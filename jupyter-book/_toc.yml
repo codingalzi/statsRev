@@ -11,11 +11,11 @@ chapters:
 - file: arrays
 - file: series
 - file: dataframes
-# - file: data_handling
-# - file: oneD_data
-# - file: oneD_visualization
-# - file: twoD_data
-# - file: twoD_visualization
+- file: data_handling
+- file: oneD_data
+- file: oneD_visualization
+- file: twoD_data
+- file: twoD_visualization
 # - file: sampling
 # - file: probability
 # - file: probability_discrete
