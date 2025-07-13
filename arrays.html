@@ -58,6 +58,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'arrays';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -406,14 +408,26 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">3.1. 다차원 어레이</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">3.1.1. 1차원 어레이</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">3.1.2. 2차원 어레이</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dtype">3.1.3. <code class="docutils literal notranslate"><span class="pre">dtype</span></code> 종류</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#np-arange">3.1.3. <code class="docutils literal notranslate"><span class="pre">np.arange()</span></code> 함수</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">3.2. 어레이 연산</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">3.3. 어레이 모양 변형</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">3.4. 브로드캐스팅</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">3.5. 어레이 인덱싱/슬라이싱</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">3.6. 예제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">3.2. 어레이 속성</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shape">3.2.1. <code class="docutils literal notranslate"><span class="pre">shape</span></code> 속성</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ndim">3.2.2. <code class="docutils literal notranslate"><span class="pre">ndim</span></code> 속성</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dtype">3.2.3. <code class="docutils literal notranslate"><span class="pre">dtype</span></code> 속성</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">3.3. 어레이 연산</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">3.3.1. 1차원 어레이 사칙연산</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">3.3.2. 2차원 어레이 사칙연산</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">3.3.3. 비교 연산</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">3.3.4. 논리 연산</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">3.4. 어레이 모양 변형</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">3.5. 브로드캐스팅</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">3.6. 어레이 인덱싱/슬라이싱</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">3.7. 예제</a></li>
 </ul>
             </nav>
         </div>
@@ -427,8 +441,15 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="ch-numpy-array">
 <span id="id1"></span><h1><span class="section-number">3. </span>넘파이 어레이<a class="headerlink" href="#ch-numpy-array" title="Link to this heading">#</a></h1>
+<p><strong>넘파이</strong><font size='2'>numpy</font>는 NUMerical PYthon의 줄임말이며,
+파이썬 데이터 사이언스에서 가장 유용하게 활용되는 도구를 제공하는 라이브러리다.
+넘파이가 제공하는 핵심 요소는 아래 두 가지이다.</p>
+<ul class="simple">
+<li><p>다차원 어레이(배열)</p></li>
+<li><p>메모리 효율적이며 빠른 어레이 연산</p></li>
+</ul>
 <p><strong>기본 설정</strong></p>
-<p><code class="docutils literal notranslate"><span class="pre">numpy</span></code> 라이브러리를 별칭 <code class="docutils literal notranslate"><span class="pre">np</span></code>로 불러온다.</p>
+<p><code class="docutils literal notranslate"><span class="pre">numpy</span></code> 라이브러리는 관습적으로 별칭 <code class="docutils literal notranslate"><span class="pre">np</span></code>로 불러온다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -436,20 +457,13 @@ document.write(`
 </div>
 </div>
 </div>
-<p><strong>넘파이</strong><font size='2'>numpy</font>는 NUMerical PYthon의 줄임말이며,
-파이썬 데이터 과학에서 가장 중요한 도구를 제공하는 라이브러리다.
-넘파이가 제공하는 가장 중요한 요소는 아래 두 가지이다.</p>
-<ul class="simple">
-<li><p>다차원 어레이(배열)</p></li>
-<li><p>메모리 효율적이며 빠른 어레이 연산</p></li>
-</ul>
 <section id="id2">
 <h2><span class="section-number">3.1. </span>다차원 어레이<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
-<p>넘파이 어레이는 리스트와는 달리 항목으로 사용된 값 자체뿐만 아니라
-포함된 데이터들의 모양, 항목들의 자료형 등에 대한 정보도 포함한다.
-모양에 따라 차원이 결정되며, 모든 항목은 동일한 자료형을 가져야 한다.
-3차원, 4차원 등의 고차원 어레이도 데이터 분석에서 많이 다루지만
-여기서는 가장 많이 활용되는 1차원 어레이와 2차원 어레이의 사용법을 익혀본다.</p>
+<p>리스트와는 달리 넘파이 어레이는 항목으로 사용된 값들 뿐만 아니라,
+어레이의 모양, 항목들의 자료형 등에 대한 정보도 함께 포함한다.
+어레이의 모양에 따라 차원이 결정되며, 어레이의 모든 항목은 동일한 자료형을 가져야 한다.</p>
+<p>3차원, 4차원 등의 고차원 어레이도 데이터 분석에서 다루지만
+여기서는 가장 많이 활용되는 1차원과 2차원 어레이의 사용법을 소개한다.</p>
 <section id="id3">
 <h3><span class="section-number">3.1.1. </span>1차원 어레이<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
 <p>1차원 어레이는 중첩이 없는 리스트와 동일한 모양을 가지며, 리스트 등에 <code class="docutils literal notranslate"><span class="pre">np.array()</span></code> 함수를 적용하여 생성할 수 있다.
@@ -457,10 +471,10 @@ document.write(`
 한 개의 <strong>축</strong><font size='2'>axis</font>을 갖는다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_1D</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 
-<span class="n">arr1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data1</span><span class="p">)</span>
-<span class="n">arr1</span>
+<span class="n">arr_1D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data_1D</span><span class="p">)</span>
+<span class="n">arr_1D</span>
 </pre></div>
 </div>
 </div>
@@ -471,10 +485,10 @@ document.write(`
 </div>
 </div>
 <p><strong><code class="docutils literal notranslate"><span class="pre">ndarray</span></code> 자료형</strong></p>
-<p>넘파이 어레이는 <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> 클래스의 객체다.</p>
+<p>넘파이 어레이의 자료형은 <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">arr1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">arr_1D</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -487,13 +501,14 @@ document.write(`
 </section>
 <section id="id4">
 <h3><span class="section-number">3.1.2. </span>2차원 어레이<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>2차원 어레이의 모든 항목은 동일한 크기의 1차원 어레이어야 한다. 따라서 동일한 길이의 리스트를 항목으로 갖는 중첩 리스트를 2차원 어레이로 변환할 수 있다. 아래 코드는 길이 4인 두 개의 리스트를 항목으로 갖는 중첩 리스트 <code class="docutils literal notranslate"><span class="pre">data_2D</span></code>를 2차원 어레이 <code class="docutils literal notranslate"><span class="pre">arr_2D</span></code>로 변환한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data2</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_2D</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
          <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]]</span>
 
-<span class="n">arr2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data2</span><span class="p">)</span>
-<span class="n">arr2</span>
+<span class="n">arr_2D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data_2D</span><span class="p">)</span>
+<span class="n">arr_2D</span>
 </pre></div>
 </div>
 </div>
@@ -504,10 +519,17 @@ document.write(`
 </div>
 </div>
 </div>
-<p>2차원 어레이의 모든 항목은 동일한 크기의 1차원 어레이어야 한다. 따라서 동일한 길이의 리스트를 항목으로 갖는 중첩 리스트를 2차원 어레이로 변환할 수 있다. 아래 코드는 길이 4인 두 개의 리스트를 항목으로 갖는 중첩 리스트 <code class="docutils literal notranslate"><span class="pre">data2</span></code>를 2차원 어레이 <code class="docutils literal notranslate"><span class="pre">arr2</span></code>로 변환한다.
-2차원 어레이는 <strong>행</strong><font size='2'>row</font>과 <strong>열</strong><font size='2'>column</font>
-두 개의 축을 가지며, 이런 의미에서 <strong>행렬</strong><font size='2'>matrix</font>로 불린다.</p>
-<p>아래 <code class="docutils literal notranslate"><span class="pre">list_ragged</span></code>처럼 중첩 리스트의 항목이 서로 길이가 다른 리스트로 이루어져 있으면 어레이로의 변환이 허용되지 않는다.</p>
+<p>2차원 어레이는 <strong>행</strong><font size='2'>row</font>과 <strong>열</strong><font size='2'>column</font>
+두 개의 축을 가지며, 이런 의미에서 <strong>행렬</strong><font size='2'>matrix</font>로 불린다.
+예를 들어, <code class="docutils literal notranslate"><span class="pre">arr_2D</span></code>는 2개의 행과 4개의 열을 갖는 아래 행렬에 대응한다.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+1 &amp; 2 &amp; 3 &amp; 4\\
+5 &amp; 6 &amp; 7 &amp; 8
+\end{bmatrix}
+\end{split}\]</div>
+<p>아래 <code class="docutils literal notranslate"><span class="pre">list_ragged</span></code>처럼 중첩 리스트의 항목이 서로 길이가 다른 리스트로 이루어져 있으면 어레이로의 변환이 허용되지 않음에 주의한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list_ragged</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]]</span>
@@ -530,7 +552,7 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">26</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">list_ragged</span><span class="p">)</span>
 
 <span class="ne">ValueError</span>: setting an array element with a sequence. The requested array has an inhomogeneous shape after 1 dimensions. The detected shape was (3,) + inhomogeneous part.
@@ -538,11 +560,51 @@ document.write(`
 </div>
 </div>
 </div>
-<p><strong><code class="docutils literal notranslate"><span class="pre">shape</span></code></strong> 속성</p>
-<p>어레이 객체의 <code class="docutils literal notranslate"><span class="pre">shape</span></code> 속성은 어레이의 모양을 저장하고 있다. 예를 들어, 위에서 생성한 2차원 어레이 <code class="docutils literal notranslate"><span class="pre">arr2</span></code>의 <code class="docutils literal notranslate"><span class="pre">shape</span></code>은 행과 열의 개수로 구성된 튜플 <code class="docutils literal notranslate"><span class="pre">(2,</span> <span class="pre">4)</span></code>이다.</p>
+</section>
+<section id="np-arange">
+<h3><span class="section-number">3.1.3. </span><code class="docutils literal notranslate"><span class="pre">np.arange()</span></code> 함수<a class="headerlink" href="#np-arange" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">np.arange()</span></code> 함수는 <a class="reference internal" href="lists_dicts.html#sec-range"><span class="std std-numref">2.2절</span></a>에서
+살펴본 <code class="docutils literal notranslate"><span class="pre">range()</span></code> 함수와 유사한 역할을 하지만, 반환값이 리스트가 아닌 넘파이 어레이이다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr2</span><span class="o">.</span><span class="n">shape</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">range()</span></code> 함수와는 다르게 부동소수점을 스텝으로 사용할 수도 있다.
+예를 들어 아래 코드는 0부터 1까지 스텝 0.1씩 증가시켜 1차원 어레이를 생성한다.
+시작점 0은 어레이의 항목이 되지만, 오른쪽 끝값인 1은 어레이의 항목이 아님에 유의한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0. , 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="id5">
+<h2><span class="section-number">3.2. </span>어레이 속성<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<p>넘파이 어레이 객체는 자신에 대한 정보를 다양한 속성으로 저장한다.
+여기서는 가장 중요한 속성 세 가지를 소개한다.</p>
+<section id="shape">
+<h3><span class="section-number">3.2.1. </span><code class="docutils literal notranslate"><span class="pre">shape</span></code> 속성<a class="headerlink" href="#shape" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">shape</span></code> 속성은 어레이의 모양을 저장한다.
+예를 들어, 위에서 생성한 2차원 어레이 <code class="docutils literal notranslate"><span class="pre">arr_2D</span></code>의 <code class="docutils literal notranslate"><span class="pre">shape</span></code>은 행과 열의 개수로 구성된 튜플 <code class="docutils literal notranslate"><span class="pre">(2,</span> <span class="pre">4)</span></code>이다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_2D</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
@@ -556,7 +618,7 @@ document.write(`
 길이가 1인 튜플로 표현된다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr1</span><span class="o">.</span><span class="n">shape</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_1D</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
@@ -592,11 +654,13 @@ document.write(`
 </div>
 </div>
 </div>
-<p><strong><code class="docutils literal notranslate"><span class="pre">ndim</span></code> 속성</strong></p>
-<p>어레이의 차원은 <code class="docutils literal notranslate"><span class="pre">ndim</span></code> 속성에 저장되며, <code class="docutils literal notranslate"><span class="pre">shape</span></code>에 저장된 튜플의 길이와 동일하다. 2차원 어레이 <code class="docutils literal notranslate"><span class="pre">arr2</span></code>의 <code class="docutils literal notranslate"><span class="pre">ndim</span></code>은 2이고, 1차원 어레이 <code class="docutils literal notranslate"><span class="pre">arr1</span></code>의 <code class="docutils literal notranslate"><span class="pre">ndim</span></code>은 1이다.</p>
+</section>
+<section id="ndim">
+<h3><span class="section-number">3.2.2. </span><code class="docutils literal notranslate"><span class="pre">ndim</span></code> 속성<a class="headerlink" href="#ndim" title="Link to this heading">#</a></h3>
+<p>어레이의 차원은 <code class="docutils literal notranslate"><span class="pre">ndim</span></code> 속성에 저장되며, <code class="docutils literal notranslate"><span class="pre">shape</span></code>에 저장된 튜플의 길이와 동일하다. 2차원 어레이 <code class="docutils literal notranslate"><span class="pre">arr_2D</span></code>의 <code class="docutils literal notranslate"><span class="pre">ndim</span></code>은 2이고, 1차원 어레이 <code class="docutils literal notranslate"><span class="pre">arr_1D</span></code>의 <code class="docutils literal notranslate"><span class="pre">ndim</span></code>은 1이다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr2</span><span class="o">.</span><span class="n">ndim</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_2D</span><span class="o">.</span><span class="n">ndim</span>
 </pre></div>
 </div>
 </div>
@@ -608,7 +672,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr1</span><span class="o">.</span><span class="n">ndim</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_1D</span><span class="o">.</span><span class="n">ndim</span>
 </pre></div>
 </div>
 </div>
@@ -618,47 +682,16 @@ document.write(`
 </div>
 </div>
 </div>
-<p><strong><code class="docutils literal notranslate"><span class="pre">np.arange()</span></code> 함수</strong></p>
-<p><code class="docutils literal notranslate"><span class="pre">np.arange()</span></code> 함수는 앞에서 살펴본 <code class="docutils literal notranslate"><span class="pre">range()</span></code> 함수와 유사한 역할을 하지만, 반환값이 리스트가 아닌 넘파이 어레이이다.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-</pre></div>
-</div>
-</div>
-</div>
-<p>그리고 부동소수점을 스텝으로 사용할 수도 있다.
-예를 들어 아래 코드는 0부터 1까지 스텝 0.1씩 증가시켜 1차원 어레이를 생성한다. 시작점 0은 어레이의 항목이 되지만, 오른쪽 끝값인 1은 어레이의 항목이 아님에 유의한다.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0. , 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9])
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 <section id="dtype">
-<h3><span class="section-number">3.1.3. </span><code class="docutils literal notranslate"><span class="pre">dtype</span></code> 종류<a class="headerlink" href="#dtype" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">3.2.3. </span><code class="docutils literal notranslate"><span class="pre">dtype</span></code> 속성<a class="headerlink" href="#dtype" title="Link to this heading">#</a></h3>
 <p>넘파이 어레이의 <code class="docutils literal notranslate"><span class="pre">dtype</span></code> 속성은 어레이 항목의 자료형을 담고 있는데, 저장된 자료형은 파이썬 표준 라이브러리에서 제공하는
-<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>, <code class="docutils literal notranslate"><span class="pre">str</span></code> 등의 세분화 버전이다.
-파이썬 표준은 기본적으로 정수와 부동소수점을 64비트로 처리하지만,
-필요에 따라 <code class="docutils literal notranslate"><span class="pre">astype()</span></code> 라는 어레이 메서드를 이용하여 32비트, 16비트, 8비트 형식으로 미리 지정할 수도 있다.</p>
-<p><strong><code class="docutils literal notranslate"><span class="pre">float</span></code> 자료형</strong></p>
+<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>, <code class="docutils literal notranslate"><span class="pre">str</span></code> 등을 보다 세분화한 버전이다.</p>
+<p><strong>부동소수점 자료형</strong></p>
+<p>예를 들어, 변수 <code class="docutils literal notranslate"><span class="pre">arr_1D</span></code>가 가리키는 어레이에 포함된 항목의 자료형은 64비트 형식의 부동소수점 자료형인 <code class="docutils literal notranslate"><span class="pre">float64</span></code>다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">])</span>
-
-<span class="n">arr1</span><span class="o">.</span><span class="n">dtype</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_1D</span><span class="o">.</span><span class="n">dtype</span>
 </pre></div>
 </div>
 </div>
@@ -668,28 +701,26 @@ document.write(`
 </div>
 </div>
 </div>
-<p>아래 코드는 <code class="docutils literal notranslate"><span class="pre">astype()</span></code> 메서드를 이용해 16비트 형식의 부동소수점으로 항목들의 자료형을 지정한다. 소수점 이하의 자릿수를 줄이므로 메모리 사용량을 절약할 수 있다.</p>
+<p><code class="docutils literal notranslate"><span class="pre">arr_1D</span></code>의 선언에 사용된 <code class="docutils literal notranslate"><span class="pre">data_1D</span></code> 리스트에는 정수와 부동소수점이 포함되어 있는데
+앞서 언급한 대로 하나의 자료형으로 통일되어야 하기에 <code class="docutils literal notranslate"><span class="pre">float64</span></code>로 <code class="docutils literal notranslate"><span class="pre">ndim</span></code> 속성이 지정되었다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float16&#39;</span><span class="p">)</span>
-
-<span class="n">arr1</span><span class="o">.</span><span class="n">dtype</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_1D</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dtype(&#39;float16&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[6, 7.5, 8, 0, 1]
 </pre></div>
 </div>
 </div>
 </div>
-<p><strong><code class="docutils literal notranslate"><span class="pre">int</span></code> 자료형</strong></p>
-<p>정수의 경우도 부동소수점의 처리 방식과 동일하다.</p>
+<p><strong>정수 자료형</strong></p>
+<p>반면에 <code class="docutils literal notranslate"><span class="pre">arr_2D</span></code>의 <code class="docutils literal notranslate"><span class="pre">ndim</span></code>은 64비트 형식의 정수 자료형인 <code class="docutils literal notranslate"><span class="pre">int64</span></code>다.
+이유는 어레이 생성에 사용된 <code class="docutils literal notranslate"><span class="pre">data_2D</span></code> 리스트에 정수만 포함되었기 때문이다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
-
-<span class="n">arr2</span><span class="o">.</span><span class="n">dtype</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_2D</span><span class="o">.</span><span class="n">dtype</span>
 </pre></div>
 </div>
 </div>
@@ -699,11 +730,28 @@ document.write(`
 </div>
 </div>
 </div>
+<p>파이썬은 기본적으로 정수와 부동소수점을 64비트로 처리하지만,
+어레이 객체는 필요에 따라 <code class="docutils literal notranslate"><span class="pre">astype()</span></code> 메서드를 이용하여 32비트, 16비트, 8비트 형식으로
+<code class="docutils literal notranslate"><span class="pre">ndim</span></code> 속성을 지정할 수 있다.</p>
+<p>예를 들어, 아래 코드는 <code class="docutils literal notranslate"><span class="pre">astype()</span></code> 메서드를 이용해 16비트 형식의 부동소수점으로 항목들의 자료형을 지정한다. 소수점 이하의 자릿수를 줄이므로 메모리 사용량을 절약하는 데에 사용되곤 한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int16&#39;</span><span class="p">)</span>
-
-<span class="n">arr2</span><span class="o">.</span><span class="n">dtype</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_1D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data_1D</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float16&#39;</span><span class="p">)</span>
+<span class="n">arr_1D</span><span class="o">.</span><span class="n">dtype</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dtype(&#39;float16&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>아래 코드는 16비트 형식의 정수로 구성된 2차원 어레이를 생성한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_2D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data_2D</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int16&#39;</span><span class="p">)</span>
+<span class="n">arr_2D</span><span class="o">.</span><span class="n">dtype</span>
 </pre></div>
 </div>
 </div>
@@ -714,11 +762,13 @@ document.write(`
 </div>
 </div>
 <p><strong>문자열 자료형</strong></p>
-<p>문자열은 기본적으로 유니코드로 처리되며 크기는 최장 길이의 문자열에 맞춰 결정된다.
-예를 들어 아래 코드는 어레이에 포함된 가장 긴 문자열 <code class="docutils literal notranslate"><span class="pre">'python'</span></code> 의 길이인 <code class="docutils literal notranslate"><span class="pre">&lt;U6</span></code>가 자료형으로 지정됨을 보여준다.</p>
+<p>문자열은 기본적으로 유니코드로 처리되며,크기는 최장 길이의 문자열 항목에 맞춰 결정된다.
+예를 들어 아래 코드는 어레이에 포함된 가장 긴 문자열 <code class="docutils literal notranslate"><span class="pre">'python'</span></code> 의 길이가 6이기에
+<code class="docutils literal notranslate"><span class="pre">&lt;U6</span></code>가 자료형으로 지정됨을 보여준다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39;python&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">dtype</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_string</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39;python&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">])</span>
+<span class="n">arr_string</span><span class="o">.</span><span class="n">dtype</span>
 </pre></div>
 </div>
 </div>
@@ -744,10 +794,22 @@ document.write(`
 </div>
 </section>
 </section>
-<section id="id5">
-<h2><span class="section-number">3.2. </span>어레이 연산<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<section id="id6">
+<h2><span class="section-number">3.3. </span>어레이 연산<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
 <p>넘파이 어레이 연산은 기본적으로 항목별로 이루어진다.
 즉, 지정된 연산을 동일한 위치의 항목끼리 실행하여 새로운, 동일한 모양의 어레이를 생성한다.</p>
+<section id="id7">
+<h3><span class="section-number">3.3.1. </span>1차원 어레이 사칙연산<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<p>모양이 동일한 아래 1차원 어레이 두 개를 이용하여
+어레이 사칙연산의 작동법을 보여준다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">])</span>
+<span class="n">arr2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr1</span> <span class="o">+</span> <span class="n">arr2</span>
@@ -755,7 +817,19 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([2.       , 4.       , 6.1992188], dtype=float32)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([2. , 4. , 6.2])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr1</span> <span class="o">-</span> <span class="n">arr2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0. , 0. , 0.2])
 </pre></div>
 </div>
 </div>
@@ -767,41 +841,26 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1.      , 4.      , 9.597656], dtype=float32)
-</pre></div>
-</div>
-</div>
-</div>
-<p>모양이 맞지 않아도 브로드캐스팅 기법으로 모양을 맞출 수 있는 경우에는 연산이 가능하다.
-따라서 숫자와의 연산은 모든 항목에 동일한 값을 사용하게 된다.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr1</span> <span class="o">-</span> <span class="mi">2</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-1.   ,  0.   ,  1.199], dtype=float16)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1. , 4. , 9.6])
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr1</span> <span class="o">/</span> <span class="mf">2.3</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr1</span> <span class="o">/</span> <span class="n">arr2</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.4346, 0.869 , 1.391 ], dtype=float16)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1.        , 1.        , 1.06666667])
 </pre></div>
 </div>
 </div>
 </div>
-<div class="note admonition">
-<p class="admonition-title">어레이 브로드캐스팅</p>
-<p>원하는 경우 <a class="reference external" href="https://codingalzi.github.io/datapy/numpy_4.html#id7">(코딩알지) 브로드캐스팅</a>을 읽어볼 것을 권장한다.</p>
-</div>
+</section>
+<section id="id8">
+<h3><span class="section-number">3.3.2. </span>2차원 어레이 사칙연산<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
 <p>2차원 어레이 연산도 동일한 방식으로 진행된다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -883,34 +942,11 @@ document.write(`
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr3</span> <span class="o">+</span> <span class="mf">2.4</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[3.4, 4.4, 5.4],
-       [6.4, 7.4, 8.4]])
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mf">3.78</span> <span class="o">-</span> <span class="n">arr3</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 2.78,  1.78,  0.78],
-       [-0.22, -1.22, -2.22]])
-</pre></div>
-</div>
-</div>
-</div>
-<p><strong>비교 연산</strong></p>
-<p>모양이 동일한 두 어레이의 값 비교도 항목별로 수행된다.</p>
+</section>
+<section id="id9">
+<h3><span class="section-number">3.3.3. </span>비교 연산<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<p>모양이 동일한 두 어레이의 값 비교도 항목별로 수행되며,
+결과물로 생성되는 어레이는 모든 항목이 <code class="docutils literal notranslate"><span class="pre">bool</span></code> 자료형, 즉 <code class="docutils literal notranslate"><span class="pre">True</span></code> 또는 <code class="docutils literal notranslate"><span class="pre">False</span></code>이다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr4</span> <span class="o">&gt;</span> <span class="n">arr3</span>
@@ -989,13 +1025,36 @@ document.write(`
 </div>
 </div>
 </div>
-<p><strong>논리 연산</strong></p>
-<p>어레이를 대상으로 사용 가능한 논리 연산은 아래 세 가지이며, 결과물로 생성되는 어레이는 모든 항목이 <code class="docutils literal notranslate"><span class="pre">bool</span></code> 자료형, 즉 <code class="docutils literal notranslate"><span class="pre">True</span></code> 또는 <code class="docutils literal notranslate"><span class="pre">False</span></code>이다.</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">~</span></code>: 부정(not) 연산자</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&amp;</span></code>: 논리곱(and) 연산자</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">|</span></code>: 논리합(or) 연산자</p></li>
-</ul>
+</section>
+<section id="id10">
+<h3><span class="section-number">3.3.4. </span>논리 연산<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
+<p>어레이를 대상으로 사용 가능한 논리 연산은 아래 세 가지이며,
+논리 연산 또한 항목별로 실행되어
+동일한 모양의 어레이를 생성한다.</p>
+<div class="pst-scrollable-table-container"><table class="table" id="array-logical">
+<caption><span class="caption-number">Table 3.1 </span><span class="caption-text">어레이 논리 연산자</span><a class="headerlink" href="#array-logical" title="Link to this table">#</a></caption>
+<colgroup>
+<col style="width: 15.4%" />
+<col style="width: 84.6%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>기호</p></th>
+<th class="head"><p>기능</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">~</span></code></p></td>
+<td><p>부정(not) 연산자</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&amp;</span></code></p></td>
+<td><p>논리곱(and) 연산자</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">|</span></code></p></td>
+<td><p>논리합(or) 연산자</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">~</span><span class="p">(</span><span class="n">arr3</span> <span class="o">==</span> <span class="n">arr3</span><span class="p">)</span>
@@ -1036,17 +1095,18 @@ document.write(`
 </div>
 </div>
 </section>
-<section id="id6">
-<h2><span class="section-number">3.3. </span>어레이 모양 변형<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+</section>
+<section id="id11">
+<h2><span class="section-number">3.4. </span>어레이 모양 변형<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
 <p>어레이의 항목을 그대로 유지하면서 모양만 변형시키는 방식과
 활용법을 소개한다.</p>
 <p><strong><code class="docutils literal notranslate"><span class="pre">reshape()</span></code> 메서드</strong></p>
 <p><code class="docutils literal notranslate"><span class="pre">reshape()</span></code> 메서드는 어레이의 모양을 변형하는데 쓰인다. 단, 전체 항목의 수가 변하지 않도록 모양을 지정해야 한다.
-예를 들어, 길이 8인 1차원 어레이는 (4,2) 모양의 2차원 어레이로 변형할 수 있지만, (4,3) 모양의 어레이로 변형하려 하면 오류를 발생시킨다.</p>
+예를 들어, 길이 8인 1차원 어레이는 (4, 2) 모양의 2차원 어레이로 변형할 수 있지만, (4, 3) 모양의 어레이로 변형하려 하면 오류를 발생시킨다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
-<span class="n">arr</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_arange8</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">arr_arange8</span>
 </pre></div>
 </div>
 </div>
@@ -1058,8 +1118,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr2</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-<span class="n">arr2</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_arange8</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1074,15 +1133,15 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_arange8</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="nn">/tmp/ipython-input-11-2858205448.py</span> in <span class="ni">&lt;cell line: 0&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">arr</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">115</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">arr_arange8</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 
 <span class="ne">ValueError</span>: cannot reshape array of size 8 into shape (4,3)
 </pre></div>
@@ -1094,8 +1153,8 @@ document.write(`
 예를 들어, 아래 코드에서 -1은 4로 결정된다. 20개의 항목을 5개의 행을 가진 2차원 어레이로 지정하려면 열의 개수가 4가 되기 때문이다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
-<span class="n">arr</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_arange20</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">arr_arange20</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1111,7 +1170,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_arange20</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1128,7 +1187,7 @@ document.write(`
 <p>마찬가지로, 아래 코드에서 -1은 5를 의미한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_arange20</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1143,16 +1202,16 @@ document.write(`
 </div>
 </div>
 </section>
-<section id="id7">
-<h2><span class="section-number">3.4. </span>브로드캐스팅<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<section id="id12">
+<h2><span class="section-number">3.5. </span>브로드캐스팅<a class="headerlink" href="#id12" title="Link to this heading">#</a></h2>
 <p><strong>브로드캐스팅</strong><font size='2'>broadcasting</font>
 기능은 모양이 서로 다른 두 어레이가 주어졌을 때 두 모양을 통일시킬 수 있다면 두 어레이의 연산이 가능하도록
 도와주는 기능이다.
 설명을 위해 하나의 어레이와 하나의 정수의 곱셈이 작동하는 과정을 살펴본다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
-<span class="n">arr</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_623</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">arr_623</span>
 </pre></div>
 </div>
 </div>
@@ -1166,7 +1225,7 @@ document.write(`
 <p>위 어레이에 4를 곱한 결과는 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr</span> <span class="o">*</span> <span class="mi">4</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_623</span> <span class="o">*</span> <span class="mi">4</span>
 </pre></div>
 </div>
 </div>
@@ -1178,13 +1237,16 @@ document.write(`
 </div>
 </div>
 <p>결과가 항목별로 곱해지는 이유는 <code class="docutils literal notranslate"><span class="pre">arr</span> <span class="pre">*</span> <span class="pre">4</span></code> 가 아래 어레이의 곱셈과 동일하게 작동하기 때문이다.
-즉, 정수 4로 채워진 동일한 모양의 어레이를 먼저 생성한 후에 항목별 곱셈을 진행한다.</p>
-<div align="center"><img src="https://raw.githubusercontent.com/codingalzi/datapy/master/jupyter-book/images/broadcasting14.png?raw=true" style="width:300px;"></div><p>이와 같이 어레이의 모양을 확장하여 항목별 연산을 해주는 브로드캐스팅 기능은 두 어레이의 모양이 항목별 연산을 일괄적으로 적용시켜도 무방한 경우에는 자동 적용된다.</p>
-<p>아래 예제는 (4,3) 모양의 2차원 어레이와 (1,3) 모양의 1차원 어레이의 덧셈을 실행해서 브로드캐스팅 기능이 어떻게 작용하는지를 보여준다. 먼저 1차원 어레이를 (4,1) 모양의 2차원 어레이로 변형한 후, (4,3) 모양의 어레이로 확장시킨다.</p>
+즉, 정수 4로 채워진 동일한 모양의 어레이를 먼저 생성한 후에 항목별 곱셈을 진행한 결과와 동일하다.</p>
+<div align="center"><img src="https://raw.githubusercontent.com/codingalzi/datapy/master/jupyter-book/images/broadcasting14.png?raw=true" style="width:300px;"></div><p>이와 같이 어레이의 모양을 확장하여 항목별 연산을 가능하게 해주는 브로드캐스팅 기능은 두 어레이의 모양이 항목별 연산을 일괄적으로 적용시켜도 무방한 경우에는 자동 적용된다.</p>
+<p>아래 예제는 (4, 3) 모양의 2차원 어레이와 (3,) 모양의 1차원 어레이의 덧셈을 실행해서 브로드캐스팅 기능이 어떻게 작용하는지를 보여준다. 먼저 1차원 어레이를 (4,1) 모양의 2차원 어레이로 변형한 후, (4,3) 모양의 어레이로 확장시킨다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">arr2</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_arange4_2D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                           <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>       
+                           <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+                           <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+<span class="n">arr_arange4_2D</span>
 </pre></div>
 </div>
 </div>
@@ -1197,11 +1259,11 @@ document.write(`
 </div>
 </div>
 </div>
-<p>또다른 어레이는 (1,3) 모양으로 생성한 후, 앞의 어레이와 덧셈을 실행해 본다.</p>
+<p>또다른 어레이는 (3,) 모양으로 생성한 후, 앞의 어레이와 덧셈을 실행해 본다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-<span class="n">arr3</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_arange14</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">arr_arange14</span>
 </pre></div>
 </div>
 </div>
@@ -1213,7 +1275,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr2</span> <span class="o">+</span> <span class="n">arr3</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_arange4_2D</span> <span class="o">+</span> <span class="n">arr_arange14</span>
 </pre></div>
 </div>
 </div>
@@ -1227,11 +1289,12 @@ document.write(`
 </div>
 </div>
 <p>위 연산이 작동하는 이유는 아래 그림을 통해 이해할 수 있다.</p>
-<div align="center"><img src="https://raw.githubusercontent.com/codingalzi/datapy/master/jupyter-book/images/broadcasting10.png?raw=true" style="width:400px;"></div><p>마찬가지로, (4,3) 모양의 <code class="docutils literal notranslate"><span class="pre">arr2</span></code>와 (4,1) 모양의 어레이 <code class="docutils literal notranslate"><span class="pre">arr4</span></code>의 덧셈에도 브로드캐스팅 기능이 자동 적용된다.</p>
+<div align="center"><img src="https://raw.githubusercontent.com/codingalzi/datapy/master/jupyter-book/images/broadcasting10.png?raw=true" style="width:400px;"></div><p>아래 코드는 (4,3) 모양의 어레이와 (4,1) 모양의 어레이의 덧셈에도
+브로드캐스팅 기능이 마찬가지로 자동 적용됨을 보여준다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr4</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
-<span class="n">arr4</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_arange15_2D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">arr_arange15_2D</span>
 </pre></div>
 </div>
 </div>
@@ -1246,7 +1309,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr2</span> <span class="o">+</span> <span class="n">arr4</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_arange4_2D</span> <span class="o">+</span> <span class="n">arr_arange15_2D</span>
 </pre></div>
 </div>
 </div>
@@ -1259,11 +1322,12 @@ document.write(`
 </div>
 </div>
 </div>
+<p>아래 그림이 위 연산이 작동하는 이유를 설명한다.</p>
 <div align="center"><img src="https://raw.githubusercontent.com/codingalzi/datapy/master/jupyter-book/images/broadcasting11.png?raw=true" style="width:400px;"></div><p>하지만 (4,3) 모양의 어레이와 (1,4) 모양의 어레이의 항목별 연산은 정의될 수가 없으므로, 브로드캐스팅이 가능하지 않고 오류가 발생한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr5</span> <span class="o">=</span> <span class="n">arr4</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">arr5</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_arange15_reshaped</span> <span class="o">=</span> <span class="n">arr_arange15_2D</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">arr_arange15_reshaped</span>
 </pre></div>
 </div>
 </div>
@@ -1275,24 +1339,26 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr2</span> <span class="o">+</span> <span class="n">arr5</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_arange4_2D</span> <span class="o">+</span> <span class="n">arr_arange15_reshaped</span>
 </pre></div>
 </div>
 </div>
-</div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">-------------------------------------------------------------------------</span>
-<span class="ne">ValueError</span>                                <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">20</span><span class="o">-</span><span class="mf">897499081.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">cell</span> <span class="n">line</span><span class="p">:</span> <span class="mi">0</span><span class="o">&gt;</span><span class="p">()</span>
-<span class="o">----&gt;</span> <span class="mi">1</span> <span class="n">arr2</span> <span class="o">+</span> <span class="n">arr5</span>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">137</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">arr_arange4_2D</span> <span class="o">+</span> <span class="n">arr_arange15_reshaped</span>
 
-<span class="ne">ValueError</span><span class="p">:</span> <span class="n">operands</span> <span class="n">could</span> <span class="ow">not</span> <span class="n">be</span> <span class="n">broadcast</span> <span class="n">together</span> <span class="k">with</span> <span class="n">shapes</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="ne">ValueError</span>: operands could not be broadcast together with shapes (4,3) (1,4) 
 </pre></div>
+</div>
+</div>
 </div>
 <p>아래 그림이 이유를 설명해준다.</p>
 <div align="center"><img src="https://raw.githubusercontent.com/codingalzi/datapy/master/jupyter-book/images/broadcasting11a.png?raw=true" style="width:380px;"></div>
 <p><div style="text-align: center">&lt;그림 출처: <a href="https://numpy.org/doc/stable/user/basics.broadcasting.html">NumPy: Broadcasting</a>&gt;</div></p></section>
-<section id="id8">
-<h2><span class="section-number">3.5. </span>어레이 인덱싱/슬라이싱<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<section id="id13">
+<h2><span class="section-number">3.6. </span>어레이 인덱싱/슬라이싱<a class="headerlink" href="#id13" title="Link to this heading">#</a></h2>
 <p><strong>1차원 어레이 인덱싱/슬라이싱</strong></p>
 <p>1차원 어레이의 인덱싱은 리스트와 거의 동일하다.</p>
 <div class="cell docutils container">
@@ -1320,9 +1386,9 @@ document.write(`
 </div>
 </div>
 </div>
-<p><strong>뷰<font size='2'>view</font></strong></p>
+<p><strong>뷰 기능</strong></p>
 <p>넘파이 어레이의 슬라이싱은 리스트와 다르게, 지정된 구간의 객체를 새로 생성하는 게 아니라 구간의 정보를 활용하기만 한다.
-이러한 기능을 <strong>뷰</strong>라고 부르는데, 넘파이 어레이와 관련된 많은 함수가 뷰 기능을 사용한다.</p>
+이러한 기능을 <strong>뷰</strong><font size='2'>view</font>라고 부르는데, 넘파이 어레이와 관련된 많은 함수가 뷰 기능을 사용한다.</p>
 <p>아래 코드에서 <code class="docutils literal notranslate"><span class="pre">arr_slice</span></code>의 항목을 변경하면 <code class="docutils literal notranslate"><span class="pre">arr</span></code>의 항목도 함께 달라진다. 즉, 슬라이싱이 새로운 어레이를 생성하는 것이 아님이 확인된다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1407,8 +1473,8 @@ document.write(`
 <p>2차원 이상의 다차원 어레이는 리스트보다 훨씬 다양한 인덱싱, 슬라이싱 기능을 제공한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr2d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]])</span>
-<span class="n">arr2d</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_2Dd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]])</span>
+<span class="n">arr_2Dd</span>
 </pre></div>
 </div>
 </div>
@@ -1423,7 +1489,7 @@ document.write(`
 <p>우선 리스트의 인덱싱을 그대로 사용할 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr2d</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_2Dd</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1435,7 +1501,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr2d</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_2Dd</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1448,7 +1514,7 @@ document.write(`
 <p>하지만 어레이는 다음과 같은 간단한 인덱싱도 허용한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr2d</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_2Dd</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1464,7 +1530,7 @@ document.write(`
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr2d</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_2Dd</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1479,7 +1545,7 @@ document.write(`
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr2d</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_2Dd</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1495,7 +1561,7 @@ document.write(`
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr2d</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_2Dd</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1514,7 +1580,7 @@ document.write(`
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr2d</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_2Dd</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span>
 </pre></div>
 </div>
 </div>
@@ -1532,7 +1598,7 @@ document.write(`
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr2d</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_2Dd</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1547,7 +1613,7 @@ document.write(`
 예를 들어, 아래 코드는 0번 축에 대해 인덱싱을 사용하므로, 슬라이싱의 결과물은 1차원 어레이이다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr2d</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_2Dd</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1559,7 +1625,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr2d</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_2Dd</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
@@ -1572,7 +1638,7 @@ document.write(`
 <p>반면에, 아래 코드는 모든 축에 대해 슬라이싱을 적용하였기에 차원이 그대로 유지된 (1,2) 어레이가 된다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr2d</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_2Dd</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1584,7 +1650,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr2d</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arr_2Dd</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
@@ -1595,8 +1661,8 @@ document.write(`
 </div>
 </div>
 </section>
-<section id="id9">
-<h2><span class="section-number">3.6. </span>예제<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
+<section id="id14">
+<h2><span class="section-number">3.7. </span>예제<a class="headerlink" href="#id14" title="Link to this heading">#</a></h2>
 <p><strong>예제 1</strong></p>
 <p>아래 모양의 2차원 어레이를 지정된 단계를 따라 생성해보자.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">array</span><span class="p">([[</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span>  <span class="mi">3</span><span class="p">,</span>  <span class="mi">4</span><span class="p">,</span>  <span class="mi">5</span><span class="p">],</span>
@@ -1937,14 +2003,26 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">3.1. 다차원 어레이</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">3.1.1. 1차원 어레이</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">3.1.2. 2차원 어레이</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dtype">3.1.3. <code class="docutils literal notranslate"><span class="pre">dtype</span></code> 종류</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#np-arange">3.1.3. <code class="docutils literal notranslate"><span class="pre">np.arange()</span></code> 함수</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">3.2. 어레이 연산</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">3.3. 어레이 모양 변형</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">3.4. 브로드캐스팅</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">3.5. 어레이 인덱싱/슬라이싱</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">3.6. 예제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">3.2. 어레이 속성</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shape">3.2.1. <code class="docutils literal notranslate"><span class="pre">shape</span></code> 속성</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ndim">3.2.2. <code class="docutils literal notranslate"><span class="pre">ndim</span></code> 속성</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dtype">3.2.3. <code class="docutils literal notranslate"><span class="pre">dtype</span></code> 속성</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">3.3. 어레이 연산</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">3.3.1. 1차원 어레이 사칙연산</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">3.3.2. 2차원 어레이 사칙연산</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">3.3.3. 비교 연산</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">3.3.4. 논리 연산</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">3.4. 어레이 모양 변형</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">3.5. 브로드캐스팅</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">3.6. 어레이 인덱싱/슬라이싱</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">3.7. 예제</a></li>
 </ul>
   </nav></div>
 
