@@ -62,7 +62,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="2. 리스트와 사전" href="lists_dicts.html" />
-    <link rel="prev" title="소개" href="intro.html" />
+    <link rel="prev" title="데이터 사이언스와 통계분석" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -403,9 +403,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-assignment">1.1. 변수 할당(variable assignment)과 활용</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-assignment">1.1. 변수 할당<font size="2">variable assignment</font>과 활용</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.2. 변수 재할당과 업데이트</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1.3. 변수명 작성법</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sec-var-naming">1.3. 변수명 작성법</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">1.4. 예제</a></li>
 </ul>
             </nav>
         </div>
@@ -417,10 +418,10 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">1. </span>변수와 값<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="ch-variables-values">
+<span id="id1"></span><h1><span class="section-number">1. </span>변수와 값<a class="headerlink" href="#ch-variables-values" title="Link to this heading">#</a></h1>
 <p>컴퓨터 프로그램은 간단하게 말해 변수를 조작하여 원하는 값을
-만들어내는 명령문의 모음집이라고 할 수 있다.
+만들어내는 명령문의 모음집이다.
 이번 장에서는 변수의 활용법과 함께
 파이썬에서 기본으로 제공하는 값의 종류와 값을 표현하는 표현식에 대해 알아본다.</p>
 <p><strong>값</strong><font size="2">values</font>은 컴퓨터에 저장해
@@ -428,16 +429,19 @@ document.write(`
 정수, 유한소수,
 <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span></code>, <code class="docutils literal notranslate"><span class="pre">c</span></code>, …, <code class="docutils literal notranslate"><span class="pre">가</span></code>, <code class="docutils literal notranslate"><span class="pre">나</span></code>, <code class="docutils literal notranslate"><span class="pre">다</span></code>, …, <code class="docutils literal notranslate"><span class="pre">!</span></code>, <code class="docutils literal notranslate"><span class="pre">:</span></code>, <code class="docutils literal notranslate"><span class="pre">;</span></code>, <code class="docutils literal notranslate"><span class="pre">_</span></code>, <code class="docutils literal notranslate"><span class="pre">(</span></code>, <code class="docutils literal notranslate"><span class="pre">)</span></code>, … 처럼
 컴퓨터 키보드를 이용하여 입력할 수 있는 임의의 문자, 숫자, 기호로
-구성된 문자열 등이 값이다.
-파이썬에서는 <code class="docutils literal notranslate"><span class="pre">파이썬</span> <span class="pre">좋아요;-)</span></code>, <code class="docutils literal notranslate"><span class="pre">Hello,</span> <span class="pre">World!</span></code> 등과 같은 문자열은 물론이고, 리스트, 튜플, 사전과 같은 다양한 형태로 구성된 값의 집합도 하나의 값으로 취급한다.</p>
-<p>반면에, <strong>변수</strong><font size="2">variables</font>는
-값이 저장된 컴퓨터 메모리 주소를 가르키는 이름이다. 파이썬에서 변수를 선언하는 방법은 다음과 같이 변수에 값을 할당하는 것이다.</p>
+구성된 문자열 등이 값이다.</p>
+<p>또한 <code class="docutils literal notranslate"><span class="pre">파이썬</span> <span class="pre">좋아요;-)</span></code>, <code class="docutils literal notranslate"><span class="pre">Hello,</span> <span class="pre">World!</span></code> 등과 같은 문자열과 함께
+리스트, 튜플, 사전과 같은 다양한 형태로 구성된 값들의 모음도 하나의 값으로 취급한다.</p>
+<p>반면에 <strong>변수</strong><font size="2">variables</font>는
+값이 저장된 컴퓨터 메모리 주소를 가르키는 이름이다.
+파이썬에서 변수는 다음과 같이 변수에 값을 할당하는 형식으로 선언된다.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">변수</span> <span class="o">=</span> <span class="n">값</span>
 </pre></div>
 </div>
-<p>변수 이름은 알파벳과 숫자, 밑줄(_)로 만든 문자열이면 되는데, 숫자로 시작해서는 안된다. 자세한 사항은 ‘변수명 작성법’을 참고하기 바란다.</p>
+<p>변수 이름은 알파벳과 숫자, 밑줄 기호(<code class="docutils literal notranslate"><span class="pre">_</span></code>)로 만든 문자열이면 되는데, 숫자로 시작해서는 안된다.
+자세한 사항은 <a class="reference internal" href="#sec-var-naming"><span class="std std-numref">1.3. 변수명 작성법</span></a>을 참고하기 바란다.</p>
 <section id="variable-assignment">
-<h2><span class="section-number">1.1. </span>변수 할당(variable assignment)과 활용<a class="headerlink" href="#variable-assignment" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.1. </span>변수 할당<font size='2'>variable assignment</font>과 활용<a class="headerlink" href="#variable-assignment" title="Link to this heading">#</a></h2>
 <p>다음 명령문은 네 개의 변수에 서로 다른 유형의 값, 즉 문자열, 정수, 유한소수, 리스트를 할당하는 코드이다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -449,7 +453,10 @@ document.write(`
 </div>
 </div>
 </div>
-<p>변수 <code class="docutils literal notranslate"><span class="pre">greetings</span></code>는 문자열 ‘안녕하세요’가 저장된 메모리의 주소를 가르키는 이름이고, 변수 <code class="docutils literal notranslate"><span class="pre">num</span></code>은 정수 17을, 변수 <code class="docutils literal notranslate"><span class="pre">scores</span></code>는 세 개의 정수가 저장된 리스트의 주소를 가르키는 이름으로 정의된다.
+<p>변수 <code class="docutils literal notranslate"><span class="pre">greetings</span></code>는 문자열 ‘안녕하세요’가 저장된 메모리의 주소를 가르키는 이름이고,
+변수 <code class="docutils literal notranslate"><span class="pre">num</span></code>은 정수 17을,
+변수 <code class="docutils literal notranslate"><span class="pre">pi</span></code>는 부동소수점 3.14를,
+변수 <code class="docutils literal notranslate"><span class="pre">scores</span></code>는 세 개의 정수가 저장된 리스트의 주소를 가르키는 이름으로 정의된다.
 이렇듯 변수에 값이 할당되면, 이 변수는 해당 값을 출력하거나 각종 연산에 이용되거나 다른 변수에 복사되는데 활용된다.</p>
 <p>예를 들어, 변수명 <code class="docutils literal notranslate"><span class="pre">greetings</span></code> 을 실행하면 변수에 할당된 값인 문자열
 <code class="docutils literal notranslate"><span class="pre">안녕하세요!</span></code>이 출력된다.</p>
@@ -509,7 +516,9 @@ document.write(`
 </section>
 <section id="id2">
 <h2><span class="section-number">1.2. </span>변수 재할당과 업데이트<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
-<p>변수 재할당은 변수에 할당된 값을 다른 값으로 대체하는 일이다. 현재 변수 <code class="docutils literal notranslate"><span class="pre">num</span></code> 에 할당된 값을 확인해보자.</p>
+<p><strong>변수 재할당</strong><font size='2'>variable reassignment</font>은
+변수에 할당된 값을 다른 값으로 대체하는 일이다.
+현재 변수 <code class="docutils literal notranslate"><span class="pre">num</span></code> 에 할당된 값을 확인해보자.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num</span>
@@ -548,12 +557,12 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num</span> <span class="o">=</span> <span class="n">num</span> <span class="o">+</span> <span class="mi">1</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+<span class="n">num</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8
 </pre></div>
 </div>
 </div>
@@ -563,12 +572,12 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+<span class="n">num</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9
 </pre></div>
 </div>
 </div>
@@ -577,12 +586,12 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num</span> <span class="o">/=</span> <span class="mi">3</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+<span class="n">num</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.0
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.0
 </pre></div>
 </div>
 </div>
@@ -665,14 +674,14 @@ document.write(`
 </div>
 </div>
 </section>
-<section id="id3">
-<h2><span class="section-number">1.3. </span>변수명 작성법<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<section id="sec-var-naming">
+<span id="id3"></span><h2><span class="section-number">1.3. </span>변수명 작성법<a class="headerlink" href="#sec-var-naming" title="Link to this heading">#</a></h2>
 <p>변수명, 즉 변수의 이름은 할당되는 값과 연관된 이름을 사용하는 게 좋다.
-예를 들어, 농구 시합에서 A 팀의 점수 72와 B 팀의 점수 80을 저장하는 변수명으로는 <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> 보다는 <code class="docutils literal notranslate"><span class="pre">A_score</span></code>, <code class="docutils literal notranslate"><span class="pre">B_score</span></code> 와 같은 변수명이 더 바람직하다.</p>
+예를 들어, 농구 시합에서 A 팀의 점수 77와 B 팀의 점수 81을 저장하는 변수명으로는 <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> 보다는 <code class="docutils literal notranslate"><span class="pre">A_score</span></code>, <code class="docutils literal notranslate"><span class="pre">B_score</span></code> 와 같은 변수명이 더 바람직하다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A_score</span> <span class="o">=</span> <span class="mi">72</span>
-<span class="n">B_score</span> <span class="o">=</span> <span class="mi">80</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A_score</span> <span class="o">=</span> <span class="mi">77</span>
+<span class="n">B_score</span> <span class="o">=</span> <span class="mi">81</span>
 </pre></div>
 </div>
 </div>
@@ -681,14 +690,13 @@ document.write(`
 <ul>
 <li><p>알파벳, 숫자, 밑줄 기호 <code class="docutils literal notranslate"><span class="pre">_</span></code> 등을 임의로 조합하되, 공백<font size='2'>space</font>을 포함할 수 없고, 숫자로 시작해서는 안되며, 알파벳 대소문자의 구분이 있다.</p></li>
 <li><p>다음 기호들은 사용할 수 없다.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>., !, +, -, *, /, %, @, ~
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>., !, +, -, , /, %, @, ~
 </pre></div>
 </div>
 </li>
-<li><p>파이썬에서 특별한 역할을 수행하는 아래 <strong>키워드</strong><font size="2">keyword</font>들은
+<li><p>파이썬에서 특별한 역할을 수행하는 아래 키워드<font size="2">keyword</font>들은
 그대로 변수로 사용할 수 없다.
-파이썬 프로그래밍 언어의 키워드는 파이썬 최신 버전 기준으로 총 35개이다.
-각 키워드의 역할은 필요할 때마다 설명하기로 한다.</p>
+파이썬 프로그래밍 언어의 키워드는 파이썬 최신 버전 기준으로 총 35개이다.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kc">False</span>      <span class="k">await</span>      <span class="k">else</span>       <span class="kn">import</span>     <span class="nn">pass</span>
 <span class="kc">None</span>       <span class="k">break</span>      <span class="k">except</span>     <span class="ow">in</span>         <span class="k">raise</span>
 <span class="kc">True</span>       <span class="k">class</span>      <span class="nc">finally</span>    <span class="ow">is</span>         <span class="k">return</span>
@@ -700,6 +708,10 @@ document.write(`
 </div>
 </li>
 </ul>
+</section>
+<section id="id4">
+<h2><span class="section-number">1.4. </span>예제<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<p>준비중 …</p>
 </section>
 </section>
 
@@ -739,7 +751,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">소개</p>
+        <p class="prev-next-title">데이터 사이언스와 통계분석</p>
       </div>
     </a>
     <a class="right-next"
@@ -767,9 +779,10 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-assignment">1.1. 변수 할당(variable assignment)과 활용</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-assignment">1.1. 변수 할당<font size="2">variable assignment</font>과 활용</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.2. 변수 재할당과 업데이트</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1.3. 변수명 작성법</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sec-var-naming">1.3. 변수명 작성법</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">1.4. 예제</a></li>
 </ul>
   </nav></div>
 
