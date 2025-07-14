@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -1317,9 +1317,13 @@ $<span class="math notranslate nohighlight">\(p\text{-값} = P(Z \le z_0) = P(Z 
 </div>
 </div>
 </div>
-<p>따라서 소득 2구간에서 임의로 선택된 66개 구역의 평균값은 전체 평균값보다 낮을 확률이 5% 미만이기에
-귀무가설을 기각한다.</p>
-<p>결론: 소득 2구간에서만 표본을 선택하였기에 당연히 전체 평균값보다 작음.</p>
+<p>결론:</p>
+<ul class="simple">
+<li><p>왼쪽 꼬리 검정, 기각역은 <span class="math notranslate nohighlight">\(\{z\le -1.644854 (\text{임계값)}\}\)</span></p></li>
+<li><p>검정통계량 <span class="math notranslate nohighlight">\(z_0 = -5.265918 &lt; -1.644854\)</span> 이므로 기각역에 속한다.</p></li>
+<li><p>따라서 귀무가설을 기각한다.</p></li>
+<li><p>즉, 소득2분위에 속한 사람들이 산 집값이 평균보다 낮다고 볼 수 있다.</p></li>
+</ul>
 <p><strong>소득 3구간을 대상으로 하는 경우</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1385,7 +1389,13 @@ $<span class="math notranslate nohighlight">\(p\text{-값} = P(Z \le z_0) = P(Z 
 </div>
 </div>
 </div>
-<p>결론: 검정통계량이 임계값보다 작기에 귀무가설을 유지한다.</p>
+<p>결론:</p>
+<ul class="simple">
+<li><p>오른쪽 꼬리 검정, 기각역은 <span class="math notranslate nohighlight">\(\{z\ge 1.644854 (\text{임계값)}\}\)</span></p></li>
+<li><p>검정통계량 <span class="math notranslate nohighlight">\(z_0 = 0.417664 &lt; 1.644854\)</span> 이므로 기각역에 속하지 않는다.</p></li>
+<li><p>따라서 귀무가설을 기각하지 않는다.</p></li>
+<li><p>즉, 소득3분위에 속한 사람들이 산 집값이 평균보다 높다고 볼 수 없다.</p></li>
+</ul>
 </section>
 </section>
 
