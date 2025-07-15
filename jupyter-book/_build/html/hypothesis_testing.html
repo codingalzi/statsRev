@@ -28,8 +28,8 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
@@ -1245,7 +1245,7 @@ Name: median_house_value, dtype: float64
 <p>양측검정을 위해 귀무가설과 대립가설을 다음과 같이 설정한다.</p>
 <ul class="simple">
 <li><p>귀무가설 <span class="math notranslate nohighlight">\(\text{H}_0\)</span>: <code class="docutils literal notranslate"><span class="pre">sample_3Cat</span></code>에 속한 구역들의 평균 집값이 <code class="docutils literal notranslate"><span class="pre">house_value_mean</span></code>와 같다.</p></li>
-<li><p>대립가설 <span class="math notranslate nohighlight">\(\text{H}_0\)</span>: <code class="docutils literal notranslate"><span class="pre">sample_3Cat</span></code>에 속한 구역들의 평균 집값이 <code class="docutils literal notranslate"><span class="pre">house_value_mean</span></code> 다르다.</p></li>
+<li><p>대립가설 <span class="math notranslate nohighlight">\(\text{H}_1\)</span>: <code class="docutils literal notranslate"><span class="pre">sample_3Cat</span></code>에 속한 구역들의 평균 집값이 <code class="docutils literal notranslate"><span class="pre">house_value_mean</span></code> 다르다.</p></li>
 </ul>
 <p>우선 귀무가설이 참이라고 가정한다.
 그러면 다음이 성립한다.</p>
@@ -1294,7 +1294,7 @@ p-값:       0.676193
 <li><p>따라서 귀무가설을 기각하지 않는다.</p></li>
 <li><p>즉, 소득3분위에 속한 사람들이 산 집값이 평균과 다르다고 볼 수 없다.</p></li>
 </ul>
-<p><strong>예제 2: 소득 2구간에서만 표본을 선택하는 경우 (단측검정)</strong></p>
+<p><strong>예제 2: 소득 2구간에서만 표본을 선택하는 경우 (왼쪽 꼬리 단측검정)</strong></p>
 <p>소득 2구간의 중위주택가격은 전체 구역의 중위주택가격보다 훨씬 작다.</p>
 <ul class="simple">
 <li><p>소득 2구간 구역의 기초 통계</p></li>
@@ -1333,7 +1333,7 @@ Name: median_house_value, dtype: float64
 <p>단측검정을 위해 귀무가설과 대립가설을 다음과 같이 설정한다.</p>
 <ul class="simple">
 <li><p>귀무가설 <span class="math notranslate nohighlight">\(\text{H}_0\)</span>: <code class="docutils literal notranslate"><span class="pre">sample_2Cat</span></code>에 속한 구역들의 평균 집값이 <code class="docutils literal notranslate"><span class="pre">house_value_mean</span></code>와 같다.</p></li>
-<li><p>대립가설 <span class="math notranslate nohighlight">\(\text{H}_0\)</span>: <code class="docutils literal notranslate"><span class="pre">sample_2Cat</span></code>에 속한 구역들의 평균 집값이 <code class="docutils literal notranslate"><span class="pre">house_value_mean</span></code> 보다 작다.</p></li>
+<li><p>대립가설 <span class="math notranslate nohighlight">\(\text{H}_1\)</span>: <code class="docutils literal notranslate"><span class="pre">sample_2Cat</span></code>에 속한 구역들의 평균 집값이 <code class="docutils literal notranslate"><span class="pre">house_value_mean</span></code> 보다 작다.</p></li>
 </ul>
 <p>우선 귀무가설이 참이라고 가정한다.
 그러면 다음이 성립한다.</p>
@@ -1382,7 +1382,7 @@ p-값:       0.000001
 <li><p>따라서 귀무가설을 기각한다.</p></li>
 <li><p>즉, 소득 2구간에 속한 사람들이 산 집값이 평균과 다르다고 볼 수 있다.</p></li>
 </ul>
-<p><strong>예제 3: 선택 편향 방지</strong></p>
+<p><strong>예제 3: 선택 편향 방지 (오른쪽 꼬리 단측검정)</strong></p>
 <p>표본을 선택할 때 특정 소득 구간에 속하는 데이터만을 대상으로 하는 경우
 가설검정 결과가 상이하게 나올 수 있음을 이전 두 예제가 보여줬다.
 이는 표본 선택에 오류가 있음을 의미하며,
@@ -1421,7 +1421,7 @@ Name: median_house_value, dtype: float64
 <p>오른쪽 꼬리 단측검정을 위해 귀무가설과 대립가설을 다음과 같이 설정한다.</p>
 <ul class="simple">
 <li><p>귀무가설 <span class="math notranslate nohighlight">\(\text{H}_0\)</span>: <code class="docutils literal notranslate"><span class="pre">sample_2Cat</span></code>에 속한 구역들의 평균 집값이 <code class="docutils literal notranslate"><span class="pre">house_value_mean</span></code>와 같다.</p></li>
-<li><p>대립가설 <span class="math notranslate nohighlight">\(\text{H}_0\)</span>: <code class="docutils literal notranslate"><span class="pre">sample_2Cat</span></code>에 속한 구역들의 평균 집값이 <code class="docutils literal notranslate"><span class="pre">house_value_mean</span></code> 보다 크다.</p></li>
+<li><p>대립가설 <span class="math notranslate nohighlight">\(\text{H}_1\)</span>: <code class="docutils literal notranslate"><span class="pre">sample_2Cat</span></code>에 속한 구역들의 평균 집값이 <code class="docutils literal notranslate"><span class="pre">house_value_mean</span></code> 보다 크다.</p></li>
 </ul>
 <p>우선 귀무가설이 참이라고 가정한다.
 그러면 다음이 성립한다.</p>
@@ -1470,7 +1470,7 @@ p-값:       0.092160
 <li><p>따라서 귀무가설을 기각할 수 없다.</p></li>
 <li><p>즉, 표본 평균이 전체 평균 집값 보다 크다고 볼 수 있다.</p></li>
 </ul>
-<p><strong>예제 4: 층화표집 활용</strong></p>
+<p><strong>예제 4: 층화표집 활용 (양측검정)</strong></p>
 <p>선택 편향의 위험성을 보다 줄이기 위해 층화표집을 활용한다.
 아래 코드는 전체 데이터셋에서 1% 크기의 표본을 층화표집 기법으로 선택한다.</p>
 <div class="cell docutils container">
@@ -1615,7 +1615,7 @@ Name: median_house_value, dtype: float64
 <p>왼쪽 꼬리 단측검정을 위해 귀무가설과 대립가설을 다음과 같이 설정한다.</p>
 <ul class="simple">
 <li><p>귀무가설 <span class="math notranslate nohighlight">\(\text{H}_0\)</span>: <code class="docutils literal notranslate"><span class="pre">sample_2Cat</span></code>에 속한 구역들의 평균 집값이 <code class="docutils literal notranslate"><span class="pre">house_value_mean</span></code>와 같다.</p></li>
-<li><p>대립가설 <span class="math notranslate nohighlight">\(\text{H}_0\)</span>: <code class="docutils literal notranslate"><span class="pre">sample_2Cat</span></code>에 속한 구역들의 평균 집값이 <code class="docutils literal notranslate"><span class="pre">house_value_mean</span></code> 보다 작다.</p></li>
+<li><p>대립가설 <span class="math notranslate nohighlight">\(\text{H}_1\)</span>: <code class="docutils literal notranslate"><span class="pre">sample_2Cat</span></code>에 속한 구역들의 평균 집값이 <code class="docutils literal notranslate"><span class="pre">house_value_mean</span></code>와 다르다.</p></li>
 </ul>
 <p>우선 귀무가설이 참이라고 가정한다.
 그러면 다음이 성립한다.</p>
@@ -1657,12 +1657,18 @@ p-값:       0.179635
 </div>
 </div>
 <p>또한 <span class="math notranslate nohighlight">\(p\)</span>-값이 0.05보다 크다.</p>
-<p>결론:</p>
+<p>결론 1:</p>
 <ul class="simple">
 <li><p>왼쪽 꼬리검정의 기각역은 <span class="math notranslate nohighlight">\(\{ z \mid z \le -1.644854 \}\)</span></p></li>
 <li><p>검정통계량 <span class="math notranslate nohighlight">\(z_0 = -0.916756 &gt; -1.644854\)</span> 이므로 기각역에 속하지 않는다.</p></li>
 <li><p>따라서 귀무가설을 기각할 수 없다.</p></li>
 <li><p>즉, 표본 평균이 전체 평균 집값 보다 작다고 볼 수 있다.</p></li>
+</ul>
+<p>결론 2:</p>
+<ul class="simple">
+<li><p>표본을 선택할 때 무작위 추출한 경우보다 <span class="math notranslate nohighlight">\(p\)</span>-값이 더 크다.</p></li>
+<li><p>이는 층화추출로 생성된 표본의 평균값이 보다 모평균에 가까움을 의미한다.</p></li>
+<li><p>이유는 정규분포의 특징상 <span class="math notranslate nohighlight">\(p\)</span>-값이 클 수록 검정통계량이 0에 가까워지기 때문이다.</p></li>
 </ul>
 </section>
 </section>
