@@ -28,13 +28,13 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -1121,7 +1121,10 @@ $<span class="math notranslate nohighlight">\(p\text{-값} = P(Z \le z_0) = P(Z 
 <p>19675 rows × 3 columns</p>
 </div></div></div>
 </div>
-<p>위 자료 housing에서 집값의 평균은 192477.921017이다.</p>
+<p>위 자료 housing에서 집값의 평균값과 표준편차는 다음과 같다.</p>
+<ul class="simple">
+<li><p>평균값</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">house_value_mean</span> <span class="o">=</span> <span class="n">housing</span><span class="p">[</span><span class="s1">&#39;median_house_value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
@@ -1135,13 +1138,347 @@ $<span class="math notranslate nohighlight">\(p\text{-값} = P(Z \le z_0) = P(Z 
 </div>
 </div>
 </div>
-<p>각 소득분위별 집값에 대한 이야기를 하려 한다.</p>
-<p>예를 들어 2소득분위에 속한 표본 66 개를 추출하여 2소득 분위에 속한 사람들이 산 집값이 평균보다 낮은지를 유의수준 5%(1%)로 판단하여라.</p>
+<ul class="simple">
+<li><p>표준편차</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">house_value_std</span> <span class="o">=</span> <span class="n">housing</span><span class="o">.</span><span class="n">median_house_value</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">house_value_std</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>97709.026443
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>집값 대상 가설검정</strong></p>
+<p>아래 <code class="docutils literal notranslate"><span class="pre">testStatistic()</span></code>는 모평균과 모분산이 알려져 있는 경우에 주어진 표본의
+평균값에 대한 검정통계량과 p-값을 계산한다.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sample</span></code>: 표본</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mu_p</span></code>: 모평균</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sigma_p</span></code>: 모분산</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">alpha=0.05</span></code>: 유의수준. 기본값은 5%</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">oneTailed=False</span></code>: 단측검정 여부. 기본값은 <code class="docutils literal notranslate"><span class="pre">False</span></code>, 즉 양측검정 실행이 기본값.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lessThan=None</span></code>: 단측검정의 경우 검정통계량보다 작은 값이 나올 확률을 p-값으로 계산할지 여부.
+즉, <code class="docutils literal notranslate"><span class="pre">True</span></code>이면 왼쪽 꼬리검정 진행, <code class="docutils literal notranslate"><span class="pre">False</span></code>이면 오른쪽 꼬리검정 진행.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+
+<span class="k">def</span> <span class="nf">testStatistic</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">mu_p</span><span class="p">,</span> <span class="n">sigma_p</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">oneTailed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">lessThan</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+    <span class="n">mu_sample</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">n_sample</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+    
+    <span class="n">z0</span> <span class="o">=</span> <span class="p">(</span><span class="n">mu_sample</span> <span class="o">-</span> <span class="n">mu_p</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">sigma_p</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n_sample</span><span class="p">))</span>
+    
+    <span class="k">if</span> <span class="n">oneTailed</span> <span class="ow">and</span> <span class="n">lessThan</span><span class="p">:</span>
+        <span class="n">p_value</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">z0</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">oneTailed</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">lessThan</span><span class="p">:</span>
+        <span class="n">p_value</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">z0</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="n">oneTailed</span> <span class="ow">and</span> <span class="n">z0</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">p_value</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">z0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="n">oneTailed</span> <span class="ow">and</span> <span class="n">z0</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">p_value</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">z0</span><span class="p">))</span> <span class="o">*</span> <span class="mi">2</span>
+        
+    <span class="k">return</span> <span class="n">z0</span><span class="p">,</span> <span class="n">p_value</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>예제 1: 소득 3구간에서만 표본을 선택하는 경우 (양측검정)</strong></p>
+<p>소득 3구간의 중위주택가격과 전체 구역의 중위주택가격이 유사하다.</p>
+<ul class="simple">
+<li><p>전체 구역의 중위주택가격</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">housing</span><span class="o">.</span><span class="n">median_house_value</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>173800.000000
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>소득 3구간 구역의 기초 통계</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mask</span> <span class="o">=</span> <span class="n">housing</span><span class="p">[</span><span class="s1">&#39;income_cat&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span>
+<span class="n">housing_3Cat</span> <span class="o">=</span> <span class="n">housing</span><span class="o">.</span><span class="n">median_house_value</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+<span class="n">housing_3Cat</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count      7103.000000
+mean     193988.680698
+std       81583.050538
+min       14999.000000
+25%      137150.000000
+50%      178500.000000
+75%      233800.000000
+max      500000.000000
+Name: median_house_value, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>질문: 소득 3구간에서 1%의 표본을 선택하여 계산된 평균값이 모평균과 다른가?</p>
+<p>위 질문에 답하기 위해 먼저 소득 3구간에서 1%의 표본을 무작위로 선택한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_3Cat</span> <span class="o">=</span> <span class="n">housing_3Cat</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">43</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>양측검정을 위해 귀무가설과 대립가설을 다음과 같이 설정한다.</p>
+<ul class="simple">
+<li><p>귀무가설 <span class="math notranslate nohighlight">\(\text{H}_0\)</span>: <code class="docutils literal notranslate"><span class="pre">sample_3Cat</span></code>에 속한 구역들의 평균 집값이 <code class="docutils literal notranslate"><span class="pre">house_value_mean</span></code>와 같다.</p></li>
+<li><p>대립가설 <span class="math notranslate nohighlight">\(\text{H}_0\)</span>: <code class="docutils literal notranslate"><span class="pre">sample_3Cat</span></code>에 속한 구역들의 평균 집값이 <code class="docutils literal notranslate"><span class="pre">house_value_mean</span></code> 다르다.</p></li>
+</ul>
+<p>우선 귀무가설이 참이라고 가정한다.
+그러면 다음이 성립한다.</p>
+<div class="math notranslate nohighlight">
+\[\overline{X} \sim N(\mu, \sigma^2/n)\]</div>
+<div class="math notranslate nohighlight">
+\[Z = \frac{\overline{X} - \mu}{\sigma/\sqrt{n}}\sim N(0, 1^2)\]</div>
+<p>따라서 표본 <code class="docutils literal notranslate"><span class="pre">sample_3Cat</span></code>에 속한 구역의 평균 집값의 검정통계량 <span class="math notranslate nohighlight">\(z_0\)</span>와 <span class="math notranslate nohighlight">\(p\)</span>-값은 다음과 같다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z0</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">testStatistic</span><span class="p">(</span><span class="n">sample_3Cat</span><span class="p">,</span> <span class="n">house_value_mean</span><span class="p">,</span> <span class="n">house_value_std</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;검정통계량: </span><span class="si">{</span><span class="n">z0</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;p-값: </span><span class="si">{</span><span class="n">p_value</span><span class="si">:</span><span class="s2">14.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>검정통계량: 0.417664
+p-값:       0.676193
+</pre></div>
+</div>
+</div>
+</div>
+<p>검정통계량이 0.417664이다.
+반면에 유의수준 5%의 상위 임계값은 1.959964이다.
+즉 계산된 검정통계량보다 크다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z_25p</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.975</span><span class="p">)</span>
+<span class="n">z_25p</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.959964
+</pre></div>
+</div>
+</div>
+</div>
+<p>또한 <span class="math notranslate nohighlight">\(p\)</span>-값이 0.05보다 크다.</p>
+<p>결론:</p>
+<ul class="simple">
+<li><p>양측검정의 기각역은 <span class="math notranslate nohighlight">\(\{ z \mid z \le -1.959964 \; \text{또는} \; z \ge 1.959964 \}\)</span></p></li>
+<li><p>검정통계량 <span class="math notranslate nohighlight">\(-1.959964 &lt; z_0 = 0.417664 &lt; 1.959964\)</span> 이므로 기각역에 속하지 않는다.</p></li>
+<li><p>따라서 귀무가설을 기각하지 않는다.</p></li>
+<li><p>즉, 소득3분위에 속한 사람들이 산 집값이 평균과 다르다고 볼 수 없다.</p></li>
+</ul>
+<p><strong>예제 2: 소득 2구간에서만 표본을 선택하는 경우 (단측검정)</strong></p>
+<p>소득 2구간의 중위주택가격은 전체 구역의 중위주택가격보다 훨씬 작다.</p>
+<ul class="simple">
+<li><p>소득 2구간 구역의 기초 통계</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mask</span> <span class="o">=</span> <span class="n">housing</span><span class="p">[</span><span class="s1">&#39;income_cat&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span>
-<span class="n">sample_2Cat</span> <span class="o">=</span> <span class="n">housing</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">sample_2Cat</span>
+<span class="n">housing_2Cat</span> <span class="o">=</span> <span class="n">housing</span><span class="o">.</span><span class="n">median_house_value</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+<span class="n">housing_2Cat</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count      6552.000000
+mean     134935.408730
+std       69001.703453
+min       14999.000000
+25%       85675.000000
+50%      118800.000000
+75%      166100.000000
+max      500000.000000
+Name: median_house_value, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>질문: 소득 2구간에서 1%의 표본을 선택하여 계산된 평균값이 모평균 보다 작은가?</p>
+<p>먼저 소득 2구간에서 1%의 표본을 무작위로 선택한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_2Cat</span> <span class="o">=</span> <span class="n">housing_2Cat</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">43</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>단측검정을 위해 귀무가설과 대립가설을 다음과 같이 설정한다.</p>
+<ul class="simple">
+<li><p>귀무가설 <span class="math notranslate nohighlight">\(\text{H}_0\)</span>: <code class="docutils literal notranslate"><span class="pre">sample_2Cat</span></code>에 속한 구역들의 평균 집값이 <code class="docutils literal notranslate"><span class="pre">house_value_mean</span></code>와 같다.</p></li>
+<li><p>대립가설 <span class="math notranslate nohighlight">\(\text{H}_0\)</span>: <code class="docutils literal notranslate"><span class="pre">sample_2Cat</span></code>에 속한 구역들의 평균 집값이 <code class="docutils literal notranslate"><span class="pre">house_value_mean</span></code> 보다 작다.</p></li>
+</ul>
+<p>우선 귀무가설이 참이라고 가정한다.
+그러면 다음이 성립한다.</p>
+<div class="math notranslate nohighlight">
+\[\overline{X} \sim N(\mu, \sigma^2/n)\]</div>
+<div class="math notranslate nohighlight">
+\[Z = \frac{\overline{X} - \mu}{\sigma/\sqrt{n}}\sim N(0, 1^2)\]</div>
+<p>따라서 표본 <code class="docutils literal notranslate"><span class="pre">sample_2Cat</span></code>에 속한 구역의 평균 집값의 검정통계량 <span class="math notranslate nohighlight">\(z_0\)</span>와 <span class="math notranslate nohighlight">\(p\)</span>-값은 다음과 같다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z0</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">testStatistic</span><span class="p">(</span><span class="n">sample_2Cat</span><span class="p">,</span> <span class="n">house_value_mean</span><span class="p">,</span> <span class="n">house_value_std</span><span class="p">,</span> <span class="n">oneTailed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">lessThan</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;검정통계량: </span><span class="si">{</span><span class="n">z0</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;p-값: </span><span class="si">{</span><span class="n">p_value</span><span class="si">:</span><span class="s2">14.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>검정통계량: -4.712372
+p-값:       0.000001
+</pre></div>
+</div>
+</div>
+</div>
+<p>검정통계량이 -4.712372이다.
+반면에 유의수준 5% 임계값은 -1.644854이다.
+즉 계산된 검정통계량보다 작다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z_m5p</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="n">z_m5p</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-1.644854
+</pre></div>
+</div>
+</div>
+</div>
+<p>또한 <span class="math notranslate nohighlight">\(p\)</span>-값이 0.05보다 작다.</p>
+<p>결론:</p>
+<ul class="simple">
+<li><p>왼쪽 꼬리 단측검정의 기각역은 <span class="math notranslate nohighlight">\(\{ z \mid z \le -1.644854 \}\)</span></p></li>
+<li><p>검정통계량 <span class="math notranslate nohighlight">\(z_0 = -4.712372 &lt; -1.644854\)</span> 이므로 기각역에 속한다.</p></li>
+<li><p>따라서 귀무가설을 기각한다.</p></li>
+<li><p>즉, 소득 2구간에 속한 사람들이 산 집값이 평균과 다르다고 볼 수 있다.</p></li>
+</ul>
+<p><strong>예제 3: 선택 편향 방지</strong></p>
+<p>표본을 선택할 때 특정 소득 구간에 속하는 데이터만을 대상으로 하는 경우
+가설검정 결과가 상이하게 나올 수 있음을 이전 두 예제가 보여줬다.
+이는 표본 선택에 오류가 있음을 의미하며,
+이런 오류를 <strong>선택 편향</strong><font size='2'>selection bias</font>라 한다.
+선택 편향이 발생하지 않도록 표본을 선택하는 일이 매우 중요하다.</p>
+<p>선택 편향을 피하기 위해 일반적으로 모집단에서 무작위로 샘플을 선택한다.
+아래 코드는 전체 데이터셋에서 1% 크기의 표본을 무작위로 선택한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_general</span> <span class="o">=</span> <span class="n">housing</span><span class="o">.</span><span class="n">median_house_value</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">43</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>표본의 중위주택가격 전체 구역의 중위주택가격 보다 조금 크다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_general</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count       197.000000
+mean     201719.796954
+std       97015.201123
+min       36600.000000
+25%      126100.000000
+50%      180400.000000
+75%      266500.000000
+max      455300.000000
+Name: median_house_value, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>오른쪽 꼬리 단측검정을 위해 귀무가설과 대립가설을 다음과 같이 설정한다.</p>
+<ul class="simple">
+<li><p>귀무가설 <span class="math notranslate nohighlight">\(\text{H}_0\)</span>: <code class="docutils literal notranslate"><span class="pre">sample_2Cat</span></code>에 속한 구역들의 평균 집값이 <code class="docutils literal notranslate"><span class="pre">house_value_mean</span></code>와 같다.</p></li>
+<li><p>대립가설 <span class="math notranslate nohighlight">\(\text{H}_0\)</span>: <code class="docutils literal notranslate"><span class="pre">sample_2Cat</span></code>에 속한 구역들의 평균 집값이 <code class="docutils literal notranslate"><span class="pre">house_value_mean</span></code> 보다 크다.</p></li>
+</ul>
+<p>우선 귀무가설이 참이라고 가정한다.
+그러면 다음이 성립한다.</p>
+<div class="math notranslate nohighlight">
+\[\overline{X} \sim N(\mu, \sigma^2/n)\]</div>
+<div class="math notranslate nohighlight">
+\[Z = \frac{\overline{X} - \mu}{\sigma/\sqrt{n}}\sim N(0, 1^2)\]</div>
+<p>따라서 표본 <code class="docutils literal notranslate"><span class="pre">sample_general</span></code>에 속한 구역의 평균 집값의 검정통계량 <span class="math notranslate nohighlight">\(z_0\)</span>와 <span class="math notranslate nohighlight">\(p\)</span>-값은 다음과 같다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z0</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">testStatistic</span><span class="p">(</span><span class="n">sample_general</span><span class="p">,</span> <span class="n">house_value_mean</span><span class="p">,</span> <span class="n">house_value_std</span><span class="p">,</span> <span class="n">oneTailed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">lessThan</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;검정통계량: </span><span class="si">{</span><span class="n">z0</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;p-값: </span><span class="si">{</span><span class="n">p_value</span><span class="si">:</span><span class="s2">14.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>검정통계량: 1.327573
+p-값:       0.092160
+</pre></div>
+</div>
+</div>
+</div>
+<p>검정통계량이 1.327573이다.
+반면에 유의수준 5% 임계값은 1.644854이다.
+즉 계산된 검정통계량보다 작다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z_5p</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.95</span><span class="p">)</span>
+<span class="n">z_5p</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.644854
+</pre></div>
+</div>
+</div>
+</div>
+<p>또한 <span class="math notranslate nohighlight">\(p\)</span>-값이 0.05보다 크다.</p>
+<p>결론:</p>
+<ul class="simple">
+<li><p>오른쪽 꼬리검정의 기각역은 <span class="math notranslate nohighlight">\(\{ z \mid z \ge 1.644854 \}\)</span></p></li>
+<li><p>검정통계량 <span class="math notranslate nohighlight">\(z_0 = 1.327573 &lt; 1.644854\)</span> 이므로 기각역에 속하지 않는다.</p></li>
+<li><p>따라서 귀무가설을 기각할 수 없다.</p></li>
+<li><p>즉, 표본 평균이 전체 평균 집값 보다 크다고 볼 수 있다.</p></li>
+</ul>
+<p><strong>예제 4: 층화표집 활용</strong></p>
+<p>선택 편향의 위험성을 보다 줄이기 위해 층화표집을 활용한다.
+아래 코드는 전체 데이터셋에서 1% 크기의 표본을 층화표집 기법으로 선택한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stratification</span> <span class="o">=</span> <span class="n">housing</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;income_cat&#39;</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">group_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">stratified_sampling</span> <span class="o">=</span> <span class="n">stratification</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">y</span><span class="p">:</span><span class="n">y</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span> <span class="n">include_groups</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">stratified_sampling</span> <span class="o">=</span> <span class="n">stratified_sampling</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">stratified_sampling</span>
 </pre></div>
 </div>
 </div>
@@ -1164,9 +1501,9 @@ $<span class="math notranslate nohighlight">\(p\text{-값} = P(Z \le z_0) = P(Z 
   <thead>
     <tr style="text-align: right;">
       <th></th>
+      <th>income_cat</th>
       <th>median_income</th>
       <th>median_house_value</th>
-      <th>income_cat</th>
     </tr>
     <tr>
       <th>district</th>
@@ -1177,34 +1514,34 @@ $<span class="math notranslate nohighlight">\(p\text{-값} = P(Z \le z_0) = P(Z 
   </thead>
   <tbody>
     <tr>
-      <th>2931</th>
-      <td>2.5644</td>
-      <td>73000.0</td>
-      <td>2</td>
+      <th>4388</th>
+      <td>1</td>
+      <td>1.1868</td>
+      <td>93800.0</td>
     </tr>
     <tr>
-      <th>2128</th>
-      <td>2.3967</td>
-      <td>58700.0</td>
-      <td>2</td>
+      <th>13310</th>
+      <td>1</td>
+      <td>1.3811</td>
+      <td>51300.0</td>
     </tr>
     <tr>
-      <th>11520</th>
-      <td>1.9531</td>
-      <td>162500.0</td>
-      <td>2</td>
+      <th>3262</th>
+      <td>1</td>
+      <td>1.1650</td>
+      <td>53300.0</td>
     </tr>
     <tr>
-      <th>2144</th>
-      <td>2.7857</td>
-      <td>79700.0</td>
-      <td>2</td>
+      <th>4752</th>
+      <td>1</td>
+      <td>0.9234</td>
+      <td>187500.0</td>
     </tr>
     <tr>
-      <th>17954</th>
-      <td>1.7411</td>
-      <td>98400.0</td>
-      <td>2</td>
+      <th>12210</th>
+      <td>1</td>
+      <td>1.4861</td>
+      <td>63100.0</td>
     </tr>
     <tr>
       <th>...</th>
@@ -1213,97 +1550,99 @@ $<span class="math notranslate nohighlight">\(p\text{-값} = P(Z \le z_0) = P(Z 
       <td>...</td>
     </tr>
     <tr>
-      <th>13462</th>
-      <td>1.9500</td>
-      <td>150000.0</td>
-      <td>2</td>
+      <th>1334</th>
+      <td>5</td>
+      <td>6.0497</td>
+      <td>177500.0</td>
     </tr>
     <tr>
-      <th>2773</th>
-      <td>2.7583</td>
-      <td>64900.0</td>
-      <td>2</td>
+      <th>10235</th>
+      <td>5</td>
+      <td>7.8496</td>
+      <td>490800.0</td>
     </tr>
     <tr>
-      <th>4819</th>
-      <td>1.8086</td>
-      <td>97100.0</td>
-      <td>2</td>
+      <th>3986</th>
+      <td>5</td>
+      <td>6.1274</td>
+      <td>315900.0</td>
     </tr>
     <tr>
-      <th>12269</th>
-      <td>2.3958</td>
-      <td>78400.0</td>
-      <td>2</td>
+      <th>8559</th>
+      <td>5</td>
+      <td>6.4310</td>
+      <td>492500.0</td>
     </tr>
     <tr>
-      <th>14407</th>
-      <td>2.9000</td>
-      <td>185200.0</td>
-      <td>2</td>
+      <th>8728</th>
+      <td>5</td>
+      <td>7.6059</td>
+      <td>323700.0</td>
     </tr>
   </tbody>
 </table>
-<p>66 rows × 3 columns</p>
+<p>197 rows × 3 columns</p>
 </div></div></div>
 </div>
-<p>표본평균은 129143.939394이다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_2Cat_house_value_mean</span> <span class="o">=</span> <span class="n">sample_2Cat</span><span class="o">.</span><span class="n">median_house_value</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="n">sample_2Cat_house_value_mean</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_stratified</span> <span class="o">=</span> <span class="n">stratified_sampling</span><span class="o">.</span><span class="n">median_house_value</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>표본의 중위주택가격이 전체 구역의 중위주택가격 보다 조금 작다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_stratified</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>129143.939394
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count       197.000000
+mean     186095.939086
+std       97399.417945
+min       40000.000000
+25%      115800.000000
+50%      162200.000000
+75%      234800.000000
+max      496000.000000
+Name: median_house_value, dtype: float64
 </pre></div>
 </div>
 </div>
 </div>
-<p>귀무가설 <span class="math notranslate nohighlight">\(\text{H}_0\)</span>: <code class="docutils literal notranslate"><span class="pre">sample_2Cat_house_value_mean</span></code> = <code class="docutils literal notranslate"><span class="pre">house_value_mean</span></code></p>
-<p>대립가설 <span class="math notranslate nohighlight">\(\text{H}_0\)</span>: <code class="docutils literal notranslate"><span class="pre">sample_2Cat_house_value_mean</span></code> &lt; <code class="docutils literal notranslate"><span class="pre">house_value_mean</span></code></p>
-<p>귀무가설이 참이라고 가정.</p>
+<p>왼쪽 꼬리 단측검정을 위해 귀무가설과 대립가설을 다음과 같이 설정한다.</p>
+<ul class="simple">
+<li><p>귀무가설 <span class="math notranslate nohighlight">\(\text{H}_0\)</span>: <code class="docutils literal notranslate"><span class="pre">sample_2Cat</span></code>에 속한 구역들의 평균 집값이 <code class="docutils literal notranslate"><span class="pre">house_value_mean</span></code>와 같다.</p></li>
+<li><p>대립가설 <span class="math notranslate nohighlight">\(\text{H}_0\)</span>: <code class="docutils literal notranslate"><span class="pre">sample_2Cat</span></code>에 속한 구역들의 평균 집값이 <code class="docutils literal notranslate"><span class="pre">house_value_mean</span></code> 보다 작다.</p></li>
+</ul>
+<p>우선 귀무가설이 참이라고 가정한다.
+그러면 다음이 성립한다.</p>
 <div class="math notranslate nohighlight">
 \[\overline{X} \sim N(\mu, \sigma^2/n)\]</div>
 <div class="math notranslate nohighlight">
 \[Z = \frac{\overline{X} - \mu}{\sigma/\sqrt{n}}\sim N(0, 1^2)\]</div>
+<p>따라서 표본 <code class="docutils literal notranslate"><span class="pre">sample_general</span></code>에 속한 구역의 평균 집값의 검정통계량 <span class="math notranslate nohighlight">\(z_0\)</span>와 <span class="math notranslate nohighlight">\(p\)</span>-값은 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">house_value_std</span> <span class="o">=</span> <span class="n">housing</span><span class="o">.</span><span class="n">median_house_value</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">house_value_std</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z0</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">testStatistic</span><span class="p">(</span><span class="n">sample_stratified</span><span class="p">,</span> <span class="n">house_value_mean</span><span class="p">,</span> <span class="n">house_value_std</span><span class="p">,</span> <span class="n">oneTailed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">lessThan</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;검정통계량: </span><span class="si">{</span><span class="n">z0</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;p-값: </span><span class="si">{</span><span class="n">p_value</span><span class="si">:</span><span class="s2">14.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>97709.026443
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>검정통계량: -0.916756
+p-값:       0.179635
 </pre></div>
 </div>
 </div>
 </div>
-<p>검정통계량 계산</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z_0</span> <span class="o">=</span> <span class="p">(</span><span class="n">sample_2Cat_house_value_mean</span> <span class="o">-</span> <span class="n">house_value_mean</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">house_value_std</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sample_2Cat</span><span class="p">)))</span>
-<span class="n">z_0</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-5.265918
-</pre></div>
-</div>
-</div>
-</div>
-<p>반면에 유의수준 5% 임계값은 -1.644854이다.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">ppf()</span></code> 함수는 누적분포함수 <code class="docutils literal notranslate"><span class="pre">cdf()</span></code>의 역함수임.</p>
+<p>검정통계량이 -0.916756이다.
+반면에 유의수준 5% 임계값은 -1.644854이다.
+즉 계산된 검정통계량보다 크다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z_5p</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.05</span><span class="p">)</span>
@@ -1317,84 +1656,13 @@ $<span class="math notranslate nohighlight">\(p\text{-값} = P(Z \le z_0) = P(Z 
 </div>
 </div>
 </div>
+<p>또한 <span class="math notranslate nohighlight">\(p\)</span>-값이 0.05보다 크다.</p>
 <p>결론:</p>
 <ul class="simple">
-<li><p>왼쪽 꼬리 검정, 기각역은 <span class="math notranslate nohighlight">\(\{z\le -1.644854 (\text{임계값)}\}\)</span></p></li>
-<li><p>검정통계량 <span class="math notranslate nohighlight">\(z_0 = -5.265918 &lt; -1.644854\)</span> 이므로 기각역에 속한다.</p></li>
-<li><p>따라서 귀무가설을 기각한다.</p></li>
-<li><p>즉, 소득2분위에 속한 사람들이 산 집값이 평균보다 낮다고 볼 수 있다.</p></li>
-</ul>
-<p><strong>소득 3구간을 대상으로 하는 경우</strong></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mask</span> <span class="o">=</span> <span class="n">housing</span><span class="p">[</span><span class="s1">&#39;income_cat&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span>
-<span class="n">sample_3Cat</span> <span class="o">=</span> <span class="n">housing</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">43</span><span class="p">)</span>
-
-<span class="n">sample_3Cat_house_value_mean</span> <span class="o">=</span> <span class="n">sample_3Cat</span><span class="o">.</span><span class="n">median_house_value</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="n">sample_3Cat_house_value_mean</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>197321.126761
-</pre></div>
-</div>
-</div>
-</div>
-<p>평균값보다 크다.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">house_value_mean</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>192477.921017
-</pre></div>
-</div>
-</div>
-</div>
-<p>귀무가설 <span class="math notranslate nohighlight">\(\text{H}_0\)</span>: <code class="docutils literal notranslate"><span class="pre">sample_3Cat_house_value_mean</span></code> = <code class="docutils literal notranslate"><span class="pre">house_value_mean</span></code></p>
-<p>대립가설 <span class="math notranslate nohighlight">\(\text{H}_0\)</span>: <code class="docutils literal notranslate"><span class="pre">sample_3Cat_house_value_mean</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">house_value_mean</span></code></p>
-<p>귀무가설이 참이라고 가정.</p>
-<div class="math notranslate nohighlight">
-\[\overline{X} \sim N(\mu, \sigma^2/n)\]</div>
-<div class="math notranslate nohighlight">
-\[Z = \frac{\overline{X} - \mu}{\sigma/\sqrt{n}}\sim N(0, 1^2)\]</div>
-<p>검정통계량이 0.417664이다.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z_0</span> <span class="o">=</span> <span class="p">(</span><span class="n">sample_3Cat_house_value_mean</span> <span class="o">-</span> <span class="n">house_value_mean</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">house_value_std</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sample_3Cat</span><span class="p">)))</span>
-<span class="n">z_0</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.417664
-</pre></div>
-</div>
-</div>
-</div>
-<p>반면에 유의수준 5% 임계값은 1.644854이다.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z_5p</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.95</span><span class="p">)</span>
-<span class="n">z_5p</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.644854
-</pre></div>
-</div>
-</div>
-</div>
-<p>결론:</p>
-<ul class="simple">
-<li><p>오른쪽 꼬리 검정, 기각역은 <span class="math notranslate nohighlight">\(\{z\ge 1.644854 (\text{임계값)}\}\)</span></p></li>
-<li><p>검정통계량 <span class="math notranslate nohighlight">\(z_0 = 0.417664 &lt; 1.644854\)</span> 이므로 기각역에 속하지 않는다.</p></li>
-<li><p>따라서 귀무가설을 기각하지 않는다.</p></li>
-<li><p>즉, 소득3분위에 속한 사람들이 산 집값이 평균보다 높다고 볼 수 없다.</p></li>
+<li><p>왼쪽 꼬리검정의 기각역은 <span class="math notranslate nohighlight">\(\{ z \mid z \le -1.644854 \}\)</span></p></li>
+<li><p>검정통계량 <span class="math notranslate nohighlight">\(z_0 = -0.916756 &gt; -1.644854\)</span> 이므로 기각역에 속하지 않는다.</p></li>
+<li><p>따라서 귀무가설을 기각할 수 없다.</p></li>
+<li><p>즉, 표본 평균이 전체 평균 집값 보다 작다고 볼 수 있다.</p></li>
 </ul>
 </section>
 </section>
