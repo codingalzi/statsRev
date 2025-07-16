@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -1194,7 +1194,7 @@ $<span class="math notranslate nohighlight">\(p\text{-값} = P(Z \le z_0) = P(Z 
 </div>
 </div>
 <p><strong>예제 1: 소득 3구간에서만 표본을 선택하는 경우 (양측검정)</strong></p>
-<p>소득 3구간의 중위주택가격과 전체 구역의 중위주택가격이 유사하다.</p>
+<p>소득별 5구간중 3구간에서의 평균 중위주택 가격이 전체 중위주택가격 평균과 제일 유사할 것이라 짐작할 수 있다. 가설검정을 통하여 논의하여 보자.</p>
 <ul class="simple">
 <li><p>전체 구역의 중위주택가격</p></li>
 </ul>
@@ -1235,7 +1235,8 @@ Name: median_house_value, dtype: float64
 </div>
 </div>
 </div>
-<p>질문: 소득 3구간에서 1%의 표본을 선택하여 계산된 평균값이 모평균과 다른가?</p>
+<p>질문: 소득 3구간에서의 집값이 전체 평균 집값과 다르다고 할 수 있는가?
+소득 3구간에서의 1%의 표본을 조사하여 판단하여 보자.</p>
 <p>위 질문에 답하기 위해 먼저 소득 3구간에서 1%의 표본을 무작위로 선택한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1297,7 +1298,7 @@ p-값:       0.676193
 <li><p>즉, 소득3분위에 속한 사람들이 산 집값이 평균과 다르다고 볼 수 없다.</p></li>
 </ul>
 <p><strong>예제 2: 소득 2구간에서만 표본을 선택하는 경우 (왼쪽 꼬리 단측검정)</strong></p>
-<p>소득 2구간의 중위주택가격은 전체 구역의 중위주택가격보다 훨씬 작다.</p>
+<p>소득 2구간의 중위주택가격은 전체 구역의 중위주택가격보다 작을 것이다. 가설검정을 통하여 작다고 할 수 있겠는지 판단하여 보자.</p>
 <ul class="simple">
 <li><p>소득 2구간 구역의 기초 통계</p></li>
 </ul>
@@ -1323,7 +1324,7 @@ Name: median_house_value, dtype: float64
 </div>
 </div>
 </div>
-<p>질문: 소득 2구간에서 1%의 표본을 선택하여 계산된 평균값이 모평균 보다 작은가?</p>
+<p>질문: 소득 2구간에서의 집값이 전체 평균 집값보다 작은가? 소득 2구간에서의 1%의 표본을 조사하여 판단하여 보자.</p>
 <p>먼저 소득 2구간에서 1%의 표본을 무작위로 선택한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1385,13 +1386,9 @@ p-값:       0.000001
 <li><p>즉, 소득 2구간에 속한 사람들이 산 집값이 평균과 다르다고 볼 수 있다.</p></li>
 </ul>
 <p><strong>예제 3: 선택 편향 방지 (오른쪽 꼬리 단측검정)</strong></p>
-<p>표본을 선택할 때 특정 소득 구간에 속하는 데이터만을 대상으로 하는 경우
-가설검정 결과가 상이하게 나올 수 있음을 이전 두 예제가 보여줬다.
-이는 표본 선택에 오류가 있음을 의미하며,
-이런 오류를 <strong>선택 편향</strong><font size='2'>selection bias</font>라 한다.
-선택 편향이 발생하지 않도록 표본을 선택하는 일이 매우 중요하다.</p>
-<p>선택 편향을 피하기 위해 일반적으로 모집단에서 무작위로 샘플을 선택한다.
-아래 코드는 전체 데이터셋에서 1% 크기의 표본을 무작위로 선택한다.</p>
+<p>위 예제는 각 소득 분위별로 예상되는 평균 집값과의 차이의 의미를 판단하기 위하여 의도적으로 편향된 표본을 선택하였다. 계산 결과 위의 소득 분위 기준으로는 검정통계량과 임계값의 차이도 많이 남을 알 수 있다.</p>
+<p>문제의 성격에 따라 <strong>선택 편향</strong><font size='2'>selection bias</font>이 발생하지 않도록 표본을 선택하는 일이 매우 중요할 수 있다. 이제는 되도록 편향이 발생하지 않는 표본 선택 방법을 논의하고자 한다.</p>
+<p>선택 편향을 피하기 위한 샘플 선택으로 아래 코드에서는 전체 데이터셋에서 1% 크기의 표본을 무작위로 선택한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_general</span> <span class="o">=</span> <span class="n">housing</span><span class="o">.</span><span class="n">median_house_value</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">43</span><span class="p">)</span>
@@ -1470,7 +1467,7 @@ p-값:       0.092160
 <li><p>오른쪽 꼬리검정의 기각역은 <span class="math notranslate nohighlight">\(\{ z \mid z \ge 1.644854 \}\)</span></p></li>
 <li><p>검정통계량 <span class="math notranslate nohighlight">\(z_0 = 1.327573 &lt; 1.644854\)</span> 이므로 기각역에 속하지 않는다.</p></li>
 <li><p>따라서 귀무가설을 기각할 수 없다.</p></li>
-<li><p>즉, 표본 평균이 전체 평균 집값 보다 크다고 볼 수 있다.</p></li>
+<li><p>즉, 표본 평균이 전체 평균 집값 보다 크다고 볼 수 없고 따라서 평균 집값이 타당하다고 볼 수 있다.</p></li>
 </ul>
 <p><strong>예제 4: 층화표집 활용 (양측검정)</strong></p>
 <p>선택 편향의 위험성을 보다 줄이기 위해 층화표집을 활용한다.
@@ -1664,13 +1661,13 @@ p-값:       0.179635
 <li><p>왼쪽 꼬리검정의 기각역은 <span class="math notranslate nohighlight">\(\{ z \mid z \le -1.644854 \}\)</span></p></li>
 <li><p>검정통계량 <span class="math notranslate nohighlight">\(z_0 = -0.916756 &gt; -1.644854\)</span> 이므로 기각역에 속하지 않는다.</p></li>
 <li><p>따라서 귀무가설을 기각할 수 없다.</p></li>
-<li><p>즉, 표본 평균이 전체 평균 집값 보다 작다고 볼 수 있다.</p></li>
+<li><p>즉, 표본 평균이 전체 평균 집값 보다 작다고 볼 수 없고 따라서 평균 집값이 타당하다고 볼 수 있다.</p></li>
 </ul>
 <p>결론 2:</p>
 <ul class="simple">
 <li><p>표본을 선택할 때 무작위 추출한 경우보다 <span class="math notranslate nohighlight">\(p\)</span>-값이 더 크다.</p></li>
 <li><p>이는 층화추출로 생성된 표본의 평균값이 보다 모평균에 가까움을 의미한다.</p></li>
-<li><p>이유는 정규분포의 특징상 <span class="math notranslate nohighlight">\(p\)</span>-값이 클 수록 검정통계량이 0에 가까워지기 때문이다.</p></li>
+<li><p>이유는 표준정규분포의 특성상 <span class="math notranslate nohighlight">\(p\)</span>-값이 클 수록 검정통계량이 0에 가까워지기 때문이다.</p></li>
 </ul>
 </section>
 </section>
