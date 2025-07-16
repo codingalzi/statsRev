@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>9. 선형 상관관계 &#8212; 거꾸로 배우는 데이터분석</title>
+    <title>9. 선형 상관관계 &#8212; 데이터로 배우는 통계분석</title>
   
   
   
@@ -152,7 +152,7 @@
   
   
   
-    <p class="title logo__title">거꾸로 배우는 데이터분석</p>
+    <p class="title logo__title">데이터로 배우는 통계분석</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -850,16 +850,53 @@ S_{XY} &amp; = \frac 1 n \sum_{i=1}^{n} (x_i - \bar x)(y_i - \bar y) \\
 예를 들어 학생들의 키와 체중을 대상으로 공분산을 계산한다면 단위가 <code class="docutils literal notranslate"><span class="pre">cm</span> <span class="pre">*</span> <span class="pre">kg</span></code>이 되고,
 멀리뛰기와 오래 매달리기의 공분산은 단위가 <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">*</span> <span class="pre">sec</span></code>이 된다.
 또한, 동일한 단위를 사용한다 하더라도 데이터 값의 척도(scale)에 따라 공분산 값도 많이 달라질 수 있다.
-예를 들어, 10명이 아닌 50명 전체를 대상으로 영어 점수와 수학 점수의 공분산을 계산하면
+예를 들어, 182 개 국가 전체가 아니라 처음 10개 국가를 대상으로 공분산을 계산하면 값이 달라진다.
 공분산이 60점 대에서 50점 대로 달라진다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdpPerCapita_2015_2020</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>2015</th>
+      <th>2020</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2015</th>
+      <td>2.896712e+08</td>
+      <td>3.107778e+08</td>
+    </tr>
+    <tr>
+      <th>2020</th>
+      <td>3.107778e+08</td>
+      <td>3.379077e+08</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
-<p>따라서 공분산 값의 절대적 크기는 상관관계의 강도를 측정하는 기준이 될 수 없다. 이 점을 보완한 척도가 <strong>상관계수</strong><font size='2'>correlation coefficient</font>이다. 여러가지 상관계수가 있으나, 가장 대표적인 것이 <strong>피어슨 상관계수</strong><font size='2'>Pearson correlation coefficient</font>이다. 데이터 <span class="math notranslate nohighlight">\(X\)</span>와 <span class="math notranslate nohighlight">\(Y\)</span>의 피어슨 상관계수 <span class="math notranslate nohighlight">\(r_{XY}\)</span>는 공분산 <span class="math notranslate nohighlight">\(S_{XY}\)</span>을 각 데이터의 표준편차 <span class="math notranslate nohighlight">\(S_X\)</span>와 <span class="math notranslate nohighlight">\(S_Y\)</span>로 나눈 값이다. 아래 계산식으로부터 알 수 있듯이, 두 데이터의 단위 및 척도(scale)와 무관한, 항상 -1과 1 사이의 값이 나온다.</p>
+<p>따라서 공분산 값의 절대적 크기는 선형 상관관계의 강도를 측정하는 기준이 될 수 없다. 이 점을 보완한 척도가 <strong>상관계수</strong><font size='2'>correlation coefficient</font>이다. 여러가지 상관계수가 있으나, 가장 대표적인 것이 <strong>피어슨 상관계수</strong><font size='2'>Pearson correlation coefficient</font>이다. 데이터 <span class="math notranslate nohighlight">\(X\)</span>와 <span class="math notranslate nohighlight">\(Y\)</span>의 피어슨 상관계수 <span class="math notranslate nohighlight">\(r_{XY}\)</span>는 공분산 <span class="math notranslate nohighlight">\(S_{XY}\)</span>을 각 데이터의 표준편차 <span class="math notranslate nohighlight">\(S_X\)</span>와 <span class="math notranslate nohighlight">\(S_Y\)</span>로 나눈 값이다. 아래 계산식으로부터 알 수 있듯이, 두 데이터의 단위 및 척도(scale)와 무관한, 항상 -1과 1 사이의 값이 나온다.</p>
 <div class="math notranslate nohighlight">
 \[
 r_{xy} = \frac{S_{xy}}{S_x \cdot S_y}
@@ -887,13 +924,21 @@ r_{xy} = \frac{S_{xy}}{S_x \cdot S_y}
 <p>아래 그림은 다양한 상관계수에 대응되는 산점도들이다.
 상관계수의 절댓값이 1에 가까워질수록 산점도가 직선에 가까워지며,
 0에 가까워질수록 산점도가 여러 방향으로 넓게 퍼져 두 데이터의 상관관계가 모호해진다.</p>
-<p><div align="center"><img src="https://github.com/codingalzi/DataSci/blob/master/jupyter-book/images/ch03/img-3-3.jpg?raw=true" style="width:500px"></div></p><p><strong><code class="docutils literal notranslate"><span class="pre">np.corrcoef()</span></code> 함수</strong></p>
-<p>10명 학생의 영어 점수와 수학 점수의 상관계수는 넘파이의 <code class="docutils literal notranslate"><span class="pre">corrcoef()</span></code> 함수와 데이터프레임의 <code class="docutils literal notranslate"><span class="pre">corr()</span></code> 메서드로 계산할 수 있다.</p>
-<p>넘파이 <code class="docutils literal notranslate"><span class="pre">corrcoef()</span></code> 함수의 반환값 모양과 항목별 의미는
-공분산 <code class="docutils literal notranslate"><span class="pre">cov()</span></code> 함수의 경우와 동일하다. 10명 학생의 영어 점수와 수학 점수의 상관계수는 0.82 정도로 1에 무척 가깝다. 따라서 두 데이터 사이의 선형 상관관계는 매우 큰 편이라고 평가할 수 있다.</p>
+<p><div align="center"><img src="https://github.com/codingalzi/statsRev/blob/master/jupyter-book/images/pearson_correlation.png?raw=true" style="width:700px"></div></p>
+<p><div style="text-align: center">&lt;그림 출처: <a href="https://en.wikipedia.org/wiki/Pearson_correlation_coefficient">(Wikipedia) 피어슨 상관계수</a>&gt;</div></p><p><strong><code class="docutils literal notranslate"><span class="pre">np.corrcoef()</span></code> 함수</strong></p>
+<p>상관계수는 넘파이의 <code class="docutils literal notranslate"><span class="pre">corrcoef()</span></code> 함수와 데이터프레임의 <code class="docutils literal notranslate"><span class="pre">corr()</span></code> 메서드로 계산할 수 있다.</p>
+<p>넘파이 <code class="docutils literal notranslate"><span class="pre">corrcoef()</span></code> 함수의 반환값 모양과 항목별 의미는 공분산 <code class="docutils literal notranslate"><span class="pre">cov()</span></code> 함수의 경우와 동일하다.
+2015년도 1인당 GDP와 2020년도 1인당 GDP의 상관계수는 0.98 정도로 1에 무척 가깝다.
+따라서 두 데이터 사이의 선형 상관관계는 매우 크다고 평가할 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">gdp_per_capita_2015</span><span class="p">,</span> <span class="n">gdp_per_capita_2020</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1.      , 0.978579],
+       [0.978579, 1.      ]])
 </pre></div>
 </div>
 </div>
@@ -902,18 +947,92 @@ r_{xy} = \frac{S_{xy}}{S_x \cdot S_y}
 <p>데이터프레임의 <code class="docutils literal notranslate"><span class="pre">corr()</span></code> 메서드도 동일한 결과를 보여준다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scores_df</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdpPerCapita_2015_2020</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>2015</th>
+      <th>2020</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2015</th>
+      <td>1.000000</td>
+      <td>0.978579</td>
+    </tr>
+    <tr>
+      <th>2020</th>
+      <td>0.978579</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
-<p>50명 전체의 영어 점수와 수학 점수의 상관계수는 0.72 정도로 조금 약해지지만, 여전히 강한 선형 상관관계라고 볼 수 있다.</p>
+<p>처음 10 개 국가에 대한 상관계수는 0.99 이상으로 커진다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdpPerCapita_2015_2020</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>2015</th>
+      <th>2020</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2015</th>
+      <td>1.000000</td>
+      <td>0.993341</td>
+    </tr>
+    <tr>
+      <th>2020</th>
+      <td>0.993341</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </section>
 <section id="id6">
