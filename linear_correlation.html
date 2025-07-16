@@ -1,0 +1,1167 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>9. 선형 상관관계 &#8212; 데이터로 배우는 통계분석</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'linear_correlation';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="10. 2차원 데이터 시각화" href="twoD_visualization.html" />
+    <link rel="prev" title="8. 1차원 데이터 시각화" href="oneD_visualization.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">데이터로 배우는 통계분석</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="variables_values.html">1. 변수와 값</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lists_dicts.html">2. 리스트와 사전</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arrays.html">3. 넘파이 어레이</a></li>
+<li class="toctree-l1"><a class="reference internal" href="series.html">4. 판다스 시리즈</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataframes.html">5. 판다스 데이터프레임</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_handling.html">6. 데이터 다루기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="central_tendency.html">7. 데이터 대표값과 분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oneD_visualization.html">8. 1차원 데이터 시각화</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">9. 선형 상관관계</a></li>
+<li class="toctree-l1"><a class="reference internal" href="twoD_visualization.html">10. 2차원 데이터 시각화</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sampling.html">11. 모집단과 표본</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability.html">12. 확률분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hypothesis_testing.html">13. 가설검정</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/codingalzi/statsRev/blob/master/jupyter-book/linear_correlation.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/codingalzi/statsRev" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/codingalzi/statsRev/issues/new?title=Issue%20on%20page%20%2Flinear_correlation.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/linear_correlation.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>선형 상관관계</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">9.1. 1인당 국민총생산 데이터셋</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">9.2. 상관관계와 산점도</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">9.3. 공분산</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">9.4. 상관계수</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">9.5. 연습문제</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="ch-linear-correlation">
+<span id="id1"></span><h1><span class="section-number">9. </span>선형 상관관계<a class="headerlink" href="#ch-linear-correlation" title="Link to this heading">#</a></h1>
+<p>상관관계는 선형 상관관계와 비선형 상관관계로 나뉜다.
+선형 상관관계는 하나의 데이터 값이 증가함에 따라 다른 데이터 값이 일차함수로
+단조증가(양의 상관관계) 또는 단조감소(음의 상관관계)를 의미한다.
+반면에 비선형 상관관계는 일차함수보다 복잡한 함수로 나타나는 경우를 말한다.</p>
+<p>2차원 데이터를 다루는 대부분의 경우, 선형 상관관계 여부를 분석하며, 이를 평가하기 위한 척도로서
+공분산<font size='2'>covariance</font>과 상관계수<font size='2'>correlation coefficient</font>를 사용한다.</p>
+<p><strong>기본 설정</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">numpy</span></code>와 <code class="docutils literal notranslate"><span class="pre">pandas</span></code> 라이브러리를 각각 <code class="docutils literal notranslate"><span class="pre">np</span></code>와 <code class="docutils literal notranslate"><span class="pre">pd</span></code>로 불러온다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>데이터프레임의 <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy">chained indexing을 금지시키기 위한 설정</a>을 지정한다.
+Pandas 3.0 버전부터는 기본 옵션으로 지정된다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">mode</span><span class="o">.</span><span class="n">copy_on_write</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>주피터 노트북에서 부동소수점의 출력을 소수점 이하 6자리로 제한한다.
+아래 코드는 주피터 노트북에서만 사용하며 일반적인 파이썬 코드가 아니다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">precision</span> 6
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;%.6f&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>아래 코드는 데이터프레임 내에서 부동소수점의 출력을 소수점 이하 6자리로 제한한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.precision&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>데이터 시각화를 위해 <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot</span></code>를 <code class="docutils literal notranslate"><span class="pre">plt</span></code>라는 별칭으로 불러온다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>코드에 사용되는 <a class="reference external" href="https://github.com/codingalzi/DataSci/tree/master/data">데이터 저장소의 기본 디렉토리</a>를 지정한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_url</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/codingalzi/statsRev/refs/heads/master/data/&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id2">
+<h2><span class="section-number">9.1. </span>1인당 국민총생산 데이터셋<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>182 개 국가의 2015년과 2020년의 1인당 국민총생산(GDP) 정보를 담고 있는 csv 파일을 데이터프레임으로 불러온다.
+이때 국가명을 인덱스로 지정하며 단위는 미국 달러다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdpPerCapita_2015_2020</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_url</span> <span class="o">+</span> <span class="s2">&quot;gdpPerCapita_2015_2020.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;Country&#39;</span><span class="p">)</span>
+<span class="n">gdpPerCapita_2015_2020</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>2015</th>
+      <th>2020</th>
+    </tr>
+    <tr>
+      <th>Country</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Afghanistan</th>
+      <td>599.994</td>
+      <td>499.441</td>
+    </tr>
+    <tr>
+      <th>Albania</th>
+      <td>3995.383</td>
+      <td>4898.280</td>
+    </tr>
+    <tr>
+      <th>Algeria</th>
+      <td>4318.135</td>
+      <td>3331.080</td>
+    </tr>
+    <tr>
+      <th>Angola</th>
+      <td>4100.315</td>
+      <td>2021.310</td>
+    </tr>
+    <tr>
+      <th>Antigua and Barbuda</th>
+      <td>14414.302</td>
+      <td>14158.570</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>Venezuela</th>
+      <td>7744.746</td>
+      <td>1739.110</td>
+    </tr>
+    <tr>
+      <th>Vietnam</th>
+      <td>2088.344</td>
+      <td>3497.510</td>
+    </tr>
+    <tr>
+      <th>Yemen</th>
+      <td>1302.940</td>
+      <td>645.126</td>
+    </tr>
+    <tr>
+      <th>Zambia</th>
+      <td>1350.151</td>
+      <td>1001.440</td>
+    </tr>
+    <tr>
+      <th>Zimbabwe</th>
+      <td>1064.350</td>
+      <td>921.847</td>
+    </tr>
+  </tbody>
+</table>
+<p>182 rows × 2 columns</p>
+</div></div></div>
+</div>
+<p>연도별로 각각 182개의 부동소수점이 포함되어 있음을 확인한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdpPerCapita_2015_2020</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+Index: 182 entries, Afghanistan to Zimbabwe
+Data columns (total 2 columns):
+ #   Column  Non-Null Count  Dtype  
+---  ------  --------------  -----  
+ 0   2015    182 non-null    float64
+ 1   2020    182 non-null    float64
+dtypes: float64(2)
+memory usage: 4.3+ KB
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id3">
+<h2><span class="section-number">9.2. </span>상관관계와 산점도<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>2015년도 1인당 GDP와 2020년도 1인당 GDP 사이의 상관관계 여부를 시각적으로 확인하기 위해
+<strong>산점도</strong><font size='2'>scatter plot</font>를 그려본다.
+산점도는 <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot</span></code> 라이브러리에 포함된 <code class="docutils literal notranslate"><span class="pre">scatter()</span></code> 함수를 이용하면 된다.</p>
+<p>먼저 2015년 데이터와 2020년 데이터를 나눠 넘파이 어레이로 지정한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdp_per_capita_2015</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gdpPerCapita_2015_2020</span><span class="p">[</span><span class="s1">&#39;2015&#39;</span><span class="p">])</span>
+<span class="n">gdp_per_capita_2020</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gdpPerCapita_2015_2020</span><span class="p">[</span><span class="s1">&#39;2020&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>아래 코드에서 그리는 산점도는 x축이 2015년도 1인당 GDP, y축이 2020년도 1인당 GDP다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">gdp_per_capita_2015</span><span class="p">,</span> <span class="n">gdp_per_capita_2020</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;2015&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;2020&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/069fcc14e00f9bc8aaf0ce1b05482d902825ae409b7896b261aa6f963e44d911.png" src="_images/069fcc14e00f9bc8aaf0ce1b05482d902825ae409b7896b261aa6f963e44d911.png" />
+</div>
+</div>
+<p>위 산점도는 2015년도 1인당 GDP가 높아질수록 2020년도 1인당 GDP도 올라가는 경향이 있음을 보여준다.
+즉 두 데이터는 양의 선형 상관관계를 갖는다고 추측할 수 있다.</p>
+<p>이제 선형 상관관계를 수치화한 두 가지 척도,
+<strong>공분산</strong><font size='2'>covariance</font>과
+<strong>상관계수</strong><font size='2'>correlation coefficient</font>를 통해 살펴보자.
+먼저 공분산을 소개한다.</p>
+</section>
+<section id="id4">
+<h2><span class="section-number">9.3. </span>공분산<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<p><a class="reference internal" href="central_tendency.html#ch-central-tendency"><span class="std std-numref">7장</span></a>에서
+다룬 분산<font size='2'>variance</font>은 한 종류의 데이터
+<span class="math notranslate nohighlight">\(X=\{ x_1,\cdots, x_n \}\)</span>에 대해 샘플값들의 편차의 제곱의 평균값이다.
+아래 식과 같이 계산되며, 샘플값들이 평균으로부터 떨어져있는 정도를 나타내는 양의 측정치이다.</p>
+<div class="math notranslate nohighlight">
+\[
+S_X^2 = \frac 1 n \sum_{i=1}^{n} (x_i - \bar x)^2 = \frac 1 n \left\{(x_1 - \bar x)^2 + (x_2 - \bar x)^2 + \cdots + (x_n - \bar x)^2 \right \}
+\]</div>
+<p>공분산<font size='2'>covariance</font>은 두 종류의 데이터 <span class="math notranslate nohighlight">\(X=\{ x_1, \cdots, x_n \}\)</span>와 <span class="math notranslate nohighlight">\(Y=\{ y_1,
+\cdots, y_n \}\)</span>에 대해 다음과 같이 정의하며 <span class="math notranslate nohighlight">\(S_{XY}\)</span>로 표기하자.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+S_{XY} &amp; = \frac 1 n \sum_{i=1}^{n} (x_i - \bar x)(y_i - \bar y) \\
+&amp;= \frac 1 n \left\{ (x_1 - \bar x)(y_1 - \bar y) + (x_2 - \bar x)(y_2 - \bar y) + \cdots + (x_n - \bar x)(y_n - \bar y) \right\}
+\end{align*}
+\end{split}\]</div>
+<p>위의 두 식으로부터 알 수 있는 사실은, 분산과 달리 공분산은 음수가 나올 수 있다는 것이다.
+분산은 한 종류의 데이터에 대해 편차의 제곱의 평균이므로 항상 양의 값을 갖는다. 하지만 공분산은 두 종류의 데이터에 대해 편차의 곱의 평균인데, 곱해지는 편차의 부호가 다른 항들은 음수가 되므로 평균 또한 음수가 될 수 있다.</p>
+<p>넘파이와 판다스 모두 공분산을 계산하는 API를 제공하는데, 넘파이의 <code class="docutils literal notranslate"><span class="pre">cov()</span></code>와 데이터프레임의 <code class="docutils literal notranslate"><span class="pre">cov()</span></code>가 그것이다.</p>
+<p><strong>넘파이의 <code class="docutils literal notranslate"><span class="pre">cov()</span></code> 함수</strong></p>
+<p>아래 코드는 넘파이의 <code class="docutils literal notranslate"><span class="pre">cov()</span></code> 함수를 이용해 두 데이터의 공분산을 계산한다. (2, 2) 행렬 모양의 어레이가 생성되는데, 이 어레이의 항목별 의미는 다음과 같다.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>인덱스</p></th>
+<th class="head text-left"><p>의미</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">0]</span></code></p></td>
+<td class="text-left"><p>영어 점수와 영어 점수의 공분산, 즉 영어 점수의 분산</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1]</span></code></p></td>
+<td class="text-left"><p>영어 점수와 수학 점수의 공분산</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">0]</span></code></p></td>
+<td class="text-left"><p>수학 점수와 영어 점수의 공분산</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">1]</span></code></p></td>
+<td class="text-left"><p>수학 점수와 수학 점수의 공분산, 즉 수학 점수의 분산</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cov_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">gdp_per_capita_2015</span><span class="p">,</span> <span class="n">gdp_per_capita_2020</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">cov_mat</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[3.060020e+08, 3.146226e+08],
+       [3.146226e+08, 3.378031e+08]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>공분산의 계산식으로부터 알 수 있듯이, ‘2015년도 1인당 GDP와 2020년도 1인당 GDP의 공분산’과
+‘2020년도 1인당 GDP와 2015년도 1인당 GDP의 공분산’은 동일하다.
+아래 두 코드는 각 연도별 공분산은 해당 연도의 표본분산과 일치하는지 확인해준다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;2015년도 1인당 GDP 분산:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">gdp_per_capita_2015</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2015년도 1인당 GDP 분산: 306002004.4529384
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;2020년도 1인당 GDP분산:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">gdp_per_capita_2020</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2020년도 1인당 GDP분산: 337803085.89880574
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>데이터프레임의 <code class="docutils literal notranslate"><span class="pre">cov()</span></code> 메서드</strong></p>
+<p>데이터프레임 객체의 <code class="docutils literal notranslate"><span class="pre">cov()</span></code> 메서드는 모든 특성들 사이의 공분산을 계산한다.
+데이터프레임<code class="docutils literal notranslate"><span class="pre">gdpPerCapita_2015_2020</span></code>에 <code class="docutils literal notranslate"><span class="pre">2015</span></code>와 <code class="docutils literal notranslate"><span class="pre">2020</span></code> 두 개의 특성이 있으므로, (2, 2) 행렬 모양의 데이터프레임을 생성한다.</p>
+<p>앞서 <code class="docutils literal notranslate"><span class="pre">np.cov()</span></code>의 반환값을 설명할 때 사용된 인덱스가 여기서는 특성명으로 대체된다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdpPerCapita_2015_2020</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>2015</th>
+      <th>2020</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2015</th>
+      <td>3.060020e+08</td>
+      <td>3.146226e+08</td>
+    </tr>
+    <tr>
+      <th>2020</th>
+      <td>3.146226e+08</td>
+      <td>3.378031e+08</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>참고</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">ddof=1</span></code>로 지정하면 불편분산이 계산된다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cov_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">gdp_per_capita_2015</span><span class="p">,</span> <span class="n">gdp_per_capita_2020</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">cov_mat</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[3.076926e+08, 3.163608e+08],
+       [3.163608e+08, 3.396694e+08]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdpPerCapita_2015_2020</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>2015</th>
+      <th>2020</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2015</th>
+      <td>3.076926e+08</td>
+      <td>3.163608e+08</td>
+    </tr>
+    <tr>
+      <th>2020</th>
+      <td>3.163608e+08</td>
+      <td>3.396694e+08</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="id5">
+<h2><span class="section-number">9.4. </span>상관계수<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<p>공분산은 데이터의 크기와 단위에 따라 계산된 값의 크기와 단위가 달라진다.
+예를 들어 학생들의 키와 체중을 대상으로 공분산을 계산한다면 단위가 <code class="docutils literal notranslate"><span class="pre">cm</span> <span class="pre">*</span> <span class="pre">kg</span></code>이 되고,
+멀리뛰기와 오래 매달리기의 공분산은 단위가 <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">*</span> <span class="pre">sec</span></code>이 된다.
+또한, 동일한 단위를 사용한다 하더라도 데이터 값의 척도(scale)에 따라 공분산 값도 많이 달라질 수 있다.
+예를 들어, 182 개 국가 전체가 아니라 처음 10개 국가를 대상으로 공분산을 계산하면 값이 달라진다.
+공분산이 60점 대에서 50점 대로 달라진다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdpPerCapita_2015_2020</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>2015</th>
+      <th>2020</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2015</th>
+      <td>2.896712e+08</td>
+      <td>3.107778e+08</td>
+    </tr>
+    <tr>
+      <th>2020</th>
+      <td>3.107778e+08</td>
+      <td>3.379077e+08</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>따라서 공분산 값의 절대적 크기는 선형 상관관계의 강도를 측정하는 기준이 될 수 없다. 이 점을 보완한 척도가 <strong>상관계수</strong><font size='2'>correlation coefficient</font>이다. 여러가지 상관계수가 있으나, 가장 대표적인 것이 <strong>피어슨 상관계수</strong><font size='2'>Pearson correlation coefficient</font>이다. 데이터 <span class="math notranslate nohighlight">\(X\)</span>와 <span class="math notranslate nohighlight">\(Y\)</span>의 피어슨 상관계수 <span class="math notranslate nohighlight">\(r_{XY}\)</span>는 공분산 <span class="math notranslate nohighlight">\(S_{XY}\)</span>을 각 데이터의 표준편차 <span class="math notranslate nohighlight">\(S_X\)</span>와 <span class="math notranslate nohighlight">\(S_Y\)</span>로 나눈 값이다. 아래 계산식으로부터 알 수 있듯이, 두 데이터의 단위 및 척도(scale)와 무관한, 항상 -1과 1 사이의 값이 나온다.</p>
+<div class="math notranslate nohighlight">
+\[
+r_{xy} = \frac{S_{xy}}{S_x \cdot S_y}
+\]</div>
+<p>피어슨 상관계수의 값으로부터 두 데이터의 상관관계는 다음과 같이 평가된다.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>상관계수</p></th>
+<th class="head text-left"><p>의미</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>1에 가까운 값</p></td>
+<td class="text-left"><p>양의 상관관계가 강함</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>-1에 가까운 값</p></td>
+<td class="text-left"><p>음의 상관관계가 강함</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>0에 가까운 값</p></td>
+<td class="text-left"><p>상관관계가 거의 없음</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>아래 그림은 다양한 상관계수에 대응되는 산점도들이다.
+상관계수의 절댓값이 1에 가까워질수록 산점도가 직선에 가까워지며,
+0에 가까워질수록 산점도가 여러 방향으로 넓게 퍼져 두 데이터의 상관관계가 모호해진다.</p>
+<p><div align="center"><img src="https://github.com/codingalzi/statsRev/blob/master/jupyter-book/images/pearson_correlation.png?raw=true" style="width:700px"></div></p>
+<p><div style="text-align: center">&lt;그림 출처: <a href="https://en.wikipedia.org/wiki/Pearson_correlation_coefficient">(Wikipedia) 피어슨 상관계수</a>&gt;</div></p><p><strong><code class="docutils literal notranslate"><span class="pre">np.corrcoef()</span></code> 함수</strong></p>
+<p>상관계수는 넘파이의 <code class="docutils literal notranslate"><span class="pre">corrcoef()</span></code> 함수와 데이터프레임의 <code class="docutils literal notranslate"><span class="pre">corr()</span></code> 메서드로 계산할 수 있다.</p>
+<p>넘파이 <code class="docutils literal notranslate"><span class="pre">corrcoef()</span></code> 함수의 반환값 모양과 항목별 의미는 공분산 <code class="docutils literal notranslate"><span class="pre">cov()</span></code> 함수의 경우와 동일하다.
+2015년도 1인당 GDP와 2020년도 1인당 GDP의 상관계수는 0.98 정도로 1에 무척 가깝다.
+따라서 두 데이터 사이의 선형 상관관계는 매우 크다고 평가할 수 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">gdp_per_capita_2015</span><span class="p">,</span> <span class="n">gdp_per_capita_2020</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1.      , 0.978579],
+       [0.978579, 1.      ]])
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>데이터프레임의 <code class="docutils literal notranslate"><span class="pre">corr()</span></code> 메서드</strong></p>
+<p>데이터프레임의 <code class="docutils literal notranslate"><span class="pre">corr()</span></code> 메서드도 동일한 결과를 보여준다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdpPerCapita_2015_2020</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>2015</th>
+      <th>2020</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2015</th>
+      <td>1.000000</td>
+      <td>0.978579</td>
+    </tr>
+    <tr>
+      <th>2020</th>
+      <td>0.978579</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>처음 10 개 국가에 대한 상관계수는 0.99 이상으로 커진다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdpPerCapita_2015_2020</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>2015</th>
+      <th>2020</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2015</th>
+      <td>1.000000</td>
+      <td>0.993341</td>
+    </tr>
+    <tr>
+      <th>2020</th>
+      <td>0.993341</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="id6">
+<h2><span class="section-number">9.5. </span>연습문제<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<p>참고: <a class="reference external" href="https://colab.research.google.com/github/codingalzi/DataSci/blob/master/practices/practice-twoD_data.ipynb">(연습) 2차원 데이터</a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="oneD_visualization.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">8. </span>1차원 데이터 시각화</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="twoD_visualization.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">10. </span>2차원 데이터 시각화</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">9.1. 1인당 국민총생산 데이터셋</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">9.2. 상관관계와 산점도</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">9.3. 공분산</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">9.4. 상관계수</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">9.5. 연습문제</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By 코딩알지와 친구들
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

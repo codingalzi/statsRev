@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>7. 1차원 데이터 &#8212; 거꾸로 배우는 데이터분석</title>
+    <title>7. 데이터 대표값과 분포 &#8212; 데이터로 배우는 통계분석</title>
   
   
   
@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -60,7 +60,7 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'oneD_data';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'central_tendency';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="8. 1차원 데이터 시각화" href="oneD_visualization.html" />
@@ -152,7 +152,7 @@
   
   
   
-    <p class="title logo__title">거꾸로 배우는 데이터분석</p>
+    <p class="title logo__title">데이터로 배우는 통계분석</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -175,11 +175,13 @@
 <li class="toctree-l1"><a class="reference internal" href="series.html">4. 판다스 시리즈</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dataframes.html">5. 판다스 데이터프레임</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data_handling.html">6. 데이터 다루기</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">7. 1차원 데이터</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">7. 데이터 대표값과 분포</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oneD_visualization.html">8. 1차원 데이터 시각화</a></li>
-<li class="toctree-l1"><a class="reference internal" href="twoD_data.html">9. 2차원 데이터</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linear_correlation.html">9. 선형 상관관계</a></li>
 <li class="toctree-l1"><a class="reference internal" href="twoD_visualization.html">10. 2차원 데이터 시각화</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hypothesis_testing.html">11. 가설검정</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sampling.html">11. 모집단과 표본</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability.html">12. 확률분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hypothesis_testing.html">13. 가설검정</a></li>
 </ul>
 
     </div>
@@ -234,7 +236,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/codingalzi/statsRev/blob/master/jupyter-book/oneD_data.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/codingalzi/statsRev/blob/master/jupyter-book/central_tendency.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Colab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -282,7 +284,7 @@
       
       
       
-      <li><a href="https://github.com/codingalzi/statsRev/issues/new?title=Issue%20on%20page%20%2FoneD_data.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/codingalzi/statsRev/issues/new?title=Issue%20on%20page%20%2Fcentral_tendency.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -312,7 +314,7 @@
       
       
       
-      <li><a href="_sources/oneD_data.ipynb" target="_blank"
+      <li><a href="_sources/central_tendency.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -396,7 +398,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>1차원 데이터</h1>
+    <h1>데이터 대표값과 분포</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -423,8 +425,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="ch-oned-data">
-<span id="id1"></span><h1><span class="section-number">7. </span>1차원 데이터<a class="headerlink" href="#ch-oned-data" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="ch-central-tendency">
+<span id="id1"></span><h1><span class="section-number">7. </span>데이터 대표값과 분포<a class="headerlink" href="#ch-central-tendency" title="Link to this heading">#</a></h1>
 <p><strong>기본 설정</strong></p>
 <p><code class="docutils literal notranslate"><span class="pre">numpy</span></code>와 <code class="docutils literal notranslate"><span class="pre">pandas</span></code> 라이브러리를 각각 <code class="docutils literal notranslate"><span class="pre">np</span></code>와 <code class="docutils literal notranslate"><span class="pre">pd</span></code>로 불러온다.</p>
 <div class="cell docutils container">
@@ -465,7 +467,6 @@ Pandas 3.0 버전부터는 기본 옵션으로 지정된다.</p>
 </div>
 </div>
 </div>
-<p><strong>데이터 저장소 디렉토리</strong></p>
 <p>앞으로 사용할 데이터셋들의 기본 저장소를 지정한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1756,7 +1757,7 @@ Q2는 앞서 살펴본 중앙값에 해당한다.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/629f36fc5ac47a614f957b97bc26904ae34558d675c96bc6ae8005e2888d02e8.png" src="_images/629f36fc5ac47a614f957b97bc26904ae34558d675c96bc6ae8005e2888d02e8.png" />
+<img alt="_images/f1116d3b186b501a3fef16453112a336a643c945118b2ce2fcb481d6089fe0ff.png" src="_images/f1116d3b186b501a3fef16453112a336a643c945118b2ce2fcb481d6089fe0ff.png" />
 </div>
 </div>
 <p><strong>데이터프레임의 <code class="docutils literal notranslate"><span class="pre">describe()</span></code> 메서드</strong></p>
