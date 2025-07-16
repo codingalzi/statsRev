@@ -28,13 +28,13 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -1757,7 +1757,7 @@ Q2는 앞서 살펴본 중앙값에 해당한다.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/f1116d3b186b501a3fef16453112a336a643c945118b2ce2fcb481d6089fe0ff.png" src="_images/f1116d3b186b501a3fef16453112a336a643c945118b2ce2fcb481d6089fe0ff.png" />
+<img alt="_images/dd5a5e4c9df8980df249441ca75fc37961cc5f9832844371a9af2cdf02590c68.png" src="_images/dd5a5e4c9df8980df249441ca75fc37961cc5f9832844371a9af2cdf02590c68.png" />
 </div>
 </div>
 <p><strong>데이터프레임의 <code class="docutils literal notranslate"><span class="pre">describe()</span></code> 메서드</strong></p>
@@ -1897,7 +1897,7 @@ Q2는 앞서 살펴본 중앙값에 해당한다.</p>
 </div>
 </div>
 </div>
-<p>평균값은 (거의) 0, 표준편차는 (거의) 1이 되었다. <code class="docutils literal notranslate"><span class="pre">-1.6653345369377347e-17</span></code>은 `-1.665334536937734 * (10의 -17승)을 의미하며, 매우 큰, 또는 0에 매우 가까운 숫자를 위한 과학적 표기법이다.</p>
+<p>평균값과 표준편차는 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">z</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
@@ -1910,6 +1910,26 @@ Q2는 앞서 살펴본 중앙값에 해당한다.</p>
 </div>
 </div>
 </div>
+<p><code class="docutils literal notranslate"><span class="pre">-0.000000</span></code>으로 표기되는 이유는 소수점 아래 어딘가에 0이 아닌 숫자가 있음을 의미한다.
+즉, 평균값이 0이 아니다.
+이는 앞서 소수점 이하 6자리까지만 출력하라고 했기 때문이다.
+하지만 다음과 같이 소수점 이하 20째 자리까지 표현하라 하면 다르게 출력된다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">precision</span> 20
+
+<span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">z</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-0.00000000000000001665, 0.99999999999999988898)
+</pre></div>
+</div>
+</div>
+</div>
+<p>즉, 평균값은 거의 0, 표준편차는 거의 1로 계산된다.
+하지만 이는 부동소수점 연산의 한계 때문이다.</p>
 <div class="note admonition">
 <p class="admonition-title">부동소수점 연산</p>
 <p>위 결과에서 평균값이 정확하게 0이 아니라 0에 매우 가까운 유리수로 나타나는 이유는 컴퓨터가 사용하는 수는 항상 부동소수점<font size='2'>floating point</font>으로 표현된 유리수(무리수는 그것의 유리수 근사값으로 표현)이고 모든 연산은 부동소수점 연산이기 때문이다. 컴퓨터에 숫자를 저장하고 연산하는데는 유한한 메모리를 사용할 수 밖에 없기 때문에 어떤 연산의 결과값은 이론적 계산값과 약간의 오차를 발생시킨다. 예를 들어, 8개의 비트에 저장할 수 있는 가장 큰 양의 정수에 2를 곱한 결과는 8개의 비트에 저장할 수 없음이 논리적으로 분명하다. 부동소수점 연산의 오차 크기는 컴퓨터 사용환경에 따라 달라진다.</p>
