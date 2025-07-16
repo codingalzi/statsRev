@@ -12,9 +12,9 @@ chapters:
 - file: series
 - file: dataframes
 - file: data_handling
-- file: oneD_data
+- file: central_tendency
 - file: oneD_visualization
-- file: twoD_data
+- file: linear_correlation
 - file: twoD_visualization
 - file: sampling
 - file: probability
