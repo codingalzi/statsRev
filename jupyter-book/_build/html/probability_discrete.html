@@ -1,0 +1,2203 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>13. 이산확률분포 &#8212; 데이터로 배우는 통계 분석</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'probability_discrete';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="14. 가설검정" href="hypothesis_testing.html" />
+    <link rel="prev" title="12. 확률분포" href="probability.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">데이터로 배우는 통계 분석</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="variables_values.html">1. 변수와 값</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lists_dicts.html">2. 리스트와 사전</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arrays.html">3. 넘파이 어레이</a></li>
+<li class="toctree-l1"><a class="reference internal" href="series.html">4. 판다스 시리즈</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataframes.html">5. 판다스 데이터프레임</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_handling.html">6. 데이터 다루기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="central_tendency.html">7. 데이터 대표값과 분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oneD_visualization.html">8. 1차원 데이터 시각화</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linear_correlation.html">9. 선형 상관관계</a></li>
+<li class="toctree-l1"><a class="reference internal" href="twoD_visualization.html">10. 2차원 데이터 시각화</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sampling.html">11. 모집단과 표본</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability.html">12. 확률분포</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">13. 이산확률분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hypothesis_testing.html">14. 가설검정</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/codingalzi/statsRev/blob/master/jupyter-book/probability_discrete.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/codingalzi/statsRev" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/codingalzi/statsRev/issues/new?title=Issue%20on%20page%20%2Fprobability_discrete.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/probability_discrete.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>이산확률분포</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">13.1. 이산확률변수</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pmf">13.1.1. 확률질량함수(PMF)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cdf">13.1.2. 누적분포함수(CDF)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">13.2. 다변량 분포</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">13.2.1. 이산결합확률분포</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">13.2.2. 조건부확률</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">13.2.3. 주변확률분포</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">13.3. 연습문제</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="ch-probability-discrete">
+<span id="id1"></span><h1><span class="section-number">13. </span>이산확률분포<a class="headerlink" href="#ch-probability-discrete" title="Link to this heading">#</a></h1>
+<p><strong>기본 설정</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">numpy</span></code>와 <code class="docutils literal notranslate"><span class="pre">pandas</span></code> 라이브러리를 각각 <code class="docutils literal notranslate"><span class="pre">np</span></code>와 <code class="docutils literal notranslate"><span class="pre">pd</span></code>로 불러온다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>데이터프레임의 <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy">chained indexing을 금지시키기 위한 설정</a>을 지정한다.
+Pandas 3.0 버전부터는 기본 옵션으로 지정된다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">mode</span><span class="o">.</span><span class="n">copy_on_write</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>주피터 노트북에서 부동소수점의 출력을 소수점 이하 6자리로 제한한다.
+아래 코드는 주피터 노트북에서만 사용하며 일반적인 파이썬 코드가 아니다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">precision</span> 6
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;%.6f&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>아래 코드는 데이터프레임 내에서 부동소수점의 출력을 소수점 이하 6자리로 제한한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.precision&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>코드에 사용되는 <a class="reference external" href="https://github.com/codingalzi/DataSci/tree/master/data">데이터 저장소의 기본 디렉토리</a>를 지정한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_url</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/codingalzi/DataSci/refs/heads/master/data/&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>데이터 시각화를 위해 <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot</span></code>를 <code class="docutils literal notranslate"><span class="pre">plt</span></code>라는 별칭으로 불러온다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>주요 내용</strong></p>
+<p>이 장에서는 이산확률분포와 다변량 분포의 주요 개념들을 소개한다. 구체적으로, 이산확률변수를 이용한 확률질량함수, 누적분포함수, 결합확률분포, 조건부확률, 주변확률분포 등의 개념을 다룬다.</p>
+<section id="id2">
+<h2><span class="section-number">13.1. </span>이산확률변수<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p><a class="reference internal" href="probability.html#ch-probability"><span class="std std-numref">12장</span></a>에서 살펴본 확률변수는 주사위를 던져 나오는 값이나 소득 범주를 나타내는 1부터 5까지의 정수 레이블처럼, 확률변수가 취할 수 있는 값이 <span class="math notranslate nohighlight">\(x_1\)</span>, <span class="math notranslate nohighlight">\(x_2\)</span>, <span class="math notranslate nohighlight">\(x_3\)</span> … 식으로 셀 수 있다. 이러한 확률변수를 **이산확률변수 <font size='2'>discrete random variable</font>**라 하고, 이산확률변수가 따르는 확률분포를 **이산확률분포 <font size='2'>discrete probability distribution</font>**라 한다.</p>
+<p><strong>예제: 소득 범주의 이산확률분포</strong></p>
+<p>캘리포니아 주택가격 데이터셋에서 소득 범주의 이산확률분포를 나타내는 데이터프레임을 이미 생성한 바 있다. 하지만 이 장의 뒷부분에서 다변량 분포를 다루기 위해 주택가격 범주의 이산확률분포를 구해야 하므로, 앞 장의 내용을 압축적으로 요약하며 동일 데이터프레임 생성과정을 다시한번 반복한다. 각 과정의 의미는 모두 주석으로 대체한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 데이터셋을 불러온 후, 가구중위소득과 주택중위가격만 활용</span>
+<span class="n">housing</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_url</span><span class="o">+</span><span class="s2">&quot;california_housing.csv&quot;</span><span class="p">)</span>
+<span class="n">housing</span> <span class="o">=</span> <span class="n">housing</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s1">&#39;median_income&#39;</span><span class="p">,</span> <span class="s1">&#39;median_house_value&#39;</span><span class="p">]]</span>
+
+<span class="c1"># 데이터 이상치(주택중위가격 50만 초과)를 삭제하고 인덱스 초기화</span>
+<span class="n">house_value_max</span> <span class="o">=</span> <span class="n">housing</span><span class="p">[</span><span class="s1">&#39;median_house_value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="c1"># 500,001</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">housing</span><span class="p">[</span><span class="s1">&#39;median_house_value&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">house_value_max</span>
+<span class="n">housing</span> <span class="o">=</span> <span class="n">housing</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">]</span>
+<span class="n">housing</span> <span class="o">=</span> <span class="n">housing</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">housing</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;district&#39;</span>
+
+<span class="c1"># 중위소득 범주 특성 추가</span>
+<span class="n">housing</span><span class="p">[</span><span class="s2">&quot;income_cat&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">housing</span><span class="p">[</span><span class="s2">&quot;median_income&quot;</span><span class="p">],</span>
+                               <span class="n">bins</span><span class="o">=</span><span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mf">6.</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">],</span>
+                               <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+
+<span class="c1"># 소득 범주별로 그룹화하고 구간별 도수 및 상대도수 계산</span>
+<span class="n">x_stratification</span> <span class="o">=</span> <span class="n">housing</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;income_cat&#39;</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">group_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">x_stratified_count</span> <span class="o">=</span> <span class="n">x_stratification</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="n">x_stratified_ratio</span> <span class="o">=</span> <span class="n">x_stratified_count</span><span class="o">/</span><span class="p">(</span><span class="n">housing</span><span class="o">.</span><span class="n">shape</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">x_stratified_ratio</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>median_income</th>
+    </tr>
+    <tr>
+      <th>income_cat</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>0.041372</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.333011</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.361017</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.177992</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.086607</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>마지막으로, 위 데이터프레임의 상대도수를 소득 범주로 정의된 확률변수 <span class="math notranslate nohighlight">\(X\)</span>에 대한 확률분포표 형태로 변환한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 데이터프레임으로 변환</span>
+<span class="n">prob_income</span> <span class="o">=</span> <span class="n">x_stratified_ratio</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span>
+<span class="c1"># 컬럼과 인덱스 이름 지정</span>
+<span class="n">prob_income</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;확률&#39;</span><span class="p">]</span>
+<span class="n">prob_income</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;X&#39;</span>
+
+<span class="c1"># 가로형의 데이터프레임으로 변환</span>
+<span class="n">prob_income</span> <span class="o">=</span> <span class="n">prob_income</span><span class="o">.</span><span class="n">T</span>
+<span class="n">prob_income</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>X</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>확률</th>
+      <td>0.041372</td>
+      <td>0.333011</td>
+      <td>0.361017</td>
+      <td>0.177992</td>
+      <td>0.086607</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="pmf">
+<h3><span class="section-number">13.1.1. </span>확률질량함수(PMF)<a class="headerlink" href="#pmf" title="Link to this heading">#</a></h3>
+<p>이산확률변수  <span class="math notranslate nohighlight">\(X\)</span>가 취할 수 있는 각 값 <span class="math notranslate nohighlight">\(x\)</span>에 대해
+그 값이 나타날 확률 <span class="math notranslate nohighlight">\(P(X = x)\)</span>를 대응시키는 함수 <span class="math notranslate nohighlight">\(f\)</span> 를
+**확률질량함수 <font size='2'>probability mass function(PMF)</font>**라고 하며, 다음과 같이 표기한다.</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = P(X = x)
+\]</div>
+<p><strong>확률의 성질</strong></p>
+<p>이산확률분포가 주어졌을 때 모든 경우에 대한 확률은 0과 1사이의 값이고, 모든 확률의 합은 1이다.
+즉 다음이 성립해야 한다.</p>
+<ul>
+<li><p>첫째, 확률변수가 취할 수 있는 임의의 값 <span class="math notranslate nohighlight">\(x_k\)</span>에 대한 확률은 0과 1 사이의 값이다.</p>
+<div class="math notranslate nohighlight">
+\[0 \le f(x_k) \le 1\]</div>
+</li>
+<li><p>둘째, 확률변수가 취할 수 있는 모든 값에 대한 확률의 합은 1이다.
+$<span class="math notranslate nohighlight">\(\sum_k f(x_k) = 1\)</span>$</p></li>
+</ul>
+<p>소득 범주로 정의된 확률변수  X 또한 위 성질을 모두 만족한다.</p>
+<ul class="simple">
+<li><p>모든 확률은 0과 1사이의 값</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">prob_income</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">prob_income</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># 판다스의 요소별 논리 연산 &quot;AND&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>X</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>확률</th>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>다음 방식으로 확인해도 되는데,
+<code class="docutils literal notranslate"><span class="pre">all()</span></code> 함수에 <code class="docutils literal notranslate"><span class="pre">axis=1</span></code>을 사용해서
+모든 열에 대해 참인 경우에만 <code class="docutils literal notranslate"><span class="pre">True</span></code>를 출력하도록 한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">((</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">prob_income</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">prob_income</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>확률    True
+dtype: bool
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>모든 확률의 합은 1</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prob_income</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>확률    1.0
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="cdf">
+<h3><span class="section-number">13.1.2. </span>누적분포함수(CDF)<a class="headerlink" href="#cdf" title="Link to this heading">#</a></h3>
+<p>이산확률변수 <span class="math notranslate nohighlight">\(X\)</span>가 <span class="math notranslate nohighlight">\(x\)</span>보다 같거나 작은 값을 가질 확률 <span class="math notranslate nohighlight">\(P(X \leq x)\)</span>을
+**누적분포함수<font size='2'>cumulative distribution function</font>(CDF)**라고 부르며
+아래처럼 정의한다.</p>
+<div class="math notranslate nohighlight">
+\[
+F(x) = P(X \le x) = \sum_{x_k \le x} f(x_k)
+\]</div>
+<p>따라서 소득 범주로 정의된 이산확률변수 <span class="math notranslate nohighlight">\(X\)</span>의 누적분포함수 CDF는 확률분포 <code class="docutils literal notranslate"><span class="pre">prob_income</span></code>에 리스트 컴프리헨션 <font size='2'>list comprehension</font> 기법을 적용해 다음과 같이 정의할 수 있다.
+<code class="docutils literal notranslate"><span class="pre">prob_income.columns</span></code> (소득 범주의 레이블들)에 포함된 각각의 <span class="math notranslate nohighlight">\(x_k\)</span>에 대해서 <span class="math notranslate nohighlight">\(x_k \leq x\)</span>인 경우의 <code class="docutils literal notranslate"><span class="pre">prob_income[x_k]</span></code>들만 모아서 리스트를 생성하고, 그 원소들을 더한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">income_cdf</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">prob_income</span><span class="p">[</span><span class="n">x_k</span><span class="p">]</span> <span class="k">for</span> <span class="n">x_k</span> <span class="ow">in</span> <span class="n">prob_income</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">x_k</span> <span class="o">&lt;=</span> <span class="n">x</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition-list-comprehension-class-note admonition">
+<p class="admonition-title">리스트 컴프리헨션(list comprehension) :class: note</p>
+<p>리스트 컴프리헨션은 파이썬에서 반복문이나 조건문을 사용하여 기존 리스트나 다른 이터러블(순회 가능한 객체)로부터 새로운 리스트를 만들 때 매우 유용하다.
+기본 문법은 <code class="docutils literal notranslate"><span class="pre">[표현식</span> <span class="pre">for</span> <span class="pre">항목</span> <span class="pre">in</span> <span class="pre">이터러블</span> <span class="pre">if</span> <span class="pre">조건]</span></code>이다.</p>
+<ul class="simple">
+<li><p>표현식: 리스트에 추가될 값을 정의. 뒤의 for문에서 얻은 항목을 그대로 사용하거나 연산을 수행하는 표현.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">for</span></code> 항목 <code class="docutils literal notranslate"><span class="pre">in</span></code> 이터러블: 순회 가능한 객체 (예: 리스트, 튜플, 문자열, 레인지, 데이터프레임의 컬럼 등)의 각 항목을 차례로 순회.
+if 조건(선택사항): 이터러블의 항목 중에서 이 조건을 만족하는 항목들만 표현식을 거쳐 리스트에 포함됨.</p></li>
+</ul>
+</div>
+<div class="admonition-class-note admonition">
+<p class="admonition-title">파이썬에서의 함수 정의 :class: note</p>
+<p>파이썬에서는 <code class="docutils literal notranslate"><span class="pre">def</span></code> 키워드를 사용하여 함수를 정의하며, 기본 문법은 다음과 같다.</p>
+<p><code class="docutils literal notranslate"><span class="pre">def</span></code> 함수_이름(매개변수1, 매개변수2, …):
+#함수 본문: 함수가 호출될 때 실행되는 코드
+<code class="docutils literal notranslate"><span class="pre">return</span></code> 결과 (선택 사항)</p>
+</div>
+<p>위에서 정의한 확률변수 <span class="math notranslate nohighlight">\(X\)</span>의 CDF를 사용해 소득 범주가 3 이하일 확률을 확인할 수 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">income_cdf</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.735400
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="id3">
+<h2><span class="section-number">13.2. </span>다변량 분포<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p><strong>다변량 분포</strong><font size='2'>multivariate distribution</font>는
+여러 개의 확률변수들이 결합된 확률분포를 말한다. 여기서는 두 개의 이산확률변수가 결합된 다변량 분포를 소개한다.</p>
+<section id="id4">
+<h3><span class="section-number">13.2.1. </span>이산결합확률분포<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>두 이산확률변수 <span class="math notranslate nohighlight">\(X\)</span>와 <span class="math notranslate nohighlight">\(Y\)</span>에 대해,
+결합확률변수 <span class="math notranslate nohighlight">\((X, Y)\)</span>는 <span class="math notranslate nohighlight">\(X\)</span>가 취할 수 있는 값과
+<span class="math notranslate nohighlight">\(Y\)</span>가 취할 수 있는 값의 모든 가능한 순서쌍 <span class="math notranslate nohighlight">\((x, y)\)</span>을 나타낸다. 이러한 순서쌍 <span class="math notranslate nohighlight">\((x, y)\)</span> 각각이 발생할 확률들의 분포를 **이산결합확률분포 <font size='2'>discrete joint probability distribution</font>**라고 한다.</p>
+<p>이산결합확률분포의 확률질량함수는 **결합확률질량함수 <font size='2'>joint probability mass function</font>**라 부르며, 확률변수 <span class="math notranslate nohighlight">\(X\)</span>는 <span class="math notranslate nohighlight">\(x\)</span>를 취하고 동시에 확률변수 <span class="math notranslate nohighlight">\(Y\)</span>는 <span class="math notranslate nohighlight">\(y\)</span>를 취할 확률로서 다음과 같이 정의한다.</p>
+<div class="math notranslate nohighlight">
+\[
+f_{XY}(x, y) = P(X=x, Y=y)
+\]</div>
+<p>여기서 <span class="math notranslate nohighlight">\(P(X=x, Y=y)\)</span>는
+<span class="math notranslate nohighlight">\(P(X=x \;\cap\; Y=y)\)</span> 또는
+<span class="math notranslate nohighlight">\(P(X=x \;\;\text{and}\;\; Y=y)\)</span>와 정확히 같은 의미로 쓰인다.</p>
+<p><strong>예제: 소득 범주와 주택가격 범주</strong></p>
+<p>이제 캘리포니아 주택가격 데이터셋의 주택중위가격을 6개의 구간으로 나눠 주택가격 범주를 가르키는 새로운 이산확률변수 <span class="math notranslate nohighlight">\(Y\)</span>를 정의해보자. 소득 범주의 경우와 유사한 방식으로 작업을 진행하면 된다.</p>
+<p>주택중위가격의 범위는 14,999부터 500,000까지다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">housing</span><span class="o">.</span><span class="n">median_house_value</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count     19675.000000
+mean     192477.921017
+std       97711.509613
+min       14999.000000
+25%      116600.000000
+50%      173800.000000
+75%      248200.000000
+max      500000.000000
+Name: median_house_value, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>주택중위가격의 사분위수 정보를 이용하여 주택중위가격을 6개 범주로 나눈다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">housing</span><span class="p">[</span><span class="s2">&quot;value_cat&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">housing</span><span class="p">[</span><span class="s2">&quot;median_house_value&quot;</span><span class="p">],</span>
+                              <span class="n">bins</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">50_000</span><span class="p">,</span> <span class="mi">100_000</span><span class="p">,</span> <span class="mi">150_000</span><span class="p">,</span> <span class="mi">250_000</span><span class="p">,</span> <span class="mi">400_000</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">],</span>
+                              <span class="n">labels</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+
+<span class="n">housing</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>median_income</th>
+      <th>median_house_value</th>
+      <th>income_cat</th>
+      <th>value_cat</th>
+    </tr>
+    <tr>
+      <th>district</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>8.3252</td>
+      <td>452600.0</td>
+      <td>5</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>8.3014</td>
+      <td>358500.0</td>
+      <td>5</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>7.2574</td>
+      <td>352100.0</td>
+      <td>5</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>5.6431</td>
+      <td>341300.0</td>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>3.8462</td>
+      <td>342200.0</td>
+      <td>3</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>19670</th>
+      <td>1.5603</td>
+      <td>78100.0</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>19671</th>
+      <td>2.5568</td>
+      <td>77100.0</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>19672</th>
+      <td>1.7000</td>
+      <td>92300.0</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>19673</th>
+      <td>1.8672</td>
+      <td>84700.0</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>19674</th>
+      <td>2.3886</td>
+      <td>89400.0</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+<p>19675 rows × 4 columns</p>
+</div></div></div>
+</div>
+<p>주택중위가격 범주별로 그룹화하고 그룹별 도수와 상대도수를 확인한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_stratification</span> <span class="o">=</span> <span class="n">housing</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;value_cat&#39;</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">group_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">y_stratified_count</span> <span class="o">=</span> <span class="n">y_stratification</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="n">y_stratified_ratio</span> <span class="o">=</span> <span class="n">y_stratified_count</span><span class="o">/</span><span class="p">(</span><span class="n">housing</span><span class="o">.</span><span class="n">shape</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">y_stratified_ratio</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>median_house_value</th>
+    </tr>
+    <tr>
+      <th>value_cat</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>0.010673</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.175248</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.201372</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.367878</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.205235</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.039593</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>주택중위가격 범주로 정의된 확률변수 <span class="math notranslate nohighlight">\(Y\)</span>의 확률분포는 다음과 같다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prob_value</span> <span class="o">=</span> <span class="n">y_stratified_ratio</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">prob_value</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;확률&#39;</span><span class="p">]</span>
+<span class="n">prob_value</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Y&#39;</span>
+
+<span class="n">prob_value</span> <span class="o">=</span> <span class="n">prob_value</span><span class="o">.</span><span class="n">T</span>
+<span class="n">prob_value</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Y</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>확률</th>
+      <td>0.010673</td>
+      <td>0.175248</td>
+      <td>0.201372</td>
+      <td>0.367878</td>
+      <td>0.205235</td>
+      <td>0.039593</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>참고로 소득 범주로 정의된 확률변수 <span class="math notranslate nohighlight">\(X\)</span>의 확률분포는 다음과 같다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prob_income</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>X</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>확률</th>
+      <td>0.041372</td>
+      <td>0.333011</td>
+      <td>0.361017</td>
+      <td>0.177992</td>
+      <td>0.086607</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>두 확률변수의 확률분포를 그래프로 그리면 다음과 같다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
+
+<span class="n">prob_income</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">rot</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">.7</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Marginal probability distribution for X&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Income&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Probability&#39;</span><span class="p">)</span>
+
+<span class="n">prob_value</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">rot</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">.7</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Marginal probability distribution for Y&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;House value&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Probability&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/b1aaf7d2184f670b8ec5481f44dd691cf5b27fbdc59ab126cad9c494698e8160.png" src="_images/b1aaf7d2184f670b8ec5481f44dd691cf5b27fbdc59ab126cad9c494698e8160.png" />
+</div>
+</div>
+<p><strong>확률변수 <span class="math notranslate nohighlight">\(X\)</span>, <span class="math notranslate nohighlight">\(Y\)</span>의 확률질량함수</strong></p>
+<p>먼저 확률변수 <span class="math notranslate nohighlight">\(X\)</span>와 확률변수 <span class="math notranslate nohighlight">\(Y\)</span>의 확률질량함수를 각각 정의하자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">p_X</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">prob_income</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">def</span> <span class="nf">p_Y</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">prob_value</span><span class="p">[</span><span class="n">y</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>결합확률질량함수(Joint PMF)</strong></p>
+<p>캘리포니아 주택가격 데이터셋에 포함된 총 19,675개의 구역에서 한 구역을 임의로 선택했을 때,
+해당 구역의 소득 범주는4, 주택가격 범주는 3일 확률 <span class="math notranslate nohighlight">\(P(X=4, Y=3)\)</span>을 계산해보자.</p>
+<p>먼저 두 확률변수 <span class="math notranslate nohighlight">\(X\)</span>와 <span class="math notranslate nohighlight">\(Y\)</span>는 상호 독립적인 관계가 아닐 가능성이 높음에 주목하자. 이유는 일반적으로 소득이 높은 지역일수록 주택가격도 높은 편이기 때문이다.
+실제로 두 특성 사이의 상관계수가 0.64 정도로 높은 편이며,
+이는 <span class="math notranslate nohighlight">\(P(X=4, Y=3)\)</span>와 <span class="math notranslate nohighlight">\(P(X=4)\cdot P(Y=3)\)</span>가 다를 가능성이 높음을 의미한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">housing</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>median_income</th>
+      <th>median_house_value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>median_income</th>
+      <td>1.000000</td>
+      <td>0.642611</td>
+    </tr>
+    <tr>
+      <th>median_house_value</th>
+      <td>0.642611</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>결합확률질량함수 <span class="math notranslate nohighlight">\(P(X=x, Y=y)\)</span>는 확률변수 <span class="math notranslate nohighlight">\(X\)</span>가 값 <span class="math notranslate nohighlight">\(x\)</span>를 갖고 동시에 확률변수 <span class="math notranslate nohighlight">\(Y\)</span>가 값 <span class="math notranslate nohighlight">\(y\)</span>를 가질 확률이므로, 두 변수의 특정 조합 <span class="math notranslate nohighlight">\((x, y)\)</span>이 전체 데이터에서 얼마나 자주 발생하는지를 통해 계산할 수 있다. 판다스의 <code class="docutils literal notranslate"><span class="pre">crosstab()</span></code> 함수를 사용하면 각 조합의 발생 빈도를 쉽게 집계할 수 있다.</p>
+<p>먼저 소득 범주와 주택가격 범주만 별도의 데이터프레임으로 만든다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">two_cats</span> <span class="o">=</span> <span class="n">housing</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">2</span><span class="p">:]</span>
+<span class="n">two_cats</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>income_cat</th>
+      <th>value_cat</th>
+    </tr>
+    <tr>
+      <th>district</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>5</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>5</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>3</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>19670</th>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>19671</th>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>19672</th>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>19673</th>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>19674</th>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+<p>19675 rows × 2 columns</p>
+</div></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">pd.crosstab()</span></code> 함수는 두 범주 특성에 대한 <strong>교차표</strong><font size='2'>cross table</font>, 즉 두 범주 특성의 가능한 모든 조합에 대한 도수가 계산된다. <code class="docutils literal notranslate"><span class="pre">margins=True</span></code> 인자는 행별, 열별 도수의 합을 집계한 행과 열도 추가시킨다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cats_crossed</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">two_cats</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">two_cats</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">margins</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">cats_crossed</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>value_cat</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>All</th>
+    </tr>
+    <tr>
+      <th>income_cat</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>72</td>
+      <td>436</td>
+      <td>159</td>
+      <td>108</td>
+      <td>33</td>
+      <td>6</td>
+      <td>814</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>131</td>
+      <td>2335</td>
+      <td>1880</td>
+      <td>1799</td>
+      <td>358</td>
+      <td>49</td>
+      <td>6552</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>6</td>
+      <td>650</td>
+      <td>1652</td>
+      <td>3343</td>
+      <td>1273</td>
+      <td>179</td>
+      <td>7103</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>24</td>
+      <td>251</td>
+      <td>1753</td>
+      <td>1289</td>
+      <td>184</td>
+      <td>3502</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0</td>
+      <td>3</td>
+      <td>20</td>
+      <td>235</td>
+      <td>1085</td>
+      <td>361</td>
+      <td>1704</td>
+    </tr>
+    <tr>
+      <th>All</th>
+      <td>210</td>
+      <td>3448</td>
+      <td>3962</td>
+      <td>7238</td>
+      <td>4038</td>
+      <td>779</td>
+      <td>19675</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>교차표에 인덱싱을 적용하면 임의의 <span class="math notranslate nohighlight">\(x\)</span>와 <span class="math notranslate nohighlight">\(y\)</span>에 대해 <span class="math notranslate nohighlight">\(P(X=x, Y=y)\)</span>를 계산할 수 있다. <span class="math notranslate nohighlight">\(P(X=4, Y=3)\)</span>는 아래 두 항목의 비율이므로</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cats_crossed.loc[4,</span> <span class="pre">3]</span></code>: 소득 범주 4, 주택가격 범주  3인 경우의 도수</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cats_crossed.loc['All',</span> <span class="pre">'All']</span></code>: 모집단 크기</p></li>
+</ul>
+<p><span class="math notranslate nohighlight">\(P(X=4, Y=3)\)</span>는 다음과 같이 계산된다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cats_crossed</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">/</span> <span class="n">cats_crossed</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;All&#39;</span><span class="p">,</span> <span class="s1">&#39;All&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.012757
+</pre></div>
+</div>
+</div>
+</div>
+<p>따라서 소득 범주와 주택가격 범주의 결합확률분포를 따르는 결합확률질량함수는 다음과 같이 정의된다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">p_XY</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span>  <span class="n">cats_crossed</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span> <span class="o">/</span> <span class="n">cats_crossed</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;All&#39;</span><span class="p">,</span> <span class="s1">&#39;All&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>캘리포니아 주택가격 데이터셋에서 임의의 구역을 선택했을 때 소득 범주는 4, 주택가격 범주는 3인 경우의 확률은 다음과 같고</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p_XY</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.012757
+</pre></div>
+</div>
+</div>
+</div>
+<p>캘리포니아 주택가격 데이터셋에서 임의의 구역을 선택했을 때 소득 범주는 5, 주택가격 범주는 6인 경우의 확률은 다음과 같다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p_XY</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.018348
+</pre></div>
+</div>
+</div>
+</div>
+<p>참고로 두 확률변수가 서로 영향을 주지 않는다면, 위 결과가 <span class="math notranslate nohighlight">\(P(X=5)\cdot P(Y=6)\)</span>과 같아야 하는데, 그렇지 않다. 따라서 두 확률변수 <span class="math notranslate nohighlight">\(X\)</span>와 <span class="math notranslate nohighlight">\(Y\)</span>는 독립이 아니다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p_X</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="n">p_Y</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.003429
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>확률의 성질</strong></p>
+<p>이산결합확률분포에 대해서도 확률의 두 가지 성질을 확인해보자.</p>
+<p>첫째, 두 확률변수 <span class="math notranslate nohighlight">\(X\)</span>, <span class="math notranslate nohighlight">\(Y\)</span>가 취할 수 있는 임의의 값 <span class="math notranslate nohighlight">\(x\)</span>와 <span class="math notranslate nohighlight">\(y\)</span>에 대한 확률은 0과 1 사이의 값이다.</p>
+<p>브로드캐스팅 기능을 통해 모든  <span class="math notranslate nohighlight">\(x\)</span>와 <span class="math notranslate nohighlight">\(y\)</span>의 조합에 대해 <span class="math notranslate nohighlight">\(P(X=x, Y=y)\)</span>를 쉽게 구할 수 있다. 아래 데이터프레임의 각 항목이 0과 1사이의 값인지를 확인하면 된다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p_XY_df</span> <span class="o">=</span> <span class="n">cats_crossed</span> <span class="o">/</span> <span class="n">cats_crossed</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;All&#39;</span><span class="p">,</span> <span class="s1">&#39;All&#39;</span><span class="p">]</span>
+<span class="n">p_XY_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>value_cat</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>All</th>
+    </tr>
+    <tr>
+      <th>income_cat</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>0.003659</td>
+      <td>0.022160</td>
+      <td>0.008081</td>
+      <td>0.005489</td>
+      <td>0.001677</td>
+      <td>0.000305</td>
+      <td>0.041372</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.006658</td>
+      <td>0.118679</td>
+      <td>0.095553</td>
+      <td>0.091436</td>
+      <td>0.018196</td>
+      <td>0.002490</td>
+      <td>0.333011</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.000305</td>
+      <td>0.033037</td>
+      <td>0.083964</td>
+      <td>0.169911</td>
+      <td>0.064701</td>
+      <td>0.009098</td>
+      <td>0.361017</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.000051</td>
+      <td>0.001220</td>
+      <td>0.012757</td>
+      <td>0.089098</td>
+      <td>0.065515</td>
+      <td>0.009352</td>
+      <td>0.177992</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.000000</td>
+      <td>0.000152</td>
+      <td>0.001017</td>
+      <td>0.011944</td>
+      <td>0.055146</td>
+      <td>0.018348</td>
+      <td>0.086607</td>
+    </tr>
+    <tr>
+      <th>All</th>
+      <td>0.010673</td>
+      <td>0.175248</td>
+      <td>0.201372</td>
+      <td>0.367878</td>
+      <td>0.205235</td>
+      <td>0.039593</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">p_XY_df</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">1</span> <span class="o">&gt;=</span> <span class="n">p_XY_df</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>둘째, 두 확률변수가 취할 수 있는 모든 조합에 대한 확률의 합은 1이다.</p>
+<p><code class="docutils literal notranslate"><span class="pre">p_XY_df.loc['All',</span> <span class="pre">'All']</span></code> 또는 다음의 값이 1임을 확인하면 된다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p_XY_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.000000
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>이산결합확률분포의 히트맵</strong></p>
+<p>영역별 값의 크기를 색과 농도로 구분하는 히트맵을 이용하면
+중위소득 범주와 주택중위가격 범주 사이의 연관성을 한 눈에 알아볼 수 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">hx</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">row</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="n">p_XY_df</span><span class="o">.</span><span class="n">shape</span>
+
+<span class="c1"># 마지막 행과 열 제외</span>
+<span class="n">row</span> <span class="o">-=</span> <span class="mi">1</span>
+<span class="n">col</span> <span class="o">-=</span> <span class="mi">1</span>
+
+<span class="c1"># 히트맵</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">hx</span><span class="o">.</span><span class="n">pcolor</span><span class="p">(</span><span class="n">p_XY_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="n">row</span><span class="p">,</span> <span class="p">:</span><span class="n">col</span><span class="p">])</span>
+
+<span class="c1"># 축 눈금 지정</span>
+<span class="n">hx</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">col</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">minor</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">hx</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">minor</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">hx</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">hx</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">row</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="n">hx</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span> <span class="c1"># 소득 범주 위에서부터</span>
+<span class="n">hx</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">labeltop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">labelbottom</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="c1"># x축 눈금은 위쪽</span>
+                                                                         <span class="c1"># y축 눈금은 기본값인 왼쪽</span>
+
+<span class="n">hx</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;House Value&#39;</span><span class="p">)</span>
+<span class="n">hx</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Income&#39;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">hx</span><span class="p">)</span> <span class="c1"># 색 기둥</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ec7bd4d0c503b11a8d500e07f7e5f9bf96da223a29c82650a0b2dd9d9b308e8d.png" src="_images/ec7bd4d0c503b11a8d500e07f7e5f9bf96da223a29c82650a0b2dd9d9b308e8d.png" />
+</div>
+</div>
+<p>대각선에 위치한 영역의 일반적으로 밝다.
+특히 중위소득의 범주가 3, 주택중위가격의 범주가 4인 영역의 확률이 가장 높다.
+일반적으로 소득 수준과 주택가격의 수준이 비례한다는 점과
+중산층이 적정한 가격의 주택에 산다는 상식에 부합하는 결과인 셈이다.</p>
+</section>
+<section id="id5">
+<h3><span class="section-number">13.2.2. </span>조건부확률<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<p><strong>조건부확률</strong><font size='2'>conditional probability</font> <span class="math notranslate nohighlight">\(P(A\mid B)\)</span>는 사건 <span class="math notranslate nohighlight">\(B\)</span>가 일어났다는 전제 하에 사건 <span class="math notranslate nohighlight">\(A\)</span>가 발생할 확률을 나타내며,
+아래 그림에서 파랑색 영역 <span class="math notranslate nohighlight">\(B\)</span>에서 보라색 영역이 차지하는 비율을 가리킨다.
+반면에 <span class="math notranslate nohighlight">\(P(A)\)</span>, <span class="math notranslate nohighlight">\(P(B)\)</span>, <span class="math notranslate nohighlight">\(P(A, B)\)</span>는 전체 검정색 영역 <span class="math notranslate nohighlight">\(U\)</span>에서
+각각의 영역이 차지하는 비율을 가리킨다.</p>
+<p><div align="center"><img src="https://github.com/codingalzi/DataSci/blob/master/jupyter-book/images/conditional02.png?raw=true" style="width:300px"></div></p><p>따라서 조건부확률 <span class="math notranslate nohighlight">\(P(A \mid B)\)</span>는 전체 영역 <span class="math notranslate nohighlight">\(U\)</span>에서 보라색 영역이 차지하는 비율인 <span class="math notranslate nohighlight">\(P(A, B)=P(A \;\cap\; B)\)</span>과 다르지만, 다음의 관계식을 만족한다.
+$<span class="math notranslate nohighlight">\(
+P(A\mid B) = \frac{P(A, B)}{P(B)}\qquad (\ast)
+\)</span>$</p>
+<p>위 그림의 영역들의 면적을 이용해 이를 쉽게 보일 수 있다.</p>
+<div class="math notranslate nohighlight">
+\[
+P(A\mid B) = \frac{area(A \;\cap\; B)}{area(B)}
+= \frac{\frac{area(A \;\cap\; B)}{area(U)}}{\frac{area(B)}{area(U)}}
+= \frac{P(A \;\cap\; B)}{P(B)}
+\]</div>
+<div class="example admonition">
+<p class="admonition-title">예제</p>
+<p>15명으로 구성된 동아리가 진행하는 행사에 참여하는 회원의 정보가 다음과 같다.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p></p></th>
+<th class="head text-center"><p>여성(0)</p></th>
+<th class="head text-center"><p>남성(1)</p></th>
+<th class="head text-center"><p>합계</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>불참(0)</p></td>
+<td class="text-center"><p>2</p></td>
+<td class="text-center"><p>2</p></td>
+<td class="text-center"><p>4</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>참여(1)</p></td>
+<td class="text-center"><p>6</p></td>
+<td class="text-center"><p>5</p></td>
+<td class="text-center"><p>11</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>합계</p></td>
+<td class="text-center"><p>8</p></td>
+<td class="text-center"><p>7</p></td>
+<td class="text-center"><p>15</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>15명 중에 한 명을 임의로 선택할 때
+확률변수 <span class="math notranslate nohighlight">\(X\)</span>는 불참이면 0, 참여하면 1이라는 값을,
+확률변수 <span class="math notranslate nohighlight">\(Y\)</span>는 여성이면 0, 남성이면 1이라는 값을 갖는다고 하자.</p>
+<p>그러면 임의로 선택된 사람이 여성일 때 그 여성이 행사에 참여할 확률
+<span class="math notranslate nohighlight">\(P(X=1 \mid Y=0)\)</span>은 총 8명의 여성회원 중에서 행사에 참여하는
+6명의 비율인 3/4이다.
+반면에, 임의로 선택된 사람이 행사에 참여하는 여성일 확률 <span class="math notranslate nohighlight">\(P(X=1, Y=0)\)</span>은
+총 15명 중에 6명의 비율인 6/15이다.
+<span class="math notranslate nohighlight">\(P(Y=0)=8/15\)</span>이므로, 식 <span class="math notranslate nohighlight">\((*)\)</span>을 이용해도 동일한 조건부확률 3/4을 얻는다.</p>
+<div class="math notranslate nohighlight">
+\[
+P(X=1 \mid Y=0) = \frac{P(X=1, Y=0)}{P(Y=0)} = \frac{\frac{6}{15}}{\frac{8}{15}} = \frac 6 8 = \frac 3 4
+\]</div>
+</div>
+<p>조건부확률 <span class="math notranslate nohighlight">\(P(X=x\mid Y=y)\)</span>를 계산하기 위해 <span class="math notranslate nohighlight">\((*)\)</span>를 이용한다.</p>
+<div class="math notranslate nohighlight">
+\[
+P(X=x\mid Y=y) = \frac{P(X=x, Y=y)}{P(Y=y)}
+\]</div>
+<p><code class="docutils literal notranslate"><span class="pre">X</span></code>와 <code class="docutils literal notranslate"><span class="pre">Y</span></code>의 역할을 바꾸면 다음도 성립한다.</p>
+<div class="math notranslate nohighlight">
+\[
+P(Y=y\mid X=x) = \frac{P(Y=y, X=x)}{P(X=x)} = \frac{P(X=x, Y=y)}{P(X=x)}
+\]</div>
+<p><strong>조건부확률의  확률질량함수</strong></p>
+<p>조건부확률의 확률질량함수를 앞서 정의한 확률질량함수들과 위 계산식을 이용해
+간단하게 정의할 수 있다.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P(X=x \mid Y=y)\)</span> 계산 함수</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">p_XconY</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">p_XY</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">/</span> <span class="n">p_Y</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P(Y=y \mid X=x)\)</span> 계산 함수</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">p_YconX</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">p_XY</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">/</span> <span class="n">p_X</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>예를 들어, 캘리포니아 주택가격 데이터셋에서 주택중위가격의 범주가 3인 구역을 임의로 하나 선택했을 때, 해당 구역의 소득 범주가 4일 확률은 약 6.3%다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p_XconY</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.063352
+</pre></div>
+</div>
+</div>
+</div>
+<p>실제로 아래 코드들을 통해 확인되듯이,
+주택중위가격의 범주가 3인 경우의 도수는 3,962이고,
+그중에 중위소득의 범주가 4인 경우의 도수는 251이므로,
+그들의 비율인 251/3962는 약 0.063이다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cats_crossed</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;All&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3962
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cats_crossed</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>251
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">251</span> <span class="o">/</span> <span class="mi">3962</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.063352
+</pre></div>
+</div>
+</div>
+</div>
+<p>만일 두 확률변수 <span class="math notranslate nohighlight">\(X\)</span>와 <span class="math notranslate nohighlight">\(Y\)</span>가 서로 독립이라면
+<span class="math notranslate nohighlight">\(P(X=4 \mid Y=3)\)</span>인 <code class="docutils literal notranslate"><span class="pre">p_XconY(4,</span> <span class="pre">3)</span></code>의 값은 <span class="math notranslate nohighlight">\(P(X=4)\)</span>인 <code class="docutils literal notranslate"><span class="pre">p_X(4)</span></code>와 동일해야 하지만, 위에서 계산한 값과 <code class="docutils literal notranslate"><span class="pre">p_X(4)</span></code>의 값은 다르다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p_X</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.177992
+</pre></div>
+</div>
+</div>
+</div>
+<p><span class="math notranslate nohighlight">\(P(Y=3 \mid X=4)\)</span>인 <code class="docutils literal notranslate"><span class="pre">p_YconX(3,</span> <span class="pre">4)</span></code>와 <span class="math notranslate nohighlight">\(P(Y=3)\)</span>인 <code class="docutils literal notranslate"><span class="pre">p_Y(3)</span></code> 또한 서로 다르다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p_YconX</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.071673
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p_Y</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.201372
+</pre></div>
+</div>
+</div>
+</div>
+<p>따라서 소득 수준과 주택가격 수준은 독립이 아니며 서로 영향을 준다는 사실을 알 수 있다.</p>
+</section>
+<section id="id6">
+<h3><span class="section-number">13.2.3. </span>주변확률분포<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<p>확률변수 <span class="math notranslate nohighlight">\((X, Y)\)</span>의 결합확률분포가 주어졌을 때, 확률변수 <span class="math notranslate nohighlight">\(X\)</span>의 <strong>주변확률분포</strong><font size='2'>marginal probability distribution</font>는 <span class="math notranslate nohighlight">\(Y\)</span>의 값에 관계없이 <span class="math notranslate nohighlight">\(X\)</span>가 특정 값을 가질 확률분포를 의미한다. 따라서 확률변수 <span class="math notranslate nohighlight">\(X\)</span>의 주변확률질량함수는 다음과 같이 정의된다.</p>
+<div class="math notranslate nohighlight">
+\[
+f_X(x) = \sum_k f_{XY}(x, y_k) = \sum_k P(X=x, Y=y_k)
+\]</div>
+<p>마찬가지로 확률변수 <span class="math notranslate nohighlight">\(Y\)</span>의 주변확률분포를 나타내는 주변확률질량함수를 다음과 같이 정의한다.</p>
+<div class="math notranslate nohighlight">
+\[
+f_Y(y) = \sum_k f_{XY}(x_k, y) = \sum_k P(X=x_k, Y=y)
+\]</div>
+<p><span class="math notranslate nohighlight">\(f_X\)</span>는 확률변수 <span class="math notranslate nohighlight">\(Y\)</span>의 영향을 받지 않고 독립적으로 확률변수 <span class="math notranslate nohighlight">\(X\)</span>의 확률분포를,
+<span class="math notranslate nohighlight">\(f_Y\)</span>는 확률변수 <span class="math notranslate nohighlight">\(X\)</span>의 영향을 받지 않고 독립적으로 확률변수 <span class="math notranslate nohighlight">\(Y\)</span>의 확률분포를 계산한다.</p>
+<p>소득 범주를 가리키는 확률변수 <span class="math notranslate nohighlight">\(X\)</span>와 주택가격 범주를 가리키는 확률변수 <span class="math notranslate nohighlight">\(Y\)</span>에 대해,
+앞서 선언된 이산결합확률분포의 PMF인 <code class="docutils literal notranslate"><span class="pre">p_XY()</span></code> 함수를 이용하면 각 확률변수에 대한 주변확률질량함수를 쉽게 정의할 수 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f_X</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">prob_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">p_XY</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)])</span>
+    <span class="k">return</span> <span class="n">prob_x</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f_Y</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+    <span class="n">prob_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">p_XY</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)])</span>
+    <span class="k">return</span> <span class="n">prob_y</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>하지만 <code class="docutils literal notranslate"><span class="pre">cats_crossed</span></code> 데이터프레임의 값들을 이용해 다음과 같이 직접적으로 계산할 수도 있다.  <code class="docutils literal notranslate"><span class="pre">cats_crossed.loc[x,</span> <span class="pre">'All']</span></code>가
+확률변수 <span class="math notranslate nohighlight">\(X\)</span>가 <span class="math notranslate nohighlight">\(x\)</span>일 때의 모든 <span class="math notranslate nohighlight">\(y\)</span>에 대한 도수의 합을, <code class="docutils literal notranslate"><span class="pre">cats_crossed.loc['All',</span> <span class="pre">y]</span></code>가 확률변수 <span class="math notranslate nohighlight">\(Y\)</span>가 <span class="math notranslate nohighlight">\(y\)</span>일 때의 모든 <span class="math notranslate nohighlight">\(x\)</span>에 대한 도수의 합을 가리키기 때문이다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f_X1</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">cats_crossed</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;All&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">cats_crossed</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;All&#39;</span><span class="p">,</span> <span class="s1">&#39;All&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f_Y1</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">cats_crossed</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;All&#39;</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span> <span class="o">/</span> <span class="n">cats_crossed</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;All&#39;</span><span class="p">,</span> <span class="s1">&#39;All&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>두 가지 정의가 동일한 확률값을 얻는다는 것을 앞에서 소개한 리스트 컴프리헨션 기능과 넘파이의 <code class="docutils literal notranslate"><span class="pre">allclose()</span> </code>함수를 이용해 다음과 같이 확인할 수 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">([</span><span class="n">f_X</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)],</span> <span class="p">[</span><span class="n">f_X1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">([</span><span class="n">f_Y</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)],</span> <span class="p">[</span><span class="n">f_Y1</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>넘파이의 <code class="docutils literal notranslate"><span class="pre">allclose()</span></code> 함수는 부동소수점으로 구성된 두 어레이에 대해
+동일한 인덱스의 두 부동소수점이 “허용된 오차 범위 내에 위치하는가”를 확인한다.
+이 함수를 사용하는 이유는 모든 항목에 대해 부동소수점의 동일여부를 물으면 다르다고 판정되기 때문이다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">([</span><span class="n">f_X</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)],</span> <span class="p">[</span><span class="n">f_X1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<p>예를 들어 다음이 성립한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f_X</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="n">f_X1</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<p>그런데 두 값을 출력해 확인하면 언뜻 동일해 보이는데, 부동소수점을 소수점 이하 여섯째 자리까지만 화면에 보이도록 설정했었기 때문이다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f_X</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.361017
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f_X1</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.361017
+</pre></div>
+</div>
+</div>
+</div>
+<p>따라서 소수점 이하 20번째 자리까지 출력해 보면, 두 함수의 결과가 소수점 이하 17번째 자리에서 다름이 확인된다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">precision</span> 20
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;%.20f&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f_X</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.36101651842439647089
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f_X1</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.36101651842439641538
+</pre></div>
+</div>
+</div>
+</div>
+<p>두 함수의 결과가 이론적으로는 동일함에도 불구하고 계산값이 다르게 나오는 이유는 두 함수가 아래와 같이 서로 다른 방식으로 부동소수점 연산을 실행하기 때문이다. 즉, 부동소수점 연산의 한계 때문이다.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">f_X(x)</span></code>: 모든 <code class="docutils literal notranslate"><span class="pre">y</span></code>에 대해 확률 <code class="docutils literal notranslate"><span class="pre">P(X=x,</span> <span class="pre">Y=y)</span></code>을 계산한 다음, 이 값들을 모두 더함.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f_X1(x)</span></code>: <code class="docutils literal notranslate"><span class="pre">x</span></code>의 범주에 속하는 모든 <code class="docutils literal notranslate"><span class="pre">y</span></code>의 도수들을 더한 값을 전체 데이터수로 나눠 확률을 계산.</p></li>
+</ul>
+<p>한편, <code class="docutils literal notranslate"><span class="pre">f_X1()</span></code>과 <code class="docutils literal notranslate"><span class="pre">f_Y1()</span></code>은 앞서 정의한 확률질량함수 <code class="docutils literal notranslate"><span class="pre">p_X()</span></code>, <code class="docutils literal notranslate"><span class="pre">p_Y()</span></code>와 완전히 동일한
+확률값을 갖는다. <code class="docutils literal notranslate"><span class="pre">p_X()</span></code>와 <code class="docutils literal notranslate"><span class="pre">p_Y()</span></code>는 <code class="docutils literal notranslate"><span class="pre">f_X1()</span></code>과 <code class="docutils literal notranslate"><span class="pre">f_Y1()</span></code>의 경우처럼, 도수들을 더한 값을 전체 데이터수로 나눠 계산한 확률이기 때문이다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">([</span><span class="n">p_X</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)],</span> <span class="p">[</span><span class="n">f_X1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">([</span><span class="n">p_Y</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)],</span> <span class="p">[</span><span class="n">f_Y1</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>결론적으로 두 확률변수의 확률질량함수는 결합확률질량함수로부터 얻은 주변확률질량함수와 동일하다.</p>
+</section>
+</section>
+<section id="id7">
+<h2><span class="section-number">13.3. </span>연습문제<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<p>참고: <a class="reference external" href="https://colab.research.google.com/github/codingalzi/DataSci/blob/master/practices/practice-probability_discrete.ipynb">(연습) 이산확률분포</a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="probability.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">12. </span>확률분포</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="hypothesis_testing.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">14. </span>가설검정</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">13.1. 이산확률변수</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pmf">13.1.1. 확률질량함수(PMF)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cdf">13.1.2. 누적분포함수(CDF)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">13.2. 다변량 분포</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">13.2.1. 이산결합확률분포</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">13.2.2. 조건부확률</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">13.2.3. 주변확률분포</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">13.3. 연습문제</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By 코딩알지와 친구들
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

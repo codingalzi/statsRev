@@ -18,7 +18,7 @@ chapters:
 - file: twoD_visualization
 - file: sampling
 - file: probability
-# - file: probability_discrete
+- file: probability_discrete
 # - file: probability_continuous
 # - file: expected_values
 # - file: normal_distribution
