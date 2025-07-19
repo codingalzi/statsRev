@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>13. 가설검정 &#8212; 데이터로 배우는 통계분석</title>
+    <title>15. 가설검정 &#8212; 데이터로 배우는 통계 분석</title>
   
   
   
@@ -63,7 +63,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'hypothesis_testing';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="12. 확률분포" href="probability.html" />
+    <link rel="prev" title="14. 연속확률분포" href="probability_continuous.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -151,7 +151,7 @@
   
   
   
-    <p class="title logo__title">데이터로 배우는 통계분석</p>
+    <p class="title logo__title">데이터로 배우는 통계 분석</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -180,7 +180,9 @@
 <li class="toctree-l1"><a class="reference internal" href="twoD_visualization.html">10. 2차원 데이터 시각화</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling.html">11. 모집단과 표본</a></li>
 <li class="toctree-l1"><a class="reference internal" href="probability.html">12. 확률분포</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">13. 가설검정</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability_discrete.html">13. 이산확률분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability_continuous.html">14. 연속확률분포</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">15. 가설검정</a></li>
 </ul>
 
     </div>
@@ -407,8 +409,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">13.1. 이론</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">13.2. 예제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">15.1. 이론</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">15.2. 예제</a></li>
 </ul>
             </nav>
         </div>
@@ -421,9 +423,9 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="ch-hyp-testing">
-<span id="id1"></span><h1><span class="section-number">13. </span>가설검정<a class="headerlink" href="#ch-hyp-testing" title="Link to this heading">#</a></h1>
+<span id="id1"></span><h1><span class="section-number">15. </span>가설검정<a class="headerlink" href="#ch-hyp-testing" title="Link to this heading">#</a></h1>
 <section id="id2">
-<h2><span class="section-number">13.1. </span>이론<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">15.1. </span>이론<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <p>다음과 같은 두 가지 가설을 생각한다.</p>
 <ul class="simple">
 <li><p>귀무가설 (null hypothesis) <span class="math notranslate nohighlight">\(\text{H}_0\)</span> : 모집단에 대하여 기존에 사실이라고 알려져 있거나 처음부터 주장하는 가설</p></li>
@@ -565,7 +567,7 @@ $<span class="math notranslate nohighlight">\(p\text{-값} = P(Z \le z_0) = P(Z 
 <p><strong>결론</strong>: 유의수준 5% 하에서 새로운 공정으로 생산된 제품의 평균 사용 시간이 100시간보다 짧다고 할 충분한 증거가 없습니다.</p>
 </section>
 <section id="id3">
-<h2><span class="section-number">13.2. </span>예제<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">15.2. </span>예제<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -1193,10 +1195,10 @@ $<span class="math notranslate nohighlight">\(p\text{-값} = P(Z \le z_0) = P(Z 
 </div>
 </div>
 </div>
-<p><strong>예제 1: 소득 3구간에서만 표본을 선택하는 경우 (양측검정)</strong></p>
-<p>소득별 5구간중 3구간에서의 평균 중위주택 가격이 전체 중위주택가격 평균과 제일 유사할 것이라 짐작할 수 있다. 가설검정을 통하여 논의하여 보자.</p>
+<p><strong>예제 1: 가구소득 3구간에서만 표본을 선택하는 경우 (양측검정)</strong></p>
+<p>가구소득별 5구간중 3구간에서의 평균 주택가격이 전체 주택가격 평균과 제일 유사할 것이라 짐작할 수 있다. 가설검정을 통하여 논의하여 보자.</p>
 <ul class="simple">
-<li><p>전체 구역의 중위주택가격</p></li>
+<li><p>전체 구역의 주택가격</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1211,7 +1213,7 @@ $<span class="math notranslate nohighlight">\(p\text{-값} = P(Z \le z_0) = P(Z 
 </div>
 </div>
 <ul class="simple">
-<li><p>소득 3구간 구역의 기초 통계</p></li>
+<li><p>가구소득 3구간 구역의 기초 통계</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1235,9 +1237,9 @@ Name: median_house_value, dtype: float64
 </div>
 </div>
 </div>
-<p>질문: 소득 3구간에서의 집값이 전체 평균 집값과 다르다고 할 수 있는가?
-소득 3구간에서의 1%의 표본을 조사하여 판단하여 보자.</p>
-<p>위 질문에 답하기 위해 먼저 소득 3구간에서 1%의 표본을 무작위로 선택한다.</p>
+<p>질문: 가구소득 3구간에서의 집값이 전체 평균 집값과 다르다고 할 수 있는가?
+가구소득 3구간에서의 1%의 표본을 조사하여 판단하여 보자.</p>
+<p>위 질문에 답하기 위해 먼저 가구소득 3구간에서 1%의 표본을 무작위로 선택한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_3Cat</span> <span class="o">=</span> <span class="n">housing_3Cat</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">43</span><span class="p">)</span>
@@ -1295,12 +1297,12 @@ p-값:       0.676193
 <li><p>양측검정의 기각역은 <span class="math notranslate nohighlight">\(\{ z \mid z \le -1.959964 \; \text{또는} \; z \ge 1.959964 \}\)</span></p></li>
 <li><p>검정통계량 <span class="math notranslate nohighlight">\(-1.959964 &lt; z_0 = 0.417664 &lt; 1.959964\)</span> 이므로 기각역에 속하지 않는다.</p></li>
 <li><p>따라서 귀무가설을 기각하지 않는다.</p></li>
-<li><p>즉, 소득3분위에 속한 사람들이 산 집값이 평균과 다르다고 볼 수 없다.</p></li>
+<li><p>즉, 가구소득 3구간에 속한 사람들이 산 집값이 평균과 다르다고 볼 수 없다.</p></li>
 </ul>
-<p><strong>예제 2: 소득 2구간에서만 표본을 선택하는 경우 (왼쪽 꼬리 단측검정)</strong></p>
-<p>소득 2구간의 중위주택가격은 전체 구역의 중위주택가격보다 작을 것이다. 가설검정을 통하여 작다고 할 수 있겠는지 판단하여 보자.</p>
+<p><strong>예제 2: 가구소득 2구간에서만 표본을 선택하는 경우 (왼쪽 꼬리 단측검정)</strong></p>
+<p>가구소득 2구간의 주택가격은 전체 구역의 주택가격보다 작을 것이다. 가설검정을 통하여 작다고 할 수 있겠는지 판단하여 보자.</p>
 <ul class="simple">
-<li><p>소득 2구간 구역의 기초 통계</p></li>
+<li><p>가구소득 2구간 구역의 기초 통계</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1324,8 +1326,8 @@ Name: median_house_value, dtype: float64
 </div>
 </div>
 </div>
-<p>질문: 소득 2구간에서의 집값이 전체 평균 집값보다 작은가? 소득 2구간에서의 1%의 표본을 조사하여 판단하여 보자.</p>
-<p>먼저 소득 2구간에서 1%의 표본을 무작위로 선택한다.</p>
+<p>질문: 가구소득 2구간에서의 집값이 전체 평균 집값보다 작은가? 가구소득 2구간에서의 1%의 표본을 조사하여 판단하여 보자.</p>
+<p>먼저 가구소득 2구간에서 1%의 표본을 무작위로 선택한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_2Cat</span> <span class="o">=</span> <span class="n">housing_2Cat</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">43</span><span class="p">)</span>
@@ -1382,12 +1384,12 @@ p-값:       0.000001
 <ul class="simple">
 <li><p>왼쪽 꼬리 단측검정의 기각역은 <span class="math notranslate nohighlight">\(\{ z \mid z \le -1.644854 \}\)</span></p></li>
 <li><p>검정통계량 <span class="math notranslate nohighlight">\(z_0 = -4.712372 &lt; -1.644854\)</span> 이므로 기각역에 속한다.</p></li>
-<li><p>따라서 귀무가설을 기각한다.</p></li>
-<li><p>즉, 소득 2구간에 속한 사람들이 산 집값이 평균과 다르다고 볼 수 있다.</p></li>
+<li><p>따라서 귀무가설을 기각하고 대립가설을 채택한다.</p></li>
+<li><p>즉, 가구소득 2구간에 속한 사람들이 산 집값이 평균보다 작다고 할 수 있다.</p></li>
 </ul>
 <p><strong>예제 3: 선택 편향 방지 (오른쪽 꼬리 단측검정)</strong></p>
-<p>위 예제는 각 소득 분위별로 예상되는 평균 집값과의 차이의 의미를 판단하기 위하여 의도적으로 편향된 표본을 선택하였다. 계산 결과 위의 소득 분위 기준으로는 검정통계량과 임계값의 차이도 많이 남을 알 수 있다.</p>
-<p>문제의 성격에 따라 <strong>선택 편향</strong><font size='2'>selection bias</font>이 발생하지 않도록 표본을 선택하는 일이 매우 중요할 수 있다. 이제는 되도록 편향이 발생하지 않는 표본 선택 방법을 논의하고자 한다.</p>
+<p>위 예제는 각 가구소득 구간별로 예상되는 평균 집값과의 차이의 의미를 판단하기 위하여 의도적으로 편향된 표본을 선택하였다. 계산 결과 위의 가구소득 구간 기준으로는 검정통계량과 임계값의 차이도 많이 남을 알 수 있다.</p>
+<p>문제의 성격에 따라 <strong>선택 편향</strong><font size='2'>selection bias이</font> 발생하지 않도록 표본을 선택하는 일이 매우 중요할 수 있다. 이제는 되도록 편향이 발생하지 않는 표본 선택 방법을 논의하고자 한다.</p>
 <p>선택 편향을 피하기 위한 샘플 선택으로 아래 코드에서는 전체 데이터셋에서 1% 크기의 표본을 무작위로 선택한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1396,7 +1398,7 @@ p-값:       0.000001
 </div>
 </div>
 </div>
-<p>표본의 중위주택가격 전체 구역의 중위주택가격 보다 조금 크다.</p>
+<p>표본의 주택가격 전체 구역의 주택가격 보다 조금 크다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_general</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
@@ -1467,7 +1469,7 @@ p-값:       0.092160
 <li><p>오른쪽 꼬리검정의 기각역은 <span class="math notranslate nohighlight">\(\{ z \mid z \ge 1.644854 \}\)</span></p></li>
 <li><p>검정통계량 <span class="math notranslate nohighlight">\(z_0 = 1.327573 &lt; 1.644854\)</span> 이므로 기각역에 속하지 않는다.</p></li>
 <li><p>따라서 귀무가설을 기각할 수 없다.</p></li>
-<li><p>즉, 표본 평균이 전체 평균 집값 보다 크다고 볼 수 없고 따라서 평균 집값이 타당하다고 볼 수 있다.</p></li>
+<li><p>즉, 표본 평균이 전체 평균 집값 보다 크다고 볼 수 없고 따라서 전체 평균 집값이 타당하다고 볼 수 있다.</p></li>
 </ul>
 <p><strong>예제 4: 층화표집 활용 (양측검정)</strong></p>
 <p>선택 편향의 위험성을 보다 줄이기 위해 층화표집을 활용한다.
@@ -1590,7 +1592,7 @@ p-값:       0.092160
 </div>
 </div>
 </div>
-<p>표본의 중위주택가격이 전체 구역의 중위주택가격 보다 조금 작다.</p>
+<p>표본의 주택가격이 전체 구역의 주택가격 보다 조금 작다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_stratified</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
@@ -1661,7 +1663,7 @@ p-값:       0.179635
 <li><p>왼쪽 꼬리검정의 기각역은 <span class="math notranslate nohighlight">\(\{ z \mid z \le -1.644854 \}\)</span></p></li>
 <li><p>검정통계량 <span class="math notranslate nohighlight">\(z_0 = -0.916756 &gt; -1.644854\)</span> 이므로 기각역에 속하지 않는다.</p></li>
 <li><p>따라서 귀무가설을 기각할 수 없다.</p></li>
-<li><p>즉, 표본 평균이 전체 평균 집값 보다 작다고 볼 수 없고 따라서 평균 집값이 타당하다고 볼 수 있다.</p></li>
+<li><p>즉, 표본 평균이 전체 평균 집값 보다 작다고 볼 수 없고 따라서 전체 평균 집값이 타당하다고 볼 수 있다.</p></li>
 </ul>
 <p>결론 2:</p>
 <ul class="simple">
@@ -1703,12 +1705,12 @@ p-값:       0.179635
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="probability.html"
+       href="probability_continuous.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">12. </span>확률분포</p>
+        <p class="prev-next-title"><span class="section-number">14. </span>연속확률분포</p>
       </div>
     </a>
 </div>
@@ -1727,8 +1729,8 @@ p-값:       0.179635
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">13.1. 이론</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">13.2. 예제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">15.1. 이론</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">15.2. 예제</a></li>
 </ul>
   </nav></div>
 

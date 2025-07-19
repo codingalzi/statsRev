@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>2. 리스트와 사전 &#8212; 데이터로 배우는 통계분석</title>
+    <title>2. 리스트와 사전 &#8212; 데이터로 배우는 통계 분석</title>
   
   
   
@@ -150,7 +150,7 @@
   
   
   
-    <p class="title logo__title">데이터로 배우는 통계분석</p>
+    <p class="title logo__title">데이터로 배우는 통계 분석</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -179,7 +179,9 @@
 <li class="toctree-l1"><a class="reference internal" href="twoD_visualization.html">10. 2차원 데이터 시각화</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling.html">11. 모집단과 표본</a></li>
 <li class="toctree-l1"><a class="reference internal" href="probability.html">12. 확률분포</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hypothesis_testing.html">13. 가설검정</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability_discrete.html">13. 이산확률분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability_continuous.html">14. 연속확률분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hypothesis_testing.html">15. 가설검정</a></li>
 </ul>
 
     </div>
@@ -1165,7 +1167,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;a&#39;, &#39;b&#39;, 7, &#39;language&#39;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;a&#39;, &#39;b&#39;]
 </pre></div>
 </div>
 </div>
@@ -1177,7 +1179,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;some value&#39;, [1, 2, 3, 4], &#39;an integer&#39;, &#39;python3&#39;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;some value&#39;, [1, 2, 3, 4]]
 </pre></div>
 </div>
 </div>
@@ -1286,7 +1288,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;enumerate object at 0x77da203eca40&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;enumerate object at 0x7f8d1011fc90&gt;
 </pre></div>
 </div>
 </div>
@@ -1340,7 +1342,7 @@ thon
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;zip at 0x77da203e93c0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;zip at 0x7f8d10123b40&gt;
 </pre></div>
 </div>
 </div>
@@ -1392,18 +1394,20 @@ thon
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">seq1</span><span class="p">,</span> <span class="n">seq2</span><span class="p">)):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">: </span><span class="si">{1}</span><span class="s1">, </span><span class="si">{2}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="mi">2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0: foo, one
-1: bar, two
-2: baz, three
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0: foo, 2
+1: bar, 2
+2: baz, 2
 </pre></div>
 </div>
 </div>
 </div>
+<p><strong>추가사항:</strong></p>
+<p>f-문자열에 대한 설명 필요.</p>
 </section>
 </section>
 <section id="id10">
