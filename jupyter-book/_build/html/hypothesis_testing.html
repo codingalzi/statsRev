@@ -1195,10 +1195,10 @@ $<span class="math notranslate nohighlight">\(p\text{-값} = P(Z \le z_0) = P(Z 
 </div>
 </div>
 </div>
-<p><strong>예제 1: 소득 3구간에서만 표본을 선택하는 경우 (양측검정)</strong></p>
-<p>소득별 5구간중 3구간에서의 평균 중위주택 가격이 전체 중위주택가격 평균과 제일 유사할 것이라 짐작할 수 있다. 가설검정을 통하여 논의하여 보자.</p>
+<p><strong>예제 1: 가구소득 3구간에서만 표본을 선택하는 경우 (양측검정)</strong></p>
+<p>가구소득별 5구간중 3구간에서의 평균 주택가격이 전체 주택가격 평균과 제일 유사할 것이라 짐작할 수 있다. 가설검정을 통하여 논의하여 보자.</p>
 <ul class="simple">
-<li><p>전체 구역의 중위주택가격</p></li>
+<li><p>전체 구역의 주택가격</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1213,7 +1213,7 @@ $<span class="math notranslate nohighlight">\(p\text{-값} = P(Z \le z_0) = P(Z 
 </div>
 </div>
 <ul class="simple">
-<li><p>소득 3구간 구역의 기초 통계</p></li>
+<li><p>가구소득 3구간 구역의 기초 통계</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1237,9 +1237,9 @@ Name: median_house_value, dtype: float64
 </div>
 </div>
 </div>
-<p>질문: 소득 3구간에서의 집값이 전체 평균 집값과 다르다고 할 수 있는가?
-소득 3구간에서의 1%의 표본을 조사하여 판단하여 보자.</p>
-<p>위 질문에 답하기 위해 먼저 소득 3구간에서 1%의 표본을 무작위로 선택한다.</p>
+<p>질문: 가구소득 3구간에서의 집값이 전체 평균 집값과 다르다고 할 수 있는가?
+가구소득 3구간에서의 1%의 표본을 조사하여 판단하여 보자.</p>
+<p>위 질문에 답하기 위해 먼저 가구소득 3구간에서 1%의 표본을 무작위로 선택한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_3Cat</span> <span class="o">=</span> <span class="n">housing_3Cat</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">43</span><span class="p">)</span>
@@ -1297,12 +1297,12 @@ p-값:       0.676193
 <li><p>양측검정의 기각역은 <span class="math notranslate nohighlight">\(\{ z \mid z \le -1.959964 \; \text{또는} \; z \ge 1.959964 \}\)</span></p></li>
 <li><p>검정통계량 <span class="math notranslate nohighlight">\(-1.959964 &lt; z_0 = 0.417664 &lt; 1.959964\)</span> 이므로 기각역에 속하지 않는다.</p></li>
 <li><p>따라서 귀무가설을 기각하지 않는다.</p></li>
-<li><p>즉, 소득3분위에 속한 사람들이 산 집값이 평균과 다르다고 볼 수 없다.</p></li>
+<li><p>즉, 가구소득 3구간에 속한 사람들이 산 집값이 평균과 다르다고 볼 수 없다.</p></li>
 </ul>
-<p><strong>예제 2: 소득 2구간에서만 표본을 선택하는 경우 (왼쪽 꼬리 단측검정)</strong></p>
-<p>소득 2구간의 중위주택가격은 전체 구역의 중위주택가격보다 작을 것이다. 가설검정을 통하여 작다고 할 수 있겠는지 판단하여 보자.</p>
+<p><strong>예제 2: 가구소득 2구간에서만 표본을 선택하는 경우 (왼쪽 꼬리 단측검정)</strong></p>
+<p>가구소득 2구간의 주택가격은 전체 구역의 주택가격보다 작을 것이다. 가설검정을 통하여 작다고 할 수 있겠는지 판단하여 보자.</p>
 <ul class="simple">
-<li><p>소득 2구간 구역의 기초 통계</p></li>
+<li><p>가구소득 2구간 구역의 기초 통계</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1326,8 +1326,8 @@ Name: median_house_value, dtype: float64
 </div>
 </div>
 </div>
-<p>질문: 소득 2구간에서의 집값이 전체 평균 집값보다 작은가? 소득 2구간에서의 1%의 표본을 조사하여 판단하여 보자.</p>
-<p>먼저 소득 2구간에서 1%의 표본을 무작위로 선택한다.</p>
+<p>질문: 가구소득 2구간에서의 집값이 전체 평균 집값보다 작은가? 가구소득 2구간에서의 1%의 표본을 조사하여 판단하여 보자.</p>
+<p>먼저 가구소득 2구간에서 1%의 표본을 무작위로 선택한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_2Cat</span> <span class="o">=</span> <span class="n">housing_2Cat</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">43</span><span class="p">)</span>
@@ -1385,10 +1385,10 @@ p-값:       0.000001
 <li><p>왼쪽 꼬리 단측검정의 기각역은 <span class="math notranslate nohighlight">\(\{ z \mid z \le -1.644854 \}\)</span></p></li>
 <li><p>검정통계량 <span class="math notranslate nohighlight">\(z_0 = -4.712372 &lt; -1.644854\)</span> 이므로 기각역에 속한다.</p></li>
 <li><p>따라서 귀무가설을 기각하고 대립가설을 채택한다.</p></li>
-<li><p>즉, 소득 2구간에 속한 사람들이 산 집값이 평균보다 작다고 할 수 있다.</p></li>
+<li><p>즉, 가구소득 2구간에 속한 사람들이 산 집값이 평균보다 작다고 할 수 있다.</p></li>
 </ul>
 <p><strong>예제 3: 선택 편향 방지 (오른쪽 꼬리 단측검정)</strong></p>
-<p>위 예제는 각 소득 분위별로 예상되는 평균 집값과의 차이의 의미를 판단하기 위하여 의도적으로 편향된 표본을 선택하였다. 계산 결과 위의 소득 분위 기준으로는 검정통계량과 임계값의 차이도 많이 남을 알 수 있다.</p>
+<p>위 예제는 각 가구소득 구간별로 예상되는 평균 집값과의 차이의 의미를 판단하기 위하여 의도적으로 편향된 표본을 선택하였다. 계산 결과 위의 가구소득 구간 기준으로는 검정통계량과 임계값의 차이도 많이 남을 알 수 있다.</p>
 <p>문제의 성격에 따라 <strong>선택 편향</strong><font size='2'>selection bias이</font> 발생하지 않도록 표본을 선택하는 일이 매우 중요할 수 있다. 이제는 되도록 편향이 발생하지 않는 표본 선택 방법을 논의하고자 한다.</p>
 <p>선택 편향을 피하기 위한 샘플 선택으로 아래 코드에서는 전체 데이터셋에서 1% 크기의 표본을 무작위로 선택한다.</p>
 <div class="cell docutils container">
@@ -1398,7 +1398,7 @@ p-값:       0.000001
 </div>
 </div>
 </div>
-<p>표본의 중위주택가격 전체 구역의 중위주택가격 보다 조금 크다.</p>
+<p>표본의 주택가격 전체 구역의 주택가격 보다 조금 크다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_general</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
@@ -1592,7 +1592,7 @@ p-값:       0.092160
 </div>
 </div>
 </div>
-<p>표본의 중위주택가격이 전체 구역의 중위주택가격 보다 조금 작다.</p>
+<p>표본의 주택가격이 전체 구역의 주택가격 보다 조금 작다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_stratified</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
