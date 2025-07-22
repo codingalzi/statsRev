@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -63,7 +63,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'probability_continuous';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="15. 가설검정" href="hypothesis_testing.html" />
+    <link rel="next" title="15. 기댓값과 분산" href="expected_values.html" />
     <link rel="prev" title="13. 이산확률분포" href="probability_discrete.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -175,7 +175,7 @@
 <li class="toctree-l1"><a class="reference internal" href="series.html">4. 판다스 시리즈</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dataframes.html">5. 판다스 데이터프레임</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data_handling.html">6. 데이터 다루기</a></li>
-<li class="toctree-l1"><a class="reference internal" href="central_tendency.html">7. 데이터 대표값과 분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="representatives.html">7. 데이터 대표</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oneD_visualization.html">8. 1차원 데이터 시각화</a></li>
 <li class="toctree-l1"><a class="reference internal" href="linear_correlation.html">9. 선형 상관관계</a></li>
 <li class="toctree-l1"><a class="reference internal" href="twoD_visualization.html">10. 2차원 데이터 시각화</a></li>
@@ -183,7 +183,10 @@
 <li class="toctree-l1"><a class="reference internal" href="probability.html">12. 확률분포</a></li>
 <li class="toctree-l1"><a class="reference internal" href="probability_discrete.html">13. 이산확률분포</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">14. 연속확률분포</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hypothesis_testing.html">15. 가설검정</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expected_values.html">15. 기댓값과 분산</a></li>
+<li class="toctree-l1"><a class="reference internal" href="normal_distribution.html">16. 정규분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sampling_distribution.html">17. 표본분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hypothesis_testing.html">18. 가설검정</a></li>
 </ul>
 
     </div>
@@ -486,10 +489,10 @@ Pandas 3.0 버전부터는 기본 옵션으로 지정된다.</p>
 </div>
 </div>
 </div>
-<p>코드에 사용되는 <a class="reference external" href="https://github.com/codingalzi/DataSci/tree/master/data">데이터 저장소의 기본 디렉토리</a>를 지정한다.</p>
+<p>코드에 사용되는 <a class="reference external" href="https://github.com/codingalzi/statsRev/tree/master/data">데이터 저장소의 기본 디렉토리</a>를 지정한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_url</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/codingalzi/DataSci/refs/heads/master/data/&#39;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_url</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/codingalzi/statsRev/refs/heads/master/data/&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -638,7 +641,7 @@ P(a \le X \le b) = F(b) - F(a),
 주택가격이 50만을 초과하는 경우는 삭제하고 인덱스를 초기화한 후 가구소득 특성만을 남긴다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">housing</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_url</span><span class="o">+</span><span class="s2">&quot;california_housing.csv&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">housing</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_url</span><span class="o">+</span><span class="s2">&quot;california_housing_mini.csv&quot;</span><span class="p">)</span>
 
 <span class="c1"># 주택가격이 50만1달러 이상인 구역 삭제</span>
 <span class="n">house_value_max</span> <span class="o">=</span> <span class="n">housing</span><span class="p">[</span><span class="s1">&#39;median_house_value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="c1"># 500,001</span>
@@ -651,24 +654,26 @@ P(a \le X \le b) = F(b) - F(a),
 <span class="c1"># 가구소득 특성만 선택</span>
 <span class="n">housing</span> <span class="o">=</span> <span class="n">housing</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;median_income&#39;</span><span class="p">]</span>
 <span class="n">housing</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;district&#39;</span>
-<span class="n">housing</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>가구소득<font size='2'><code class="docutils literal notranslate"><span class="pre">median_income</span></code></font> 특성만 남아 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">housing</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>district
-0        8.3252
-1        8.3014
-2        7.2574
-3        5.6431
-4        3.8462
-          ...  
-19670    1.5603
-19671    2.5568
-19672    1.7000
-19673    1.8672
-19674    2.3886
-Name: median_income, Length: 19675, dtype: float64
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.series.Series&#39;&gt;
+RangeIndex: 19675 entries, 0 to 19674
+Series name: median_income
+Non-Null Count  Dtype  
+--------------  -----  
+19675 non-null  float64
+dtypes: float64(1)
+memory usage: 153.8 KB
 </pre></div>
 </div>
 </div>
@@ -737,7 +742,9 @@ Name: median_income, Length: 19675, dtype: float64
 <code class="docutils literal notranslate"><span class="pre">F_income</span></code><span class="math notranslate nohighlight">\((a - 10^{-5})\)</span>는 사실상 <span class="math notranslate nohighlight">\(P(X &lt; a)\)</span>를 계산하는 효과를 갖게 되고,
 <span class="math notranslate nohighlight">\(P(a \leq X \leq b)\)</span>는 <code class="docutils literal notranslate"><span class="pre">F_income()</span></code> 함수를 이용하여 정확하게 계산된다.</p>
 <p>이런 연속성 보정은 유한 개의 실전 데이터를 이용해 확률을 계산할 때 항상 고려해야 한다.
-연속성 보정을 위해 사용되는 <code class="docutils literal notranslate"><span class="pre">error</span></code>는 사용되는 데이터의 소수점 이하 자릿수보다 한 자리 더 많은 값으로 지정하는 것이 일반적이다.</p>
+연속성 보정을 위해 사용되는 <code class="docutils literal notranslate"><span class="pre">error</span></code>는 사용되는
+주어진 데이터에 따라 적절하게 지정되어야 한다.
+연속성 보장의 다른 활용 예제는 <a class="reference internal" href="normal_distribution.html#ch-normal-distribution"><span class="std std-numref">16장</span></a>에서 살펴본다.</p>
 <p>아래 <code class="docutils literal notranslate"><span class="pre">P_income()</span></code> 함수는 임의로 선택된 구역의 가구소득이 특정 구간에 속할 확률을 계산하며
 앞서 설명한 연속성 보정을 적용하였다. 코드에 사용된 <code class="docutils literal notranslate"><span class="pre">assert</span></code>문은 뒤에 오는 조건이 참인지 확인하고, 거짓이면 그 이후의 문자열을 에러 메시지로 반환한다.</p>
 <div class="cell docutils container">
@@ -931,10 +938,10 @@ F(a) = P(X \le a) = P(x_0 &lt; X \le a) = F(a) - F(x_0)
 <li><p>왼편 그래프의 빨간색 면적에 해당하는 값들의 그래프</p></li>
 <li><p>일반적으로 늘어진 S자 형태를 띄며, <span class="math notranslate nohighlight">\(x\)</span>가 작아지면 0으로, 커지면 1로 수렴</p></li>
 </ul>
-<p><div align="center"><img src="https://raw.githubusercontent.com/codingalzi/DataSci/master/jupyter-book/images/pdf-cdf-1.png" style="width:100%"></div></p><div class="note admonition">
+<p><div align="center"><img src="https://raw.githubusercontent.com/codingalzi/statsRev/master/jupyter-book/images/pdf-cdf-1.png" style="width:100%"></div></p><div class="note admonition">
 <p class="admonition-title">확률질량함수 vs. 확률밀도함수</p>
 <p>확률질량함수(PMF)는 이산확률변수가 특정 값을 취할 확률이고, 확률밀도함수(PDF)는 연속확률변수가 특정 값 이하의 값을 가질 확률의 변화율이다.</p>
-<p><div align="center"><img src="https://raw.githubusercontent.com/codingalzi/DataSci/master/jupyter-book/images/pmf-pdf-cdf.png" style="width:450px"></div></p>
+<p><div align="center"><img src="https://raw.githubusercontent.com/codingalzi/statsRev/master/jupyter-book/images/pmf-pdf-cdf.png" style="width:450px"></div></p>
 </div>
 </section>
 <section id="id7">
@@ -943,13 +950,13 @@ F(a) = P(X \le a) = P(x_0 &lt; X \le a) = F(a) - F(x_0)
 <strong>연속균등분포</strong><font size='2'>continuous uniform distribution</font>라 한다.
 구간 <span class="math notranslate nohighlight">\([a,b]\)</span>에서 정의된 연속균등분포는
 주로 <span class="math notranslate nohighlight">\(U(a, b)\)</span>로 표기하며, 연속균등분포 <span class="math notranslate nohighlight">\(U(a, b)\)</span>의 누적분포함수 <span class="math notranslate nohighlight">\(F(x)\)</span>는 기울기가 <span class="math notranslate nohighlight">\(\frac{1}{b-a}\)</span>인 선분을 포함한 아래의 그래프로 표현된다.</p>
-<p><div align="center"><img src="https://raw.githubusercontent.com/codingalzi/DataSci/master/jupyter-book/images/uniform-cdf.png" style="width:300px"></div></p><p>구간 <span class="math notranslate nohighlight">\([a, b]\)</span>에 속한 모든 <span class="math notranslate nohighlight">\(x\)</span>에 대하여 임의로 선택된 값이 구간 <span class="math notranslate nohighlight">\([a, x]\)</span>에 위치할 확률은 다음과 같이 <span class="math notranslate nohighlight">\(x\)</span>에 대한 1차 함수로 표현된다.</p>
+<p><div align="center"><img src="https://raw.githubusercontent.com/codingalzi/statsRev/master/jupyter-book/images/uniform-cdf.png" style="width:300px"></div></p><p>구간 <span class="math notranslate nohighlight">\([a, b]\)</span>에 속한 모든 <span class="math notranslate nohighlight">\(x\)</span>에 대하여 임의로 선택된 값이 구간 <span class="math notranslate nohighlight">\([a, x]\)</span>에 위치할 확률은 다음과 같이 <span class="math notranslate nohighlight">\(x\)</span>에 대한 1차 함수로 표현된다.</p>
 <div class="math notranslate nohighlight">
 \[
 F(x) = \frac{x-a}{b-a}
 \]</div>
 <p>따라서 구간 <span class="math notranslate nohighlight">\([a, b]\)</span>에서 정의된 연속균등분포 <span class="math notranslate nohighlight">\(U(a, b)\)</span>의 확률밀도함수는 위 함수의 도함수인 상수 함수 <span class="math notranslate nohighlight">\(f(x) = \frac{1}{b-a}\)</span>가 된다.</p>
-<p><div align="center"><img src="https://raw.githubusercontent.com/codingalzi/DataSci/master/jupyter-book/images/uniform-pdf.png" style="width:300px"></div></p><p>실제로 구간 <span class="math notranslate nohighlight">\([a, b]\)</span>에서 확률밀도함수 <span class="math notranslate nohighlight">\(f\)</span>와 <span class="math notranslate nohighlight">\(x\)</span>축 사이의 영역인 직사각형의 넓이는 1이며,
+<p><div align="center"><img src="https://raw.githubusercontent.com/codingalzi/statsRev/master/jupyter-book/images/uniform-pdf.png" style="width:300px"></div></p><p>실제로 구간 <span class="math notranslate nohighlight">\([a, b]\)</span>에서 확률밀도함수 <span class="math notranslate nohighlight">\(f\)</span>와 <span class="math notranslate nohighlight">\(x\)</span>축 사이의 영역인 직사각형의 넓이는 1이며,
 <span class="math notranslate nohighlight">\(x\)</span>가 <span class="math notranslate nohighlight">\(a,\)</span> <span class="math notranslate nohighlight">\(b\)</span> 사이를 움직일 때 밑변 <span class="math notranslate nohighlight">\(\overline{ax}\)</span>를 갖는 직사각형의 면적은 위 <span class="math notranslate nohighlight">\(F(x)\)</span>의 식과 동일한 <span class="math notranslate nohighlight">\(\frac{x-a}{b-a}\)</span>이다.</p>
 <p><strong>넘파이의 <code class="docutils literal notranslate"><span class="pre">random.uniform()</span></code> 함수</strong></p>
 <p>넘파이 라이브러리가 제공하는 <code class="docutils literal notranslate"><span class="pre">random.uniform()</span></code> 함수는 지정된 구간의
@@ -998,35 +1005,37 @@ F(x) = \frac{x-a}{b-a}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/786583a2f9d395f171ec88e61b1a87c5e7610a46528aa4f1846abc35d23726dd.png" src="_images/786583a2f9d395f171ec88e61b1a87c5e7610a46528aa4f1846abc35d23726dd.png" />
+<img alt="_images/d79a174c0ed3cc493d7073024196c870283e18199eac47ed7fd5c02345a323af.png" src="_images/d79a174c0ed3cc493d7073024196c870283e18199eac47ed7fd5c02345a323af.png" />
 </div>
 </div>
 <p><strong>균등분포의 히스토그램과 확률밀도함수</strong></p>
-<p><code class="docutils literal notranslate"><span class="pre">plt.hist()</span></code> 함수를 호출할 때 <code class="docutils literal notranslate"><span class="pre">density=True</span></code> 키워드 인자를 지정하면 각 구간별로 상대도수가 막대의 높이이다. 또한 전체 구역의 면적을 1로 만들기 위해 구간의 상대도수를 해당 구간의 크기로 나눈 값을 막대의 높이로 사용한다.</p>
+<p><code class="docutils literal notranslate"><span class="pre">plt.hist()</span></code> 함수를 호출할 때 <code class="docutils literal notranslate"><span class="pre">density=True</span></code> 키워드 인자를 지정하면 막대 각각의 높이는
+막대가 가리키는 구간별 상대도수를 구간의 크기로 나눈 값으로 지정된다.
+이렇게 하면 막대로 구성된 전체 구역의 면적이 1이 된다.</p>
 <div class="note admonition">
 <p class="admonition-title">히스토그램의 막대 높이</p>
-<p>총 <span class="math notranslate nohighlight">\(t\)</span> 개의 데이터 샘플을 <span class="math notranslate nohighlight">\(n\)</span>개의 구간으로 나눠 히스토그램을 그린다고 하자.
-이때 <code class="docutils literal notranslate"><span class="pre">density=True</span></code> 키워드 인자를 사용하면 <span class="math notranslate nohighlight">\(i\)</span>번째 구간의 막대 높이 <span class="math notranslate nohighlight">\(h_i\)</span>는
-다음과 같이 해당 구간의 상대도수를 해당 구간의 크기로 나눈 값이다.
-아래 식에서 <span class="math notranslate nohighlight">\(t_i\)</span>는 <span class="math notranslate nohighlight">\(i\)</span>번째 구간의 도수, <span class="math notranslate nohighlight">\(w_i\)</span>는 <span class="math notranslate nohighlight">\(i\)</span>번째 구간의 크기를 가리킨다.</p>
+<p>총 <span class="math notranslate nohighlight">\(m\)</span> 개의 데이터 샘플을 <span class="math notranslate nohighlight">\(n\)</span>개의 구간으로 나눠 히스토그램을 그린다고 하자.
+또한 <span class="math notranslate nohighlight">\(m_i\)</span>는 <span class="math notranslate nohighlight">\(i\)</span>번째 구간의 도수, <span class="math notranslate nohighlight">\(w_i\)</span>는 <span class="math notranslate nohighlight">\(i\)</span>번째 구간의 크기를 가리킨다.</p>
+<p>히스토그램을 그릴 때 <code class="docutils literal notranslate"><span class="pre">density=True</span></code> 키워드 인자를 사용하면 <span class="math notranslate nohighlight">\(i\)</span>번째 구간의 막대 높이 <span class="math notranslate nohighlight">\(h_i\)</span>는
+다음과 같이 해당 구간의 상대도수 <span class="math notranslate nohighlight">\(\frac{m_i}{m}\)</span>를 해당 구간의 크기 <span class="math notranslate nohighlight">\(w_i\)</span>로 나눈 값이다.</p>
 <div class="math notranslate nohighlight">
 \[
-h_i = \frac{t_i}{t} \cdot \frac{1}{w_i}
+h_i = \frac{m_i}{m} \cdot \frac{1}{w_i}
 \]</div>
 <p>그러면 막대 면적의 총합은 다음과 같이 1로 계산된다.</p>
 <div class="math notranslate nohighlight">
 \[
-\sum_{i=1}^n h_i \cdot w_i = \sum_{i=1}^n \frac{t_i}{t} \cdot \frac{1}{w_i}\cdot w_i = \sum_{i=1}^n \frac{t_i}{t} = \frac 1 t \cdot \sum_{i=1}^n t_i = \frac t t = 1
+\sum_{i=1}^n h_i \cdot w_i = \sum_{i=1}^n \frac{m_i}{m} \cdot \frac{1}{w_i}\cdot w_i = \sum_{i=1}^n \frac{m_i}{m} = \frac 1 m \cdot \sum_{i=1}^n m_i = \frac m m = 1
 \]</div>
 </div>
 <p>예를 들어, 균등분포의 경우, 구간별 밀도 히스토그램에서 구간별 막대 높이는 평균 <span class="math notranslate nohighlight">\(\frac{1}{b-a}\)</span>로 계산되는데, 그 이유는 다음과 같다.</p>
-<p>먼저 <span class="math notranslate nohighlight">\(t\)</span>는 데이터셋의 크기, <span class="math notranslate nohighlight">\(n\)</span>은 구간의 개수를 가리킨다고 하자.
-그러면 구간별 평균 도수는 <span class="math notranslate nohighlight">\(\frac t n\)</span>이고, 구간별 평균 상대도수는 <span class="math notranslate nohighlight">\(\frac 1 n\)</span>이다.
+<p>먼저 <span class="math notranslate nohighlight">\(m\)</span>는 데이터셋의 크기, <span class="math notranslate nohighlight">\(n\)</span>은 구간의 개수를 가리킨다고 하자.
+그러면 구간별 평균 도수는 <span class="math notranslate nohighlight">\(\frac m n\)</span>이고, 구간별 평균 상대도수는 <span class="math notranslate nohighlight">\(\frac 1 n\)</span>이다.
 각 구간의 크기는 일정하게 <span class="math notranslate nohighlight">\(\frac{b-a}{n}\)</span>이므로, 앞서 언급한 막대 높이의 공식에 의해
 구간별 막대의 평균 높이는 다음과 같이 <span class="math notranslate nohighlight">\(\frac{1}{b-a}\)</span>로 계산된다.</p>
 <div class="math notranslate nohighlight">
 \[
-\frac{1}{n} \cdot \frac{1}{\displaystyle \frac{b-a}{n}} = \frac 1 n \cdot \frac{n}{b-a} = \frac{1}{b-a}
+\frac{1}{n} \cdot \frac{\;\;\quad1\quad\;\;}{\displaystyle{\frac{b-a}{n}}} = \frac 1 n \cdot \frac{n}{b-a} = \frac{1}{b-a}
 \]</div>
 <p>따라서 데이터셋의 구간별 밀도를 나타내는 히스토그램은 전체 면적이 1이 되도록 막대
 높이가 정의되었다는 점, 단위구간의 상대도수가 크면 막대의 높이와 면적도 커진다는 점에서 확률밀도함수의 그래프를 비슷하게 모방하고 있음을 알 수 있다.</p>
@@ -1044,7 +1053,7 @@ h_i = \frac{t_i}{t} \cdot \frac{1}{w_i}
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">bins</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">5</span><span class="o">-</span><span class="mi">2</span><span class="p">),</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
 
 <span class="c1"># 실제 평균 밀도: dens.mean() = 0.334067 (노란 직선)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">bins</span><span class="p">)</span><span class="o">*</span><span class="n">dens</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">bins</span><span class="p">)</span><span class="o">*</span><span class="n">dens</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Density&#39;</span><span class="p">)</span>
@@ -1054,7 +1063,7 @@ h_i = \frac{t_i}{t} \cdot \frac{1}{w_i}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/cf426b2bae59951201f837e584682f6e27324b2aa9dd61e726580e336891e5f8.png" src="_images/cf426b2bae59951201f837e584682f6e27324b2aa9dd61e726580e336891e5f8.png" />
+<img alt="_images/0ad638cee0705b59936353000520dcd81058380666e55680e637fee8bbad8b90.png" src="_images/0ad638cee0705b59936353000520dcd81058380666e55680e637fee8bbad8b90.png" />
 </div>
 </div>
 <p>이론적 평균 막대 높이와 실제 평균 막대 높이가 다르게 계산되는 이유는 부동소수점 연산에 기인한다.
@@ -1078,8 +1087,7 @@ KDE에 기반하여 구현할 수 있음을 보인다.</p>
 <div class="note admonition">
 <p class="admonition-title">KDE 기법 이해</p>
 <p>여기서는 KDE의 활용 결과만 언급한다.
-KDE 기법 자체에 대한 설명은  정규분포에서 약간 다루겠지만,
-보다 자세한 설명은 위키피디아의
+KDE 기법 자체에 대한 보다 자세한 설명은 위키피디아의
 <a class="reference external" href="https://en.wikipedia.org/wiki/Kernel_density_estimation">Kernel density estimation</a>를 참고하기 바란다.</p>
 </div>
 <section id="seaborn">
@@ -1133,7 +1141,7 @@ memory usage: 153.8 KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ed9b736f18ee6ef0794f40c2a57c8b9d7acf4e51dd58b49c88739da402a3781b.png" src="_images/ed9b736f18ee6ef0794f40c2a57c8b9d7acf4e51dd58b49c88739da402a3781b.png" />
+<img alt="_images/5c6539614340e526818275435b7e3f29ad806ced2176045c112cd4bb2b278605.png" src="_images/5c6539614340e526818275435b7e3f29ad806ced2176045c112cd4bb2b278605.png" />
 </div>
 </div>
 <p><strong>Seaborn 라이브러리의 <code class="docutils literal notranslate"><span class="pre">kdeplot()</span></code> 함수</strong></p>
@@ -1154,7 +1162,7 @@ memory usage: 153.8 KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/cfc09e2deb7fc78346be91436f6181b13b84d67aca5cf5390a1a60cf33b980d7.png" src="_images/cfc09e2deb7fc78346be91436f6181b13b84d67aca5cf5390a1a60cf33b980d7.png" />
+<img alt="_images/a1688310a81c97ee635d83d237e8310537f5cc48055bfe5ad7bff2dc51120098.png" src="_images/a1688310a81c97ee635d83d237e8310537f5cc48055bfe5ad7bff2dc51120098.png" />
 </div>
 </div>
 <p>가우스 KDE 기법으로 추정된 확률밀도함수는 모든 실수에 대해 정의된다.
@@ -1174,7 +1182,7 @@ memory usage: 153.8 KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/f9989d786501cab95119600d53bc9dae20cb10e6329d1954d4ac65ee7099d051.png" src="_images/f9989d786501cab95119600d53bc9dae20cb10e6329d1954d4ac65ee7099d051.png" />
+<img alt="_images/34abf02fabb2c3d45d20e421b8e92307e9504625eb8ec629bc725fcd51188afc.png" src="_images/34abf02fabb2c3d45d20e421b8e92307e9504625eb8ec629bc725fcd51188afc.png" />
 </div>
 </div>
 <p>하지만 여기서는 <code class="docutils literal notranslate"><span class="pre">cut</span></code> 키워드 인자를 지정하지 않고
@@ -1193,7 +1201,7 @@ memory usage: 153.8 KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/9b28355c026527ed68bb16386142d85a5fa59698fb6d920ec1bb027c59dc721a.png" src="_images/9b28355c026527ed68bb16386142d85a5fa59698fb6d920ec1bb027c59dc721a.png" />
+<img alt="_images/2701d25849084c9e7cd232b795fa089c36e900fa8b84fcc534c59de92fa53c73.png" src="_images/2701d25849084c9e7cd232b795fa089c36e900fa8b84fcc534c59de92fa53c73.png" />
 </div>
 </div>
 <p>참고로 <code class="docutils literal notranslate"><span class="pre">sns.kdeplot()</span></code> 함수의 반환값은 <code class="docutils literal notranslate"><span class="pre">matplotlib.axes._axes.Axes</span></code> 클래스의 객체이고 그래프의 모든 정보를 담고 있다.
@@ -1218,7 +1226,7 @@ memory usage: 153.8 KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/765862f217089b96773956ef77665c60b4f7a0b91c65c57ed92a87207b7870f0.png" src="_images/765862f217089b96773956ef77665c60b4f7a0b91c65c57ed92a87207b7870f0.png" />
+<img alt="_images/244c7fb0bba797a3a6402f343be2ac1a623d91356700dfdc47ba4d2e26314747.png" src="_images/244c7fb0bba797a3a6402f343be2ac1a623d91356700dfdc47ba4d2e26314747.png" />
 </div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">bw_method=0.19</span></code> 키워드 인자를 사용하면 추정된 확률밀도함수의 그래프가 부드러워진다.</p>
@@ -1234,7 +1242,7 @@ memory usage: 153.8 KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/519d72fee443923fad4ca90c6b910f6bfb5aae1ff418f02b655d9aa9c7969fe7.png" src="_images/519d72fee443923fad4ca90c6b910f6bfb5aae1ff418f02b655d9aa9c7969fe7.png" />
+<img alt="_images/1f0b8729770af3e32885d2905fef597b6a4cd1751aa6e8eaa5ad6f4a6015a3dd.png" src="_images/1f0b8729770af3e32885d2905fef597b6a4cd1751aa6e8eaa5ad6f4a6015a3dd.png" />
 </div>
 </div>
 <p>이제 구간별 밀도 히스토그램과 함께 그리면 자연스럽게 막대들의 끝을 따라 부드럽게 움직이는 것처럼 보인다.</p>
@@ -1253,12 +1261,12 @@ memory usage: 153.8 KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/b5e0baa21a5ee99079e0f0daab51ed6b508a204db7f048452c4a3c2d09db81df.png" src="_images/b5e0baa21a5ee99079e0f0daab51ed6b508a204db7f048452c4a3c2d09db81df.png" />
+<img alt="_images/1f602b215d69919c8f64e0576e2d4df48fa2ee0775757c9ada6073f0dbfafabe.png" src="_images/1f602b215d69919c8f64e0576e2d4df48fa2ee0775757c9ada6073f0dbfafabe.png" />
 </div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">bw_method</span></code> 변수는 평활모수(smoothing parameter, bandwidth)라고 불리는 값을 인자로 받는다.
-기본 인자는 주어진 데이터를 활용해 자동으로 적절한 값으로 지정된다. 더 자세한 설명은 이후에 정규분포를 다룰 때 다루기로 하고,
-이 값을 크게 지정할수록 확률밀도함수 그래프의 곡선이 부드럽고 평평해진다는 점만 기억하면 된다.</p>
+<p><code class="docutils literal notranslate"><span class="pre">bw_method</span></code> 변수는 평활모수<font size='2'>smoothing parameter, bandwidth</font>라고 불리는 값을 인자로 받는다.
+기본 인자는 주어진 데이터를 활용해 자동으로 적절한 값으로 지정된다.
+이 값을 크게 지정할수록 확률밀도함수 그래프의 곡선이 부드럽고 평평해진다는 점은 기억해 두어야 한다.</p>
 <p>마지막으로 <code class="docutils literal notranslate"><span class="pre">bw_method=1</span></code>로 지정한 경우를 살펴보면, KDE에 의해 추정된 확률밀도함수가 구간별 밀도 히스토그램과 상당히 다른 형태를 띈다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1275,13 +1283,14 @@ memory usage: 153.8 KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/19e178795804b8e4e12e52e6b065a0950c86c9752a3ec30e98fd90e516b28335.png" src="_images/19e178795804b8e4e12e52e6b065a0950c86c9752a3ec30e98fd90e516b28335.png" />
+<img alt="_images/66486ddac6c658f19ace1d1624f17af4b94c18f9379c978f7a8e40fc9671324b.png" src="_images/66486ddac6c658f19ace1d1624f17af4b94c18f9379c978f7a8e40fc9671324b.png" />
 </div>
 </div>
 <p>가구소득 데이터의 경우엔
 자동으로 계산된 <code class="docutils literal notranslate"><span class="pre">bw_method</span></code>의 값보다 <code class="docutils literal notranslate"><span class="pre">bw_method=0.19</span></code>로 지정했을 때가
 구간별 밀도 히스토그램과 더 밀착된 그래프 모양을 보여준다.
-이렇듯 커널밀도추정 기법은 여러 옵션에 의존하기 때문에 사용자 입장에선 경우에 따라 적절한 옵션을 찾아 수동으로 지정하는 것이 필요하다.</p>
+이렇듯 커널밀도추정 기법은 여러 옵션에 의존하기 때문에 사용자 입장에선 경우에 따라 적절한 옵션을 찾아
+수동으로 지정해줄 필요가 있다.</p>
 <p><strong>Seaborn 라이브러리의 <code class="docutils literal notranslate"><span class="pre">histplot()</span></code> 함수</strong></p>
 <p><code class="docutils literal notranslate"><span class="pre">sns.histplot()</span></code> 함수는 앞에서 많이 활용해 온 <code class="docutils literal notranslate"><span class="pre">plt.hist()</span></code> 함수와 매개변수명에서는 차이가 있지만 기능은 동일하다. 다만 Seaborn 라이브러리의 특성상 색상이 좀더 옅어진다.</p>
 <div class="cell docutils container">
@@ -1299,7 +1308,7 @@ memory usage: 153.8 KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/36948314ba6a8d84e5d01e6cf3634dbbc2d827f02c57826023ce802296f8747c.png" src="_images/36948314ba6a8d84e5d01e6cf3634dbbc2d827f02c57826023ce802296f8747c.png" />
+<img alt="_images/aeba6069ead74404af7d2c0d790faf2e962fd7cf388e657a4fa6baebb2925492.png" src="_images/aeba6069ead74404af7d2c0d790faf2e962fd7cf388e657a4fa6baebb2925492.png" />
 </div>
 </div>
 <p><strong><code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> 모듈</strong></p>
@@ -1336,7 +1345,7 @@ memory usage: 153.8 KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/dc12992a12a2171c3879823544727403bccd283f27f5af02ac4279c4691a845f.png" src="_images/dc12992a12a2171c3879823544727403bccd283f27f5af02ac4279c4691a845f.png" />
+<img alt="_images/481310ba6f3237f4a8fcc37dbc351cc27a1acbe8e38f3a4397b1ce15959e714a.png" src="_images/481310ba6f3237f4a8fcc37dbc351cc27a1acbe8e38f3a4397b1ce15959e714a.png" />
 </div>
 </div>
 </section>
@@ -1486,7 +1495,7 @@ KDE 기법은 그런데 <strong>단봉 분포</strong><font size='2'>unimodal di
 히스토그램 그래프를 참고해서 수동으로 조절해 줄 필요가 있는지 판단해야 한다.
 단, 히스토그램이 전달하는 정보의 내용은 막대의 개수, 즉 각 구간의 크기에 의존함을 기억해야 한다.
 결국 다양한 경우를 확인하여 사용자의 목적에 맞는 적절한 히스토그램과 평활모수를 지정할 필요가 있다.</p>
-<p><a class="reference external" href="https://colab.research.google.com/github/codingalzi/DataSci/blob/master/practices/practice-probability_continuous.ipynb">(연습) 연속확률분포</a>의
+<p><a class="reference external" href="https://colab.research.google.com/github/codingalzi/statsRev/blob/master/practices/practice-probability_continuous.ipynb">(연습) 연속확률분포</a>의
 문제 8과 문제 9에서 에제를 통해 히스토그램과 KDE 기법의 활용 기준을 설명한다.</p>
 </section>
 </section>
@@ -1989,7 +1998,7 @@ P(a \le X \le b, \; c \le Y \le d) = \int_{a}^{b} \int_{c}^{d} f(x, y)\; dy\, dx
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/52b31762e4109c32af690757ee2fc00c9d88736d68d39fe133f5fd366f503630.png" src="_images/52b31762e4109c32af690757ee2fc00c9d88736d68d39fe133f5fd366f503630.png" />
+<img alt="_images/bb6f75b6923557316d646949c3fd1c1c688e9295c49d1fee69479eef69d42398.png" src="_images/bb6f75b6923557316d646949c3fd1c1c688e9295c49d1fee69479eef69d42398.png" />
 </div>
 </div>
 <p>다음 코드는 데이터 산점도와 확률밀도함수 그래프를 함께 그린다.
@@ -2009,7 +2018,7 @@ P(a \le X \le b, \; c \le Y \le d) = \int_{a}^{b} \int_{c}^{d} f(x, y)\; dy\, dx
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/43b1f64264532e3a73f12889082d4e6d81b3f2afe589c5a28125cb07e22be2bc.png" src="_images/43b1f64264532e3a73f12889082d4e6d81b3f2afe589c5a28125cb07e22be2bc.png" />
+<img alt="_images/66d0b8588c43a572cca2aa58d5cf0803023c2286748bd492340822b39c72e06c.png" src="_images/66d0b8588c43a572cca2aa58d5cf0803023c2286748bd492340822b39c72e06c.png" />
 </div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">sns.kdeplot()</span></code> 함수 자체로 밀도를 색으로 구분해주는 기능이 있다.
@@ -2026,7 +2035,7 @@ P(a \le X \le b, \; c \le Y \le d) = \int_{a}^{b} \int_{c}^{d} f(x, y)\; dy\, dx
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/b8b1c02e13253f6de5a82b4f857c83c604b896be9c82f0fb72fe9298d55af6fb.png" src="_images/b8b1c02e13253f6de5a82b4f857c83c604b896be9c82f0fb72fe9298d55af6fb.png" />
+<img alt="_images/2b0fe5e90f7c864b68e3a0758b3df21d2bb9c33b3540cd57172d922dcab560ce.png" src="_images/2b0fe5e90f7c864b68e3a0758b3df21d2bb9c33b3540cd57172d922dcab560ce.png" />
 </div>
 </div>
 </section>
@@ -2079,14 +2088,14 @@ P(a \le X \le b, \; c \le Y \le d) = \int_{a}^{b} \int_{c}^{d} f(x, y)\; dy\, dx
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/244118e1762732d930c3142ebc6fef80095b445689992a13e2ca6e678daa4a8a.png" src="_images/244118e1762732d930c3142ebc6fef80095b445689992a13e2ca6e678daa4a8a.png" />
+<img alt="_images/c4cee5b7a7a6f06695c61be28f48c153efe93dbdd4cb148d0156e7296c4327df.png" src="_images/c4cee5b7a7a6f06695c61be28f48c153efe93dbdd4cb148d0156e7296c4327df.png" />
 </div>
 </div>
 <p>참고로 지금까지 확률밀도함수의 그래프는 모두 Cycler 색상의 두번째(C1)인 주황색(<code class="docutils literal notranslate"><span class="pre">tab:orange</span></code> 또는 <code class="docutils literal notranslate"><span class="pre">#ff7f0e</span></code>)으로 지정되었다.</p>
 </section>
 <section id="id14">
 <h2><span class="section-number">14.9. </span>연습문제<a class="headerlink" href="#id14" title="Link to this heading">#</a></h2>
-<p>참고: <a class="reference external" href="https://colab.research.google.com/github/codingalzi/DataSci/blob/master/practices/practice-probability_continuous.ipynb">(연습) 연속확률분포</a></p>
+<p>참고: <a class="reference external" href="https://colab.research.google.com/github/codingalzi/statsRev/blob/master/practices/practice-probability_continuous.ipynb">(연습) 연속확률분포</a></p>
 </section>
 </section>
 
@@ -2130,11 +2139,11 @@ P(a \le X \le b, \; c \le Y \le d) = \int_{a}^{b} \int_{c}^{d} f(x, y)\; dy\, dx
       </div>
     </a>
     <a class="right-next"
-       href="hypothesis_testing.html"
+       href="expected_values.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">15. </span>가설검정</p>
+        <p class="prev-next-title"><span class="section-number">15. </span>기댓값과 분산</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

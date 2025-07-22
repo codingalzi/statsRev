@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -173,7 +173,7 @@
 <li class="toctree-l1"><a class="reference internal" href="series.html">4. 판다스 시리즈</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dataframes.html">5. 판다스 데이터프레임</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data_handling.html">6. 데이터 다루기</a></li>
-<li class="toctree-l1"><a class="reference internal" href="central_tendency.html">7. 데이터 대표값과 분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="representatives.html">7. 데이터 대표</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oneD_visualization.html">8. 1차원 데이터 시각화</a></li>
 <li class="toctree-l1"><a class="reference internal" href="linear_correlation.html">9. 선형 상관관계</a></li>
 <li class="toctree-l1"><a class="reference internal" href="twoD_visualization.html">10. 2차원 데이터 시각화</a></li>
@@ -181,7 +181,10 @@
 <li class="toctree-l1"><a class="reference internal" href="probability.html">12. 확률분포</a></li>
 <li class="toctree-l1"><a class="reference internal" href="probability_discrete.html">13. 이산확률분포</a></li>
 <li class="toctree-l1"><a class="reference internal" href="probability_continuous.html">14. 연속확률분포</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hypothesis_testing.html">15. 가설검정</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expected_values.html">15. 기댓값과 분산</a></li>
+<li class="toctree-l1"><a class="reference internal" href="normal_distribution.html">16. 정규분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sampling_distribution.html">17. 표본분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hypothesis_testing.html">18. 가설검정</a></li>
 </ul>
 
     </div>
@@ -474,10 +477,10 @@ Pandas 3.0 버전부터는 기본 옵션으로 지정된다.</p>
 </div>
 </div>
 </div>
-<p>코드에 사용되는 <a class="reference external" href="https://github.com/codingalzi/DataSci/tree/master/data">데이터 저장소의 기본 디렉토리</a>를 지정한다.</p>
+<p>코드에 사용되는 <a class="reference external" href="https://github.com/codingalzi/statsRev/tree/master/data">데이터 저장소의 기본 디렉토리</a>를 지정한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_url</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/codingalzi/DataSci/refs/heads/master/data/&#39;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_url</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/codingalzi/statsRev/refs/heads/master/data/&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -505,244 +508,17 @@ Pandas 3.0 버전부터는 기본 옵션으로 지정된다.</p>
 <p><div align="center"><img src="https://github.com/codingalzi/statsRev/blob/master/jupyter-book/images/sampling.png?raw=true" style="width:500px"></div></p><section id="id3">
 <h3><span class="section-number">11.1.1. </span>캘리포니아 주택가격 데이터셋<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
 <p>이 장부터 다룰 통계 데이터의 모집단은 캘리포니아 주택가격 데이터이다. 1990년도에 시행된 미국 캘리포니아 주의 20,640개 구역별 주택가격 데이터셋은
-구역별로 경도, 위도, 주택 건물 중위연령, 총 방 수, 총 침실 수, 인구, 가구수, 가구중위소득, 주택중위가격, 해안근접도
+구역별로 경도, 위도, 주택 건물 중위연령, 총 방 수, 총 침실 수, 인구, 가구수, 중위가구소득, 중위주택가격, 해안근접도
 등 총 10개의 <strong>특성</strong><font size='2'>feature</font>을 포함하는 인구조사 자료다.
-통계 분야에서는 특성을 변수 또는 변인 등으로 부르지만 머신러닝 분야에서는 특성이라 부르는 게 일반적이다.</p>
+통계 분야에서는 특성을 변수 또는 변인 등으로 부르지만 머신러닝 분야에서는 특성이라 부르는 게 일반적이다.
+또한 지금부터는 편의상 ‘중위가구소득’을 ‘가구소득’, ‘중위주택가격’을 ‘주택가격’으로 부르기로 한다.</p>
 <p><div align="center"><img src="https://raw.githubusercontent.com/codingalzi/handson-ml3/master/jupyter-book/imgs/ch02/LA-USA01.png" width="600"></div></p><p><strong>데이터 정보 요약</strong></p>
-<p>데이터 기본저장소에서 csv 파일을 데이터프레임으로 불러온다.</p>
+<p>데이터 기본저장소에서 캘리포니아 주택가격 데이터를 담고 있는 csv 파일을 데이터프레임으로 불러온다.
+단, 앞으로 설명에 필요한 중위가구소득과 중위주택가격 특성만 포함된 데이터셋을 활용한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">housing</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_url</span><span class="o">+</span><span class="s2">&quot;california_housing.csv&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">housing</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_url</span><span class="o">+</span><span class="s2">&quot;california_housing_mini.csv&quot;</span><span class="p">)</span>
 <span class="n">housing</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>longitude</th>
-      <th>latitude</th>
-      <th>housing_median_age</th>
-      <th>total_rooms</th>
-      <th>total_bedrooms</th>
-      <th>population</th>
-      <th>households</th>
-      <th>median_income</th>
-      <th>median_house_value</th>
-      <th>ocean_proximity</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>-122.23</td>
-      <td>37.88</td>
-      <td>41.0</td>
-      <td>880.0</td>
-      <td>129.0</td>
-      <td>322.0</td>
-      <td>126.0</td>
-      <td>8.3252</td>
-      <td>452600.0</td>
-      <td>NEAR BAY</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>-122.22</td>
-      <td>37.86</td>
-      <td>21.0</td>
-      <td>7099.0</td>
-      <td>1106.0</td>
-      <td>2401.0</td>
-      <td>1138.0</td>
-      <td>8.3014</td>
-      <td>358500.0</td>
-      <td>NEAR BAY</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>-122.24</td>
-      <td>37.85</td>
-      <td>52.0</td>
-      <td>1467.0</td>
-      <td>190.0</td>
-      <td>496.0</td>
-      <td>177.0</td>
-      <td>7.2574</td>
-      <td>352100.0</td>
-      <td>NEAR BAY</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>-122.25</td>
-      <td>37.85</td>
-      <td>52.0</td>
-      <td>1274.0</td>
-      <td>235.0</td>
-      <td>558.0</td>
-      <td>219.0</td>
-      <td>5.6431</td>
-      <td>341300.0</td>
-      <td>NEAR BAY</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>-122.25</td>
-      <td>37.85</td>
-      <td>52.0</td>
-      <td>1627.0</td>
-      <td>280.0</td>
-      <td>565.0</td>
-      <td>259.0</td>
-      <td>3.8462</td>
-      <td>342200.0</td>
-      <td>NEAR BAY</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>20635</th>
-      <td>-121.09</td>
-      <td>39.48</td>
-      <td>25.0</td>
-      <td>1665.0</td>
-      <td>374.0</td>
-      <td>845.0</td>
-      <td>330.0</td>
-      <td>1.5603</td>
-      <td>78100.0</td>
-      <td>INLAND</td>
-    </tr>
-    <tr>
-      <th>20636</th>
-      <td>-121.21</td>
-      <td>39.49</td>
-      <td>18.0</td>
-      <td>697.0</td>
-      <td>150.0</td>
-      <td>356.0</td>
-      <td>114.0</td>
-      <td>2.5568</td>
-      <td>77100.0</td>
-      <td>INLAND</td>
-    </tr>
-    <tr>
-      <th>20637</th>
-      <td>-121.22</td>
-      <td>39.43</td>
-      <td>17.0</td>
-      <td>2254.0</td>
-      <td>485.0</td>
-      <td>1007.0</td>
-      <td>433.0</td>
-      <td>1.7000</td>
-      <td>92300.0</td>
-      <td>INLAND</td>
-    </tr>
-    <tr>
-      <th>20638</th>
-      <td>-121.32</td>
-      <td>39.43</td>
-      <td>18.0</td>
-      <td>1860.0</td>
-      <td>409.0</td>
-      <td>741.0</td>
-      <td>349.0</td>
-      <td>1.8672</td>
-      <td>84700.0</td>
-      <td>INLAND</td>
-    </tr>
-    <tr>
-      <th>20639</th>
-      <td>-121.24</td>
-      <td>39.37</td>
-      <td>16.0</td>
-      <td>2785.0</td>
-      <td>616.0</td>
-      <td>1387.0</td>
-      <td>530.0</td>
-      <td>2.3886</td>
-      <td>89400.0</td>
-      <td>INLAND</td>
-    </tr>
-  </tbody>
-</table>
-<p>20640 rows × 10 columns</p>
-</div></div></div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">info()</span></code> 함수가 보여주는 캘리포니아 주택 데이터의 기본적인 정보들을 요약하면 다음과 같다.</p>
-<ul class="simple">
-<li><p>20,640 개 구역별로 10개의 특성 조사</p></li>
-<li><p>해안 근접도를 뜻하는 <code class="docutils literal notranslate"><span class="pre">ocean_proximity</span></code> 특성은 <strong>범주형</strong><font size='2'>categorical</font>이고
-나머지는 <strong>수치형</strong><font size='2'>numerical</font> 특성임.</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">housing</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-RangeIndex: 20640 entries, 0 to 20639
-Data columns (total 10 columns):
- #   Column              Non-Null Count  Dtype  
----  ------              --------------  -----  
- 0   longitude           20640 non-null  float64
- 1   latitude            20640 non-null  float64
- 2   housing_median_age  20640 non-null  float64
- 3   total_rooms         20640 non-null  float64
- 4   total_bedrooms      20433 non-null  float64
- 5   population          20640 non-null  float64
- 6   households          20640 non-null  float64
- 7   median_income       20640 non-null  float64
- 8   median_house_value  20640 non-null  float64
- 9   ocean_proximity     20640 non-null  object 
-dtypes: float64(9), object(1)
-memory usage: 1.6+ MB
-</pre></div>
-</div>
-</div>
-</div>
-<p><strong>가구중위소득과 주택중위가격</strong></p>
-<p>이 장에서는 10개의 특성 중에서 가구중위소득과 주택중위가격 특성만 이용하므로, 나머지 특성 데이터는 제거한다.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">housing</span> <span class="o">=</span> <span class="n">housing</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s1">&#39;median_income&#39;</span><span class="p">,</span> <span class="s1">&#39;median_house_value&#39;</span><span class="p">]]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">housing</span>
 </pre></div>
 </div>
 </div>
@@ -830,22 +606,44 @@ memory usage: 1.6+ MB
 <p>20640 rows × 2 columns</p>
 </div></div></div>
 </div>
+<p><code class="docutils literal notranslate"><span class="pre">info()</span></code> 메서드가 보여주는 캘리포니아 주택가격 데이터셋의 두 특성에 대한 정보는 다음과 같다.
+원래 20,640 개 구역별로 10개의 특성 조사했지만 여기서는 가구소득<font size='2'><code class="docutils literal notranslate"><span class="pre">median</span> <span class="pre">income</span></code></font>과 주태가격<font size='2'><code class="docutils literal notranslate"><span class="pre">median_house_value</span></code></font> 두 특성만 포함되었음을 보여준다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">housing</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 20640 entries, 0 to 20639
+Data columns (total 2 columns):
+ #   Column              Non-Null Count  Dtype  
+---  ------              --------------  -----  
+ 0   median_income       20640 non-null  float64
+ 1   median_house_value  20640 non-null  float64
+dtypes: float64(2)
+memory usage: 322.6 KB
+</pre></div>
+</div>
+</div>
+</div>
 <p><strong>산점도 확인</strong></p>
-<p>소득이 많을수록 비싼 집에 사는 경향이 클 것이므로,
-주택중위가격과 가구중위소득의 산점도를 통해 이러한 경향을 확인해보자.
+<p>가구소득이 많을수록 비싼 집에 사는 경향이 클 것이므로,
+주택가격과 가구소득의 산점도를 통해 이러한 경향을 확인해보자.
 여기서는 <code class="docutils literal notranslate"><span class="pre">plot()</span></code> 함수가 자체적으로 제공하는 산점도 기능을 이용해본다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">housing</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">&#39;median_income&#39;</span><span class="p">,</span> <span class="s1">&#39;median_house_value&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;scatter&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">housing</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;median_income&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;median_house_value&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;scatter&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/6f05a804d859fdc95fcadc976284cf1a80a5232dbc120f01e514b6a52c81eaed.png" src="_images/6f05a804d859fdc95fcadc976284cf1a80a5232dbc120f01e514b6a52c81eaed.png" />
+<img alt="_images/173730ed13d36b1d75fde22afebd8998099de415253831809ede70d904571638.png" src="_images/173730ed13d36b1d75fde22afebd8998099de415253831809ede70d904571638.png" />
 </div>
 </div>
-<p>주택중위가격 500,000 부근에 직선 형태로 점들이 분포되어 있는데,
+<p>주택가격 500,000 부근에 직선 형태로 점들이 분포되어 있는데,
 그 이유를 알아보기 위해 데이터의 수치적 지표들을 확인해본다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -921,21 +719,21 @@ memory usage: 1.6+ MB
 </table>
 </div></div></div>
 </div>
-<p>주택중위가격의 최댓값이 500,001인데 자연스럽지 못하다.
+<p>주택가격의 최댓값이 500,001인데 자연스럽지 못하다.
 아마도 50만 달러 이상은 50만 1달러로 지정한 것으로 보인다.
 따라서 50만 달러를 초과하는 데이터는 <strong>이상치<font size='2'>outlier</strong></font>로 간주해 데이터셋에서 제외시키는 것이 바람직하다.</p>
 </section>
 <section id="id4">
 <h3><span class="section-number">11.1.2. </span>데이터 이상치 제거<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
-<p>주택중위가격이 50만 달러를 초과하는 데이터들을 삭제하기 위해 부울 인덱싱을 활용한다.</p>
+<p>주택가격이 50만 달러를 초과하는 데이터들을 삭제하기 위해 부울 인덱싱을 활용한다.</p>
 <p><strong>부울 인덱싱</strong></p>
 <p>부울 인덱싱<font size='2'>Boolean indexing</font>은
 <code class="docutils literal notranslate"><span class="pre">True</span></code> 또는 <code class="docutils literal notranslate"><span class="pre">False</span></code>의 진리값으로만 구성된 어레이 또는 데이터프레임을 이용하여
 <code class="docutils literal notranslate"><span class="pre">True</span></code>에 해당하는 행 또는 열만 남기고 나머지는 제거하는 기법이다.
 부울 인덱싱에 사용되는 진리값으로만 구성된 1차원 어레이, 리스트, 데이터프레임을
 마스크<font size='2'>mask</font>라 부른다.</p>
-<p>주택중위가격이 50만 달러를 초과하는 구역을 삭제하기 위해
-먼저 주택중위가격이 50만 달러를 초과하는 경우에만 <code class="docutils literal notranslate"><span class="pre">True</span></code> 값을 갖는 시리즈를 생성한다. 아래 코드에서는 단일값인 <code class="docutils literal notranslate"><span class="pre">house_value_max</span></code>를 시리즈와 비교하는데 브로드캐스팅 기능을 활용했다.</p>
+<p>주택가격이 50만 달러를 초과하는 구역을 삭제하기 위해
+먼저 주택가격이 50만 달러를 초과하는 경우에만 <code class="docutils literal notranslate"><span class="pre">True</span></code> 값을 갖는 시리즈를 생성한다. 아래 코드에서는 단일값인 <code class="docutils literal notranslate"><span class="pre">house_value_max</span></code>를 시리즈와 비교하는데 브로드캐스팅 기능을 활용했다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">house_value_max</span> <span class="o">=</span> <span class="n">housing</span><span class="p">[</span><span class="s1">&#39;median_house_value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="c1"># 500,001</span>
@@ -962,7 +760,8 @@ Name: median_house_value, Length: 20640, dtype: bool
 </div>
 </div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">mask</span></code>가 가리키는 어레이에는 총 965개의 <code class="docutils literal notranslate"><span class="pre">True</span></code>가 포함되어 있다. 즉, 주택중위가격이 50만 달러를 초과해서 제거해야 하는 구역이 총 965개이다.</p>
+<p><code class="docutils literal notranslate"><span class="pre">mask</span></code>가 가리키는 어레이에는 총 965개의 <code class="docutils literal notranslate"><span class="pre">True</span></code>가 포함되어 있다. 즉, 주택가격이 50만 달러를 초과해서 제거해야 하는 구역이 총 965개이다.
+<code class="docutils literal notranslate"><span class="pre">sum()</span></code> 메서드는 <code class="docutils literal notranslate"><span class="pre">True</span></code>는 1로, <code class="docutils literal notranslate"><span class="pre">False</span></code>는 0으로 취급한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mask</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -999,7 +798,7 @@ Name: median_house_value, Length: 20640, dtype: bool
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/16c977b407977bf079426448d3bd468a9de94077eb7eb331b3201a3979cce629.png" src="_images/16c977b407977bf079426448d3bd468a9de94077eb7eb331b3201a3979cce629.png" />
+<img alt="_images/4ef86dd1738669680220e5d0fc5b5a903357730a908da7184725a33d91420a4a.png" src="_images/4ef86dd1738669680220e5d0fc5b5a903357730a908da7184725a33d91420a4a.png" />
 </div>
 </div>
 <p><strong>인덱스 초기화</strong></p>
@@ -1466,13 +1265,13 @@ Name: median_house_value, Length: 20640, dtype: bool
 </div>
 <p>분산 또한 표본과 모집단의 정보가 조금 다르다.
 모집단의 경우엔 편향분산을 사용해야 하며,
-<a class="reference external" href="https://codingalzi.github.io/DataSci/oneD_data.html">6장</a>에서 설명한 대로 표본의 불편분산은 (편향)분산보다 조금 더 크다.</p>
+<a class="reference external" href="https://codingalzi.github.io/statsRev/oneD_data.html">6장</a>에서 설명한 대로 표본의 불편분산은 (편향)분산보다 조금 더 크다.</p>
 <ul class="simple">
 <li><p>모집단의 (편향)분산</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">housing</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># 데이터프레임이므로, 기본값은 ddof=1</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">housing</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># ddof=1 이 기본값</span>
 </pre></div>
 </div>
 </div>
@@ -1489,7 +1288,7 @@ dtype: float64
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">random_sampling</span><span class="o">.</span><span class="n">var</span><span class="p">()</span> <span class="c1"># 데이터프레임이므로, 기본값은 ddof=1</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">random_sampling</span><span class="o">.</span><span class="n">var</span><span class="p">()</span> <span class="c1"># ddof=1 이 기본값</span>
 </pre></div>
 </div>
 </div>
@@ -1518,18 +1317,20 @@ dtype: float64
 </div>
 </div>
 </div>
-<p>이번 표본의 경우, 가구중위소득과 주택중위가격의 불편분산과 편향분산 모두 모분산에 비해 크게 나왔지만, 표본을 다르게 하면 다른 결과가 나온다.
-예를 들어, 아래 코드는 무작위 추출의 시드를 0으로 지정했을 때의 결과들을 보여준다.</p>
+<p>이번 표본의 경우, 가구소득과 주택가격의 불편분산과 편향분산 모두 모분산에 비해 작게 나왔지만,
+표본을 다르게 하면 다른 결과가 나온다.
+예를 들어, 아래 코드는 무작위 추출의 시드를 17로 지정했을 때 두 경우 모두 보다 큰 분산이
+계산됨을 보여준다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">random_sampling</span> <span class="o">=</span> <span class="n">housing</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">random_sampling</span> <span class="o">=</span> <span class="n">housing</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">17</span><span class="p">)</span>
 <span class="n">random_sampling</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>  <span class="c1"># 이번 표본의 불편분산</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>median_income         2.614173e+00
-median_house_value    9.390295e+09
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>median_income         2.484291e+00
+median_house_value    1.122830e+10
 dtype: float64
 </pre></div>
 </div>
@@ -1542,8 +1343,8 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>median_income         2.600903e+00
-median_house_value    9.342628e+09
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>median_income         2.471680e+00
+median_house_value    1.117131e+10
 dtype: float64
 </pre></div>
 </div>
@@ -1551,7 +1352,7 @@ dtype: float64
 </div>
 <p>표본 불편분산의 기댓값이 모분산이 되는 것은 수학적으로 쉽게 증명 가능하다.
 기댓값<font size='2'>expectation value</font>은 어떤 확률적 사건의 평균값을 말하는데,
-자세한 설명은 <a class="reference external" href="https://codingalzi.github.io/DataSci/expected_values.html">14장</a> 또는 <a class="reference external" href="https://hsm-edu.tistory.com/15">표본분산의 기댓값</a>을 참고한다.</p>
+자세한 설명은 <a class="reference external" href="https://codingalzi.github.io/statsRev/expected_values.html">14장</a> 또는 <a class="reference external" href="https://hsm-edu.tistory.com/15">표본분산의 기댓값</a>을 참고한다.</p>
 <p>아래 두 개의 코드는 무작위 표본추출을 1만번 시행해서 불편분산들의 평균값과 편향분산들의 평균값 중 어느 값이 더 모분산에 가까운지 확인해보는 실험이다.</p>
 <p>첫번째 코드는 불편분산의 평균값을 계산하는 부분이다.
 각 반복에서 계산한 두 가지 값(<code class="docutils literal notranslate"><span class="pre">median_income</span></code>의 불편분산과 <code class="docutils literal notranslate"><span class="pre">median_house_value</span></code>의 불편분산)을 저장할 (10000, 2) 모양의 어레이를 0으로 초기화하여 준비한다. 시드 <code class="docutils literal notranslate"><span class="pre">seed</span></code>를 0부터 9999까지 증가시키면서 무작위 표본추출을 시행하고, 두 가지 불편분산을 계산해 <code class="docutils literal notranslate"><span class="pre">vars[seed]</span></code>에 저장한다.</p>
@@ -1599,11 +1400,11 @@ dtype: float64
 </section>
 <section id="id7">
 <h3><span class="section-number">11.2.2. </span>층화표집<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
-<p>주택가격은 소득과 밀접하게 연관된다.
+<p>주택가격은 가구소득과 밀접하게 연관된다.
 따라서 주택가격에 대한 표본통계량을 확인하고자 할 때
-표본이 소득별로 적절한 비율을 유지하는지 확인할 필요가 있다. 지금부터는 ‘가구중위소득’을 ‘소득’, ‘주택중위가격’을 ‘주택가격’으로 부르기로 한다.</p>
-<p><strong>소득 범주 지정</strong></p>
-<p>소득을 아래 표에 언급된 5개의 구간으로 쪼개고, 1부터 5까지의 정수를 소득 범주의 레이블(이름)로 지정해보자.</p>
+표본이 가구소득별로 적절한 비율을 유지하는지 확인할 필요가 있다.</p>
+<p><strong>가구소득 범주 지정</strong></p>
+<p>가구소득을 아래 표에 언급된 5개의 구간으로 쪼개고, 1부터 5까지의 정수를 가구소득 범주의 레이블(이름)로 지정해보자.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-center"><p>구간</p></th>
@@ -1630,7 +1431,7 @@ dtype: float64
 </table>
 </div>
 <p>아래 코드는 판다스의 <code class="docutils literal notranslate"><span class="pre">cut()</span></code> 함수를 이용하여
-모든 구역의 소득을 소득 범주 <code class="docutils literal notranslate"><span class="pre">bins</span></code>에 할당하고, 소득 범주의 이름인 1부터 5까지의 정수를 <code class="docutils literal notranslate"><span class="pre">income_cat</span></code>이라는 새로운 열(특성)으로 추가한다.</p>
+모든 구역의 가구소득을 가구소득 범주 <code class="docutils literal notranslate"><span class="pre">bins</span></code>에 할당하고, 가구소득 범주의 이름인 1부터 5까지의 정수를 <code class="docutils literal notranslate"><span class="pre">income_cat</span></code>이라는 새로운 열(특성)으로 추가한다.</p>
 <p><code class="docutils literal notranslate"><span class="pre">cut()</span></code> 함수는 연속적인 데이터를 이산적인 구간으로 나눠 범주형 데이터로 변환하는 함수이다. 주어진 데이터를 그룹화하는데 유용하게 사용된다. 주요 인수에 대한 설명은 다음과 같다.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">x</span></code>: 입력 데이터(필수)</p></li>
@@ -1750,13 +1551,13 @@ dtype: float64
 <p>19675 rows × 3 columns</p>
 </div></div></div>
 </div>
-<p>이제 위에서 지정한 소득 범주별로 동일한 비율의 표본을 추출하는 일이 남았다. 여기에는 데이터프레임의  <code class="docutils literal notranslate"><span class="pre">groupby()</span></code> 메서드가 유용하다.</p>
+<p>이제 위에서 지정한 가구소득 범주별로 동일한 비율의 표본을 추출하는 일이 남았다. 여기에는 데이터프레임의  <code class="docutils literal notranslate"><span class="pre">groupby()</span></code> 메서드가 유용하다.</p>
 <p><strong>데이터프레임 <code class="docutils literal notranslate"><span class="pre">groupby()</span></code> 메서드 활용</strong></p>
 <p>데이터프레임의 <code class="docutils literal notranslate"><span class="pre">groupby()</span></code> 메서드는 데이터를 하나 이상의 기준(열)에 따라 그룹으로 묶고, 각 그룹에 대해 별도의 연산(집계, 변환, 필터링 등)을 적용할 수 있게 해준다.<br />
-아래 코드는 이 메서드를 통해 <code class="docutils literal notranslate"><span class="pre">income_cat</span></code> 열(특성)이 나타내는 5개의 소득 범주로 전체 데이터를 분류하고 그룹화하는 부분이다. 코드에서 사용한 인수에 대한 설명은 다음과 같다.</p>
+아래 코드는 이 메서드를 통해 <code class="docutils literal notranslate"><span class="pre">income_cat</span></code> 열(특성)이 나타내는 5개의 가구소득 범주로 전체 데이터를 분류하고 그룹화하는 부분이다. 코드에서 사용한 인수에 대한 설명은 다음과 같다.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">group_keys=True</span></code>: 그룹화된 결과에 그룹 키(여기서는 ‘income_cat’ 값)를 인덱스로 추가함. 아래에서 다룰 <code class="docutils literal notranslate"><span class="pre">apply()</span></code> 메서드 등을 사용하여 그룹별 연산을 수행한 후 결과를 재조합할 때 유용함.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">observed=True</span></code>: 실제로 데이터에 나타나는 레이블만으로 그룹을 생성하라는 의미. 예를 들어, <code class="docutils literal notranslate"><span class="pre">housing</span></code>의 19,675 항목중에 소득 범주 2에 해당하는 항목이 없는 경우, <code class="docutils literal notranslate"><span class="pre">True</span></code>는 총 4개의 그룹만 생성해 그룹화하지만, <code class="docutils literal notranslate"><span class="pre">False</span></code>는 하나의 빈 그룹을 포함한 5개의 그룹을 생성함.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">observed=True</span></code>: 실제로 데이터에 나타나는 레이블만으로 그룹을 생성하라는 의미. 예를 들어, <code class="docutils literal notranslate"><span class="pre">housing</span></code>의 19,675 항목중에 가구소득 범주 2에 해당하는 항목이 없는 경우, <code class="docutils literal notranslate"><span class="pre">True</span></code>는 총 4개의 그룹만 생성해 그룹화하지만, <code class="docutils literal notranslate"><span class="pre">False</span></code>는 하나의 빈 그룹을 포함한 5개의 그룹을 생성함.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1773,7 +1574,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.core.groupby.generic.DataFrameGroupBy object at 0x7fe051e7f380&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.core.groupby.generic.DataFrameGroupBy object at 0x7cc385d76570&gt;
 </pre></div>
 </div>
 </div>
@@ -2288,7 +2089,7 @@ district
 <code class="docutils literal notranslate"><span class="pre">lambda</span> <span class="pre">매개변수:</span> <span class="pre">수행할</span> <span class="pre">연산의</span> <span class="pre">표현식</span></code>이며, 이 표현식의 결과가 함수의 반환값이다.</p>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">apply()</span></code> 메서드의 출력 결과를 보면, 총 1,966개 구역의 층화표집된 데이터를 담은 데이터프레임이 새로 생성되었으며,
-기존 인덱스였던 <code class="docutils literal notranslate"><span class="pre">district</span></code> 외에도 데이터가 속한 소득 범주 <code class="docutils literal notranslate"><span class="pre">income_cat</span></code>도 인덱스로 간주되고 있음을 알 수 있다. 여기서는 <code class="docutils literal notranslate"><span class="pre">income_cat</span></code>를 인덱스보다는 일반 특성으로 사용하는 것이 자연스럽다.
+기존 인덱스였던 <code class="docutils literal notranslate"><span class="pre">district</span></code> 외에도 데이터가 속한 가구소득 범주 <code class="docutils literal notranslate"><span class="pre">income_cat</span></code>도 인덱스로 간주되고 있음을 알 수 있다. 여기서는 <code class="docutils literal notranslate"><span class="pre">income_cat</span></code>를 인덱스보다는 일반 특성으로 사용하는 것이 자연스럽다.
 아래 코드는 <code class="docutils literal notranslate"><span class="pre">reset_index()</span></code> 메서드를 이용하여
 특정 인덱스를 특성으로 변환시키는 코드를 보여준다.
 <code class="docutils literal notranslate"><span class="pre">level</span></code>이라는 인자로 변환시키고자 하는 인덱스를 구분하는데, 레벨값은 가장 왼편에 위치한 인덱스부터 0, 1, 2, 등으로 지정된다.</p>
@@ -2401,7 +2202,7 @@ district
 <p>197 rows × 3 columns</p>
 </div></div></div>
 </div>
-<p>소득 범주인 <code class="docutils literal notranslate"><span class="pre">income_cat</span></code>이 일반 특성(열)로 변경되었음을 알 수 있다. 반드시 필요한 일은 아니지만
+<p>가구소득 범주인 <code class="docutils literal notranslate"><span class="pre">income_cat</span></code>이 일반 특성(열)로 변경되었음을 알 수 있다. 반드시 필요한 일은 아니지만
 이전 데이터프레임과의 형식을 맞추기 위해 <code class="docutils literal notranslate"><span class="pre">income_cat</span></code> 특성을 오른쪽 끝으로 보내기로 하자.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2512,7 +2313,7 @@ district
 <p>197 rows × 3 columns</p>
 </div></div></div>
 </div>
-<p>아래 코드는 표본추출 결과를 소득 범주별로 그룹화한 후, 구간별로 선택된 샘플의 개수를 확인한다.</p>
+<p>아래 코드는 표본추출 결과를 가구소득 범주별로 그룹화한 후, 구간별로 선택된 샘플의 개수를 확인한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stratified_sampling_count</span> <span class="o">=</span> <span class="n">stratified_sampling</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;income_cat&#39;</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
@@ -2647,7 +2448,7 @@ district
 </section>
 <section id="vs">
 <h3><span class="section-number">11.2.3. </span>무작위 추출 vs 층화표집<a class="headerlink" href="#vs" title="Link to this heading">#</a></h3>
-<p>이제 무작위 추출과 층화표집간의 통계적 차이를 확인하자. 무작위 추출된 표본을 만들기 위해, 소득 범주를 무시하고 무작위 추출을 진행해서 크기 1,968인 표본을 생성한다.</p>
+<p>이제 무작위 추출과 층화표집간의 통계적 차이를 확인하자. 무작위 추출된 표본을 만들기 위해, 가구소득 범주를 무시하고 무작위 추출을 진행해서 크기 1,968인 표본을 생성한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">random_sampling</span> <span class="o">=</span> <span class="n">housing</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
@@ -2757,7 +2558,7 @@ district
 <p>197 rows × 3 columns</p>
 </div></div></div>
 </div>
-<p>소득 범주별로 샘플의 개수를 확인한다.</p>
+<p>가구소득 범주별로 샘플의 개수를 확인한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">random_sampling_count</span> <span class="o">=</span> <span class="n">random_sampling</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;income_cat&#39;</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
@@ -2824,9 +2625,9 @@ district
 </div></div></div>
 </div>
 <p><strong>상대도수와 분산 비교</strong></p>
-<p>먼저, 소득 범주별 상대도수를 기준으로 무작위 추출과 층화표집을 비교한다.</p>
+<p>먼저, 가구소득 범주별 상대도수를 기준으로 무작위 추출과 층화표집을 비교한다.</p>
 <ul class="simple">
-<li><p>두 표본의 크기: 무작위 추출의 경우는 정확히 모집단의 1%(소수점 이하 절사)이고, 층화표집은 5개 소득 구간으로 분류한 후에 구간별로 1%를 추출했으므로 전체의 1%보다 약간 작다.</p></li>
+<li><p>두 표본의 크기: 무작위 추출의 경우는 정확히 모집단의 1%(소수점 이하 절사)이고, 층화표집은 5개 가구소득 구간으로 분류한 후에 구간별로 1%를 추출했으므로 전체의 1%보다 약간 작다.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2859,7 +2660,7 @@ dtype: int64
 </div>
 </div>
 <ul class="simple">
-<li><p>소득 범주별 상대도수: 어느 정도 차이가 있다.</p></li>
+<li><p>가구소득 범주별 상대도수: 어느 정도 차이가 있다.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2991,7 +2792,7 @@ dtype: int64
 </table>
 </div></div></div>
 </div>
-<p>참고로 모집단에서의 소득 범주별 상대도수는 다음과 같다.</p>
+<p>참고로 모집단에서의 가구소득 범주별 상대도수는 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stratified_ratio</span> <span class="o">=</span> <span class="n">stratified_count</span><span class="o">/</span><span class="p">(</span><span class="n">housing</span><span class="o">.</span><span class="n">shape</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
@@ -3057,7 +2858,7 @@ dtype: int64
 </table>
 </div></div></div>
 </div>
-<p>아래 코드는 주택가격을 기준으로 모집단과 두 표본의 소득 범주별 상대도수를 하나로 묶어 데이터프레임을 생성한다. <code class="docutils literal notranslate"><span class="pre">concat()</span></code> 함수의 내부 인자들을 보면, 모집단과 표본들의 데이터프레임에서 주택가격에 해당하는 열번호는 1번이며, 열들을 묶는 것이므로 <code class="docutils literal notranslate"><span class="pre">axis=1</span></code>로 지정했다.</p>
+<p>아래 코드는 주택가격을 기준으로 모집단과 두 표본의 가구소득 범주별 상대도수를 하나로 묶어 데이터프레임을 생성한다. <code class="docutils literal notranslate"><span class="pre">concat()</span></code> 함수의 내부 인자들을 보면, 모집단과 표본들의 데이터프레임에서 주택가격에 해당하는 열번호는 1번이며, 열들을 묶는 것이므로 <code class="docutils literal notranslate"><span class="pre">axis=1</span></code>로 지정했다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">proportions</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">stratified_ratio</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">[</span><span class="mi">1</span><span class="p">]],</span>
@@ -3066,7 +2867,7 @@ dtype: int64
                          <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="n">proportions</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;전체&#39;</span><span class="p">,</span> <span class="s1">&#39;층화표집&#39;</span><span class="p">,</span> <span class="s1">&#39;무작위 추출&#39;</span><span class="p">]</span>
-<span class="n">proportions</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;소득 범주&#39;</span>
+<span class="n">proportions</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;가구소득 범주&#39;</span>
 <span class="n">proportions</span>
 </pre></div>
 </div>
@@ -3095,7 +2896,7 @@ dtype: int64
       <th>무작위 추출</th>
     </tr>
     <tr>
-      <th>소득 범주</th>
+      <th>가구소득 범주</th>
       <th></th>
       <th></th>
       <th></th>
@@ -3136,7 +2937,7 @@ dtype: int64
 </table>
 </div></div></div>
 </div>
-<p>모집단의 소득 범주별 상대도수를 기준으로 각 표본의 상대도수의 오차율을 새로운 특성으로 추가한다.</p>
+<p>모집단의 가구소득 범주별 상대도수를 기준으로 각 표본의 상대도수의 오차율을 새로운 특성으로 추가한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">proportions</span><span class="p">[</span><span class="s2">&quot;층화표집 오차율&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">proportions</span><span class="p">[</span><span class="s2">&quot;층화표집&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">proportions</span><span class="p">[</span><span class="s2">&quot;전체&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
@@ -3172,7 +2973,7 @@ dtype: int64
       <th>무작위 추출 오차율</th>
     </tr>
     <tr>
-      <th>소득 범주</th>
+      <th>가구소득 범주</th>
       <th></th>
       <th></th>
       <th></th>
@@ -3225,8 +3026,8 @@ dtype: int64
 </table>
 </div></div></div>
 </div>
-<p>결과적으로, 층화표집 표본의 소득 범주별 상대도수가 무작위 추출 표본의 그것보다 참값, 즉 모집단의 상대도수에 훨씬 더 근접함을 알 수 있다.
-참고로 층화표집으로 생성된 표본을 이용한 소득과 주택가격의 산점도는 다음과 같다.</p>
+<p>결과적으로, 층화표집 표본의 가구소득 범주별 상대도수가 무작위 추출 표본의 그것보다 참값, 즉 모집단의 상대도수에 훨씬 더 근접함을 알 수 있다.
+참고로 층화표집으로 생성된 표본을 이용한 가구소득과 주택가격의 산점도는 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stratified_sampling</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">&#39;median_income&#39;</span><span class="p">,</span> <span class="s1">&#39;median_house_value&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;scatter&#39;</span><span class="p">)</span>
@@ -3235,10 +3036,10 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4e3714a6b91b8db149c2ba1dc0e7eecbd61cc7c5405fc7ccf41a96d0cf038f38.png" src="_images/4e3714a6b91b8db149c2ba1dc0e7eecbd61cc7c5405fc7ccf41a96d0cf038f38.png" />
+<img alt="_images/881b22d0e013e29254cc9a1c0b79a5cfbfccefded36a3cbc17c95bcff9cec782.png" src="_images/881b22d0e013e29254cc9a1c0b79a5cfbfccefded36a3cbc17c95bcff9cec782.png" />
 </div>
 </div>
-<p>이제 분산을 기준으로 두 표본을 비교해보자. 먼저 모집단의 소득과 주택가격의 (편향)분산을 출력해본다. <code class="docutils literal notranslate"><span class="pre">housing</span></code> 데이터프레임의 처음 두 열(특성)을 슬라이싱해서 <code class="docutils literal notranslate"><span class="pre">ddof=0</span></code> 인자를 사용해 분산을 구하면 된다.</p>
+<p>이제 분산을 기준으로 두 표본을 비교해보자. 먼저 모집단의 가구소득과 주택가격의 (편향)분산을 출력해본다. <code class="docutils literal notranslate"><span class="pre">housing</span></code> 데이터프레임의 처음 두 열(특성)을 슬라이싱해서 <code class="docutils literal notranslate"><span class="pre">ddof=0</span></code> 인자를 사용해 분산을 구하면 된다.</p>
 <ul class="simple">
 <li><p>모집단의 (편향)분산</p></li>
 </ul>
@@ -3319,13 +3120,13 @@ dtype: float64
 </div>
 </div>
 <p>결론적으로, 분산의 경우에도, 층화표집으로 생성된 표본의 불편분산이 모집단의 (편향)분산에 더 근접하며, 무작위 추출로 생성된 표본의 불편분산보다 작다.</p>
-<p>또한 <a class="reference internal" href="hypothesis_testing.html#ch-hyp-testing"><span class="std std-numref">15장</span></a>에서 다루는 가설검정을 통해
+<p>또한 <a class="reference internal" href="hypothesis_testing.html#ch-hyp-testing"><span class="std std-numref">18장</span></a>에서 다루는 가설검정을 통해
 층화표집으로 생성된 표본의 평균값이 무작위로 추출한 표본의 평균값보다 높은 확률로 모평균을 대변한다는 사실을 보여준다.</p>
 </section>
 </section>
 <section id="id8">
 <h2><span class="section-number">11.3. </span>연습문제<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
-<p>참고: <a class="reference external" href="https://colab.research.google.com/github/codingalzi/DataSci/blob/master/practices/practice-sampling.ipynb">(연습) 모집단과 표본</a></p>
+<p>참고: <a class="reference external" href="https://colab.research.google.com/github/codingalzi/statsRev/blob/master/practices/practice-sampling.ipynb">(연습) 모집단과 표본</a></p>
 </section>
 </section>
 
