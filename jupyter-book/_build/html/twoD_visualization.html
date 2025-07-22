@@ -175,7 +175,7 @@
 <li class="toctree-l1"><a class="reference internal" href="series.html">4. 판다스 시리즈</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dataframes.html">5. 판다스 데이터프레임</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data_handling.html">6. 데이터 다루기</a></li>
-<li class="toctree-l1"><a class="reference internal" href="central_tendency.html">7. 데이터 대표값과 분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="representatives.html">7. 데이터 대표</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oneD_visualization.html">8. 1차원 데이터 시각화</a></li>
 <li class="toctree-l1"><a class="reference internal" href="linear_correlation.html">9. 선형 상관관계</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">10. 2차원 데이터 시각화</a></li>
@@ -183,7 +183,10 @@
 <li class="toctree-l1"><a class="reference internal" href="probability.html">12. 확률분포</a></li>
 <li class="toctree-l1"><a class="reference internal" href="probability_discrete.html">13. 이산확률분포</a></li>
 <li class="toctree-l1"><a class="reference internal" href="probability_continuous.html">14. 연속확률분포</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hypothesis_testing.html">15. 가설검정</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expected_values.html">15. 기댓값과 분산</a></li>
+<li class="toctree-l1"><a class="reference internal" href="normal_distribution.html">16. 정규분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sampling_distribution.html">17. 표본분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hypothesis_testing.html">18. 가설검정</a></li>
 </ul>
 
     </div>
@@ -484,7 +487,7 @@ Pandas 3.0 버전부터는 기본 옵션으로 지정된다.</p>
 </div>
 </div>
 </div>
-<p>코드에 사용되는 <a class="reference external" href="https://github.com/codingalzi/DataSci/tree/master/data">데이터 저장소의 기본 디렉토리</a>를 지정한다.</p>
+<p>코드에 사용되는 <a class="reference external" href="https://github.com/codingalzi/statsRev/tree/master/data">데이터 저장소의 기본 디렉토리</a>를 지정한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_url</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/codingalzi/statsRev/refs/heads/master/data/&#39;</span>
@@ -693,7 +696,7 @@ Pandas 3.0 버전부터는 기본 옵션으로 지정된다.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;figure&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 </pre></div>
 </div>
-<p><div align="center"><img src="https://github.com/codingalzi/DataSci/blob/master/jupyter-book/images/figures.png?raw=true" style="width:500px"></div></p>
+<p><div align="center"><img src="https://github.com/codingalzi/statsRev/blob/master/jupyter-book/images/figures.png?raw=true" style="width:500px"></div></p>
 <p style='text-align:center;'>그림 출처: <a href='https://velog.io/@regista/Matplotlib에서-Figure와-Axes-이해하기-Basic'>Matplotlib에서 Figure와 Axes 이해하기</a></p><p><strong>서브플롯 추가</strong></p>
 <p>서브플롯<font size='2'>subplot</font>은 그래프를 그릴 때 필요한 도화지에 해당한다.
 아래 코드는 준비된 <code class="docutils literal notranslate"><span class="pre">Figure</span></code> 객체에 하나의 서브플롯을 추가한다.</p>
@@ -701,14 +704,14 @@ Pandas 3.0 버전부터는 기본 옵션으로 지정된다.</p>
 </pre></div>
 </div>
 <p>위 코드는 다음과 같이 액자에 한 장의 도화지를 준비한 것과 동일하다.</p>
-<p><div align="center"><img src="https://github.com/codingalzi/DataSci/blob/master/jupyter-book/images/figures_subplots.png?raw=true" style="width:600px"></div></p>
+<p><div align="center"><img src="https://github.com/codingalzi/statsRev/blob/master/jupyter-book/images/figures_subplots.png?raw=true" style="width:600px"></div></p>
 <p style='text-align:center;'>그림 출처: <a href='https://velog.io/@regista/Matplotlib에서-Figure와-Axes-이해하기-Basic'>Matplotlib에서 Figure와 Axes 이해하기</a></p><p>반면에 아래 코드는 두 개의 서브플롯을 추가한다.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>위 코드는 액자에 두 장의 도화지를 좌우로 배치시키는 효과를 낸다.</p>
-<p><div align="center"><img src="https://github.com/codingalzi/DataSci/blob/master/jupyter-book/images/figures_subplots121.png?raw=true" style="width:600px"></div></p>
+<p><div align="center"><img src="https://github.com/codingalzi/statsRev/blob/master/jupyter-book/images/figures_subplots121.png?raw=true" style="width:600px"></div></p>
 <p style='text-align:center;'>그림 출처: <a href='https://velog.io/@regista/Matplotlib에서-Figure와-Axes-이해하기-Basic'>Matplotlib에서 Figure와 Axes 이해하기</a></p><p><strong><code class="docutils literal notranslate"><span class="pre">add_subplot()</span></code> 메서드의 인자</strong></p>
 <p><code class="docutils literal notranslate"><span class="pre">add_subplot()</span></code> 함수는 서브플롯을 행렬 모양으로 배치시킬 때 필요한 세 개의 정보를 인자로 받는다.</p>
 <ul class="simple">
@@ -1002,7 +1005,7 @@ RMSE = \sqrt{\frac 1 n \, \sum_{i=1}^{n} (y_i - \hat{y_i})^2}
 </ul>
 <p>아래 그래프는 8개의 실제 데이터와 예측값 각각에 대한 오차의 제곱을 시각적으로 보여준다.
 이 경우 RMSE는 파랑색 선분들의 길이의 제곱의 평균값이다.</p>
-<p><div align="center"><img src="https://github.com/codingalzi/DataSci/blob/master/jupyter-book/images/rmse.png?raw=true" style="width:600px"></div></p>
+<p><div align="center"><img src="https://github.com/codingalzi/statsRev/blob/master/jupyter-book/images/rmse.png?raw=true" style="width:600px"></div></p>
 <p style='text-align:center;'>그림 출처: <a href='https://jmlb.github.io/flashcards/2018/07/01/mae_vs_rmse/'>Root Mean Squared Error Versus Mean Absolute Error</a></p><p><code class="docutils literal notranslate"><span class="pre">np.polyfit()</span></code> 함수는 <strong>평균 제곱근 오차 값이 최소</strong>가 되도록 하는 직선의 기울기와 절편을 찾아준다.
 이에 대한 엄말한 수학 증명은 여기서는 다루지 않는다.
 다만 2020년도 1인당 GDP로 예측된 값과 실제 값 사이의 평균 제곱근 오차만 계산해본다.</p>
@@ -1612,7 +1615,7 @@ x-축과 y-축에 사용되는 데이터는 각각 <code class="docutils literal
 </section>
 <section id="id9">
 <h2><span class="section-number">10.5. </span>연습문제<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
-<p>참고: <a class="reference external" href="https://colab.research.google.com/github/codingalzi/DataSci/blob/master/practices/practice-twoD_visualization.ipynb">(연습) 2차원 데이터 시각화</a></p>
+<p>참고: <a class="reference external" href="https://colab.research.google.com/github/codingalzi/statsRev/blob/master/practices/practice-twoD_visualization.ipynb">(연습) 2차원 데이터 시각화</a></p>
 </section>
 </section>
 

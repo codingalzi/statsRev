@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>15. 가설검정 &#8212; 데이터로 배우는 통계 분석</title>
+    <title>18. 가설검정 &#8212; 데이터로 배우는 통계 분석</title>
   
   
   
@@ -63,7 +63,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'hypothesis_testing';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="14. 연속확률분포" href="probability_continuous.html" />
+    <link rel="prev" title="17. 표본분포" href="sampling_distribution.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -174,7 +174,7 @@
 <li class="toctree-l1"><a class="reference internal" href="series.html">4. 판다스 시리즈</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dataframes.html">5. 판다스 데이터프레임</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data_handling.html">6. 데이터 다루기</a></li>
-<li class="toctree-l1"><a class="reference internal" href="central_tendency.html">7. 데이터 대표값과 분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="representatives.html">7. 데이터 대표</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oneD_visualization.html">8. 1차원 데이터 시각화</a></li>
 <li class="toctree-l1"><a class="reference internal" href="linear_correlation.html">9. 선형 상관관계</a></li>
 <li class="toctree-l1"><a class="reference internal" href="twoD_visualization.html">10. 2차원 데이터 시각화</a></li>
@@ -182,7 +182,10 @@
 <li class="toctree-l1"><a class="reference internal" href="probability.html">12. 확률분포</a></li>
 <li class="toctree-l1"><a class="reference internal" href="probability_discrete.html">13. 이산확률분포</a></li>
 <li class="toctree-l1"><a class="reference internal" href="probability_continuous.html">14. 연속확률분포</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">15. 가설검정</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expected_values.html">15. 기댓값과 분산</a></li>
+<li class="toctree-l1"><a class="reference internal" href="normal_distribution.html">16. 정규분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sampling_distribution.html">17. 표본분포</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">18. 가설검정</a></li>
 </ul>
 
     </div>
@@ -409,8 +412,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">15.1. 이론</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">15.2. 예제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">18.1. 이론</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">18.2. 예제</a></li>
 </ul>
             </nav>
         </div>
@@ -423,16 +426,86 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="ch-hyp-testing">
-<span id="id1"></span><h1><span class="section-number">15. </span>가설검정<a class="headerlink" href="#ch-hyp-testing" title="Link to this heading">#</a></h1>
+<span id="id1"></span><h1><span class="section-number">18. </span>가설검정<a class="headerlink" href="#ch-hyp-testing" title="Link to this heading">#</a></h1>
+<p><strong>기본 설정</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">numpy</span></code>와 <code class="docutils literal notranslate"><span class="pre">pandas</span></code> 라이브러리를 각각 <code class="docutils literal notranslate"><span class="pre">np</span></code>와 <code class="docutils literal notranslate"><span class="pre">pd</span></code>로 불러온다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>데이터프레임의 <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy">chained indexing을 금지시키기 위한 설정</a>을 지정한다.
+Pandas 3.0 버전부터는 기본 옵션으로 지정된다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">mode</span><span class="o">.</span><span class="n">copy_on_write</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>주피터 노트북에서 부동소수점의 출력을 소수점 이하 6자리로 제한한다.
+아래 코드는 주피터 노트북에서만 사용하며 일반적인 파이썬 코드가 아니다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">precision</span> 6
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;%.6f&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>아래 코드는 데이터프레임 내에서 부동소수점의 출력을 소수점 이하 6자리로 제한한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.precision&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>데이터 시각화를 위해 <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot</span></code>를 <code class="docutils literal notranslate"><span class="pre">plt</span></code>로,
+<code class="docutils literal notranslate"><span class="pre">seaborn</span></code>을 <code class="docutils literal notranslate"><span class="pre">sns</span></code>로 불러온다.
+<code class="docutils literal notranslate"><span class="pre">seaborn</span></code> 라이브러리는 통계 관련 데이터의 정보를 보다 세련되고 정확하게 전달하는 그래프를 그리는 도구를 제공한다.
+<code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> 라이브러리를 바탕으로 만들어져서 함께 사용해도 된다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>그래프 스타일을 <code class="docutils literal notranslate"><span class="pre">seaborn</span></code>에서 제공하는 <code class="docutils literal notranslate"><span class="pre">white</span></code> 스타일로 지정한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>데이터 저장소 디렉토리</strong></p>
+<p>코드에 사용되는 <a class="reference external" href="https://github.com/codingalzi/statsRev/tree/master/data">데이터 저장소의 기본 디렉토리</a>를 지정한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_url</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/codingalzi/statsRev/refs/heads/master/data/&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
 <section id="id2">
-<h2><span class="section-number">15.1. </span>이론<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">18.1. </span>이론<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <p>다음과 같은 두 가지 가설을 생각한다.</p>
 <ul class="simple">
-<li><p>귀무가설 (null hypothesis) <span class="math notranslate nohighlight">\(\text{H}_0\)</span> : 모집단에 대하여 기존에 사실이라고 알려져 있거나 처음부터 주장하는 가설</p></li>
-<li><p>대립가설 (alternative hypothesis) <span class="math notranslate nohighlight">\(\text{H}_1\)</span> : 귀무가설에 대립되어 만들어지는 가설로 모집단에 대한 주장을 담고 있으며 실험이나 조사를 통해 입증하고 싶은 가설</p></li>
+<li><p><strong>귀무가설</strong><font size='2'>null hypothesis</font> <span class="math notranslate nohighlight">\((\text{H}_0)\)</span> : 모집단에 대하여 기존에 사실이라고 알려져 있거나 처음부터 주장하는 가설</p></li>
+<li><p><strong>대립가설</strong><font size='2'>alternative hypothesis </font> (<span class="math notranslate nohighlight">\(\text{H}_1\)</span>) : 귀무가설에 대립되어 만들어지는 가설로 모집단에 대한 주장을 담고 있으며 실험이나 조사를 통해 입증하고 싶은 가설</p></li>
 </ul>
 <p>가설검정은 조사된 데이터의 통계량(표본평균, 표본분산 등)을 통하여 귀무가설을 기각하고 대립가설을 채택할 충분한 증거가 있는지 확인하는 과정으로 다음과 같은 두 가지의 오류를 생각할 수 있다.</p>
-<p>제 1종 오류: 귀무가설이 참인데 귀무가설을 기각할 오류. 제1종 오류를 범할 확률은 보통 <span class="math notranslate nohighlight">\(\alpha\)</span>로 나타내고 이를 유의수준 (Significance Level)이라 한다.</p>
+<p>제 1종 오류: 귀무가설이 참인데 귀무가설을 기각할 오류. 제1종 오류를 범할 확률은 보통 <span class="math notranslate nohighlight">\(\alpha\)</span>로 나타내고 이를 <strong>유의수준</strong><font size='2'> Significance Level</font>이라 한다.</p>
 <p>제 2종 오류: 귀무가설이 거짓인데 귀무가설을 채택할 오류. 제2종 오류를 범할 확률은 보통 <span class="math notranslate nohighlight">\(\beta\)</span>로 나타내는데 제 1종 오류를 범할 확률 <span class="math notranslate nohighlight">\(\alpha\)</span>를 높이면 <span class="math notranslate nohighlight">\(\beta\)</span>는 낮아지는 경향이 있다.</p>
 <ul class="simple">
 <li><p>제 1종 오류를 허용할 한계인 유의수준 <span class="math notranslate nohighlight">\(\alpha\)</span> 만을 다루기로 한다. 유의수준은 연구자가 설정하는 값으로, 일반적으로 0.05 (5%) 또는 0.01(1%)를 많이 사용한다.  유의수준이 낮을수록 제1종 오류를 범할 확률이 줄어든다.</p></li>
@@ -440,8 +513,8 @@ document.write(`
 <p><strong>기각역과 가설검정의 종류</strong></p>
 <p>유의수준(<span class="math notranslate nohighlight">\(\alpha\)</span>)과 대립가설의 성격에 따라 귀무가설을 기각하는 영역(기각역)이 정해지며 이에 따라 다음과 같은 종류의 가설검정을 생각할 수 있다.</p>
 <ul class="simple">
-<li><p><strong>양측검정 (Two-tailed test)</strong>: 대립가설이 ‘차이가 있다’ (<span class="math notranslate nohighlight">\(\textbf{H}_1: \mu \ne \mu_0\)</span>) 와 같이 특정 값과 다르다는 형태일 때 사용한다.  이때는 분포의 양쪽 꼬리 부분에 기각역이 설정되며, 유의수준 <span class="math notranslate nohighlight">\(\alpha\)</span>는 양쪽 꼬리에 <span class="math notranslate nohighlight">\(\alpha/2\)</span>씩 나누어진다.</p></li>
-<li><p><strong>단측검정 (One-tailed test)</strong>: 대립가설이 ‘더 크다’ (<span class="math notranslate nohighlight">\(\textbf{H}_1: \mu &gt; \mu_0\)</span>) 또는 ‘더 작다’ (<span class="math notranslate nohighlight">\(\textbf{H}_1: \mu &lt; \mu_0\)</span>) 와 같이 특정 방향의 차이를 주장할 때 사용한다. 이때는 분포의 한쪽 꼬리에만 기각역이 설정되며, 유의수준 <span class="math notranslate nohighlight">\(\alpha\)</span> 전체가 해당 꼬리 부분에 위치한다.</p></li>
+<li><p><strong>양측검정</strong><font size='2'>Two-tailed test</font>: 대립가설이 ‘차이가 있다’ (<span class="math notranslate nohighlight">\(\textbf{H}_1: \mu \ne \mu_0\)</span>) 와 같이 특정 값과 다르다는 형태일 때 사용한다.  이때는 분포의 양쪽 꼬리 부분에 기각역이 설정되며, 유의수준 <span class="math notranslate nohighlight">\(\alpha\)</span>는 양쪽 꼬리에 <span class="math notranslate nohighlight">\(\alpha/2\)</span>씩 나누어진다.</p></li>
+<li><p><strong>단측검정</strong><font size='2'>One-tailed test </font>: 대립가설이 ‘더 크다’ (<span class="math notranslate nohighlight">\(\textbf{H}_1: \mu &gt; \mu_0\)</span>) 또는 ‘더 작다’ (<span class="math notranslate nohighlight">\(\textbf{H}_1: \mu &lt; \mu_0\)</span>) 와 같이 특정 방향의 차이를 주장할 때 사용한다. 이때는 분포의 한쪽 꼬리에만 기각역이 설정되며, 유의수준 <span class="math notranslate nohighlight">\(\alpha\)</span> 전체가 해당 꼬리 부분에 위치한다.</p></li>
 </ul>
 <p><strong>유의수준과 임계값(critical value)</strong></p>
 <p>표준정규분포 <span class="math notranslate nohighlight">\(N(0, 1^2)\)</span>을 따르는 확률변수 <span class="math notranslate nohighlight">\(Z\)</span>에 대하여</p>
@@ -473,13 +546,13 @@ document.write(`
 <p>충분히 큰 크기 <span class="math notranslate nohighlight">\(n\)</span>의 표본 데이터를 가지고 모평균에 대한 가설검정을 하려 하며 표준정규분포를 사용한다.</p>
 <p>귀무가설 <span class="math notranslate nohighlight">\(\text{H}_0\)</span> : 모평균은 <span class="math notranslate nohighlight">\(\mu_0\)</span>이다.</p>
 <ul class="simple">
-<li><p>검정통계량(Test Statistic):  표본 데이터로부터 계산되는 값으로 가설검정을 수행하는 기준이 된다. 이 경우 조사된 표본의 평균값을 <span class="math notranslate nohighlight">\(X_0\)</span>라 하면</p></li>
+<li><p><strong>검정통계량</strong><font size='2'>Test Statistic </font>:  표본 데이터로부터 계산되는 값으로 가설검정을 수행하는 기준이 된다. 이 경우 조사된 표본의 평균값을 <span class="math notranslate nohighlight">\(X_0\)</span>라 하면</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[z_0= \frac{X_0 - \mu_0}{\sigma/\sqrt{n}}\]</div>
 <p>이 검정통계량이 된다. (여기서 모분산이 알려지지 않은 경우 포본의 불편분산을 사용하기도 한다.)</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(p\)</span>-값(<span class="math notranslate nohighlight">\(p\)</span>-value): 귀무가설 하에서 현재 검정통계량 값 또는 그보다 더 극단적인 값이 나타날 확률로</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(p\)</span>-값</strong><font size='2'><span class="math notranslate nohighlight">\(p\)</span>-value</font>: 귀무가설 하에서 현재 검정통계량 값 또는 그보다 더 극단적인 값이 나타날 확률로</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[ P(z\le z_0) 또는  P(z\ge z_0)\]</div>
@@ -488,60 +561,52 @@ document.write(`
 <p>유의수준 <span class="math notranslate nohighlight">\(\alpha\)</span>/임계값 그리고 조사된 데이터로부터의 <span class="math notranslate nohighlight">\(p\)</span>-값/검정추정량을 비교하여 가설검정을 진행한다.</p>
 <p>방법 1. 임계값과 검정추정량 비교</p>
 <ul class="simple">
-<li><p>검정통계량이 기각역에 속하면 귀무가설을 기각한다.</p></li>
+<li><p>검정통계량이 기각역에 속하면 귀무가설 <span class="math notranslate nohighlight">\(\text{H}_0\)</span>을 기각하고 대립가설 <span class="math notranslate nohighlight">\(\text{H}_1\)</span>을 채택한다.</p></li>
 <li><p>검정통계량이 기각역에 속하지 않으면 귀무가설을 기각할 수 없다.</p></li>
 </ul>
 <p>방법 2. 유의수준과 <span class="math notranslate nohighlight">\(p\)</span>-값 비교</p>
 <ul class="simple">
-<li><p>단측검정에서는 <span class="math notranslate nohighlight">\(p\)</span>-값이 유의수준 <span class="math notranslate nohighlight">\(\alpha\)</span>보다 작은 경우, 양측검정에서는 <span class="math notranslate nohighlight">\(p\)</span>-값이 <span class="math notranslate nohighlight">\(\alpha/2\)</span>보다 작은 경우 귀무가설을 기각한다.</p></li>
+<li><p>단측검정에서는 <span class="math notranslate nohighlight">\(p\)</span>-값이 유의수준 <span class="math notranslate nohighlight">\(\alpha\)</span>보다 작은 경우, 양측검정에서는 <span class="math notranslate nohighlight">\(p\)</span>-값이 <span class="math notranslate nohighlight">\(\alpha/2\)</span>보다 작은 경우 귀무가설 <span class="math notranslate nohighlight">\(\text{H}_0\)</span>을 기각하고 대립가설 <span class="math notranslate nohighlight">\(\text{H}_1\)</span>을 채택한다.</p></li>
 <li><p>그렇지 않으면 귀무가설을 기각할 수 없다.</p></li>
 </ul>
 <p><strong>가설검정 절차</strong></p>
 <ul class="simple">
 <li><p>귀무가설 <span class="math notranslate nohighlight">\(\text{H}_0\)</span>, 대립가설 <span class="math notranslate nohighlight">\(\text{H}_1\)</span> 설정</p></li>
 <li><p>분포 결정</p></li>
+<li><p>대립가설 <span class="math notranslate nohighlight">\(\text{H}_1\)</span>에 따른 가설검정의 종류와 기각역 결정</p></li>
 <li><p>유의수준/임계값</p></li>
 <li><p><span class="math notranslate nohighlight">\(p\)</span>-값/검정추정량 (표본 데이터로 부터 계산한다)</p></li>
-<li><p>귀무가설을 기각할 지를 결정한다.</p></li>
+<li><p>귀무가설 <span class="math notranslate nohighlight">\(\text{H}_0\)</span>을 기각할 지를 결정한다.</p></li>
 </ul>
 <p><strong>예제 (단측 검정)</strong></p>
-<p>어떤 회사는 자사 제품의 평균 사용 시간이 100시간이라고 주장합니다.  새로운 공정으로 생산된 제품의 평균 사용 시간이 100시간보다 짧은지 유의수준 5%에서 검정해 봅시다.</p>
-<p>30개의 표본을 추출하였더니 평균은 98이 왔음.</p>
-<p>모분산을 <span class="math notranslate nohighlight">\(10^2\)</span>이라 가정합니다.</p>
+<p>어떤 회사의 기존 제품의 사용 시간은 그 평균이 <span class="math notranslate nohighlight">\(100\)</span>이고 분산은  <span class="math notranslate nohighlight">\(10^2\)</span>이라 알려져 있다. 새로운 공정으로 생산된 제품 30개의 표본을 추출하여 조사하였더니 평균 사용시간이 <span class="math notranslate nohighlight">\(98\)</span>이었다. 새로운 공정에 문제가 없는지 유의수준 5%에서 검정하여라.</p>
+<p>풀이)</p>
+<ol class="arabic simple">
+<li><p><strong>가설</strong>:</p></li>
+</ol>
 <ul class="simple">
 <li><p><strong>귀무가설 <span class="math notranslate nohighlight">\(\text{H}_0\)</span></strong>: 새로운 공정으로 생산된 제품의 평균 사용 시간은 100시간이다 (<span class="math notranslate nohighlight">\(\mu = 100\)</span>).</p></li>
 <li><p><strong>대립가설 <span class="math notranslate nohighlight">\(\text{H}_1\)</span></strong>: 새로운 공정으로 생산된 제품의 평균 사용 시간은 100시간보다 짧다 (<span class="math notranslate nohighlight">\(\mu &lt; 100\)</span>).</p></li>
 </ul>
-<p>이것은 단측 검정(왼쪽 꼬리)입니다.</p>
-<p><strong>가설 검정 절차:</strong></p>
-<ol class="arabic simple">
-<li><p><strong>귀무가설 <span class="math notranslate nohighlight">\(\text{H}_0\)</span>, 대립가설 <span class="math notranslate nohighlight">\(\text{H}_1\)</span> 설정</strong>:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\text{H}_0: \mu = 100\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\text{H}_1: \mu &lt; 100\)</span></p></li>
-</ul>
-</li>
-<li><p><strong>분포 결정</strong>: 모분산이 알려져 있고 표본 크기가 충분히 크므로 표준정규분포 <span class="math notranslate nohighlight">\(N(0, 1^2)\)</span>을 사용합니다.</p></li>
+<ol class="arabic simple" start="2">
+<li><p><strong>분포</strong>: 모분산이 알려져 있고 표본 크기가 충분히 크므로 표준정규분포 <span class="math notranslate nohighlight">\(N(0, 1^2)\)</span>을 사용한다.</p></li>
+<li><p><strong>가설검정의 종류와 기각역</strong>:
+<span class="math notranslate nohighlight">\(\text{H}_1\)</span>이 <span class="math notranslate nohighlight">\(\mu &lt; 100\)</span>이므로 기각역을 왼쪽꼬리로 하는 왼쪽꼬리 단측검정을 택한다.</p></li>
 <li><p><strong>유의수준/임계값</strong>:</p>
 <ul class="simple">
-<li><p>유의수준 <span class="math notranslate nohighlight">\(\alpha = 0.05\)</span> 입니다.</p></li>
-<li><p>단측 검정(왼쪽 꼬리)이므로, 표준정규분포에서 왼쪽 꼬리 확률이 0.05가 되는 z-값을 찾습니다.</p></li>
-<li><p>표준정규분포표 또는 계산기를 찾아보면, 누적 확률이 0.05가 되는 z-값은 약 -1.645 입니다.</p></li>
-<li><p>따라서 임계값은 <span class="math notranslate nohighlight">\(-z_{0.05} \approx -1.645\)</span> 입니다.</p></li>
-<li><p>기각역은 <span class="math notranslate nohighlight">\(Z \le -1.645\)</span> 입니다.</p></li>
+<li><p>표준정규분포에 의하여 누적 확률이 0.05가 되는 z-값은 약 -1.645 이다.</p></li>
+<li><p>따라서 임계값 <span class="math notranslate nohighlight">\(-z_{0.05} \approx -1.645\)</span></p></li>
+<li><p>왼쪽 꼬리 기각역은 <span class="math notranslate nohighlight">\(\{ Z \le -1.645 \}\)</span> 이다.</p></li>
 </ul>
 </li>
 <li><p><strong><span class="math notranslate nohighlight">\(p\)</span>-값/검정통계량 (표본 데이터로 부터 계산한다)</strong>:</p>
 <ul class="simple">
 <li><p>주어진 정보: 표본평균 <span class="math notranslate nohighlight">\(X_0 = 98\)</span>, 모평균 (귀무가설 하) <span class="math notranslate nohighlight">\(\mu_0 = 100\)</span>, 모표준편차 <span class="math notranslate nohighlight">\(\sigma = 10\)</span>, 표본 크기 <span class="math notranslate nohighlight">\(n = 30\)</span>.</p></li>
-<li><p>검정통계량 <span class="math notranslate nohighlight">\(z_0\)</span>를 계산합니다.
-$<span class="math notranslate nohighlight">\(z_0= \frac{X_0 - \mu_0}{\sigma/\sqrt{n}} = \frac{98 - 100}{10/\sqrt{30}}\)</span>$</p></li>
-<li><p><span class="math notranslate nohighlight">\(\sqrt{30} \approx 5.477\)</span> 이므로
-$<span class="math notranslate nohighlight">\(z_0 \approx \frac{-2}{10/5.477} = \frac{-2}{1.826} \approx -1.095\)</span>$</p></li>
-<li><p>검정통계량은 약 -1.095 입니다.</p></li>
-<li><p>p-값을 계산합니다. 대립가설이 <span class="math notranslate nohighlight">\(\mu &lt; 100\)</span>이므로, 귀무가설 하에서 검정통계량이 -1.095보다 작거나 같을 확률을 계산합니다.
-$<span class="math notranslate nohighlight">\(p\text{-값} = P(Z \le z_0) = P(Z \le -1.095)\)</span>$</p></li>
-<li><p>표준정규분포표 또는 계산기를 사용하면, <span class="math notranslate nohighlight">\(P(Z \le -1.095)\)</span>는 약 0.1367 입니다.</p></li>
+<li><p>검정통계량 <span class="math notranslate nohighlight">\(z_0\)</span>를 계산한다.
+$<span class="math notranslate nohighlight">\(z_0= \frac{X_0 - \mu_0}{\sigma/\sqrt{n}} = \frac{98 - 100}{10/\sqrt{30}}\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\( \approx \frac{-2}{10/5.477} = \frac{-2}{1.826} \approx -1.095\)</span>$</p></li>
+<li><p>p-값을 계산한다. 대립가설이 <span class="math notranslate nohighlight">\(\mu &lt; 100\)</span>이므로, 귀무가설 하에서 검정통계량이 -1.095보다 작거나 같을 확률이 p-값이다. 표준정규분포표 또는 계산기를 사용하면<br />
+$<span class="math notranslate nohighlight">\(p\text{-값} = P(Z \le z_0) = P(Z \le -1.095)\approx 0.1367\)</span>$</p></li>
 </ul>
 </li>
 <li><p><strong>귀무가설을 기각할 지를 결정한다</strong>:</p>
@@ -550,472 +615,42 @@ $<span class="math notranslate nohighlight">\(p\text{-값} = P(Z \le z_0) = P(Z 
 <ul>
 <li><p>검정통계량 <span class="math notranslate nohighlight">\(z_0 \approx -1.095\)</span> 입니다.</p></li>
 <li><p>임계값은 약 -1.645 입니다.</p></li>
-<li><p>검정통계량 <span class="math notranslate nohighlight">\((-1.095)\)</span>은 임계값 <span class="math notranslate nohighlight">\((-1.645)\)</span>보다 크므로 기각역(<span class="math notranslate nohighlight">\(Z \le -1.645\)</span>)에 속하지 않습니다.</p></li>
-<li><p>따라서 귀무가설을 기각할 수 없습니다.</p></li>
+<li><p>검정통계량 <span class="math notranslate nohighlight">\((-1.095)\)</span>은 임계값 <span class="math notranslate nohighlight">\((-1.645)\)</span>보다 크므로 기각역(<span class="math notranslate nohighlight">\(Z \le -1.645\)</span>)에 속하지 않는다.</p></li>
+<li><p>귀무가설을 기각할 수 없다.</p></li>
 </ul>
 </li>
 <li><p><strong>방법 2. 유의수준과 <span class="math notranslate nohighlight">\(p\)</span>-값 비교</strong>:</p>
 <ul>
 <li><p>유의수준 <span class="math notranslate nohighlight">\(\alpha = 0.05\)</span> 입니다.</p></li>
 <li><p>p-값 <span class="math notranslate nohighlight">\(\approx 0.1367\)</span> 입니다.</p></li>
-<li><p>p-값 <span class="math notranslate nohighlight">\((0.1367)\)</span>은 유의수준 <span class="math notranslate nohighlight">\((0.05)\)</span>보다 크므로 귀무가설을 기각할 수 없습니다.</p></li>
+<li><p>p-값 <span class="math notranslate nohighlight">\((0.1367)\)</span>은 유의수준 <span class="math notranslate nohighlight">\((0.05)\)</span>보다 크므로 귀무가설을 기각할 수 없다.</p></li>
 </ul>
 </li>
 </ul>
 </li>
 </ol>
-<p><strong>결론</strong>: 유의수준 5% 하에서 새로운 공정으로 생산된 제품의 평균 사용 시간이 100시간보다 짧다고 할 충분한 증거가 없습니다.</p>
+<p><strong>결론</strong>: 귀무가설 <span class="math notranslate nohighlight">\(\text{H}_0\)</span>을 채택한다. 즉, 유의수준 5% 하에서 새로운 공정에 문제가 있다고 할 수 없다.</p>
 </section>
 <section id="id3">
-<h2><span class="section-number">15.2. </span>예제<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">18.2. </span>예제<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>아래 코드는 캘리포니아 주택가격 데이터셋에서 주택가격이 50만을 초과하는 경우는 삭제하고 인덱스를 초기화한 후 가구소득 특성만을 남긴다. 또한 인덱스의 이름을 <code class="docutils literal notranslate"><span class="pre">district</span></code>로 지정하며, 가구소득 범주를 추가한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">mode</span><span class="o">.</span><span class="n">copy_on_write</span> <span class="o">=</span> <span class="kc">True</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">precision</span> 6
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;%.6f&#39;
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.precision&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_url</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/codingalzi/DataSci/refs/heads/master/data/&#39;</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">housing</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_url</span><span class="o">+</span><span class="s2">&quot;california_housing.csv&quot;</span><span class="p">)</span>
-<span class="n">housing</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">housing</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_url</span><span class="o">+</span><span class="s2">&quot;california_housing_mini.csv&quot;</span><span class="p">)</span>
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>longitude</th>
-      <th>latitude</th>
-      <th>housing_median_age</th>
-      <th>total_rooms</th>
-      <th>total_bedrooms</th>
-      <th>population</th>
-      <th>households</th>
-      <th>median_income</th>
-      <th>median_house_value</th>
-      <th>ocean_proximity</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>-122.23</td>
-      <td>37.88</td>
-      <td>41.0</td>
-      <td>880.0</td>
-      <td>129.0</td>
-      <td>322.0</td>
-      <td>126.0</td>
-      <td>8.3252</td>
-      <td>452600.0</td>
-      <td>NEAR BAY</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>-122.22</td>
-      <td>37.86</td>
-      <td>21.0</td>
-      <td>7099.0</td>
-      <td>1106.0</td>
-      <td>2401.0</td>
-      <td>1138.0</td>
-      <td>8.3014</td>
-      <td>358500.0</td>
-      <td>NEAR BAY</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>-122.24</td>
-      <td>37.85</td>
-      <td>52.0</td>
-      <td>1467.0</td>
-      <td>190.0</td>
-      <td>496.0</td>
-      <td>177.0</td>
-      <td>7.2574</td>
-      <td>352100.0</td>
-      <td>NEAR BAY</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>-122.25</td>
-      <td>37.85</td>
-      <td>52.0</td>
-      <td>1274.0</td>
-      <td>235.0</td>
-      <td>558.0</td>
-      <td>219.0</td>
-      <td>5.6431</td>
-      <td>341300.0</td>
-      <td>NEAR BAY</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>-122.25</td>
-      <td>37.85</td>
-      <td>52.0</td>
-      <td>1627.0</td>
-      <td>280.0</td>
-      <td>565.0</td>
-      <td>259.0</td>
-      <td>3.8462</td>
-      <td>342200.0</td>
-      <td>NEAR BAY</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>20635</th>
-      <td>-121.09</td>
-      <td>39.48</td>
-      <td>25.0</td>
-      <td>1665.0</td>
-      <td>374.0</td>
-      <td>845.0</td>
-      <td>330.0</td>
-      <td>1.5603</td>
-      <td>78100.0</td>
-      <td>INLAND</td>
-    </tr>
-    <tr>
-      <th>20636</th>
-      <td>-121.21</td>
-      <td>39.49</td>
-      <td>18.0</td>
-      <td>697.0</td>
-      <td>150.0</td>
-      <td>356.0</td>
-      <td>114.0</td>
-      <td>2.5568</td>
-      <td>77100.0</td>
-      <td>INLAND</td>
-    </tr>
-    <tr>
-      <th>20637</th>
-      <td>-121.22</td>
-      <td>39.43</td>
-      <td>17.0</td>
-      <td>2254.0</td>
-      <td>485.0</td>
-      <td>1007.0</td>
-      <td>433.0</td>
-      <td>1.7000</td>
-      <td>92300.0</td>
-      <td>INLAND</td>
-    </tr>
-    <tr>
-      <th>20638</th>
-      <td>-121.32</td>
-      <td>39.43</td>
-      <td>18.0</td>
-      <td>1860.0</td>
-      <td>409.0</td>
-      <td>741.0</td>
-      <td>349.0</td>
-      <td>1.8672</td>
-      <td>84700.0</td>
-      <td>INLAND</td>
-    </tr>
-    <tr>
-      <th>20639</th>
-      <td>-121.24</td>
-      <td>39.37</td>
-      <td>16.0</td>
-      <td>2785.0</td>
-      <td>616.0</td>
-      <td>1387.0</td>
-      <td>530.0</td>
-      <td>2.3886</td>
-      <td>89400.0</td>
-      <td>INLAND</td>
-    </tr>
-  </tbody>
-</table>
-<p>20640 rows × 10 columns</p>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">housing</span> <span class="o">=</span> <span class="n">housing</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s1">&#39;median_income&#39;</span><span class="p">,</span> <span class="s1">&#39;median_house_value&#39;</span><span class="p">]]</span>
-<span class="n">housing</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>median_income</th>
-      <th>median_house_value</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>8.3252</td>
-      <td>452600.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>8.3014</td>
-      <td>358500.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>7.2574</td>
-      <td>352100.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>5.6431</td>
-      <td>341300.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>3.8462</td>
-      <td>342200.0</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>20635</th>
-      <td>1.5603</td>
-      <td>78100.0</td>
-    </tr>
-    <tr>
-      <th>20636</th>
-      <td>2.5568</td>
-      <td>77100.0</td>
-    </tr>
-    <tr>
-      <th>20637</th>
-      <td>1.7000</td>
-      <td>92300.0</td>
-    </tr>
-    <tr>
-      <th>20638</th>
-      <td>1.8672</td>
-      <td>84700.0</td>
-    </tr>
-    <tr>
-      <th>20639</th>
-      <td>2.3886</td>
-      <td>89400.0</td>
-    </tr>
-  </tbody>
-</table>
-<p>20640 rows × 2 columns</p>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">house_value_max</span> <span class="o">=</span> <span class="n">housing</span><span class="p">[</span><span class="s1">&#39;median_house_value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="c1"># 500,001</span>
-
+<span class="c1"># 주택가격이 50만1달러 이상인 구역 삭제</span>
+<span class="n">house_value_max</span> <span class="o">=</span> <span class="n">housing</span><span class="p">[</span><span class="s1">&#39;median_house_value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="c1"># 500,001</span>
 <span class="n">mask</span> <span class="o">=</span> <span class="n">housing</span><span class="p">[</span><span class="s1">&#39;median_house_value&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">house_value_max</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">housing</span> <span class="o">=</span> <span class="n">housing</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">]</span>
-<span class="n">housing</span><span class="o">.</span><span class="n">shape</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(19675, 2)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">housing</span> <span class="o">=</span> <span class="n">housing</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">housing</span> <span class="o">=</span> <span class="n">housing</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">]</span>
+
+<span class="c1"># 인덱스 초기화</span>
+<span class="n">housing</span> <span class="o">=</span> <span class="n">housing</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># 인덱스 이름 지정</span>
 <span class="n">housing</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;district&#39;</span>
-<span class="n">housing</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>median_income</th>
-      <th>median_house_value</th>
-    </tr>
-    <tr>
-      <th>district</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>8.3252</td>
-      <td>452600.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>8.3014</td>
-      <td>358500.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>7.2574</td>
-      <td>352100.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>5.6431</td>
-      <td>341300.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>3.8462</td>
-      <td>342200.0</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>19670</th>
-      <td>1.5603</td>
-      <td>78100.0</td>
-    </tr>
-    <tr>
-      <th>19671</th>
-      <td>2.5568</td>
-      <td>77100.0</td>
-    </tr>
-    <tr>
-      <th>19672</th>
-      <td>1.7000</td>
-      <td>92300.0</td>
-    </tr>
-    <tr>
-      <th>19673</th>
-      <td>1.8672</td>
-      <td>84700.0</td>
-    </tr>
-    <tr>
-      <th>19674</th>
-      <td>2.3886</td>
-      <td>89400.0</td>
-    </tr>
-  </tbody>
-</table>
-<p>19675 rows × 2 columns</p>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">housing</span><span class="p">[</span><span class="s2">&quot;income_cat&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">housing</span><span class="p">[</span><span class="s2">&quot;median_income&quot;</span><span class="p">],</span>
+<span class="c1"># 가구소득 범주 추가</span>
+<span class="n">housing</span><span class="p">[</span><span class="s2">&quot;income_cat&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">housing</span><span class="p">[</span><span class="s2">&quot;median_income&quot;</span><span class="p">],</span>
                                <span class="n">bins</span><span class="o">=</span><span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mf">6.</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">],</span>
                                <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
 
@@ -1705,12 +1340,12 @@ p-값:       0.179635
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="probability_continuous.html"
+       href="sampling_distribution.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">14. </span>연속확률분포</p>
+        <p class="prev-next-title"><span class="section-number">17. </span>표본분포</p>
       </div>
     </a>
 </div>
@@ -1729,8 +1364,8 @@ p-값:       0.179635
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">15.1. 이론</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">15.2. 예제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">18.1. 이론</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">18.2. 예제</a></li>
 </ul>
   </nav></div>
 

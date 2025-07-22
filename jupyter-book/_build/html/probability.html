@@ -175,7 +175,7 @@
 <li class="toctree-l1"><a class="reference internal" href="series.html">4. 판다스 시리즈</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dataframes.html">5. 판다스 데이터프레임</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data_handling.html">6. 데이터 다루기</a></li>
-<li class="toctree-l1"><a class="reference internal" href="central_tendency.html">7. 데이터 대표값과 분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="representatives.html">7. 데이터 대표</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oneD_visualization.html">8. 1차원 데이터 시각화</a></li>
 <li class="toctree-l1"><a class="reference internal" href="linear_correlation.html">9. 선형 상관관계</a></li>
 <li class="toctree-l1"><a class="reference internal" href="twoD_visualization.html">10. 2차원 데이터 시각화</a></li>
@@ -183,7 +183,10 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">12. 확률분포</a></li>
 <li class="toctree-l1"><a class="reference internal" href="probability_discrete.html">13. 이산확률분포</a></li>
 <li class="toctree-l1"><a class="reference internal" href="probability_continuous.html">14. 연속확률분포</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hypothesis_testing.html">15. 가설검정</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expected_values.html">15. 기댓값과 분산</a></li>
+<li class="toctree-l1"><a class="reference internal" href="normal_distribution.html">16. 정규분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sampling_distribution.html">17. 표본분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hypothesis_testing.html">18. 가설검정</a></li>
 </ul>
 
     </div>
@@ -474,10 +477,10 @@ Pandas 3.0 버전부터는 기본 옵션으로 지정된다.</p>
 </div>
 </div>
 </div>
-<p>코드에 사용되는 <a class="reference external" href="https://github.com/codingalzi/DataSci/tree/master/data">데이터 저장소의 기본 디렉토리</a>를 지정한다.</p>
+<p>코드에 사용되는 <a class="reference external" href="https://github.com/codingalzi/statsRev/tree/master/data">데이터 저장소의 기본 디렉토리</a>를 지정한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_url</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/codingalzi/DataSci/refs/heads/master/data/&#39;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_url</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/codingalzi/statsRev/refs/heads/master/data/&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -494,300 +497,32 @@ Pandas 3.0 버전부터는 기본 옵션으로 지정된다.</p>
 <p>이 장에서는 확률분포와 확률변수의 개념을 캘리포니아 주택가격 데이터셋을 활용해 설명한다. 먼저 <a class="reference internal" href="sampling.html#ch-smapling"><span class="std std-numref">11장</span></a>에서 생성한 데이터 객체들중에서 이 장에서 다룰 객체들을 간단히 요약한다.</p>
 <p><strong>모집단과 표본 (요약)</strong></p>
 <ul class="simple">
-<li><p>캘리포니아 주택가격 데이터셋: 모집단</p></li>
+<li><p>모집단: 캘리포니아 주택가격 데이터셋.
+아래 코드는 캘리포니아 주택가격 데이터셋에서 주택가격이 50만을 초과하는 경우는 삭제하고
+인덱스를 초기화한 후 가구소득 특성만을 남긴다.
+또한 인덱스의 이름을 <code class="docutils literal notranslate"><span class="pre">district</span></code>로 지정한다.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">housing</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_url</span><span class="o">+</span><span class="s2">&quot;california_housing.csv&quot;</span><span class="p">)</span>
-<span class="n">housing</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">housing</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_url</span><span class="o">+</span><span class="s2">&quot;california_housing_mini.csv&quot;</span><span class="p">)</span>
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>longitude</th>
-      <th>latitude</th>
-      <th>housing_median_age</th>
-      <th>total_rooms</th>
-      <th>total_bedrooms</th>
-      <th>population</th>
-      <th>households</th>
-      <th>median_income</th>
-      <th>median_house_value</th>
-      <th>ocean_proximity</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>-122.23</td>
-      <td>37.88</td>
-      <td>41.0</td>
-      <td>880.0</td>
-      <td>129.0</td>
-      <td>322.0</td>
-      <td>126.0</td>
-      <td>8.3252</td>
-      <td>452600.0</td>
-      <td>NEAR BAY</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>-122.22</td>
-      <td>37.86</td>
-      <td>21.0</td>
-      <td>7099.0</td>
-      <td>1106.0</td>
-      <td>2401.0</td>
-      <td>1138.0</td>
-      <td>8.3014</td>
-      <td>358500.0</td>
-      <td>NEAR BAY</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>-122.24</td>
-      <td>37.85</td>
-      <td>52.0</td>
-      <td>1467.0</td>
-      <td>190.0</td>
-      <td>496.0</td>
-      <td>177.0</td>
-      <td>7.2574</td>
-      <td>352100.0</td>
-      <td>NEAR BAY</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>-122.25</td>
-      <td>37.85</td>
-      <td>52.0</td>
-      <td>1274.0</td>
-      <td>235.0</td>
-      <td>558.0</td>
-      <td>219.0</td>
-      <td>5.6431</td>
-      <td>341300.0</td>
-      <td>NEAR BAY</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>-122.25</td>
-      <td>37.85</td>
-      <td>52.0</td>
-      <td>1627.0</td>
-      <td>280.0</td>
-      <td>565.0</td>
-      <td>259.0</td>
-      <td>3.8462</td>
-      <td>342200.0</td>
-      <td>NEAR BAY</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>20635</th>
-      <td>-121.09</td>
-      <td>39.48</td>
-      <td>25.0</td>
-      <td>1665.0</td>
-      <td>374.0</td>
-      <td>845.0</td>
-      <td>330.0</td>
-      <td>1.5603</td>
-      <td>78100.0</td>
-      <td>INLAND</td>
-    </tr>
-    <tr>
-      <th>20636</th>
-      <td>-121.21</td>
-      <td>39.49</td>
-      <td>18.0</td>
-      <td>697.0</td>
-      <td>150.0</td>
-      <td>356.0</td>
-      <td>114.0</td>
-      <td>2.5568</td>
-      <td>77100.0</td>
-      <td>INLAND</td>
-    </tr>
-    <tr>
-      <th>20637</th>
-      <td>-121.22</td>
-      <td>39.43</td>
-      <td>17.0</td>
-      <td>2254.0</td>
-      <td>485.0</td>
-      <td>1007.0</td>
-      <td>433.0</td>
-      <td>1.7000</td>
-      <td>92300.0</td>
-      <td>INLAND</td>
-    </tr>
-    <tr>
-      <th>20638</th>
-      <td>-121.32</td>
-      <td>39.43</td>
-      <td>18.0</td>
-      <td>1860.0</td>
-      <td>409.0</td>
-      <td>741.0</td>
-      <td>349.0</td>
-      <td>1.8672</td>
-      <td>84700.0</td>
-      <td>INLAND</td>
-    </tr>
-    <tr>
-      <th>20639</th>
-      <td>-121.24</td>
-      <td>39.37</td>
-      <td>16.0</td>
-      <td>2785.0</td>
-      <td>616.0</td>
-      <td>1387.0</td>
-      <td>530.0</td>
-      <td>2.3886</td>
-      <td>89400.0</td>
-      <td>INLAND</td>
-    </tr>
-  </tbody>
-</table>
-<p>20640 rows × 10 columns</p>
-</div></div></div>
-</div>
-<ul class="simple">
-<li><p>가구소득과 주택가격만 활용 <font color="red"> !!책에서는 불필요!!</font></p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">housing</span> <span class="o">=</span> <span class="n">housing</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s1">&#39;median_income&#39;</span><span class="p">,</span> <span class="s1">&#39;median_house_value&#39;</span><span class="p">]]</span>
-<span class="n">housing</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>median_income</th>
-      <th>median_house_value</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>8.3252</td>
-      <td>452600.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>8.3014</td>
-      <td>358500.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>7.2574</td>
-      <td>352100.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>5.6431</td>
-      <td>341300.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>3.8462</td>
-      <td>342200.0</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>20635</th>
-      <td>1.5603</td>
-      <td>78100.0</td>
-    </tr>
-    <tr>
-      <th>20636</th>
-      <td>2.5568</td>
-      <td>77100.0</td>
-    </tr>
-    <tr>
-      <th>20637</th>
-      <td>1.7000</td>
-      <td>92300.0</td>
-    </tr>
-    <tr>
-      <th>20638</th>
-      <td>1.8672</td>
-      <td>84700.0</td>
-    </tr>
-    <tr>
-      <th>20639</th>
-      <td>2.3886</td>
-      <td>89400.0</td>
-    </tr>
-  </tbody>
-</table>
-<p>20640 rows × 2 columns</p>
-</div></div></div>
-</div>
-<ul class="simple">
-<li><p>이상치 제거: 주택가격이 50만을 초과하는 경우 삭제 후 인덱스 초기화 <font color="red"> !!책에서는 불필요!!</font></p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">house_value_max</span> <span class="o">=</span> <span class="n">housing</span><span class="p">[</span><span class="s1">&#39;median_house_value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="c1"># 500,001</span>
+<span class="c1"># 주택가격이 50만1달러 이상인 구역 삭제</span>
+<span class="n">house_value_max</span> <span class="o">=</span> <span class="n">housing</span><span class="p">[</span><span class="s1">&#39;median_house_value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="c1"># 500,001</span>
 <span class="n">mask</span> <span class="o">=</span> <span class="n">housing</span><span class="p">[</span><span class="s1">&#39;median_house_value&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">house_value_max</span>
 <span class="n">housing</span> <span class="o">=</span> <span class="n">housing</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">]</span>
+
+<span class="c1"># 인덱스 초기화</span>
 <span class="n">housing</span> <span class="o">=</span> <span class="n">housing</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># 인덱스 이름 지정</span>
 <span class="n">housing</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;district&#39;</span>
-<span class="n">housing</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">housing</span>
 </pre></div>
 </div>
 </div>
@@ -1419,7 +1154,7 @@ Pandas 3.0 버전부터는 기본 옵션으로 지정된다.</p>
       <th>무작위 추출</th>
     </tr>
     <tr>
-      <th>소득 범주</th>
+      <th>가구소득 범주</th>
       <th></th>
       <th></th>
     </tr>
@@ -1551,7 +1286,7 @@ P(X=1) = P(X=2) = \cdots = P(X=6) = \frac1 6
       <th>무작위 추출</th>
     </tr>
     <tr>
-      <th>소득 범주</th>
+      <th>가구소득 범주</th>
       <th></th>
       <th></th>
     </tr>
@@ -1590,7 +1325,7 @@ P(X=1) = P(X=2) = \cdots = P(X=6) = \frac1 6
 <p><strong><code class="docutils literal notranslate"><span class="pre">plt.hist()</span></code> 함수 활용</strong></p>
 <p>아래 코드는 무작위 추출 표본의 가구소득 범주별 상대도수 히스토그램을
 모집단의 가구소득 범주별 상대도수 히스토그램과 비교한다.
-<code class="docutils literal notranslate"><span class="pre">plt.hist()</span></code> 함수를 호출할 때 <code class="docutils literal notranslate"><span class="pre">density=True</span></code>를 지정하면 도수 대신에 상대도수를 막대그래프 형식으로 그려준다. <code class="docutils literal notranslate"><span class="pre">hist()</span></code> 함수의 자세한 사용법은 이미 <a class="reference external" href="https://codingalzi.github.io/DataSci/oneD_visualization.html">7장</a>에서 설명했으므로, 여기서는 생략한다.</p>
+<code class="docutils literal notranslate"><span class="pre">plt.hist()</span></code> 함수를 호출할 때 <code class="docutils literal notranslate"><span class="pre">density=True</span></code>를 지정하면 도수 대신에 상대도수를 막대그래프 형식으로 그려준다. <code class="docutils literal notranslate"><span class="pre">hist()</span></code> 함수의 자세한 사용법은 이미 <a class="reference external" href="https://codingalzi.github.io/statsRev/oneD_visualization.html">7장</a>에서 설명했으므로, 여기서는 생략한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">income_cat</span> <span class="o">=</span> <span class="n">housing</span><span class="p">[</span><span class="s1">&#39;income_cat&#39;</span><span class="p">]</span>
@@ -1619,7 +1354,7 @@ P(X=1) = P(X=2) = \cdots = P(X=6) = \frac1 6
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4797ad8bec9a204a97d8c236121d99c80394378bd57d88804444b3e4c75f38d2.png" src="_images/4797ad8bec9a204a97d8c236121d99c80394378bd57d88804444b3e4c75f38d2.png" />
+<img alt="_images/934508fe53bff5e2fdc46e7e7d8b2cbc7e6f9f0a784cbafa43d697c484e182e8.png" src="_images/934508fe53bff5e2fdc46e7e7d8b2cbc7e6f9f0a784cbafa43d697c484e182e8.png" />
 </div>
 </div>
 </section>
@@ -1667,7 +1402,7 @@ P(X=1) = P(X=2) = \cdots = P(X=6) = \frac1 6
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/6c1b87137fec3c4d82940813419fdf14ec78899a1f48e34c188d8a3be54cccb9.png" src="_images/6c1b87137fec3c4d82940813419fdf14ec78899a1f48e34c188d8a3be54cccb9.png" />
+<img alt="_images/3cb0b47c9a65c5ee38609f98c3bb0b728287e78cc31338c3e38154ccc79c91a4.png" src="_images/3cb0b47c9a65c5ee38609f98c3bb0b728287e78cc31338c3e38154ccc79c91a4.png" />
 </div>
 </div>
 <p>실제로 각 구간별 도수와 평균값은 다음과 같다.</p>
@@ -2008,7 +1743,7 @@ P(Y = k) = 50/1968 \simeq 0.02 , \quad k=1,\cdots, 50
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/c4c12eed16d67e885f22d66a32803cc40fb502622706c1f18f7fd34e79aaa4f3.png" src="_images/c4c12eed16d67e885f22d66a32803cc40fb502622706c1f18f7fd34e79aaa4f3.png" />
+<img alt="_images/f0afdaf92c4b5121f5fabde4c3ba38d5dc2438ea6670da6f951aeadaa5e89ecb.png" src="_images/f0afdaf92c4b5121f5fabde4c3ba38d5dc2438ea6670da6f951aeadaa5e89ecb.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2042,14 +1777,14 @@ P(Y = k) = 50/1968 \simeq 0.02 , \quad k=1,\cdots, 50
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ca70b55a9702328e0684c7667219938ba1b69aa08291bb5f8eacc076e2bc157b.png" src="_images/ca70b55a9702328e0684c7667219938ba1b69aa08291bb5f8eacc076e2bc157b.png" />
+<img alt="_images/c52e28ebc5c5f81ecbd7770e95c9b713fa573c33a81763369719c85328631cae.png" src="_images/c52e28ebc5c5f81ecbd7770e95c9b713fa573c33a81763369719c85328631cae.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="id6">
 <h2><span class="section-number">12.3. </span>연습문제<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
-<p>참고: <a class="reference external" href="https://colab.research.google.com/github/codingalzi/DataSci/blob/master/practices/practice-probability.ipynb">(연습) 확률분포</a></p>
+<p>참고: <a class="reference external" href="https://colab.research.google.com/github/codingalzi/statsRev/blob/master/practices/practice-probability.ipynb">(연습) 확률분포</a></p>
 </section>
 </section>
 

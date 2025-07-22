@@ -175,7 +175,7 @@
 <li class="toctree-l1"><a class="reference internal" href="series.html">4. 판다스 시리즈</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dataframes.html">5. 판다스 데이터프레임</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data_handling.html">6. 데이터 다루기</a></li>
-<li class="toctree-l1"><a class="reference internal" href="central_tendency.html">7. 데이터 대표값과 분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="representatives.html">7. 데이터 대표</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oneD_visualization.html">8. 1차원 데이터 시각화</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">9. 선형 상관관계</a></li>
 <li class="toctree-l1"><a class="reference internal" href="twoD_visualization.html">10. 2차원 데이터 시각화</a></li>
@@ -183,7 +183,10 @@
 <li class="toctree-l1"><a class="reference internal" href="probability.html">12. 확률분포</a></li>
 <li class="toctree-l1"><a class="reference internal" href="probability_discrete.html">13. 이산확률분포</a></li>
 <li class="toctree-l1"><a class="reference internal" href="probability_continuous.html">14. 연속확률분포</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hypothesis_testing.html">15. 가설검정</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expected_values.html">15. 기댓값과 분산</a></li>
+<li class="toctree-l1"><a class="reference internal" href="normal_distribution.html">16. 정규분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sampling_distribution.html">17. 표본분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hypothesis_testing.html">18. 가설검정</a></li>
 </ul>
 
     </div>
@@ -483,7 +486,7 @@ Pandas 3.0 버전부터는 기본 옵션으로 지정된다.</p>
 </div>
 </div>
 </div>
-<p>코드에 사용되는 <a class="reference external" href="https://github.com/codingalzi/DataSci/tree/master/data">데이터 저장소의 기본 디렉토리</a>를 지정한다.</p>
+<p>코드에 사용되는 <a class="reference external" href="https://github.com/codingalzi/statsRev/tree/master/data">데이터 저장소의 기본 디렉토리</a>를 지정한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_url</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/codingalzi/statsRev/refs/heads/master/data/&#39;</span>
@@ -652,7 +655,7 @@ memory usage: 4.3+ KB
 </section>
 <section id="id4">
 <h2><span class="section-number">9.3. </span>공분산<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
-<p><a class="reference internal" href="central_tendency.html#ch-central-tendency"><span class="std std-numref">7장</span></a>에서
+<p><a class="reference internal" href="representatives.html#ch-representatives"><span class="std std-numref">7장</span></a>에서
 다룬 분산<font size='2'>variance</font>은 한 종류의 데이터
 <span class="math notranslate nohighlight">\(X=\{ x_1,\cdots, x_n \}\)</span>에 대해 샘플값들의 편차의 제곱의 평균값이다.
 아래 식과 같이 계산되며, 샘플값들이 평균으로부터 떨어져있는 정도를 나타내는 양의 측정치이다.</p>
@@ -1039,7 +1042,7 @@ r_{xy} = \frac{S_{xy}}{S_x \cdot S_y}
 </section>
 <section id="id6">
 <h2><span class="section-number">9.5. </span>연습문제<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
-<p>참고: <a class="reference external" href="https://colab.research.google.com/github/codingalzi/DataSci/blob/master/practices/practice-twoD_data.ipynb">(연습) 2차원 데이터</a></p>
+<p>참고: <a class="reference external" href="https://colab.research.google.com/github/codingalzi/statsRev/blob/master/practices/practice-twoD_data.ipynb">(연습) 2차원 데이터</a></p>
 </section>
 </section>
 
