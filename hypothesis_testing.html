@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>18. 가설검정 &#8212; 데이터로 배우는 통계 분석</title>
+    <title>19. 가설검정 &#8212; 데이터로 배우는 통계 분석</title>
   
   
   
@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -63,7 +63,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'hypothesis_testing';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="17. 표본분포" href="sampling_distribution.html" />
+    <link rel="prev" title="18. 표본분포" href="sampling_distribution.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -177,15 +177,16 @@
 <li class="toctree-l1"><a class="reference internal" href="representatives.html">7. 데이터 대표</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oneD_visualization.html">8. 1차원 데이터 시각화</a></li>
 <li class="toctree-l1"><a class="reference internal" href="linear_correlation.html">9. 선형 상관관계</a></li>
-<li class="toctree-l1"><a class="reference internal" href="twoD_visualization.html">10. 2차원 데이터 시각화</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sampling.html">11. 모집단과 표본</a></li>
-<li class="toctree-l1"><a class="reference internal" href="probability.html">12. 확률분포</a></li>
-<li class="toctree-l1"><a class="reference internal" href="probability_discrete.html">13. 이산확률분포</a></li>
-<li class="toctree-l1"><a class="reference internal" href="probability_continuous.html">14. 연속확률분포</a></li>
-<li class="toctree-l1"><a class="reference internal" href="expected_values.html">15. 기댓값과 분산</a></li>
-<li class="toctree-l1"><a class="reference internal" href="normal_distribution.html">16. 정규분포</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sampling_distribution.html">17. 표본분포</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">18. 가설검정</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linear_correlation_1.html">10. 선형 상관관계 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="twoD_visualization.html">11. 2차원 데이터 시각화</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sampling.html">12. 모집단과 표본</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability.html">13. 확률분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability_discrete.html">14. 이산확률분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability_continuous.html">15. 연속확률분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expected_values.html">16. 기댓값과 분산</a></li>
+<li class="toctree-l1"><a class="reference internal" href="normal_distribution.html">17. 정규분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sampling_distribution.html">18. 표본분포</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">19. 가설검정</a></li>
 </ul>
 
     </div>
@@ -412,8 +413,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">18.1. 이론</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">18.2. 예제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">19.1. 이론</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">19.2. 예제</a></li>
 </ul>
             </nav>
         </div>
@@ -426,7 +427,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="ch-hyp-testing">
-<span id="id1"></span><h1><span class="section-number">18. </span>가설검정<a class="headerlink" href="#ch-hyp-testing" title="Link to this heading">#</a></h1>
+<span id="id1"></span><h1><span class="section-number">19. </span>가설검정<a class="headerlink" href="#ch-hyp-testing" title="Link to this heading">#</a></h1>
 <p><strong>기본 설정</strong></p>
 <p><code class="docutils literal notranslate"><span class="pre">numpy</span></code>와 <code class="docutils literal notranslate"><span class="pre">pandas</span></code> 라이브러리를 각각 <code class="docutils literal notranslate"><span class="pre">np</span></code>와 <code class="docutils literal notranslate"><span class="pre">pd</span></code>로 불러온다.</p>
 <div class="cell docutils container">
@@ -498,7 +499,7 @@ Pandas 3.0 버전부터는 기본 옵션으로 지정된다.</p>
 </div>
 </div>
 <section id="id2">
-<h2><span class="section-number">18.1. </span>이론<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">19.1. </span>이론<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <p>다음과 같은 두 가지 가설을 생각한다.</p>
 <ul class="simple">
 <li><p><strong>귀무가설</strong><font size='2'>null hypothesis</font> <span class="math notranslate nohighlight">\((\text{H}_0)\)</span> : 모집단에 대하여 기존에 사실이라고 알려져 있거나 처음부터 주장하는 가설</p></li>
@@ -632,7 +633,7 @@ $<span class="math notranslate nohighlight">\(p\text{-값} = P(Z \le z_0) = P(Z 
 <p><strong>결론</strong>: 귀무가설 <span class="math notranslate nohighlight">\(\text{H}_0\)</span>을 채택한다. 즉, 유의수준 5% 하에서 새로운 공정에 문제가 있다고 할 수 없다.</p>
 </section>
 <section id="id3">
-<h2><span class="section-number">18.2. </span>예제<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">19.2. </span>예제<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <p>아래 코드는 캘리포니아 주택가격 데이터셋에서 주택가격이 50만을 초과하는 경우는 삭제하고 인덱스를 초기화한 후 가구소득 특성만을 남긴다. 또한 인덱스의 이름을 <code class="docutils literal notranslate"><span class="pre">district</span></code>로 지정하며, 가구소득 범주를 추가한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1345,7 +1346,7 @@ p-값:       0.179635
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">17. </span>표본분포</p>
+        <p class="prev-next-title"><span class="section-number">18. </span>표본분포</p>
       </div>
     </a>
 </div>
@@ -1364,8 +1365,8 @@ p-값:       0.179635
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">18.1. 이론</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">18.2. 예제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">19.1. 이론</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">19.2. 예제</a></li>
 </ul>
   </nav></div>
 

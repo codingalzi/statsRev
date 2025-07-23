@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>13. 이산확률분포 &#8212; 데이터로 배우는 통계 분석</title>
+    <title>14. 이산확률분포 &#8212; 데이터로 배우는 통계 분석</title>
   
   
   
@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -63,8 +63,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'probability_discrete';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="14. 연속확률분포" href="probability_continuous.html" />
-    <link rel="prev" title="12. 확률분포" href="probability.html" />
+    <link rel="next" title="15. 연속확률분포" href="probability_continuous.html" />
+    <link rel="prev" title="13. 확률분포" href="probability.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -178,15 +178,16 @@
 <li class="toctree-l1"><a class="reference internal" href="representatives.html">7. 데이터 대표</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oneD_visualization.html">8. 1차원 데이터 시각화</a></li>
 <li class="toctree-l1"><a class="reference internal" href="linear_correlation.html">9. 선형 상관관계</a></li>
-<li class="toctree-l1"><a class="reference internal" href="twoD_visualization.html">10. 2차원 데이터 시각화</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sampling.html">11. 모집단과 표본</a></li>
-<li class="toctree-l1"><a class="reference internal" href="probability.html">12. 확률분포</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">13. 이산확률분포</a></li>
-<li class="toctree-l1"><a class="reference internal" href="probability_continuous.html">14. 연속확률분포</a></li>
-<li class="toctree-l1"><a class="reference internal" href="expected_values.html">15. 기댓값과 분산</a></li>
-<li class="toctree-l1"><a class="reference internal" href="normal_distribution.html">16. 정규분포</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sampling_distribution.html">17. 표본분포</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hypothesis_testing.html">18. 가설검정</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linear_correlation_1.html">10. 선형 상관관계 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="twoD_visualization.html">11. 2차원 데이터 시각화</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sampling.html">12. 모집단과 표본</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability.html">13. 확률분포</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">14. 이산확률분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability_continuous.html">15. 연속확률분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expected_values.html">16. 기댓값과 분산</a></li>
+<li class="toctree-l1"><a class="reference internal" href="normal_distribution.html">17. 정규분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sampling_distribution.html">18. 표본분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hypothesis_testing.html">19. 가설검정</a></li>
 </ul>
 
     </div>
@@ -413,18 +414,18 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">13.1. 이산확률변수</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pmf">13.1.1. 확률질량함수(PMF)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cdf">13.1.2. 누적분포함수(CDF)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">14.1. 이산확률변수</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pmf">14.1.1. 확률질량함수(PMF)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cdf">14.1.2. 누적분포함수(CDF)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">13.2. 다변량 분포</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">13.2.1. 이산결합확률분포</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">13.2.2. 조건부확률</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">13.2.3. 주변확률분포</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">14.2. 다변량 분포</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">14.2.1. 이산결합확률분포</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">14.2.2. 조건부확률</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">14.2.3. 주변확률분포</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">13.3. 연습문제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">14.3. 연습문제</a></li>
 </ul>
             </nav>
         </div>
@@ -437,7 +438,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="ch-probability-discrete">
-<span id="id1"></span><h1><span class="section-number">13. </span>이산확률분포<a class="headerlink" href="#ch-probability-discrete" title="Link to this heading">#</a></h1>
+<span id="id1"></span><h1><span class="section-number">14. </span>이산확률분포<a class="headerlink" href="#ch-probability-discrete" title="Link to this heading">#</a></h1>
 <p><strong>기본 설정</strong></p>
 <p><code class="docutils literal notranslate"><span class="pre">numpy</span></code>와 <code class="docutils literal notranslate"><span class="pre">pandas</span></code> 라이브러리를 각각 <code class="docutils literal notranslate"><span class="pre">np</span></code>와 <code class="docutils literal notranslate"><span class="pre">pd</span></code>로 불러온다.</p>
 <div class="cell docutils container">
@@ -498,8 +499,8 @@ Pandas 3.0 버전부터는 기본 옵션으로 지정된다.</p>
 <p><strong>주요 내용</strong></p>
 <p>이 장에서는 이산확률분포와 다변량 분포의 주요 개념들을 소개한다. 구체적으로, 이산확률변수를 이용한 확률질량함수, 누적분포함수, 결합확률분포, 조건부확률, 주변확률분포 등의 개념을 다룬다.</p>
 <section id="id2">
-<h2><span class="section-number">13.1. </span>이산확률변수<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
-<p><a class="reference internal" href="probability.html#ch-probability"><span class="std std-numref">12장</span></a>에서 살펴본 확률변수는 주사위를 던져 나오는 값이나 가구소득 범주를 나타내는 1부터 5까지의 정수 레이블처럼, 확률변수가 취할 수 있는 값이 <span class="math notranslate nohighlight">\(x_1\)</span>, <span class="math notranslate nohighlight">\(x_2\)</span>, <span class="math notranslate nohighlight">\(x_3\)</span> … 식으로 셀 수 있다. 이러한 확률변수를 <strong>이산확률변수</strong><font size='2'>discrete random variable</font>라 하고, 이산확률변수가 따르는 확률분포를 <strong>이산확률분포</strong><font size='2'>discrete probability distribution</font>라 한다.</p>
+<h2><span class="section-number">14.1. </span>이산확률변수<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p><a class="reference internal" href="probability.html#ch-probability"><span class="std std-numref">13장</span></a>에서 살펴본 확률변수는 주사위를 던져 나오는 값이나 가구소득 범주를 나타내는 1부터 5까지의 정수 레이블처럼, 확률변수가 취할 수 있는 값이 <span class="math notranslate nohighlight">\(x_1\)</span>, <span class="math notranslate nohighlight">\(x_2\)</span>, <span class="math notranslate nohighlight">\(x_3\)</span> … 식으로 셀 수 있다. 이러한 확률변수를 <strong>이산확률변수</strong><font size='2'>discrete random variable</font>라 하고, 이산확률변수가 따르는 확률분포를 <strong>이산확률분포</strong><font size='2'>discrete probability distribution</font>라 한다.</p>
 <p><strong>예제: 가구소득 범주의 이산확률분포</strong></p>
 <p>캘리포니아 주택가격 데이터셋에서 가구소득 범주의 이산확률분포를 나타내는 데이터프레임을 이미 생성한 바 있다. 하지만 이 장의 뒷부분에서 다변량 분포를 다루기 위해 주택가격 범주의 이산확률분포를 구해야 하므로, 앞 장의 내용을 압축적으로 요약하며 동일한 데이터프레임의 생성과정을 다시 한번 반복한다. 각 과정의 의미는 모두 주석으로 대체한다.</p>
 <div class="cell docutils container">
@@ -634,7 +635,7 @@ Pandas 3.0 버전부터는 기본 옵션으로 지정된다.</p>
 </div></div></div>
 </div>
 <section id="pmf">
-<h3><span class="section-number">13.1.1. </span>확률질량함수(PMF)<a class="headerlink" href="#pmf" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">14.1.1. </span>확률질량함수(PMF)<a class="headerlink" href="#pmf" title="Link to this heading">#</a></h3>
 <p>이산확률변수  <span class="math notranslate nohighlight">\(X\)</span>가 취할 수 있는 각 값 <span class="math notranslate nohighlight">\(x\)</span>에 대해
 그 값이 나타날 확률 <span class="math notranslate nohighlight">\(P(X = x)\)</span>를 대응시키는 함수 <span class="math notranslate nohighlight">\(f\)</span> 를
 <strong>확률질량함수</strong><font size='2'>probability mass function(PMF)</font>라고 하며, 다음과 같이 표기한다.</p>
@@ -736,7 +737,7 @@ dtype: float64
 </div>
 </section>
 <section id="cdf">
-<h3><span class="section-number">13.1.2. </span>누적분포함수(CDF)<a class="headerlink" href="#cdf" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">14.1.2. </span>누적분포함수(CDF)<a class="headerlink" href="#cdf" title="Link to this heading">#</a></h3>
 <p>이산확률변수 <span class="math notranslate nohighlight">\(X\)</span>가 <span class="math notranslate nohighlight">\(x\)</span>보다 같거나 작은 값을 가질 확률 <span class="math notranslate nohighlight">\(P(X \leq x)\)</span>을
 <strong>누적분포함수</strong><font size='2'>cumulative distribution function</font>(CDF)라고 부르며
 아래처럼 정의한다.</p>
@@ -792,11 +793,11 @@ if 조건(선택사항): 이터러블의 항목 중에서 이 조건을 만족�
 </section>
 </section>
 <section id="id3">
-<h2><span class="section-number">13.2. </span>다변량 분포<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.2. </span>다변량 분포<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <p><strong>다변량 분포</strong><font size='2'>multivariate distribution</font>는
 여러 개의 확률변수들이 결합된 확률분포를 말한다. 여기서는 두 개의 이산확률변수가 결합된 다변량 분포를 소개한다.</p>
 <section id="id4">
-<h3><span class="section-number">13.2.1. </span>이산결합확률분포<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">14.2.1. </span>이산결합확률분포<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <p>두 이산확률변수 <span class="math notranslate nohighlight">\(X\)</span>와 <span class="math notranslate nohighlight">\(Y\)</span>에 대해,
 결합확률변수 <span class="math notranslate nohighlight">\((X, Y)\)</span>는 <span class="math notranslate nohighlight">\(X\)</span>가 취할 수 있는 값과
 <span class="math notranslate nohighlight">\(Y\)</span>가 취할 수 있는 값의 모든 가능한 순서쌍 <span class="math notranslate nohighlight">\((x, y)\)</span>을 나타낸다. 이러한 순서쌍 <span class="math notranslate nohighlight">\((x, y)\)</span> 각각이 발생할 확률들의 분포를 <strong>이산결합확률분포</strong><font size='2'>discrete joint probability distribution</font>라고 한다.</p>
@@ -1682,7 +1683,7 @@ Name: median_house_value, dtype: float64
 중산층이 적정한 가격의 주택에 산다는 상식에 부합하는 결과인 셈이다.</p>
 </section>
 <section id="id5">
-<h3><span class="section-number">13.2.2. </span>조건부확률<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">14.2.2. </span>조건부확률<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
 <p><strong>조건부확률</strong><font size='2'>conditional probability</font> <span class="math notranslate nohighlight">\(P(A\mid B)\)</span>는 사건 <span class="math notranslate nohighlight">\(B\)</span>가 일어났다는 전제 하에 사건 <span class="math notranslate nohighlight">\(A\)</span>가 발생할 확률을 나타내며,
 아래 그림에서 파랑색 영역 <span class="math notranslate nohighlight">\(B\)</span>에서 보라색 영역이 차지하는 비율을 가리킨다.
 반면에 <span class="math notranslate nohighlight">\(P(A)\)</span>, <span class="math notranslate nohighlight">\(P(B)\)</span>, <span class="math notranslate nohighlight">\(P(A, B)\)</span>는 전체 검정색 영역 <span class="math notranslate nohighlight">\(U\)</span>에서
@@ -1872,7 +1873,7 @@ P(Y=y\mid X=x) = \frac{P(Y=y, X=x)}{P(X=x)} = \frac{P(X=x, Y=y)}{P(X=x)}
 <p>따라서 가구소득 수준과 주택가격 수준은 독립이 아니며 서로 영향을 준다는 사실을 알 수 있다.</p>
 </section>
 <section id="id6">
-<h3><span class="section-number">13.2.3. </span>주변확률분포<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">14.2.3. </span>주변확률분포<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <p>확률변수 <span class="math notranslate nohighlight">\((X, Y)\)</span>의 결합확률분포가 주어졌을 때, 확률변수 <span class="math notranslate nohighlight">\(X\)</span>의 <strong>주변확률분포</strong><font size='2'>marginal probability distribution</font>는 <span class="math notranslate nohighlight">\(Y\)</span>의 값에 관계없이 <span class="math notranslate nohighlight">\(X\)</span>가 특정 값을 가질 확률분포를 의미한다. 따라서 확률변수 <span class="math notranslate nohighlight">\(X\)</span>의 주변확률질량함수는 다음과 같이 정의된다.</p>
 <div class="math notranslate nohighlight">
 \[
@@ -2073,7 +2074,7 @@ f_Y(y) = \sum_k f_{XY}(x_k, y) = \sum_k P(X=x_k, Y=y)
 </section>
 </section>
 <section id="id7">
-<h2><span class="section-number">13.3. </span>연습문제<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.3. </span>연습문제<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
 <p>참고: <a class="reference external" href="https://colab.research.google.com/github/codingalzi/statsRev/blob/master/practices/practice-probability_discrete.ipynb">(연습) 이산확률분포</a></p>
 </section>
 </section>
@@ -2114,7 +2115,7 @@ f_Y(y) = \sum_k f_{XY}(x_k, y) = \sum_k P(X=x_k, Y=y)
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">12. </span>확률분포</p>
+        <p class="prev-next-title"><span class="section-number">13. </span>확률분포</p>
       </div>
     </a>
     <a class="right-next"
@@ -2122,7 +2123,7 @@ f_Y(y) = \sum_k f_{XY}(x_k, y) = \sum_k P(X=x_k, Y=y)
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">14. </span>연속확률분포</p>
+        <p class="prev-next-title"><span class="section-number">15. </span>연속확률분포</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -2142,18 +2143,18 @@ f_Y(y) = \sum_k f_{XY}(x_k, y) = \sum_k P(X=x_k, Y=y)
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">13.1. 이산확률변수</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pmf">13.1.1. 확률질량함수(PMF)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cdf">13.1.2. 누적분포함수(CDF)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">14.1. 이산확률변수</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pmf">14.1.1. 확률질량함수(PMF)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cdf">14.1.2. 누적분포함수(CDF)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">13.2. 다변량 분포</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">13.2.1. 이산결합확률분포</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">13.2.2. 조건부확률</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">13.2.3. 주변확률분포</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">14.2. 다변량 분포</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">14.2.1. 이산결합확률분포</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">14.2.2. 조건부확률</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">14.2.3. 주변확률분포</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">13.3. 연습문제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">14.3. 연습문제</a></li>
 </ul>
   </nav></div>
 

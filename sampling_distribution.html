@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>17. 표본분포 &#8212; 데이터로 배우는 통계 분석</title>
+    <title>18. 표본분포 &#8212; 데이터로 배우는 통계 분석</title>
   
   
   
@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -63,8 +63,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'sampling_distribution';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="18. 가설검정" href="hypothesis_testing.html" />
-    <link rel="prev" title="16. 정규분포" href="normal_distribution.html" />
+    <link rel="next" title="19. 가설검정" href="hypothesis_testing.html" />
+    <link rel="prev" title="17. 정규분포" href="normal_distribution.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -178,15 +178,16 @@
 <li class="toctree-l1"><a class="reference internal" href="representatives.html">7. 데이터 대표</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oneD_visualization.html">8. 1차원 데이터 시각화</a></li>
 <li class="toctree-l1"><a class="reference internal" href="linear_correlation.html">9. 선형 상관관계</a></li>
-<li class="toctree-l1"><a class="reference internal" href="twoD_visualization.html">10. 2차원 데이터 시각화</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sampling.html">11. 모집단과 표본</a></li>
-<li class="toctree-l1"><a class="reference internal" href="probability.html">12. 확률분포</a></li>
-<li class="toctree-l1"><a class="reference internal" href="probability_discrete.html">13. 이산확률분포</a></li>
-<li class="toctree-l1"><a class="reference internal" href="probability_continuous.html">14. 연속확률분포</a></li>
-<li class="toctree-l1"><a class="reference internal" href="expected_values.html">15. 기댓값과 분산</a></li>
-<li class="toctree-l1"><a class="reference internal" href="normal_distribution.html">16. 정규분포</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">17. 표본분포</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hypothesis_testing.html">18. 가설검정</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linear_correlation_1.html">10. 선형 상관관계 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="twoD_visualization.html">11. 2차원 데이터 시각화</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sampling.html">12. 모집단과 표본</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability.html">13. 확률분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability_discrete.html">14. 이산확률분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability_continuous.html">15. 연속확률분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expected_values.html">16. 기댓값과 분산</a></li>
+<li class="toctree-l1"><a class="reference internal" href="normal_distribution.html">17. 정규분포</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">18. 표본분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hypothesis_testing.html">19. 가설검정</a></li>
 </ul>
 
     </div>
@@ -413,22 +414,22 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">17.1. 독립성과 상관성</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">17.1.1. 독립성</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">17.1.2. 독립성 대 무상관성</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">18.1. 독립성과 상관성</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">18.1.1. 독립성</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">18.1.2. 독립성 대 무상관성</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">17.2. 확률변수 연산과 선형변환</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">17.2.1. 정규분포 합과 차</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">17.2.2. 독립성의 중요성</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">18.2. 확률변수 연산과 선형변환</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">18.2.1. 정규분포 합과 차</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">18.2.2. 독립성의 중요성</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">17.3. 표본평균의 분포</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">17.3.1. 중심극한정리</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">17.3.2. 큰 수의 법칙</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">18.3. 표본평균의 분포</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">18.3.1. 중심극한정리</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">18.3.2. 큰 수의 법칙</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">17.4. 연습문제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">18.4. 연습문제</a></li>
 </ul>
             </nav>
         </div>
@@ -441,7 +442,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="ch-sampling-distribution">
-<span id="id1"></span><h1><span class="section-number">17. </span>표본분포<a class="headerlink" href="#ch-sampling-distribution" title="Link to this heading">#</a></h1>
+<span id="id1"></span><h1><span class="section-number">18. </span>표본분포<a class="headerlink" href="#ch-sampling-distribution" title="Link to this heading">#</a></h1>
 <p><strong>기본 설정</strong></p>
 <p><code class="docutils literal notranslate"><span class="pre">numpy</span></code>와 <code class="docutils literal notranslate"><span class="pre">pandas</span></code> 라이브러리를 각각 <code class="docutils literal notranslate"><span class="pre">np</span></code>와 <code class="docutils literal notranslate"><span class="pre">pd</span></code>로 불러온다.</p>
 <div class="cell docutils container">
@@ -522,9 +523,9 @@ Pandas 3.0 버전부터는 기본 옵션으로 지정된다.</p>
 <li><p>큰 수의 법칙</p></li>
 </ul>
 <section id="id2">
-<h2><span class="section-number">17.1. </span>독립성과 상관성<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">18.1. </span>독립성과 상관성<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <section id="id3">
-<h3><span class="section-number">17.1.1. </span>독립성<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">18.1.1. </span>독립성<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
 <p>확률변수 <span class="math notranslate nohighlight">\(X\)</span>와 <span class="math notranslate nohighlight">\(Y\)</span>가 서로 어떤 영향도 끼치지 않을 때 상호 독립이라 한다.
 수식으로 표혀하면 다음 수식이 성립할 때 두 확률변수가 상호 독립이라 정의한다.</p>
 <div class="math notranslate nohighlight">
@@ -645,7 +646,7 @@ f_X(x) = \sum_k f_{XY}(x, y_k) \qquad f_Y(y) = \sum_n f_{XY}(x_n, y)
 </div>
 </section>
 <section id="id4">
-<h3><span class="section-number">17.1.2. </span>독립성 대 무상관성<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">18.1.2. </span>독립성 대 무상관성<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <p>확률변수 <span class="math notranslate nohighlight">\(X\)</span>와 <span class="math notranslate nohighlight">\(Y\)</span>가 상호 독립이면 두 확률변수 사이에 어떠한 상관성도 존재하지 않는다.
 예를 들어, 결합확률분포의 공분산과 상관계수도 0이 된다.
 여기서는 두 개의 이산 확률변수 <span class="math notranslate nohighlight">\(X\)</span>와 <span class="math notranslate nohighlight">\(Y\)</span>로 구성된 결합확률변수 <span class="math notranslate nohighlight">\((X, Y)\)</span>를
@@ -1046,7 +1047,7 @@ x^2 + y^2 = 1^2
 </section>
 </section>
 <section id="id5">
-<h2><span class="section-number">17.2. </span>확률변수 연산과 선형변환<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">18.2. </span>확률변수 연산과 선형변환<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
 <p><strong>확률변수 합과 차</strong></p>
 <p><span class="math notranslate nohighlight">\(X\)</span>와 <span class="math notranslate nohighlight">\(Y\)</span> 두 개의 확률변수가 주어졌을 때 <span class="math notranslate nohighlight">\(X+Y\)</span>와 <span class="math notranslate nohighlight">\(X-Y\)</span>는 각각
 두 확률변수의 합과 차를 가리키는 확률변수다.
@@ -1069,7 +1070,7 @@ E[X \pm Y] = E[X] \pm E[Y] \qquad V(X \pm Y) = V(X) \pm V(Y)
 E[aX + b] = aE[X] + b \qquad V(aX + b) = a^2V(X)
 \]</div>
 <section id="id6">
-<h3><span class="section-number">17.2.1. </span>정규분포 합과 차<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">18.2.1. </span>정규분포 합과 차<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <p>상호 독립인 확률변수 <span class="math notranslate nohighlight">\(X\)</span>와 <span class="math notranslate nohighlight">\(Y\)</span>가 정규분포를 따른다고 가정한다.</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1545,9 +1546,9 @@ X+Y \sim N(134.76, 14.96^2)
 </div>
 </section>
 <section id="id7">
-<h3><span class="section-number">17.2.2. </span>독립성의 중요성<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">18.2.2. </span>독립성의 중요성<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
 <p><span class="math notranslate nohighlight">\(X\)</span>와 <span class="math notranslate nohighlight">\(Y\)</span>가 상호 독립이지 않으면 정규분포의 합과 차가 정규분포를 따르지 않을 수 있다.
-설명을 위해 <a class="reference internal" href="normal_distribution.html#ch-normal-distribution"><span class="std std-numref">16장</span></a>에서 소개한
+설명을 위해 <a class="reference internal" href="normal_distribution.html#ch-normal-distribution"><span class="std std-numref">17장</span></a>에서 소개한
 피어슨의 아버지와 아들의 키 데이터셋을 활용한다.
 이유는 아들 키는 아버지의 키 유전자에 많은 영향을 받아 절대로 독립적일 수 없기 때문이다.</p>
 <p>아래 코드는 피어슨<font size='2'>Pearson</font>이 1903년에 실험을 위해 수집한
@@ -1874,7 +1875,7 @@ memory usage: 17.0 KB
 </section>
 </section>
 <section id="id8">
-<h2><span class="section-number">17.3. </span>표본평균의 분포<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">18.3. </span>표본평균의 분포<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
 <p><strong>독립동일분포</strong></p>
 <p>확률론에서 <strong>독립동일분포</strong>는 특정 확률분포를 따르는 데이터셋에서 무작위로 표본을 독립적으로 여러 번 추출해서 얻어진 값들로 구성된 데이터를 가리키는 다차원 확률변수를 의미한다.
 독립동일분포는 보통 ‘independently and identically distributed’의 표현의 줄임말인 <strong>iid</strong>로 불린다.</p>
@@ -1915,7 +1916,7 @@ V(\overline{X}) &amp;= V \left( \frac{X_1 + X_2 + \cdots + X_n}{n} \right) \\[2e
 \end{align*}
 \end{split}\]</div>
 <section id="id9">
-<h3><span class="section-number">17.3.1. </span>중심극한정리<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">18.3.1. </span>중심극한정리<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
 <p>확률변수 <span class="math notranslate nohighlight">\(X_1, X_2, \dots, X_n\)</span>이 서로 독립이고
 모두 기댓값이 <span class="math notranslate nohighlight">\(\mu\)</span>, 분산이 <span class="math notranslate nohighlight">\(\sigma^2\)</span>인 동일한 확률분포를 따른다고 가정하자.
 그러면 <span class="math notranslate nohighlight">\(n\)</span>이 충분히 클 때 표본평균 <span class="math notranslate nohighlight">\(\overline X\)</span>의 분포는 다음 정규분포를 따른다.</p>
@@ -1924,7 +1925,7 @@ V(\overline{X}) &amp;= V \left( \frac{X_1 + X_2 + \cdots + X_n}{n} \right) \\[2e
 \overline{X} \sim N \left( \mu, \frac{\sigma^2}{n} \right)
 \]</div>
 <p><strong>예제: 캘리포니아 주택가격 데이터셋</strong></p>
-<p><a class="reference internal" href="sampling.html#ch-smapling"><span class="std std-numref">11장</span></a>에서 모집단과 표본을 설명할 때 사용한 캘리포니아 주택가격 데이터셋을 다시 활용하여
+<p><a class="reference internal" href="sampling.html#ch-smapling"><span class="std std-numref">12장</span></a>에서 모집단과 표본을 설명할 때 사용한 캘리포니아 주택가격 데이터셋을 다시 활용하여
 표본평균의 분포를 확인한다.</p>
 <p>아래 코드는 캘리포니아 주택가격 데이터셋에서 주택가격이 50만을 초과하는 경우는 삭제하고 인덱스를 초기화한 후 가구소득 특성만을 남긴다. 또한 인덱스의 이름을 <code class="docutils literal notranslate"><span class="pre">district</span></code>로 지정한다.</p>
 <div class="cell docutils container">
@@ -2329,7 +2330,7 @@ dtype: float64
 </div>
 </section>
 <section id="id10">
-<h3><span class="section-number">17.3.2. </span>큰 수의 법칙<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">18.3.2. </span>큰 수의 법칙<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
 <p>확률변수 <span class="math notranslate nohighlight">\(X_1, X_2, \dots, X_n\)</span>이 서로 독립이고
 모두 기댓값이 <span class="math notranslate nohighlight">\(\mu\)</span>, 분산이 <span class="math notranslate nohighlight">\(\sigma^2\)</span>인 동일한 확률분포를 따른다고 가정하자.
 그러면 <span class="math notranslate nohighlight">\(n\)</span>이 증가할 때 표본평균 <span class="math notranslate nohighlight">\(\overline X\)</span>는 모평균 <span class="math notranslate nohighlight">\(\mu\)</span>에 수렴한다.</p>
@@ -2499,7 +2500,7 @@ dtype: float64
 </section>
 </section>
 <section id="id11">
-<h2><span class="section-number">17.4. </span>연습문제<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">18.4. </span>연습문제<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
 <p>참고: <a class="reference external" href="https://colab.research.google.com/github/codingalzi/statsRev/blob/master/practices/practice-sampling_distribution.ipynb">(연습) 표본 분포</a></p>
 </section>
 </section>
@@ -2540,7 +2541,7 @@ dtype: float64
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">16. </span>정규분포</p>
+        <p class="prev-next-title"><span class="section-number">17. </span>정규분포</p>
       </div>
     </a>
     <a class="right-next"
@@ -2548,7 +2549,7 @@ dtype: float64
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">18. </span>가설검정</p>
+        <p class="prev-next-title"><span class="section-number">19. </span>가설검정</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -2568,22 +2569,22 @@ dtype: float64
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">17.1. 독립성과 상관성</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">17.1.1. 독립성</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">17.1.2. 독립성 대 무상관성</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">18.1. 독립성과 상관성</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">18.1.1. 독립성</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">18.1.2. 독립성 대 무상관성</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">17.2. 확률변수 연산과 선형변환</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">17.2.1. 정규분포 합과 차</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">17.2.2. 독립성의 중요성</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">18.2. 확률변수 연산과 선형변환</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">18.2.1. 정규분포 합과 차</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">18.2.2. 독립성의 중요성</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">17.3. 표본평균의 분포</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">17.3.1. 중심극한정리</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">17.3.2. 큰 수의 법칙</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">18.3. 표본평균의 분포</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">18.3.1. 중심극한정리</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">18.3.2. 큰 수의 법칙</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">17.4. 연습문제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">18.4. 연습문제</a></li>
 </ul>
   </nav></div>
 

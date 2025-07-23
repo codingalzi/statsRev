@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>11. 모집단과 표본 &#8212; 데이터로 배우는 통계 분석</title>
+    <title>12. 모집단과 표본 &#8212; 데이터로 배우는 통계 분석</title>
   
   
   
@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -61,8 +61,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'sampling';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="12. 확률분포" href="probability.html" />
-    <link rel="prev" title="10. 2차원 데이터 시각화" href="twoD_visualization.html" />
+    <link rel="next" title="13. 확률분포" href="probability.html" />
+    <link rel="prev" title="11. 2차원 데이터 시각화" href="twoD_visualization.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -176,15 +176,16 @@
 <li class="toctree-l1"><a class="reference internal" href="representatives.html">7. 데이터 대표</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oneD_visualization.html">8. 1차원 데이터 시각화</a></li>
 <li class="toctree-l1"><a class="reference internal" href="linear_correlation.html">9. 선형 상관관계</a></li>
-<li class="toctree-l1"><a class="reference internal" href="twoD_visualization.html">10. 2차원 데이터 시각화</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">11. 모집단과 표본</a></li>
-<li class="toctree-l1"><a class="reference internal" href="probability.html">12. 확률분포</a></li>
-<li class="toctree-l1"><a class="reference internal" href="probability_discrete.html">13. 이산확률분포</a></li>
-<li class="toctree-l1"><a class="reference internal" href="probability_continuous.html">14. 연속확률분포</a></li>
-<li class="toctree-l1"><a class="reference internal" href="expected_values.html">15. 기댓값과 분산</a></li>
-<li class="toctree-l1"><a class="reference internal" href="normal_distribution.html">16. 정규분포</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sampling_distribution.html">17. 표본분포</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hypothesis_testing.html">18. 가설검정</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linear_correlation_1.html">10. 선형 상관관계 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="twoD_visualization.html">11. 2차원 데이터 시각화</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">12. 모집단과 표본</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability.html">13. 확률분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability_discrete.html">14. 이산확률분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability_continuous.html">15. 연속확률분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expected_values.html">16. 기댓값과 분산</a></li>
+<li class="toctree-l1"><a class="reference internal" href="normal_distribution.html">17. 정규분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sampling_distribution.html">18. 표본분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hypothesis_testing.html">19. 가설검정</a></li>
 </ul>
 
     </div>
@@ -411,18 +412,18 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">11.1. 모집단</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">11.1.1. 캘리포니아 주택가격 데이터셋</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">11.1.2. 데이터 이상치 제거</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">12.1. 모집단</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">12.1.1. 캘리포니아 주택가격 데이터셋</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">12.1.2. 데이터 이상치 제거</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">11.2. 표본</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">11.2.1. 무작위 추출</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">11.2.2. 층화표집</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vs">11.2.3. 무작위 추출 vs 층화표집</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">12.2. 표본</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">12.2.1. 무작위 추출</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">12.2.2. 층화표집</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vs">12.2.3. 무작위 추출 vs 층화표집</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">11.3. 연습문제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">12.3. 연습문제</a></li>
 </ul>
             </nav>
         </div>
@@ -435,7 +436,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="ch-smapling">
-<span id="id1"></span><h1><span class="section-number">11. </span>모집단과 표본<a class="headerlink" href="#ch-smapling" title="Link to this heading">#</a></h1>
+<span id="id1"></span><h1><span class="section-number">12. </span>모집단과 표본<a class="headerlink" href="#ch-smapling" title="Link to this heading">#</a></h1>
 <p><strong>기본 설정</strong></p>
 <p><code class="docutils literal notranslate"><span class="pre">numpy</span></code>와 <code class="docutils literal notranslate"><span class="pre">pandas</span></code> 라이브러리를 각각 <code class="docutils literal notranslate"><span class="pre">np</span></code>와 <code class="docutils literal notranslate"><span class="pre">pd</span></code>로 불러온다.</p>
 <div class="cell docutils container">
@@ -496,7 +497,7 @@ Pandas 3.0 버전부터는 기본 옵션으로 지정된다.</p>
 <p><strong>주요 내용</strong></p>
 <p>이 장에서는 모집단과 표본, 무작위 추출과 층화표집의 차이 등 추측통계의 기본 개념을 설명하고, 표본추출의 구체적인 과정들을 살펴본다.</p>
 <section id="id2">
-<h2><span class="section-number">11.1. </span>모집단<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">12.1. </span>모집단<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <p>모집단<font size='2'>population</font>은 통계적 성질을 알고자 하는 관측 대상들의 집단 전체를 가리킨다.
 반면에 표본<font size='2'>sample</font>은 관측 대상 중에 실제로 측정된 또는 관찰된 결과들의 집합이다.
 표본추출<font size='2'>sampling</font>은 모집단에서 표본을 선택하는 과정이다.</p>
@@ -506,7 +507,7 @@ Pandas 3.0 버전부터는 기본 옵션으로 지정된다.</p>
 이런 과정을 통틀어 추측통계<font size='2'>inferential statistics</font>라 부른다.
 아래 그림은 추측통계의 주요 개념인 모집단, 표본, (표본)통계량, 모수의 관계를 설명한다.</p>
 <p><div align="center"><img src="https://github.com/codingalzi/statsRev/blob/master/jupyter-book/images/sampling.png?raw=true" style="width:500px"></div></p><section id="id3">
-<h3><span class="section-number">11.1.1. </span>캘리포니아 주택가격 데이터셋<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">12.1.1. </span>캘리포니아 주택가격 데이터셋<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
 <p>이 장부터 다룰 통계 데이터의 모집단은 캘리포니아 주택가격 데이터이다. 1990년도에 시행된 미국 캘리포니아 주의 20,640개 구역별 주택가격 데이터셋은
 구역별로 경도, 위도, 주택 건물 중위연령, 총 방 수, 총 침실 수, 인구, 가구수, 중위가구소득, 중위주택가격, 해안근접도
 등 총 10개의 <strong>특성</strong><font size='2'>feature</font>을 포함하는 인구조사 자료다.
@@ -724,7 +725,7 @@ memory usage: 322.6 KB
 따라서 50만 달러를 초과하는 데이터는 <strong>이상치<font size='2'>outlier</strong></font>로 간주해 데이터셋에서 제외시키는 것이 바람직하다.</p>
 </section>
 <section id="id4">
-<h3><span class="section-number">11.1.2. </span>데이터 이상치 제거<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">12.1.2. </span>데이터 이상치 제거<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <p>주택가격이 50만 달러를 초과하는 데이터들을 삭제하기 위해 부울 인덱싱을 활용한다.</p>
 <p><strong>부울 인덱싱</strong></p>
 <p>부울 인덱싱<font size='2'>Boolean indexing</font>은
@@ -1002,12 +1003,12 @@ Name: median_house_value, Length: 20640, dtype: bool
 </section>
 </section>
 <section id="id5">
-<h2><span class="section-number">11.2. </span>표본<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">12.2. </span>표본<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
 <p>19,675개 구역의 1%에 해당하는 1,968개 구역의 데이터를 선택하여 표본으로 지정한다.
 표본추출은 보통 무작위 추출 방식으로 진행되지만 경우에 따라 층화표집도 자주 사용된다.
 여기서는 두 표본추출 방식을 소개하고, 이들의 차이점을 살펴본다.</p>
 <section id="id6">
-<h3><span class="section-number">11.2.1. </span>무작위 추출<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">12.2.1. </span>무작위 추출<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <p>무작위 추출은 모집단에서 임의로 하나의 값을 선택하는 방법이다.
 아래 코드는 <code class="docutils literal notranslate"><span class="pre">housing</span></code>에 포함된 전체 구역의 1%를 무작위로 선택하기 위해
 데이터프레임의 <code class="docutils literal notranslate"><span class="pre">sample()</span></code> 메서드를 활용한다.</p>
@@ -1399,7 +1400,7 @@ dtype: float64
 <p>실험 결과, 불편분산의 평균값들이 편향분산의 평균값들보다 모분산인 <code class="docutils literal notranslate"><span class="pre">2.465628e+00</span></code>과 <code class="docutils literal notranslate"><span class="pre">9.547054e+09</span></code>에 더 가까운 근사값임이 확인된다.</p>
 </section>
 <section id="id7">
-<h3><span class="section-number">11.2.2. </span>층화표집<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">12.2.2. </span>층화표집<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
 <p>주택가격은 가구소득과 밀접하게 연관된다.
 따라서 주택가격에 대한 표본통계량을 확인하고자 할 때
 표본이 가구소득별로 적절한 비율을 유지하는지 확인할 필요가 있다.</p>
@@ -2447,7 +2448,7 @@ district
 </div>
 </section>
 <section id="vs">
-<h3><span class="section-number">11.2.3. </span>무작위 추출 vs 층화표집<a class="headerlink" href="#vs" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">12.2.3. </span>무작위 추출 vs 층화표집<a class="headerlink" href="#vs" title="Link to this heading">#</a></h3>
 <p>이제 무작위 추출과 층화표집간의 통계적 차이를 확인하자. 무작위 추출된 표본을 만들기 위해, 가구소득 범주를 무시하고 무작위 추출을 진행해서 크기 1,968인 표본을 생성한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3120,12 +3121,12 @@ dtype: float64
 </div>
 </div>
 <p>결론적으로, 분산의 경우에도, 층화표집으로 생성된 표본의 불편분산이 모집단의 (편향)분산에 더 근접하며, 무작위 추출로 생성된 표본의 불편분산보다 작다.</p>
-<p>또한 <a class="reference internal" href="hypothesis_testing.html#ch-hyp-testing"><span class="std std-numref">18장</span></a>에서 다루는 가설검정을 통해
+<p>또한 <a class="reference internal" href="hypothesis_testing.html#ch-hyp-testing"><span class="std std-numref">19장</span></a>에서 다루는 가설검정을 통해
 층화표집으로 생성된 표본의 평균값이 무작위로 추출한 표본의 평균값보다 높은 확률로 모평균을 대변한다는 사실을 보여준다.</p>
 </section>
 </section>
 <section id="id8">
-<h2><span class="section-number">11.3. </span>연습문제<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">12.3. </span>연습문제<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
 <p>참고: <a class="reference external" href="https://colab.research.google.com/github/codingalzi/statsRev/blob/master/practices/practice-sampling.ipynb">(연습) 모집단과 표본</a></p>
 </section>
 </section>
@@ -3166,7 +3167,7 @@ dtype: float64
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">10. </span>2차원 데이터 시각화</p>
+        <p class="prev-next-title"><span class="section-number">11. </span>2차원 데이터 시각화</p>
       </div>
     </a>
     <a class="right-next"
@@ -3174,7 +3175,7 @@ dtype: float64
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">12. </span>확률분포</p>
+        <p class="prev-next-title"><span class="section-number">13. </span>확률분포</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -3194,18 +3195,18 @@ dtype: float64
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">11.1. 모집단</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">11.1.1. 캘리포니아 주택가격 데이터셋</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">11.1.2. 데이터 이상치 제거</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">12.1. 모집단</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">12.1.1. 캘리포니아 주택가격 데이터셋</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">12.1.2. 데이터 이상치 제거</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">11.2. 표본</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">11.2.1. 무작위 추출</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">11.2.2. 층화표집</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vs">11.2.3. 무작위 추출 vs 층화표집</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">12.2. 표본</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">12.2.1. 무작위 추출</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">12.2.2. 층화표집</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vs">12.2.3. 무작위 추출 vs 층화표집</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">11.3. 연습문제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">12.3. 연습문제</a></li>
 </ul>
   </nav></div>
 
