@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>10. 2차원 데이터 시각화 &#8212; 데이터로 배우는 통계 분석</title>
+    <title>11. 2차원 데이터 시각화 &#8212; 데이터로 배우는 통계 분석</title>
   
   
   
@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -63,8 +63,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'twoD_visualization';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="11. 모집단과 표본" href="sampling.html" />
-    <link rel="prev" title="9. 선형 상관관계" href="linear_correlation.html" />
+    <link rel="next" title="12. 모집단과 표본" href="sampling.html" />
+    <link rel="prev" title="10. 선형 상관관계 2" href="linear_correlation_1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -178,15 +178,16 @@
 <li class="toctree-l1"><a class="reference internal" href="representatives.html">7. 데이터 대표</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oneD_visualization.html">8. 1차원 데이터 시각화</a></li>
 <li class="toctree-l1"><a class="reference internal" href="linear_correlation.html">9. 선형 상관관계</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">10. 2차원 데이터 시각화</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sampling.html">11. 모집단과 표본</a></li>
-<li class="toctree-l1"><a class="reference internal" href="probability.html">12. 확률분포</a></li>
-<li class="toctree-l1"><a class="reference internal" href="probability_discrete.html">13. 이산확률분포</a></li>
-<li class="toctree-l1"><a class="reference internal" href="probability_continuous.html">14. 연속확률분포</a></li>
-<li class="toctree-l1"><a class="reference internal" href="expected_values.html">15. 기댓값과 분산</a></li>
-<li class="toctree-l1"><a class="reference internal" href="normal_distribution.html">16. 정규분포</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sampling_distribution.html">17. 표본분포</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hypothesis_testing.html">18. 가설검정</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linear_correlation_1.html">10. 선형 상관관계 2</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">11. 2차원 데이터 시각화</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sampling.html">12. 모집단과 표본</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability.html">13. 확률분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability_discrete.html">14. 이산확률분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability_continuous.html">15. 연속확률분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expected_values.html">16. 기댓값과 분산</a></li>
+<li class="toctree-l1"><a class="reference internal" href="normal_distribution.html">17. 정규분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sampling_distribution.html">18. 표본분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hypothesis_testing.html">19. 가설검정</a></li>
 </ul>
 
     </div>
@@ -413,16 +414,16 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">10.1. 서브플롯 관리</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">10.2. 선형 회귀</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">10.2.1. 회귀 직선</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">10.2.2. 회귀 예측</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">10.2.3. 평균 제곱근 오차</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">11.1. 서브플롯 관리</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">11.2. 선형 회귀</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">11.2.1. 회귀 직선</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">11.2.2. 회귀 예측</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">11.2.3. 평균 제곱근 오차</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">10.3. 히트맵</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">10.4. 앤스컴 데이터 4중주</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">10.5. 연습문제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">11.3. 히트맵</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">11.4. 앤스컴 데이터 4중주</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">11.5. 연습문제</a></li>
 </ul>
             </nav>
         </div>
@@ -435,7 +436,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">10. </span>2차원 데이터 시각화<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">11. </span>2차원 데이터 시각화<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <p>2차원 데이터를 시각화하는 다양한 방식을 소개하고, 이를 선형 회귀 문제를 푸는데 적용시켜 본다.
 이전 장에서 다룬 산점도를 포함하여 2차원 히스토그램에 해당하는 히트맵, <code class="docutils literal notranslate"><span class="pre">Subplot</span></code>을 통해 여러 장의 그림을 동시에 시각화하는 방법을 다룬다.</p>
 <p><strong>기본 설정</strong></p>
@@ -496,7 +497,7 @@ Pandas 3.0 버전부터는 기본 옵션으로 지정된다.</p>
 </div>
 </div>
 <section id="id2">
-<h2><span class="section-number">10.1. </span>서브플롯 관리<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">11.1. </span>서브플롯 관리<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <p><strong>예제 1</strong></p>
 <p>2015년부터 OECD 회원국가의 36개 국가의 2015년도와 2024년도의 삶의 만족도 조사 데이터</p>
 <div class="cell docutils container">
@@ -1020,7 +1021,7 @@ Pandas 3.0 버전부터는 기본 옵션으로 지정된다.</p>
 </div>
 </section>
 <section id="id3">
-<h2><span class="section-number">10.2. </span>선형 회귀<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">11.2. </span>선형 회귀<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <p>180 개 국가의 2015년 데이터와 2020년 데이터의 산점도를 보면 두 점수 사이의 상관계수가 높아 보인다.
 실제로 0.98 정도로 선형 상관계수가 확인된다.</p>
 <div class="cell docutils container">
@@ -1040,7 +1041,7 @@ Pandas 3.0 버전부터는 기본 옵션으로 지정된다.</p>
 그 경향이 0.98 정도라는 의미인데 이를 보다 직관적으로 표현하기 위해
 두 데이터의 상관관계를 시각적으로 보여주는 직선을 그려보자.</p>
 <section id="id4">
-<h3><span class="section-number">10.2.1. </span>회귀 직선<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">11.2.1. </span>회귀 직선<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <p>산점도와 상관계수를 통해 두 데이터간의 상관관계가 확인될 때, 선형 회귀로 추정된 곡선을 산점도와 함께 그려보면 이들의 상관관계를 훨씬 더 직관적으로 이해할 수 있다.</p>
 <p>선형 회귀<font size='2'>Linear regression</font>란 두 데이터, 예를 들어, 영어 점수 데이터 X와 수학 점수 데이터 Y가 주어져 있을 때, 두 데이터간의 관계를 가장 잘 나타내는 관계식의 계수들을 추정하는 작업을 말한다.</p>
 <p>예를 들어, <span class="math notranslate nohighlight">\(Y = aX + b\)</span>를 만족하는 기울기 <span class="math notranslate nohighlight">\(a\)</span>와 y-절편 <span class="math notranslate nohighlight">\(b\)</span> 값을 추정하는 것은 직선으로 선형 회귀하는 것이다.</p>
@@ -1118,7 +1119,7 @@ Pandas 3.0 버전부터는 기본 옵션으로 지정된다.</p>
 </div>
 </section>
 <section id="id5">
-<h3><span class="section-number">10.2.2. </span>회귀 예측<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">11.2.2. </span>회귀 예측<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
 <p>2015년도의 1인당 GDP가 25,000 달러 또는 65,000 달러인 국가는 데이터에 포함되지 않는다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1216,7 +1217,7 @@ Pandas 3.0 버전부터는 기본 옵션으로 지정된다.</p>
 </div>
 </section>
 <section id="id6">
-<h3><span class="section-number">10.2.3. </span>평균 제곱근 오차<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">11.2.3. </span>평균 제곱근 오차<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <p>앞서 찾은 직선 회귀가 50명의 영어 점수와 수학 점수 사이의 선형 상관관계를 <strong>가장 잘 보여준다</strong>고 하였다.
 그런데 어떤 기준으로 “가장 잘 보여준다” 라고 했을까?</p>
 <p>일반적으로 평균 제곱근 오차<font size='2'>root mean squared error</font>(RMSE)가 기준으로 사용되며 아래 식으로 정의된다.</p>
@@ -1277,7 +1278,7 @@ RMSE = \sqrt{\frac 1 n \, \sum_{i=1}^{n} (y_i - \hat{y_i})^2}
 </section>
 </section>
 <section id="id7">
-<h2><span class="section-number">10.3. </span>히트맵<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">11.3. </span>히트맵<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
 <p>아래 코드는 2015년도 1인당 GDP와 2020년도 1인당 GDP의 범위를 각각 5개 구간으로 쪼갠 후 각 영역에 포함된 국가의 수를
 <strong>히트맵</strong><font size='2'>heat map</font> 그래프로 그린다.
 히트맵은 영역별 값의 크기를 색의 종류와 농도로 표현하는 그래프이며,
@@ -1434,7 +1435,7 @@ x-축과 y-축에 사용되는 데이터는 각각 <code class="docutils literal
 </div>
 </section>
 <section id="id8">
-<h2><span class="section-number">10.4. </span>앤스컴 데이터 4중주<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">11.4. </span>앤스컴 데이터 4중주<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
 <p>지금까지 분산, 상관계수 등 수치 지표를 이용하여 데이터의 분포를 파악하였다.
 그런데 수치 지표가 동일하더라도 시각화를 진행하면 완전히 다른 데이터가 될 수도 있는데,
 앤스컴 데이터 4중주(Anscombe’s quartet)가 대표적이다.</p>
@@ -1840,7 +1841,7 @@ x-축과 y-축에 사용되는 데이터는 각각 <code class="docutils literal
 기억해야 한다.</p>
 </section>
 <section id="id9">
-<h2><span class="section-number">10.5. </span>연습문제<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">11.5. </span>연습문제<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
 <p>참고: <a class="reference external" href="https://colab.research.google.com/github/codingalzi/statsRev/blob/master/practices/practice-twoD_visualization.ipynb">(연습) 2차원 데이터 시각화</a></p>
 </section>
 </section>
@@ -1876,12 +1877,12 @@ x-축과 y-축에 사용되는 데이터는 각각 <code class="docutils literal
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="linear_correlation.html"
+       href="linear_correlation_1.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">9. </span>선형 상관관계</p>
+        <p class="prev-next-title"><span class="section-number">10. </span>선형 상관관계 2</p>
       </div>
     </a>
     <a class="right-next"
@@ -1889,7 +1890,7 @@ x-축과 y-축에 사용되는 데이터는 각각 <code class="docutils literal
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">11. </span>모집단과 표본</p>
+        <p class="prev-next-title"><span class="section-number">12. </span>모집단과 표본</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1909,16 +1910,16 @@ x-축과 y-축에 사용되는 데이터는 각각 <code class="docutils literal
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">10.1. 서브플롯 관리</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">10.2. 선형 회귀</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">10.2.1. 회귀 직선</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">10.2.2. 회귀 예측</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">10.2.3. 평균 제곱근 오차</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">11.1. 서브플롯 관리</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">11.2. 선형 회귀</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">11.2.1. 회귀 직선</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">11.2.2. 회귀 예측</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">11.2.3. 평균 제곱근 오차</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">10.3. 히트맵</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">10.4. 앤스컴 데이터 4중주</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">10.5. 연습문제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">11.3. 히트맵</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">11.4. 앤스컴 데이터 4중주</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">11.5. 연습문제</a></li>
 </ul>
   </nav></div>
 

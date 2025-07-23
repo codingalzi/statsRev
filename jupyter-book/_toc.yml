@@ -15,6 +15,7 @@ chapters:
 - file: representatives
 - file: oneD_visualization
 - file: linear_correlation
+- file: linear_correlation_1
 - file: twoD_visualization
 - file: sampling
 - file: probability

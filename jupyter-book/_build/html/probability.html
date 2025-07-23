@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>12. 확률분포 &#8212; 데이터로 배우는 통계 분석</title>
+    <title>13. 확률분포 &#8212; 데이터로 배우는 통계 분석</title>
   
   
   
@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -63,8 +63,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'probability';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="13. 이산확률분포" href="probability_discrete.html" />
-    <link rel="prev" title="11. 모집단과 표본" href="sampling.html" />
+    <link rel="next" title="14. 이산확률분포" href="probability_discrete.html" />
+    <link rel="prev" title="12. 모집단과 표본" href="sampling.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -178,15 +178,16 @@
 <li class="toctree-l1"><a class="reference internal" href="representatives.html">7. 데이터 대표</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oneD_visualization.html">8. 1차원 데이터 시각화</a></li>
 <li class="toctree-l1"><a class="reference internal" href="linear_correlation.html">9. 선형 상관관계</a></li>
-<li class="toctree-l1"><a class="reference internal" href="twoD_visualization.html">10. 2차원 데이터 시각화</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sampling.html">11. 모집단과 표본</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">12. 확률분포</a></li>
-<li class="toctree-l1"><a class="reference internal" href="probability_discrete.html">13. 이산확률분포</a></li>
-<li class="toctree-l1"><a class="reference internal" href="probability_continuous.html">14. 연속확률분포</a></li>
-<li class="toctree-l1"><a class="reference internal" href="expected_values.html">15. 기댓값과 분산</a></li>
-<li class="toctree-l1"><a class="reference internal" href="normal_distribution.html">16. 정규분포</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sampling_distribution.html">17. 표본분포</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hypothesis_testing.html">18. 가설검정</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linear_correlation_1.html">10. 선형 상관관계 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="twoD_visualization.html">11. 2차원 데이터 시각화</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sampling.html">12. 모집단과 표본</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">13. 확률분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability_discrete.html">14. 이산확률분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability_continuous.html">15. 연속확률분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expected_values.html">16. 기댓값과 분산</a></li>
+<li class="toctree-l1"><a class="reference internal" href="normal_distribution.html">17. 정규분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sampling_distribution.html">18. 표본분포</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hypothesis_testing.html">19. 가설검정</a></li>
 </ul>
 
     </div>
@@ -413,16 +414,16 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">12.1. 확률분포</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">12.1.1. 무작위 추출의 확률분포</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">13.1. 확률분포</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">13.1.1. 무작위 추출의 확률분포</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">12.2. 균등분포</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-choice">12.2.1. 넘파이의 <code class="docutils literal notranslate"><span class="pre">random.choice()</span></code> 함수</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">12.2.2. 특정 확률분포를 따르는 무작위 추출</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">13.2. 균등분포</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-choice">13.2.1. 넘파이의 <code class="docutils literal notranslate"><span class="pre">random.choice()</span></code> 함수</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">13.2.2. 특정 확률분포를 따르는 무작위 추출</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">12.3. 연습문제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">13.3. 연습문제</a></li>
 </ul>
             </nav>
         </div>
@@ -435,7 +436,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="ch-probability">
-<span id="id1"></span><h1><span class="section-number">12. </span>확률분포<a class="headerlink" href="#ch-probability" title="Link to this heading">#</a></h1>
+<span id="id1"></span><h1><span class="section-number">13. </span>확률분포<a class="headerlink" href="#ch-probability" title="Link to this heading">#</a></h1>
 <p><strong>기본 설정</strong></p>
 <p><code class="docutils literal notranslate"><span class="pre">numpy</span></code>와 <code class="docutils literal notranslate"><span class="pre">pandas</span></code> 라이브러리를 각각 <code class="docutils literal notranslate"><span class="pre">np</span></code>와 <code class="docutils literal notranslate"><span class="pre">pd</span></code>로 불러온다.</p>
 <div class="cell docutils container">
@@ -494,7 +495,7 @@ Pandas 3.0 버전부터는 기본 옵션으로 지정된다.</p>
 </div>
 </div>
 <p><strong>주요 내용</strong></p>
-<p>이 장에서는 확률분포와 확률변수의 개념을 캘리포니아 주택가격 데이터셋을 활용해 설명한다. 먼저 <a class="reference internal" href="sampling.html#ch-smapling"><span class="std std-numref">11장</span></a>에서 생성한 데이터 객체들중에서 이 장에서 다룰 객체들을 간단히 요약한다.</p>
+<p>이 장에서는 확률분포와 확률변수의 개념을 캘리포니아 주택가격 데이터셋을 활용해 설명한다. 먼저 <a class="reference internal" href="sampling.html#ch-smapling"><span class="std std-numref">12장</span></a>에서 생성한 데이터 객체들중에서 이 장에서 다룰 객체들을 간단히 요약한다.</p>
 <p><strong>모집단과 표본 (요약)</strong></p>
 <ul class="simple">
 <li><p>모집단: 캘리포니아 주택가격 데이터셋.
@@ -1190,7 +1191,7 @@ Pandas 3.0 버전부터는 기본 옵션으로 지정된다.</p>
 </div></div></div>
 </div>
 <section id="id2">
-<h2><span class="section-number">12.1. </span>확률분포<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.1. </span>확률분포<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <p>모집단에서 임의로 표본을 선택하는 무작위 추출의 결과는 일반적으로 매번 다르고 예측할 수 없다.
 하지만 무작위 추출을 실행할 때 나올 결과들의 확률을 계산할 수 있는 경우가 있다.</p>
 <p>예를 들어, 주사위를 던질 때 나오는 값은 1부터 6까지의 정수 중에서 무작위로 하나의 수를 선택하는 무작위 추출이다.
@@ -1232,7 +1233,7 @@ P(X=1) = P(X=2) = \cdots = P(X=6) = \frac1 6
 </table>
 </div>
 <section id="id3">
-<h3><span class="section-number">12.1.1. </span>무작위 추출의 확률분포<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">13.1.1. </span>무작위 추출의 확률분포<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
 <p>이제 <code class="docutils literal notranslate"><span class="pre">housing</span></code> 데이터셋의 예를 통해서, 모집단의  확률분포와 무작위 추출의 관계를 이해해보자.</p>
 <p>모집단인 <code class="docutils literal notranslate"><span class="pre">housing</span></code> 데이터셋에서 임의로 선택한 구역의 가구소득 범주를 <span class="math notranslate nohighlight">\(X\)</span>라 하면, <span class="math notranslate nohighlight">\(X\)</span>는 아래 확률분포를 따르는 확률변수가 된다.</p>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -1360,7 +1361,7 @@ P(X=1) = P(X=2) = \cdots = P(X=6) = \frac1 6
 </section>
 </section>
 <section id="id4">
-<h2><span class="section-number">12.2. </span>균등분포<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.2. </span>균등분포<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <p>확률변수가 가질 수 있는 모든 값에 대해 동일한 확률을 갖는 확률분포를
 <strong>균등분포</strong><font size='2'>uniform distribution</font>라 부른다. 앞에서 다룬 주사위를 던졌을 때 나오는 값의 확률분포가 균등분포의 예이고, 여기서는 <code class="docutils literal notranslate"><span class="pre">housing</span></code>의 index 집합에서 무작위 추출을 할 때의 예를 살펴본다.</p>
 <p>다음 코드는 모집단인 <code class="docutils literal notranslate"><span class="pre">housing</span></code> 데이터프레임에서 무작위 추출로 10%의 표본을 생성할 때 사용한 것이다.</p>
@@ -1485,7 +1486,7 @@ P(Y = k) = 50/1968 \simeq 0.02 , \quad k=1,\cdots, 50
 </div>
 </div>
 <section id="random-choice">
-<h3><span class="section-number">12.2.1. </span>넘파이의 <code class="docutils literal notranslate"><span class="pre">random.choice()</span></code> 함수<a class="headerlink" href="#random-choice" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">13.2.1. </span>넘파이의 <code class="docutils literal notranslate"><span class="pre">random.choice()</span></code> 함수<a class="headerlink" href="#random-choice" title="Link to this heading">#</a></h3>
 <p>데이터프레임의 <code class="docutils literal notranslate"><span class="pre">sample()</span></code> 메서드는 앞서 설명한대로 모집단 전체 인덱스를 기준으로 균등하게 표본을 추출한다. 넘파이의 <code class="docutils literal notranslate"><span class="pre">random.choice()</span></code> 함수를 이용해도 동일한 결과를 얻을 수 있는데, 이 함수는 균등분포 외의 임의의 확률분포에서도 무작위 표본추출에 활용될 수 있다.</p>
 <p>아래 코드는 0부터 19,674까지의 정수 중에서 무작위로 1,968개의 정수를 중복 없이 추출한다.
 무작위 추출의 시드를 <code class="docutils literal notranslate"><span class="pre">sample()</span></code> 메서드에서의 <code class="docutils literal notranslate"><span class="pre">random_state=42</span></code>와 동일하게 42로 지정해야 함에 유의한다.</p>
@@ -1554,7 +1555,7 @@ P(Y = k) = 50/1968 \simeq 0.02 , \quad k=1,\cdots, 50
 </div>
 </section>
 <section id="id5">
-<h3><span class="section-number">12.2.2. </span>특정 확률분포를 따르는 무작위 추출<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">13.2.2. </span>특정 확률분포를 따르는 무작위 추출<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
 <p>앞서 보았듯이 <code class="docutils literal notranslate"><span class="pre">np.random.choice()</span></code> 함수는 균등분포를 따른다. 1부터 5까지의 정수에 대해 실행하면 각각의 정수가 1/5의 확률로 선택됨을 간단한 모의실험으로 확인해보자.</p>
 <p>아래 코드는 <code class="docutils literal notranslate"><span class="pre">np.random.choice()</span></code> 함수를 이용하여 1부터 5까지의 정수를 무작위로 1만 개 선택한 후, 선택된 표본을 대상으로 도수분포표를 출력한다.</p>
 <div class="cell docutils container">
@@ -1783,7 +1784,7 @@ P(Y = k) = 50/1968 \simeq 0.02 , \quad k=1,\cdots, 50
 </section>
 </section>
 <section id="id6">
-<h2><span class="section-number">12.3. </span>연습문제<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.3. </span>연습문제<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
 <p>참고: <a class="reference external" href="https://colab.research.google.com/github/codingalzi/statsRev/blob/master/practices/practice-probability.ipynb">(연습) 확률분포</a></p>
 </section>
 </section>
@@ -1824,7 +1825,7 @@ P(Y = k) = 50/1968 \simeq 0.02 , \quad k=1,\cdots, 50
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">11. </span>모집단과 표본</p>
+        <p class="prev-next-title"><span class="section-number">12. </span>모집단과 표본</p>
       </div>
     </a>
     <a class="right-next"
@@ -1832,7 +1833,7 @@ P(Y = k) = 50/1968 \simeq 0.02 , \quad k=1,\cdots, 50
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">13. </span>이산확률분포</p>
+        <p class="prev-next-title"><span class="section-number">14. </span>이산확률분포</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1852,16 +1853,16 @@ P(Y = k) = 50/1968 \simeq 0.02 , \quad k=1,\cdots, 50
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">12.1. 확률분포</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">12.1.1. 무작위 추출의 확률분포</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">13.1. 확률분포</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">13.1.1. 무작위 추출의 확률분포</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">12.2. 균등분포</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-choice">12.2.1. 넘파이의 <code class="docutils literal notranslate"><span class="pre">random.choice()</span></code> 함수</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">12.2.2. 특정 확률분포를 따르는 무작위 추출</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">13.2. 균등분포</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-choice">13.2.1. 넘파이의 <code class="docutils literal notranslate"><span class="pre">random.choice()</span></code> 함수</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">13.2.2. 특정 확률분포를 따르는 무작위 추출</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">12.3. 연습문제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">13.3. 연습문제</a></li>
 </ul>
   </nav></div>
 

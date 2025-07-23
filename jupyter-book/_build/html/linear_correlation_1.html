@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>9. 선형 상관관계 &#8212; 데이터로 배우는 통계 분석</title>
+    <title>10. 선형 상관관계 2 &#8212; 데이터로 배우는 통계 분석</title>
   
   
   
@@ -60,11 +60,11 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'linear_correlation';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'linear_correlation_1';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="10. 선형 상관관계 2" href="linear_correlation_1.html" />
-    <link rel="prev" title="8. 1차원 데이터 시각화" href="oneD_visualization.html" />
+    <link rel="next" title="11. 2차원 데이터 시각화" href="twoD_visualization.html" />
+    <link rel="prev" title="9. 선형 상관관계" href="linear_correlation.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -177,8 +177,8 @@
 <li class="toctree-l1"><a class="reference internal" href="data_handling.html">6. 데이터 다루기</a></li>
 <li class="toctree-l1"><a class="reference internal" href="representatives.html">7. 데이터 대표</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oneD_visualization.html">8. 1차원 데이터 시각화</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">9. 선형 상관관계</a></li>
-<li class="toctree-l1"><a class="reference internal" href="linear_correlation_1.html">10. 선형 상관관계 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linear_correlation.html">9. 선형 상관관계</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">10. 선형 상관관계 2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="twoD_visualization.html">11. 2차원 데이터 시각화</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sampling.html">12. 모집단과 표본</a></li>
 <li class="toctree-l1"><a class="reference internal" href="probability.html">13. 확률분포</a></li>
@@ -242,7 +242,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/codingalzi/statsRev/blob/master/jupyter-book/linear_correlation.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/codingalzi/statsRev/blob/master/jupyter-book/linear_correlation_1.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Colab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -290,7 +290,7 @@
       
       
       
-      <li><a href="https://github.com/codingalzi/statsRev/issues/new?title=Issue%20on%20page%20%2Flinear_correlation.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/codingalzi/statsRev/issues/new?title=Issue%20on%20page%20%2Flinear_correlation_1.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -320,7 +320,7 @@
       
       
       
-      <li><a href="_sources/linear_correlation.ipynb" target="_blank"
+      <li><a href="_sources/linear_correlation_1.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -404,7 +404,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>선형 상관관계</h1>
+    <h1>선형 상관관계 2</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -414,11 +414,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">9.1. 1인당 국민총생산 데이터셋</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">9.2. 상관관계와 산점도</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">9.3. 공분산</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">9.4. 상관계수</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">9.5. 연습문제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">10.1. 삶의 만족도 데이터셋</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">10.2. 상관관계와 산점도</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">10.3. 공분산</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">10.4. 상관계수</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">10.5. 연습문제</a></li>
 </ul>
             </nav>
         </div>
@@ -430,8 +430,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="ch-linear-correlation">
-<span id="id1"></span><h1><span class="section-number">9. </span>선형 상관관계<a class="headerlink" href="#ch-linear-correlation" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="ch-linear-correlation-1">
+<span id="id1"></span><h1><span class="section-number">10. </span>선형 상관관계 2<a class="headerlink" href="#ch-linear-correlation-1" title="Link to this heading">#</a></h1>
 <p>상관관계는 선형 상관관계와 비선형 상관관계로 나뉜다.
 선형 상관관계는 하나의 데이터 값이 증가함에 따라 다른 데이터 값이 일차함수로
 단조증가(양의 상관관계) 또는 단조감소(음의 상관관계)를 의미한다.
@@ -496,13 +496,60 @@ Pandas 3.0 버전부터는 기본 옵션으로 지정된다.</p>
 </div>
 </div>
 <section id="id2">
-<h2><span class="section-number">9.1. </span>1인당 국민총생산 데이터셋<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
-<p>182 개 국가의 2015년과 2020년의 1인당 국민총생산(GDP) 정보를 담고 있는 csv 파일을 데이터프레임으로 불러온다.
-이때 국가명을 인덱스로 지정하며 단위는 미국 달러다.</p>
+<h2><span class="section-number">10.1. </span>삶의 만족도 데이터셋<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>OECD(경제협력개발기구)가 2011년부터 매년 발표하는
+<a class="reference external" href="https://www.oecd.org/en/data/tools/oecd-better-life-index.html"><strong>더 나은 삶 지수</strong><font size='2'>Better Life Index(BLI)</font></a>는
+단순한 경제 성장 지표(GDP 등)를 넘어서,
+국민의 삶의 질을 다각도로 평가하고 비교하기 위해 만들어진 지표다.</p>
+<p>더 나은 삶 지수(BLI)는 삶의 질을 구성하는 11개 영역을 기준으로 OECD 회원국의 웰빙 수준을 측정한다.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>항목</p></th>
+<th class="head"><p>설명</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>소득</p></td>
+<td><p>가처분 소득 수준</p></td>
+</tr>
+<tr class="row-odd"><td><p>일자리</p></td>
+<td><p>고용률, 일자리 안정성</p></td>
+</tr>
+<tr class="row-even"><td><p>주거</p></td>
+<td><p>주거 환경과 비용</p></td>
+</tr>
+<tr class="row-odd"><td><p>건강</p></td>
+<td><p>기대수명, 건강 상태</p></td>
+</tr>
+<tr class="row-even"><td><p>교육</p></td>
+<td><p>교육 수준 및 접근성</p></td>
+</tr>
+<tr class="row-odd"><td><p>환경</p></td>
+<td><p>대기질, 수질 등</p></td>
+</tr>
+<tr class="row-even"><td><p>공동체</p></td>
+<td><p>사회적 연결과 신뢰</p></td>
+</tr>
+<tr class="row-odd"><td><p>시민참여</p></td>
+<td><p>정치적 참여와 민주적 권리</p></td>
+</tr>
+<tr class="row-even"><td><p>안전</p></td>
+<td><p>범죄율, 생활 안전</p></td>
+</tr>
+<tr class="row-odd"><td><p>삶의 만족도</p></td>
+<td><p>주관적 행복도</p></td>
+</tr>
+<tr class="row-even"><td><p>일과 삶의 균형</p></td>
+<td><p>여가 시간, 근로시간 등</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>여기서는 11개 지표 중에서 2015년도와 2024년도 OECD 36개 회원국가의 ‘삶의 만족도’ 데이터를 활용한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdpPerCapita_2015_2020</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_url</span> <span class="o">+</span> <span class="s2">&quot;gdpPerCapita_2015_2020.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;Country&#39;</span><span class="p">)</span>
-<span class="n">gdpPerCapita_2015_2020</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">life_satisfaction</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_url</span> <span class="o">+</span> <span class="s2">&quot;life_satisfaction_2015_2024.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;Country&#39;</span><span class="p">)</span>
+<span class="n">life_satisfaction</span>
 </pre></div>
 </div>
 </div>
@@ -526,7 +573,7 @@ Pandas 3.0 버전부터는 기본 옵션으로 지정된다.</p>
     <tr style="text-align: right;">
       <th></th>
       <th>2015</th>
-      <th>2020</th>
+      <th>2024</th>
     </tr>
     <tr>
       <th>Country</th>
@@ -536,118 +583,242 @@ Pandas 3.0 버전부터는 기본 옵션으로 지정된다.</p>
   </thead>
   <tbody>
     <tr>
-      <th>Afghanistan</th>
-      <td>599.994</td>
-      <td>499.441</td>
+      <th>Australia</th>
+      <td>7.3</td>
+      <td>7.1</td>
     </tr>
     <tr>
-      <th>Albania</th>
-      <td>3995.383</td>
-      <td>4898.280</td>
+      <th>Austria</th>
+      <td>6.9</td>
+      <td>7.2</td>
     </tr>
     <tr>
-      <th>Algeria</th>
-      <td>4318.135</td>
-      <td>3331.080</td>
+      <th>Belgium</th>
+      <td>6.9</td>
+      <td>6.8</td>
     </tr>
     <tr>
-      <th>Angola</th>
-      <td>4100.315</td>
-      <td>2021.310</td>
+      <th>Brazil</th>
+      <td>7.0</td>
+      <td>6.1</td>
     </tr>
     <tr>
-      <th>Antigua and Barbuda</th>
-      <td>14414.302</td>
-      <td>14158.570</td>
+      <th>Canada</th>
+      <td>7.3</td>
+      <td>7.0</td>
     </tr>
     <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
+      <th>Chile</th>
+      <td>6.7</td>
+      <td>6.2</td>
     </tr>
     <tr>
-      <th>Venezuela</th>
-      <td>7744.746</td>
-      <td>1739.110</td>
+      <th>Czech Republic</th>
+      <td>6.5</td>
+      <td>6.9</td>
     </tr>
     <tr>
-      <th>Vietnam</th>
-      <td>2088.344</td>
-      <td>3497.510</td>
+      <th>Denmark</th>
+      <td>7.5</td>
+      <td>7.5</td>
     </tr>
     <tr>
-      <th>Yemen</th>
-      <td>1302.940</td>
-      <td>645.126</td>
+      <th>Estonia</th>
+      <td>5.6</td>
+      <td>6.5</td>
     </tr>
     <tr>
-      <th>Zambia</th>
-      <td>1350.151</td>
-      <td>1001.440</td>
+      <th>Finland</th>
+      <td>7.4</td>
+      <td>7.9</td>
     </tr>
     <tr>
-      <th>Zimbabwe</th>
-      <td>1064.350</td>
-      <td>921.847</td>
+      <th>France</th>
+      <td>6.5</td>
+      <td>6.7</td>
+    </tr>
+    <tr>
+      <th>Germany</th>
+      <td>7.0</td>
+      <td>7.3</td>
+    </tr>
+    <tr>
+      <th>Greece</th>
+      <td>4.8</td>
+      <td>5.8</td>
+    </tr>
+    <tr>
+      <th>Hungary</th>
+      <td>4.9</td>
+      <td>6.0</td>
+    </tr>
+    <tr>
+      <th>Iceland</th>
+      <td>7.5</td>
+      <td>7.6</td>
+    </tr>
+    <tr>
+      <th>Ireland</th>
+      <td>7.0</td>
+      <td>7.0</td>
+    </tr>
+    <tr>
+      <th>Israel</th>
+      <td>7.4</td>
+      <td>7.2</td>
+    </tr>
+    <tr>
+      <th>Italy</th>
+      <td>6.0</td>
+      <td>6.5</td>
+    </tr>
+    <tr>
+      <th>Japan</th>
+      <td>5.9</td>
+      <td>6.1</td>
+    </tr>
+    <tr>
+      <th>Korea</th>
+      <td>5.8</td>
+      <td>5.8</td>
+    </tr>
+    <tr>
+      <th>Luxembourg</th>
+      <td>6.9</td>
+      <td>7.4</td>
+    </tr>
+    <tr>
+      <th>Mexico</th>
+      <td>6.7</td>
+      <td>6.0</td>
+    </tr>
+    <tr>
+      <th>Netherlands</th>
+      <td>7.3</td>
+      <td>7.5</td>
+    </tr>
+    <tr>
+      <th>New Zealand</th>
+      <td>7.3</td>
+      <td>7.3</td>
+    </tr>
+    <tr>
+      <th>Norway</th>
+      <td>7.4</td>
+      <td>7.3</td>
+    </tr>
+    <tr>
+      <th>Poland</th>
+      <td>5.8</td>
+      <td>6.1</td>
+    </tr>
+    <tr>
+      <th>Portugal</th>
+      <td>5.1</td>
+      <td>5.8</td>
+    </tr>
+    <tr>
+      <th>Russia</th>
+      <td>6.0</td>
+      <td>5.5</td>
+    </tr>
+    <tr>
+      <th>Slovak Republic</th>
+      <td>6.1</td>
+      <td>6.5</td>
+    </tr>
+    <tr>
+      <th>Slovenia</th>
+      <td>5.7</td>
+      <td>6.5</td>
+    </tr>
+    <tr>
+      <th>Spain</th>
+      <td>6.5</td>
+      <td>6.5</td>
+    </tr>
+    <tr>
+      <th>Sweden</th>
+      <td>7.2</td>
+      <td>7.3</td>
+    </tr>
+    <tr>
+      <th>Switzerland</th>
+      <td>7.5</td>
+      <td>7.5</td>
+    </tr>
+    <tr>
+      <th>Türkiye</th>
+      <td>5.6</td>
+      <td>4.9</td>
+    </tr>
+    <tr>
+      <th>United Kingdom</th>
+      <td>6.8</td>
+      <td>6.8</td>
+    </tr>
+    <tr>
+      <th>United States</th>
+      <td>7.2</td>
+      <td>7.0</td>
     </tr>
   </tbody>
 </table>
-<p>182 rows × 2 columns</p>
 </div></div></div>
 </div>
-<p>연도별로 각각 182개의 부동소수점이 포함되어 있음을 확인한다.</p>
+<p>연도별로 각각 36개의 부동소수점이 포함되어 있음을 확인한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdpPerCapita_2015_2020</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">life_satisfaction</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-Index: 182 entries, Afghanistan to Zimbabwe
+Index: 36 entries, Australia to United States
 Data columns (total 2 columns):
  #   Column  Non-Null Count  Dtype  
 ---  ------  --------------  -----  
- 0   2015    182 non-null    float64
- 1   2020    182 non-null    float64
+ 0   2015    36 non-null     float64
+ 1   2024    36 non-null     float64
 dtypes: float64(2)
-memory usage: 4.3+ KB
+memory usage: 864.0+ bytes
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="id3">
-<h2><span class="section-number">9.2. </span>상관관계와 산점도<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
-<p>2015년도 1인당 GDP와 2020년도 1인당 GDP 사이의 상관관계 여부를 시각적으로 확인하기 위해
+<h2><span class="section-number">10.2. </span>상관관계와 산점도<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>2015년도 국가별 삶의 만족도와 2024년도 국가별 삶의 만족도 사이의 상관관계 여부를 시각적으로 확인하기 위해
 <strong>산점도</strong><font size='2'>scatter plot</font>를 그려본다.
 산점도는 <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot</span></code> 라이브러리에 포함된 <code class="docutils literal notranslate"><span class="pre">scatter()</span></code> 함수를 이용하여 그린다.</p>
-<p>먼저 2015년 데이터와 2020년 데이터를 나눠 넘파이 어레이로 지정한다.</p>
+<p>먼저 2015년 데이터와 2024년 데이터를 나눠 넘파이 어레이로 지정한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdp_per_capita_2015</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gdpPerCapita_2015_2020</span><span class="p">[</span><span class="s1">&#39;2015&#39;</span><span class="p">])</span>
-<span class="n">gdp_per_capita_2020</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gdpPerCapita_2015_2020</span><span class="p">[</span><span class="s1">&#39;2020&#39;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">life_satisfaction_2015</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">life_satisfaction</span><span class="p">[</span><span class="s1">&#39;2015&#39;</span><span class="p">])</span>
+<span class="n">life_satisfaction_2024</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">life_satisfaction</span><span class="p">[</span><span class="s1">&#39;2024&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>아래 코드에서 그리는 산점도는 x축이 2015년도 1인당 GDP, y축이 2020년도 1인당 GDP다.</p>
+<p>아래 코드에서 그리는 산점도는 x-축이 2015년도 국가별 삶의 만족도, y-축이 2024년도 국가별 삶의 만족도다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">gdp_per_capita_2015</span><span class="p">,</span> <span class="n">gdp_per_capita_2020</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">life_satisfaction_2015</span><span class="p">,</span> <span class="n">life_satisfaction_2024</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;2015&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;2020&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;2024&#39;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/069fcc14e00f9bc8aaf0ce1b05482d902825ae409b7896b261aa6f963e44d911.png" src="_images/069fcc14e00f9bc8aaf0ce1b05482d902825ae409b7896b261aa6f963e44d911.png" />
+<img alt="_images/08c1d2b4c83807cdd250f3e09851d53667467b9cb7e8a2ec6af0cf0feb082588.png" src="_images/08c1d2b4c83807cdd250f3e09851d53667467b9cb7e8a2ec6af0cf0feb082588.png" />
 </div>
 </div>
-<p>위 산점도는 2015년도 1인당 GDP가 높아질수록 2020년도 1인당 GDP도 올라가는 경향이 있음을 보여준다.
+<p>위 산점도는 2015년도 국가별 삶의 만족도가 높아질수록 2024년도 국가별 삶의 만족도도 올라가는 경향이 있음을 보여준다.
 즉 두 데이터는 양의 선형 상관관계를 갖는다고 추측할 수 있다.</p>
 <p>이제 선형 상관관계를 수치화한 두 가지 척도,
 <strong>공분산</strong><font size='2'>covariance</font>과
@@ -655,7 +826,7 @@ memory usage: 4.3+ KB
 먼저 공분산을 소개한다.</p>
 </section>
 <section id="id4">
-<h2><span class="section-number">9.3. </span>공분산<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.3. </span>공분산<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <p><a class="reference internal" href="representatives.html#ch-representatives"><span class="std std-numref">7장</span></a>에서
 다룬 분산<font size='2'>variance</font>은 한 종류의 데이터
 <span class="math notranslate nohighlight">\(X=\{ x_1,\cdots, x_n \}\)</span>에 대해 샘플값들의 편차의 제곱의 평균값이다.
@@ -675,7 +846,7 @@ S_{XY} &amp; = \frac 1 n \sum_{i=1}^{n} (x_i - \bar x)(y_i - \bar y) \\
 \end{split}\]</div>
 <p>위의 두 식으로부터 알 수 있는 사실은, 분산과 달리 공분산은 음수가 나올 수 있다는 것이다.
 분산은 한 종류의 데이터에 대해 편차의 제곱의 평균이므로 항상 양의 값을 갖는다. 하지만 공분산은 두 종류의 데이터에 대해 편차의 곱의 평균인데, 곱해지는 편차의 부호가 다른 항들은 음수가 되므로 평균 또한 음수가 될 수 있다.</p>
-<p>넘파이와 판다스 모두 공분산을 계산하는 API를 제공하는데, 넘파이의 <code class="docutils literal notranslate"><span class="pre">cov()</span></code>와 데이터프레임의 <code class="docutils literal notranslate"><span class="pre">cov()</span></code>가 그것이다.</p>
+<p>넘파이와 판다스 모두 공분산을 계산하는 API를 제공하는데, 넘파이의 <code class="docutils literal notranslate"><span class="pre">cov()</span></code> 함수와 데이터프레임의 <code class="docutils literal notranslate"><span class="pre">cov()</span></code> 메서드가 그것이다.</p>
 <p><strong>넘파이의 <code class="docutils literal notranslate"><span class="pre">cov()</span></code> 함수</strong></p>
 <p>아래 코드는 넘파이의 <code class="docutils literal notranslate"><span class="pre">cov()</span></code> 함수를 이용해 두 데이터의 공분산을 계산한다. (2, 2) 행렬 모양의 어레이가 생성되는데, 이 어레이의 항목별 의미는 다음과 같다.</p>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -686,68 +857,68 @@ S_{XY} &amp; = \frac 1 n \sum_{i=1}^{n} (x_i - \bar x)(y_i - \bar y) \\
 </thead>
 <tbody>
 <tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">0]</span></code></p></td>
-<td class="text-left"><p>2015년도 1인당 GDP의 분산</p></td>
+<td class="text-left"><p>2015년도 삶의 만족도의 분산</p></td>
 </tr>
 <tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1]</span></code></p></td>
-<td class="text-left"><p>2015년도 1인당 GDP와 2020년도 1인당 GDP의 공분산</p></td>
+<td class="text-left"><p>2015년도 삶의 만족도와 2024년도 삶의 만족도의 공분산</p></td>
 </tr>
 <tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">0]</span></code></p></td>
-<td class="text-left"><p>2020년도 1인당 GDP와 2015년도 1인당 GDP의 공분산</p></td>
+<td class="text-left"><p>2024년도 삶의 만족도와 2015년도 삶의 만족도의 공분산</p></td>
 </tr>
 <tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">1]</span></code></p></td>
-<td class="text-left"><p>2020년도 1인당 GDP의 분산</p></td>
+<td class="text-left"><p>2024년도 삶의 만족도의 분산</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cov_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">gdp_per_capita_2015</span><span class="p">,</span> <span class="n">gdp_per_capita_2020</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cov_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">life_satisfaction_2015</span><span class="p">,</span> <span class="n">life_satisfaction_2024</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">cov_mat</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[3.060020e+08, 3.146226e+08],
-       [3.146226e+08, 3.378031e+08]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.605278, 0.428009],
+       [0.428009, 0.464159]])
 </pre></div>
 </div>
 </div>
 </div>
-<p>공분산의 계산식으로부터 알 수 있듯이, ‘2015년도 1인당 GDP와 2020년도 1인당 GDP의 공분산’과
-‘2020년도 1인당 GDP와 2015년도 1인당 GDP의 공분산’은 동일하다.
+<p>공분산의 계산식으로부터 알 수 있듯이, ‘2015년도 국가별 삶의 만족도와 2024년도 국가별 삶의 만족도의 공분산’과
+‘2024년도 국가별 삶의 만족도와 2015년도 국가별 삶의 만족도의 공분산’은 동일하다.
 아래 두 코드는 각 연도별 공분산은 해당 연도의 표본분산과 일치하는지 확인해준다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;2015년도 1인당 GDP 분산:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">gdp_per_capita_2015</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;2015년도 국가별 삶의 만족도 분산:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">life_satisfaction_2015</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2015년도 1인당 GDP 분산: 306002004.4529384
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2015년도 국가별 삶의 만족도 분산: 0.6052777777777778
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;2020년도 1인당 GDP분산:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">gdp_per_capita_2020</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;2024년도 국가별 삶의 만족도분산:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">life_satisfaction_2024</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2020년도 1인당 GDP분산: 337803085.89880574
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024년도 국가별 삶의 만족도분산: 0.46415895061728396
 </pre></div>
 </div>
 </div>
 </div>
 <p><strong>데이터프레임의 <code class="docutils literal notranslate"><span class="pre">cov()</span></code> 메서드</strong></p>
 <p>데이터프레임 객체의 <code class="docutils literal notranslate"><span class="pre">cov()</span></code> 메서드는 모든 특성들 사이의 공분산을 계산한다.
-데이터프레임<code class="docutils literal notranslate"><span class="pre">gdpPerCapita_2015_2020</span></code>에 <code class="docutils literal notranslate"><span class="pre">2015</span></code>와 <code class="docutils literal notranslate"><span class="pre">2020</span></code> 두 개의 특성이 있으므로, (2, 2) 행렬 모양의 데이터프레임을 생성한다.</p>
+데이터프레임<code class="docutils literal notranslate"><span class="pre">life_satisfaction</span></code>에 <code class="docutils literal notranslate"><span class="pre">2015</span></code>와 <code class="docutils literal notranslate"><span class="pre">2024</span></code> 두 개의 특성이 있으므로, (2, 2) 행렬 모양의 데이터프레임을 생성한다.</p>
 <p>앞서 <code class="docutils literal notranslate"><span class="pre">np.cov()</span></code>의 반환값을 설명할 때 사용된 인덱스가 여기서는 특성명으로 대체된다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdpPerCapita_2015_2020</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">life_satisfaction</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -771,19 +942,19 @@ S_{XY} &amp; = \frac 1 n \sum_{i=1}^{n} (x_i - \bar x)(y_i - \bar y) \\
     <tr style="text-align: right;">
       <th></th>
       <th>2015</th>
-      <th>2020</th>
+      <th>2024</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>2015</th>
-      <td>3.060020e+08</td>
-      <td>3.146226e+08</td>
+      <td>0.605278</td>
+      <td>0.428009</td>
     </tr>
     <tr>
-      <th>2020</th>
-      <td>3.146226e+08</td>
-      <td>3.378031e+08</td>
+      <th>2024</th>
+      <td>0.428009</td>
+      <td>0.464159</td>
     </tr>
   </tbody>
 </table>
@@ -793,21 +964,21 @@ S_{XY} &amp; = \frac 1 n \sum_{i=1}^{n} (x_i - \bar x)(y_i - \bar y) \\
 <p><code class="docutils literal notranslate"><span class="pre">ddof=1</span></code>로 지정하면 불편분산이 계산된다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cov_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">gdp_per_capita_2015</span><span class="p">,</span> <span class="n">gdp_per_capita_2020</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cov_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">life_satisfaction_2015</span><span class="p">,</span> <span class="n">life_satisfaction_2024</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">cov_mat</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[3.076926e+08, 3.163608e+08],
-       [3.163608e+08, 3.396694e+08]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.622571, 0.440238],
+       [0.440238, 0.477421]])
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdpPerCapita_2015_2020</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">life_satisfaction</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -831,19 +1002,19 @@ S_{XY} &amp; = \frac 1 n \sum_{i=1}^{n} (x_i - \bar x)(y_i - \bar y) \\
     <tr style="text-align: right;">
       <th></th>
       <th>2015</th>
-      <th>2020</th>
+      <th>2024</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>2015</th>
-      <td>3.076926e+08</td>
-      <td>3.163608e+08</td>
+      <td>0.622571</td>
+      <td>0.440238</td>
     </tr>
     <tr>
-      <th>2020</th>
-      <td>3.163608e+08</td>
-      <td>3.396694e+08</td>
+      <th>2024</th>
+      <td>0.440238</td>
+      <td>0.477421</td>
     </tr>
   </tbody>
 </table>
@@ -851,7 +1022,7 @@ S_{XY} &amp; = \frac 1 n \sum_{i=1}^{n} (x_i - \bar x)(y_i - \bar y) \\
 </div>
 </section>
 <section id="id5">
-<h2><span class="section-number">9.4. </span>상관계수<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.4. </span>상관계수<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
 <p>공분산은 데이터의 크기와 단위에 따라 계산된 값의 크기와 단위가 달라진다.
 예를 들어 학생들의 키와 체중을 대상으로 공분산을 계산한다면 단위가 <code class="docutils literal notranslate"><span class="pre">cm</span> <span class="pre">*</span> <span class="pre">kg</span></code>이 되고,
 멀리뛰기와 오래 매달리기의 공분산은 단위가 <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">*</span> <span class="pre">sec</span></code>이 된다.
@@ -888,17 +1059,18 @@ r_{xy} = \frac{S_{xy}}{S_x \cdot S_y}
 <p><div style="text-align: center">&lt;그림 출처: <a href="https://en.wikipedia.org/wiki/Pearson_correlation_coefficient">(Wikipedia) 피어슨 상관계수</a>&gt;</div></p><p><strong><code class="docutils literal notranslate"><span class="pre">np.corrcoef()</span></code> 함수</strong></p>
 <p>상관계수는 넘파이의 <code class="docutils literal notranslate"><span class="pre">corrcoef()</span></code> 함수와 데이터프레임의 <code class="docutils literal notranslate"><span class="pre">corr()</span></code> 메서드로 계산할 수 있다.</p>
 <p>넘파이 <code class="docutils literal notranslate"><span class="pre">corrcoef()</span></code> 함수의 반환값 모양과 항목별 의미는 공분산 <code class="docutils literal notranslate"><span class="pre">cov()</span></code> 함수의 경우와 동일하다.
-2015년도 1인당 GDP와 2020년도 1인당 GDP의 상관계수는 0.98 정도로 1에 무척 가깝다.
-따라서 두 데이터 사이의 선형 상관관계는 매우 크다고 평가할 수 있다.</p>
+2015년도 국가별 삶의 만족도와 2024년도 국가별 삶의 만족도의 상관계수는 0.81정도로,
+두 데이터 사이의 선형 상관관계는 매우 크다고 평가할 수 있다.
+즉, 2015년도의 삶의 만족도가 높을 수록 10여년 뒤의 삶의 만족도도 높은 경향이 강하다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">gdp_per_capita_2015</span><span class="p">,</span> <span class="n">gdp_per_capita_2020</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">life_satisfaction_2015</span><span class="p">,</span> <span class="n">life_satisfaction_2024</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1.      , 0.978579],
-       [0.978579, 1.      ]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1.    , 0.8075],
+       [0.8075, 1.    ]])
 </pre></div>
 </div>
 </div>
@@ -907,7 +1079,7 @@ r_{xy} = \frac{S_{xy}}{S_x \cdot S_y}
 <p>데이터프레임의 <code class="docutils literal notranslate"><span class="pre">corr()</span></code> 메서드도 동일한 결과를 보여준다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdpPerCapita_2015_2020</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">life_satisfaction</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -931,19 +1103,19 @@ r_{xy} = \frac{S_{xy}}{S_x \cdot S_y}
     <tr style="text-align: right;">
       <th></th>
       <th>2015</th>
-      <th>2020</th>
+      <th>2024</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>2015</th>
-      <td>1.000000</td>
-      <td>0.978579</td>
+      <td>1.0000</td>
+      <td>0.8075</td>
     </tr>
     <tr>
-      <th>2020</th>
-      <td>0.978579</td>
-      <td>1.000000</td>
+      <th>2024</th>
+      <td>0.8075</td>
+      <td>1.0000</td>
     </tr>
   </tbody>
 </table>
@@ -951,7 +1123,7 @@ r_{xy} = \frac{S_{xy}}{S_x \cdot S_y}
 </div>
 </section>
 <section id="id6">
-<h2><span class="section-number">9.5. </span>연습문제<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.5. </span>연습문제<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
 <p>참고: <a class="reference external" href="https://colab.research.google.com/github/codingalzi/statsRev/blob/master/practices/practice-twoD_data.ipynb">(연습) 2차원 데이터</a></p>
 </section>
 </section>
@@ -987,20 +1159,20 @@ r_{xy} = \frac{S_{xy}}{S_x \cdot S_y}
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="oneD_visualization.html"
+       href="linear_correlation.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">8. </span>1차원 데이터 시각화</p>
+        <p class="prev-next-title"><span class="section-number">9. </span>선형 상관관계</p>
       </div>
     </a>
     <a class="right-next"
-       href="linear_correlation_1.html"
+       href="twoD_visualization.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">10. </span>선형 상관관계 2</p>
+        <p class="prev-next-title"><span class="section-number">11. </span>2차원 데이터 시각화</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1020,11 +1192,11 @@ r_{xy} = \frac{S_{xy}}{S_x \cdot S_y}
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">9.1. 1인당 국민총생산 데이터셋</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">9.2. 상관관계와 산점도</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">9.3. 공분산</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">9.4. 상관계수</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">9.5. 연습문제</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">10.1. 삶의 만족도 데이터셋</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">10.2. 상관관계와 산점도</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">10.3. 공분산</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">10.4. 상관계수</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">10.5. 연습문제</a></li>
 </ul>
   </nav></div>
 
